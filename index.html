@@ -5,14 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Vojta Novak - Osobni Stranka</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
     <style>
         body {
-            font-family: 'Helvetica now', Arial, sans-serif;
+            font-family: 'Roboto', Arial, sans-serif;
             margin: 0;
             padding: 0;
             background-color: #121212;
-            color: red; /* Set the font color to red */
-            overflow-x: hidden; /* Prevent horizontal scrolling */
+            color: #e0e0e0; /* Light grey color for text */
+            overflow-x: hidden;
+            cursor: url('http://www.rw-designer.com/cursor-extern.php?id=211358'), auto;
         }
 
         html, body {
@@ -25,30 +27,22 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            object-fit: cover; /* Ensures the video covers the entire screen */
-            z-index: -1; /* Ensure it's behind content */
-        }
-
-        #audio-background {
-            display: none; /* Hide the audio player */
-        }
-
-        header, footer, section {
-            position: relative;
-            z-index: 1;
+            object-fit: cover;
+            z-index: -1;
         }
 
         header {
-            background-color: rgba(31, 31, 31, 0.8); /* Add slight transparency */
-            color: red; /* Set the font color to red */
+            background-color: rgba(31, 31, 31, 0.9);
+            color: #fff; /* White color for header text */
             text-align: center;
-            padding: 3rem 1rem;
+            padding: 4rem 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Subtle shadow */
         }
 
         header h1 {
             margin: 0;
-            font-size: 2.5rem;
-            font-weight: 300;
+            font-size: 3rem;
+            font-weight: 700;
         }
 
         header p {
@@ -62,67 +56,72 @@
         }
 
         nav a {
-            color: red; /* Set the font color to red */
+            color: #76ff03;
             text-decoration: none;
             margin: 0 15px;
             font-size: 1rem;
             padding: 0.5rem;
+            transition: color 0.3s, background-color 0.3s;
         }
 
         nav a:hover {
-            color: #76ff03;
+            color: #ffffff;
+            background-color: rgba(118, 255, 3, 0.2); /* Light background on hover */
+            border-radius: 5px; /* Rounded corners */
         }
 
         section {
-            max-width: 800px;
+            max-width: 900px;
             margin: 2rem auto;
             padding: 2rem;
-            background-color: rgba(28, 28, 28, 0.8); /* Add transparency */
+            background-color: rgba(28, 28, 28, 0.9);
             border-radius: 8px;
-            color: red; /* Set the font color to red */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            color: #e0e0e0;
         }
 
         section h2 {
-            font-size: 1.8rem;
+            font-size: 2rem;
             margin-bottom: 1rem;
-            font-weight: 400;
+            font-weight: 500;
         }
 
         .projects, .skills {
             display: flex;
             flex-wrap: wrap;
-            justify-content: space-between;
+            gap: 1.5rem;
         }
 
         .projects div, .skills div {
-            width: 48%;
-            margin-bottom: 1.5rem;
+            width: calc(50% - 1rem); /* Adjusted for gap */
         }
 
         .projects h3, .skills h3 {
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             margin-bottom: 0.5rem;
-            font-weight: 400;
+            font-weight: 500;
         }
 
         p, li {
-            line-height: 1.6;
+            line-height: 1.8;
         }
 
         footer {
             text-align: center;
-            padding: 1rem;
-            background-color: rgba(31, 31, 31, 0.8); /* Add slight transparency */
+            padding: 2rem;
+            background-color: rgba(31, 31, 31, 0.9);
             color: #b0b0b0;
+            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.3); /* Subtle shadow */
         }
 
         a {
             color: #76ff03;
             text-decoration: none;
+            font-weight: 500;
         }
 
         a:hover {
-            color: #a6ff4d;
+            color: #ffffff;
         }
 
         /* Responsive Styles */
@@ -132,7 +131,7 @@
             }
 
             header h1 {
-                font-size: 2rem;
+                font-size: 2.5rem;
             }
 
             header p {
@@ -147,7 +146,6 @@
 
             .projects div, .skills div {
                 width: 100%;
-                margin-bottom: 1rem;
             }
 
             section {
@@ -234,7 +232,8 @@
 
     <footer>
         <p>&copy; 2024 Vojta Novak. All rights reserved.</p>
-        <a href="http://www.rw-designer.com/cursor-set/minecraftcursors"a>
+        <a href="http://www.rw-designer.com/cursor-set/minecraftcursors"
+           title="Get free cursors for your web.">Minecraft pointer edition Cursors</a>
     </footer>
 
 </body>
