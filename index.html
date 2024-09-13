@@ -12,22 +12,17 @@
             padding: 0;
             background-color: #121212;
             color: red; /* Set the font color to red */
-            background-image: url('https://youtu.be/Lixl3-jz7k8'); /* Add the animated background */
-            background-size: cover;
-            background-position: center;
-            animation: animateBackground 20s linear infinite; /* Animate the background */
+            overflow: hidden; /* Hide scrollbars */
         }
 
-        @keyframes animateBackground {
-            0% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-            100% {
-                background-position: 0% 50%;
-            }
+        #video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none; /* Ensure it doesn't block interactions */
+            z-index: -1; /* Ensure it's behind content */
         }
 
         header {
@@ -70,7 +65,7 @@
             max-width: 800px;
             margin: 2rem auto;
             padding: 2rem;
-            background-color: #1c1c1c;
+            background-color: rgba(28, 28, 28, 0.8); /* Add transparency */
             border-radius: 8px;
             color: red; /* Set the font color to red */
         }
@@ -120,6 +115,14 @@
     </style>
 </head>
 <body>
+
+    <!-- Video Background -->
+    <div id="video-background">
+        <iframe src="https://www.youtube.com/embed/MJv-IP9eVmA?autoplay=1&mute=1&loop=1&playlist=MJv-IP9eVmA&controls=0&showinfo=0&modestbranding=1" 
+            frameborder="0" 
+            allow="autoplay; loop; fullscreen" 
+            style="width:100%; height:100%; position:absolute; top:0; left:0;"></iframe>
+    </div>
 
     <header>
         <h1>Vojta Novak</h1>
