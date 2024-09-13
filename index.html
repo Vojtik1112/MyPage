@@ -12,16 +12,29 @@
             padding: 0;
             background-color: #121212;
             color: red; /* Set the font color to red */
+            background-image: url('https://youtu.be/Lixl3-jz7k8'); /* Add the animated background */
+            background-size: cover;
+            background-position: center;
+            animation: animateBackground 20s linear infinite; /* Animate the background */
+        }
+
+        @keyframes animateBackground {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
         }
 
         header {
-            background-color: #1f1f1f;
+            background-color: rgba(31, 31, 31, 0.8); /* Add slight transparency */
             color: red; /* Set the font color to red */
             text-align: center;
             padding: 3rem 0;
-            background-image: url('https://i.ytimg.com/vi/MJv-IP9eVmA/maxresdefault.jpg'); /* This will be dynamically updated */
-            background-size: cover;
-            background-position: center;
         }
 
         header h1 {
@@ -92,7 +105,7 @@
         footer {
             text-align: center;
             padding: 1rem;
-            background-color: #1f1f1f;
+            background-color: rgba(31, 31, 31, 0.8); /* Add slight transparency */
             color: #b0b0b0;
         }
 
@@ -105,15 +118,6 @@
             color: #a6ff4d;
         }
     </style>
-    <script>
-        // Function to dynamically change the background image based on URL
-        function changeBackgroundImage() {
-            let imageUrl = prompt("https://bjc.gamblingzion.com/uploads/2020/09/blackjack-1600x891-1.jpg");
-            if (imageUrl) {
-                document.querySelector('header').style.backgroundImage = 'url(' + imageUrl + ')';
-            }
-        }
-    </script>
 </head>
 <body>
 
@@ -177,7 +181,6 @@
 
     <footer>
         <p>&copy; 2024 Vojta Novak. All rights reserved.</p>
-        <button onclick="changeBackgroundImage()">Change Background Image</button>
     </footer>
 
 </body>
