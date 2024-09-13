@@ -11,10 +11,13 @@
             font-family: 'Roboto', Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #121212;
+            background-color: #282c34; /* New background color */
             color: #e0e0e0;
             overflow-x: hidden;
             cursor: url('http://www.rw-designer.com/cursor-extern.php?id=211358'), auto;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
         html, body {
@@ -22,11 +25,12 @@
         }
 
         #video-container {
-            position: relative;
+            position: absolute;
+            bottom: 0;
+            left: 0;
             width: 100%;
-            max-height: 500px; /* Adjust based on desired height */
-            margin: 2rem 0;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            max-height: 400px; /* Adjust based on desired height */
+            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.3);
             border-radius: 8px;
             overflow: hidden; /* Ensure the video doesn't overflow its container */
         }
