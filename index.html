@@ -13,6 +13,7 @@
             background-color: #121212;
             color: red; /* Set the font color to red */
             overflow-x: hidden; /* Prevent horizontal scrolling */
+            cursor: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIj4KICA8Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI1MCIgc3Ryb2tlLXdpZHRoPSIxMCIgc3Ryb2tlLWxpbmVjY2hhcnQ9InJvdW5kIiBzdHJva2UtY29sb3I9ImJsYWNrIiAvPjwvc3ZnPg==') 50 50, auto;
         }
 
         html, body {
@@ -159,6 +160,37 @@
                 font-size: 1.5rem;
             }
         }
+
+        /* Cursor Animation */
+        @keyframes cursor-pulse {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.5);
+                opacity: 0.6;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .custom-cursor {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIj4KICA8Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI1MCIgc3Ryb2tlLXdpZHRoPSIxMCIgc3Ryb2tlLWxpbmVjY2hhcnQ9InJvdW5kIiBzdHJva2UtY29sb3I9ImJsYWNrIiAvPjwvc3ZnPg==');
+            background-size: cover;
+            pointer-events: none; /* Ensures the cursor doesn't interfere with clicking */
+            animation: cursor-pulse 1s infinite;
+            z-index: 9999; /* Ensure the cursor is on top */
+        }
+
+        .no-cursor {
+            cursor: none;
+        }
     </style>
 </head>
 <body>
@@ -236,6 +268,19 @@
     <footer>
         <p>&copy; 2024 Vojta Novak. All rights reserved.</p>
     </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const cursor = document.createElement('div');
+            cursor.className = 'custom-cursor';
+            document.body.appendChild(cursor);
+
+            document.addEventListener('mousemove', function (e) {
+                cursor.style.left = e.pageX + 'px';
+                cursor.style.top = e.pageY + 'px';
+            });
+        });
+    </script>
 
 </body>
 </html>
