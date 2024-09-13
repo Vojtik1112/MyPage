@@ -25,7 +25,7 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            pointer-events: none; /* Ensure it doesn't block interactions */
+            object-fit: cover; /* Ensures the video covers the entire screen */
             z-index: -1; /* Ensure it's behind content */
         }
 
@@ -126,12 +126,10 @@
 <body>
 
     <!-- Video Background -->
-    <div id="video-background">
-        <iframe src="https://www.youtube.com/embed/Lixl3-jz7k8?autoplay=1&mute=1&loop=1&playlist=Lixl3-jz7k8&controls=0&showinfo=0&modestbranding=1" 
-            frameborder="0" 
-            allow="autoplay; loop; fullscreen" 
-            style="width:100%; height:100%; position:absolute; top:0; left:0;"></iframe>
-    </div>
+    <video id="video-background" autoplay muted loop>
+        <source src="https://www.w3schools.com/howto/rain.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
 
     <header>
         <h1>Vojta Novak</h1>
