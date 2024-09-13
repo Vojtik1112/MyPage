@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Vojta Novak - Osobni Stranka | PIKABOO WAS HERE</title>
+    <title>Vojta Novak - Osobni Stranka</title>
     <style>
         body {
             font-family: 'Helvetica Neue', Arial, sans-serif;
@@ -29,6 +29,10 @@
             z-index: -1; /* Ensure it's behind content */
         }
 
+        #audio-background {
+            display: none; /* Hide the audio player */
+        }
+
         header, footer, section {
             position: relative;
             z-index: 1;
@@ -38,7 +42,7 @@
             background-color: rgba(31, 31, 31, 0.8); /* Add slight transparency */
             color: red; /* Set the font color to red */
             text-align: center;
-            padding: 3rem 0;
+            padding: 3rem 1rem;
         }
 
         header h1 {
@@ -121,6 +125,40 @@
         a:hover {
             color: #a6ff4d;
         }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            header {
+                padding: 2rem 1rem;
+            }
+
+            header h1 {
+                font-size: 2rem;
+            }
+
+            header p {
+                font-size: 1rem;
+            }
+
+            nav a {
+                display: block;
+                margin: 0.5rem 0;
+                font-size: 0.9rem;
+            }
+
+            .projects div, .skills div {
+                width: 100%;
+                margin-bottom: 1rem;
+            }
+
+            section {
+                padding: 1rem;
+            }
+
+            section h2 {
+                font-size: 1.5rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -130,6 +168,12 @@
         <source src="https://www.w3schools.com/howto/rain.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
+
+    <!-- Audio Background -->
+    <audio id="audio-background" autoplay loop>
+        <source src="https://whyp.it/tracks/206319/joeyy-gout-music-video-youconvertnet?token=oBSHf" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
 
     <header>
         <h1>Vojta Novak</h1>
