@@ -12,7 +12,11 @@
             padding: 0;
             background-color: #121212;
             color: red; /* Set the font color to red */
-            overflow: hidden; /* Hide scrollbars */
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+        }
+
+        html, body {
+            height: 100%;
         }
 
         #video-background {
@@ -23,6 +27,11 @@
             height: 100vh;
             pointer-events: none; /* Ensure it doesn't block interactions */
             z-index: -1; /* Ensure it's behind content */
+        }
+
+        header, footer, section {
+            position: relative;
+            z-index: 1;
         }
 
         header {
