@@ -10,13 +10,24 @@
             font-family: 'Helvetica Neue', Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #121212; /* Dark background */
-            color: #e0e0e0; /* Light gray text */
+            color: #e0e0e0;
             overflow-x: hidden;
+            position: relative;
         }
 
         html, body {
             height: 100%;
+            width: 100%;
+        }
+
+        video.background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
         }
 
         header, footer, section {
@@ -28,11 +39,11 @@
         }
 
         header {
-            background-color: #1f1f1f; /* Slightly lighter dark background */
-            color: #e0e0e0; /* Light gray text */
+            background-color: rgba(31, 31, 31, 0.8); /* Semi-transparent background */
+            color: #e0e0e0;
             text-align: center;
             padding: 3rem 1rem;
-            border-bottom: 1px solid #333; /* Subtle border */
+            border-bottom: 1px solid #333;
         }
 
         header h1 {
@@ -44,7 +55,7 @@
         header p {
             margin-top: 0.5rem;
             font-size: 1.2rem;
-            color: #b0b0b0; /* Slightly lighter text */
+            color: #b0b0b0;
         }
 
         nav {
@@ -53,7 +64,7 @@
         }
 
         nav a {
-            color: #1e90ff; /* Bright blue */
+            color: #1e90ff;
             text-decoration: none;
             margin: 0 15px;
             font-size: 1rem;
@@ -62,13 +73,13 @@
         }
 
         nav a:hover {
-            color: #0d6efd; /* Darker blue on hover */
+            color: #0d6efd;
         }
 
         section {
-            background-color: #1e1e1e; /* Dark background for sections */
+            background-color: rgba(30, 30, 30, 0.8); /* Semi-transparent background */
             border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Stronger shadow */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
             color: #e0e0e0;
             padding: 2rem;
             margin-bottom: 2rem;
@@ -78,7 +89,7 @@
             font-size: 1.8rem;
             margin-bottom: 1rem;
             font-weight: 400;
-            border-bottom: 2px solid #1e90ff; /* Blue underline */
+            border-bottom: 2px solid #1e90ff;
             padding-bottom: 0.5rem;
         }
 
@@ -106,18 +117,18 @@
         footer {
             text-align: center;
             padding: 1rem;
-            background-color: #1f1f1f; /* Darker background */
+            background-color: rgba(31, 31, 31, 0.8);
             color: #b0b0b0;
-            border-top: 1px solid #333; /* Subtle border */
+            border-top: 1px solid #333;
         }
 
         a {
-            color: #1e90ff; /* Bright blue */
+            color: #1e90ff;
             text-decoration: none;
         }
 
         a:hover {
-            color: #0d6efd; /* Darker blue on hover */
+            color: #0d6efd;
         }
 
         /* Responsive Styles */
@@ -156,6 +167,11 @@
     </style>
 </head>
 <body>
+
+    <video class="background" autoplay muted loop>
+        <source src="G:\csgo surfing in a bowling alley(1).mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
 
     <header>
         <h1>Vojta Novak</h1>
