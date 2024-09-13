@@ -4,21 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Vojta Novak - Osobni stranka</title>
+    <title>Vojta Novak - Osobni Stranka</title>
     <style>
         body {
             font-family: 'Helvetica Neue', Arial, sans-serif;
             margin: 0;
             padding: 0;
             background-color: #121212;
-            color: #e0e0e0;
+            color: red; /* Set the font color to red */
         }
 
         header {
             background-color: #1f1f1f;
-            color: #e0e0e0;
+            color: red; /* Set the font color to red */
             text-align: center;
             padding: 3rem 0;
+            background-image: url('https://i.ytimg.com/vi/MJv-IP9eVmA/maxresdefault.jpg'); /* This will be dynamically updated */
+            background-size: cover;
+            background-position: center;
         }
 
         header h1 {
@@ -30,7 +33,7 @@
         header p {
             margin-top: 0.5rem;
             font-size: 1.2rem;
-            color: #b0b0b0;
+            color: red; /* Set the font color to red */
         }
 
         nav {
@@ -39,7 +42,7 @@
         }
 
         nav a {
-            color: #e0e0e0;
+            color: red; /* Set the font color to red */
             text-decoration: none;
             margin: 0 15px;
             font-size: 1rem;
@@ -56,6 +59,7 @@
             padding: 2rem;
             background-color: #1c1c1c;
             border-radius: 8px;
+            color: red; /* Set the font color to red */
         }
 
         section h2 {
@@ -101,30 +105,40 @@
             color: #a6ff4d;
         }
     </style>
+    <script>
+        // Function to dynamically change the background image based on URL
+        function changeBackgroundImage() {
+            let imageUrl = prompt("https://bjc.gamblingzion.com/uploads/2020/09/blackjack-1600x891-1.jpg");
+            if (imageUrl) {
+                document.querySelector('header').style.backgroundImage = 'url(' + imageUrl + ')';
+            }
+        }
+    </script>
 </head>
 <body>
+
     <header>
         <h1>Vojta Novak</h1>
         <p>Sigma | Lone Wolf | Phonk Crashout Master</p>
     </header>
 
     <nav>
-        <a href="#about">O me</a>
-        <a href="#projects">Projekt\</a>
+        <a href="#about">O mne</a>
+        <a href="#projects">Projekty</a>
         <a href="#skills">Skills</a>
         <a href="#contact">Kontakt</a>
     </nav>
 
     <section id="about">
-        <h2>O Me</h2>
+        <h2>O Mne</h2>
         <p>Jsem rizzgod</p>
     </section>
 
     <section id="projects">
-        <h2>projekty</h2>
+        <h2>Projekty</h2>
         <div class="projects">
             <div>
-                <h3>projekt 1</h3>
+                <h3>Projekt 1</h3>
                 <p>Rad hledam stracene psy</p>
             </div>
             <div>
@@ -163,6 +177,8 @@
 
     <footer>
         <p>&copy; 2024 Vojta Novak. All rights reserved.</p>
+        <button onclick="changeBackgroundImage()">Change Background Image</button>
     </footer>
+
 </body>
 </html>
