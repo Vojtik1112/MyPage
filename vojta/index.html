@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Vojtova Uzasna Stranka</title>
+    <title>Vojta Novak | Director of Information Security</title>
     <style>
         body {
             font-family: 'Helvetica Neue', Arial, sans-serif;
@@ -32,7 +32,7 @@
             height: 100%;
             background: linear-gradient(135deg, #c0392b, #000000);
             background-size: 400% 400%;
-            animation: gradient 12s ease infinite;
+            animation: gradient 6s ease infinite;
             z-index: -1;
         }
 
@@ -51,7 +51,7 @@
         }
 
         header {
-            background-color: rgba(0, 0, 0, 0.9); /* Dark red */
+            background-color: rgba(0, 0, 0, 0.9); /* Dark background */
             color: #f0f0f0;
             text-align: center;
             padding: 3rem 1rem;
@@ -178,15 +178,42 @@
             }
         }
 
-        /* Matrix Rain Styles */
-        #matrixRain {
-            position: fixed;
-            right: 0;
+        @media (max-width: 480px) {
+            header {
+                padding: 1.5rem 0.5rem;
+            }
+
+            header h1 {
+                font-size: 1.75rem;
+            }
+
+            header p {
+                font-size: 0.9rem;
+            }
+
+            nav a {
+                font-size: 0.8rem;
+                margin: 0.25rem 0;
+            }
+
+            section {
+                padding: 0.75rem;
+            }
+
+            section h2 {
+                font-size: 1.25rem;
+            }
+        }
+
+        /* Random Characters Styles */
+        #randomChars {
+            position: absolute;
             top: 0;
-            width: 150px;
+            left: 0;
+            width: 100%;
             height: 100%;
-            z-index: 1000;
             pointer-events: none; /* Allow clicks through the canvas */
+            overflow: hidden; /* Ensure characters don't overflow */
         }
     </style>
 </head>
@@ -194,7 +221,7 @@
 
     <header>
         <h1>Vojta Novak</h1>
-        <p>Ahoj tati | Ahoj mami | IT Security Expert</p>
+        <p>Director of Information Security | Cybersecurity Strategist</p>
     </header>
 
     <nav>
@@ -206,20 +233,20 @@
 
     <section id="about">
         <h2>About Me</h2>
-        <p>I am an experienced cybersecurity professional with a passion for ethical hacking and security auditing. With over 10 years of experience, I have protected numerous organizations from cyber threats, providing expert guidance on vulnerability assessments, penetration testing, and incident response.</p>
-        <p>My mission is to stay ahead of emerging threats and ensure the best security measures are in place. I also contribute to open-source security projects and actively engage in cybersecurity communities to share my knowledge and expertise.</p>
+        <p>As a seasoned Director of Information Security, I have dedicated over a decade to fortifying organizations against cyber threats. My expertise lies in leading comprehensive security strategies, performing in-depth vulnerability assessments, and overseeing advanced incident response initiatives.</p>
+        <p>My commitment is to stay ahead of emerging threats and ensure that cutting-edge security practices are employed. I am also actively involved in industry communities and contribute to open-source security projects, sharing my insights and experiences with fellow professionals.</p>
     </section>
 
     <section id="projects">
         <h2>Projects</h2>
         <div class="projects">
             <div>
-                <h3>Vulnerability Assessment Tool</h3>
-                <p>Developed a comprehensive tool to identify and assess vulnerabilities in network systems. Improved security posture for multiple clients through detailed reports and recommendations.</p>
+                <h3>Advanced Vulnerability Assessment System</h3>
+                <p>Led the development of a state-of-the-art tool designed for comprehensive vulnerability detection and assessment. This system has significantly enhanced the security posture of numerous organizations through detailed analysis and strategic recommendations.</p>
             </div>
             <div>
-                <h3>Penetration Testing Engagements</h3>
-                <p>Conducted penetration tests to evaluate the security of web applications and network infrastructures. Provided actionable insights and remediation strategies to enhance overall security.</p>
+                <h3>Enterprise Penetration Testing</h3>
+                <p>Executed extensive penetration tests to assess the resilience of enterprise web applications and network infrastructures. Provided critical insights and remediation strategies to bolster security defenses and mitigate potential risks.</p>
             </div>
         </div>
     </section>
@@ -230,18 +257,18 @@
             <div>
                 <h3>Core Competencies</h3>
                 <ul>
-                    <li>Ethical Hacking</li>
-                    <li>Vulnerability Assessment</li>
-                    <li>Incident Response</li>
-                    <li>Security Auditing</li>
+                    <li>Strategic Cybersecurity Leadership</li>
+                    <li>Advanced Vulnerability Management</li>
+                    <li>Incident Response & Forensics</li>
+                    <li>Security Risk Assessment</li>
                 </ul>
             </div>
             <div>
-                <h3>Technical Skills</h3>
+                <h3>Technical Expertise</h3>
                 <ul>
-                    <li>Network Security</li>
+                    <li>Network Security Architecture</li>
                     <li>Penetration Testing Tools (Kali Linux, Metasploit)</li>
-                    <li>Threat Intelligence</li>
+                    <li>Threat Intelligence Analysis</li>
                     <li>Security Information and Event Management (SIEM)</li>
                 </ul>
             </div>
@@ -250,59 +277,58 @@
 
     <section id="contact">
         <h2>Contact</h2>
-        <p>LinkedIn: <a href="https://www.linkedin.com/in/vojta-novak" target="_blank" rel="noopener noreferrer">linkedin.com/in/vojta-novak</a></p>
-        <p>Email: vojta.novak@example.com</p>
+        <p>Instagram: <a href="https://www.instagram.com/schizvojta/" target="_blank" rel="noopener noreferrer">schizvojta</a></p>
+        <p>Steam: <a href="https://steamcommunity.com/id/vojtik_tlamaku/" target="_blank" rel="noopener noreferrer">LadiesMan217</a></p>
     </section>
 
     <footer>
-        <p>&copy; 2024 Vojta Novak. All rights reserved. Designed by ChatGPT.</p>
+        <p>&copy; 2024 Vojta Novak. All rights reserved.</p>
     </footer>
 
-    <!-- Matrix Rain Canvas -->
-    <canvas id="matrixRain"></canvas>
+    <!-- Random Characters Overlay -->
+    <div id="randomChars"></div>
 
-    <!-- Matrix Rain JavaScript -->
+    <!-- Random Characters JavaScript -->
     <script>
-        const canvas = document.getElementById('matrixRain');
-        const ctx = canvas.getContext('2d');
+        const charsContainer = document.getElementById('randomChars');
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()*&^%';
+        const numChars = 100; // Number of characters to generate
 
-        canvas.height = window.innerHeight;
-        canvas.width = 150; // Set the canvas width to match the CSS width
-
-        const matrixChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()*&^%';
-        const fontSize = 14;
-        const columns = canvas.width / fontSize;
-
-        const drops = [];
-        for (let i = 0; i < columns; i++) {
-            drops[i] = canvas.height;
+        function createRandomCharacter() {
+            const char = document.createElement('div');
+            char.style.position = 'absolute';
+            char.style.color = '#0F0'; // Green color
+            char.style.fontSize = '20px';
+            char.style.fontFamily = 'monospace';
+            char.textContent = characters[Math.floor(Math.random() * characters.length)];
+            return char;
         }
 
-        function drawMatrix() {
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
+        function randomizePosition(element) {
+            const x = Math.random() * window.innerWidth;
+            const y = Math.random() * window.innerHeight;
+            element.style.left = `${x}px`;
+            element.style.top = `${y}px`;
+        }
 
-            ctx.fillStyle = '#0F0';
-            ctx.font = `${fontSize}px monospace`;
+        function generateRandomCharacters() {
+            for (let i = 0; i < numChars; i++) {
+                const char = createRandomCharacter();
+                randomizePosition(char);
+                charsContainer.appendChild(char);
 
-            for (let i = 0; i < drops.length; i++) {
-                const text = matrixChars[Math.floor(Math.random() * matrixChars.length)];
-                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-
-                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-                    drops[i] = 0;
-                }
-
-                drops[i]++;
+                // Remove character after a delay to prevent clutter
+                setTimeout(() => {
+                    charsContainer.removeChild(char);
+                }, 2000); // Adjust timing as needed
             }
         }
 
-        setInterval(drawMatrix, 30);
+        // Generate characters at regular intervals
+        setInterval(generateRandomCharacters, 1000); // Adjust interval as needed
 
-        window.addEventListener('resize', () => {
-            canvas.height = window.innerHeight;
-            canvas.width = 150;
-        });
+        // Initial character generation
+        generateRandomCharacters();
     </script>
 
 </body>
