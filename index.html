@@ -10,24 +10,29 @@
             font-family: 'Helvetica Neue', Arial, sans-serif;
             margin: 0;
             padding: 0;
-            color: #e0e0e000;
+            color: #e0e0e0;
             overflow-x: hidden;
             position: relative;
+            background: linear-gradient(-45deg, #1e1e1e, #1e90ff, #000, #0d6efd);
+            background-size: 400% 400%;
+            animation: gradientAnimation 15s ease infinite;
+        }
+
+        @keyframes gradientAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
         }
 
         html, body {
             height: 100%;
             width: 100%;
-        }
-
-        video.background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: -1;
         }
 
         header, footer, section {
@@ -167,11 +172,6 @@
     </style>
 </head>
 <body>
-
-    <video class="background" autoplay muted loop>
-        <source src="your-video-file.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
 
     <header>
         <h1>Vojta Novak</h1>
