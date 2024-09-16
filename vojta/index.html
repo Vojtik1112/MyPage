@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Vojtova Uzasna Stranka</title>
+    <title>Vojta Novak - Cybersecurity Specialist</title>
     <style>
         body {
             font-family: 'Helvetica Neue', Arial, sans-serif;
@@ -144,6 +144,29 @@
             color: #ff6666;
         }
 
+        /* Rotating Earth */
+        .rotating-earth {
+            width: 150px; /* Adjust size as needed */
+            height: 150px;
+            background: url('https://cdn.pixabay.com/animation/2022/12/24/01/36/01-36-27-376_256.gif') no-repeat center center;
+            background-size: cover;
+            border-radius: 50%;
+            position: absolute;
+            top: 20px; /* Adjust positioning */
+            left: 50%;
+            transform: translateX(-50%);
+            animation: rotate 15s infinite linear;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: translateX(-50%) rotate(0deg);
+            }
+            to {
+                transform: translateX(-50%) rotate(360deg);
+            }
+        }
+
         /* Mobile improvements */
         @media (max-width: 768px) {
             header {
@@ -180,6 +203,9 @@
     </style>
 </head>
 <body>
+
+    <!-- Rotating Earth -->
+    <div class="rotating-earth"></div>
 
     <header>
         <h1>Vojta Novak</h1>
