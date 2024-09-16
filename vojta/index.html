@@ -31,7 +31,7 @@
             height: 100%;
             background: linear-gradient(135deg, #c0392b, #000000);
             background-size: 400% 400%;
-            animation: gradient 6s ease infinite;
+            animation: gradient 10s ease infinite;
             z-index: -1;
         }
 
@@ -81,6 +81,7 @@
             font-size: 1rem;
             padding: 0.5rem;
             transition: color 0.3s ease;
+            cursor: url('cursor.png'), auto; /* Keep custom cursor for links */
         }
 
         nav a:hover {
@@ -134,73 +135,14 @@
             border-top: 1px solid #e74c3c;
         }
 
-        a {
+        footer a {
             color: #e74c3c;
             text-decoration: none;
+            cursor: url('cursor.png'), auto; /* Keep custom cursor for footer links */
         }
 
-        a:hover {
+        footer a:hover {
             color: #ff6666;
-        }
-
-        @media (max-width: 768px) {
-            header {
-                padding: 2rem 1rem;
-            }
-
-            header h1 {
-                font-size: 2rem;
-            }
-
-            header p {
-                font-size: 1rem;
-            }
-
-            nav a {
-                display: block;
-                margin: 0.5rem 0;
-                font-size: 0.9rem;
-            }
-
-            .projects div, .skills div {
-                width: 100%;
-                margin-bottom: 1rem;
-            }
-
-            section {
-                padding: 1rem;
-            }
-
-            section h2 {
-                font-size: 1.5rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            header {
-                padding: 1.5rem 0.5rem;
-            }
-
-            header h1 {
-                font-size: 1.75rem;
-            }
-
-            header p {
-                font-size: 0.9rem;
-            }
-
-            nav a {
-                font-size: 0.8rem;
-                margin: 0.25rem 0;
-            }
-
-            section {
-                padding: 0.75rem;
-            }
-
-            section h2 {
-                font-size: 1.25rem;
-            }
         }
 
         #randomChars {
@@ -221,7 +163,7 @@
             padding: 1rem 2rem;
             font-size: 1rem;
             border-radius: 8px;
-            cursor: pointer;
+            cursor: url('cursor.png'), auto; /* Keep custom cursor for button */
             z-index: 2;
         }
     </style>
