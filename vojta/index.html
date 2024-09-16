@@ -14,7 +14,6 @@
             overflow-x: hidden;
             position: relative;
             background-color: #000000; /* Black background */
-            cursor: url('/path/to/your/cursor.png'), auto; /* Custom cursor */
         }
 
         html, body {
@@ -215,6 +214,19 @@
             pointer-events: none; /* Allow clicks through the canvas */
             overflow: hidden; /* Ensure characters don't overflow */
         }
+
+        /* Button Styles */
+        #randomButton {
+            position: absolute;
+            background-color: #e74c3c; /* Red background */
+            color: #fff; /* White text */
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            z-index: 2; /* Ensure button is above other content */
+        }
     </style>
 </head>
 <body>
@@ -288,7 +300,7 @@
     <!-- Random Characters Overlay -->
     <div id="randomChars"></div>
 
-    <!-- Random Characters JavaScript -->
+    <!-- Random Button JavaScript -->
     <script>
         const charsContainer = document.getElementById('randomChars');
         const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()*&^%';
@@ -329,6 +341,29 @@
 
         // Initial character generation
         generateRandomCharacters();
+
+        // Button creation and functionality
+        function createButton() {
+            const button = document.createElement('button');
+            button.id = 'randomButton';
+            button.textContent = 'PSSST';
+            button.onclick = function() {
+                alert('RIZZ');
+                moveButton(button);
+            };
+            document.body.appendChild(button);
+            moveButton(button); // Position the button initially
+        }
+
+        function moveButton(button) {
+            const x = Math.random() * (window.innerWidth - button.offsetWidth);
+            const y = Math.random() * (window.innerHeight - button.offsetHeight);
+            button.style.left = `${x}px`;
+            button.style.top = `${y}px`;
+        }
+
+        // Create the button when the page loads
+        window.onload = createButton;
     </script>
 
 </body>
