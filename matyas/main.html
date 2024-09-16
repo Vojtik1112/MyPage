@@ -1,13 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="cs">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IT Professional Portfolio</title>
-    <link rel="stylesheet" href="styles.css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Header -->
     <header>
+        <div class="logo">LOGO</div>
         <nav>
             <ul>
                 <li><a href="#about">About</a></li>
@@ -16,31 +19,28 @@
             </ul>
         </nav>
     </header>
+
+    <!-- Main Content -->
     <main>
-        <section id="about">
-            <h1>John Doe</h1>
-            <p>Experienced IT professional with a passion for developing innovative programs that expedite the efficiency and effectiveness of organizational success.</p>
-        </section>
-        <section id="projects">
-            <h2>Projects</h2>
-            <div class="project">
-                <h3>Project 1</h3>
-                <p>Description of project 1.</p>
+        <section class="cards">
+            <div class="card" id="about">
+                <h2>About</h2>
+                <p>Learn more about me and my journey in IT and UI design.</p>
             </div>
-            <div class="project">
-                <h3>Project 2</h3>
-                <p>Description of project 2.</p>
+            <div class="card" id="projects">
+                <h2>Projects</h2>
+                <p>Check out some of the projects I've worked on.</p>
             </div>
-            <div class="project">
-                <h3>Project 3</h3>
-                <p>Description of project 3.</p>
+            <div class="card" id="contact">
+                <h2>Contact</h2>
+                <p>Get in touch with me for collaboration or inquiries.</p>
             </div>
-        </section>
-        <section id="contact">
-            <h2>Contact</h2>
-            <p>Email: john.doe@example.com</p>
         </section>
     </main>
-    <script src="script.js"></script>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 IT Specialist | Designed by Me</p>
+    </footer>
 </body>
 </html>
