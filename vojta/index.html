@@ -176,6 +176,20 @@
             z-index: 10; /* Ensure it's above other content */
         }
 
+        #popup-image {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: none;
+            z-index: 20;
+        }
+
+        #popup-image img {
+            max-width: 100%;
+            height: auto;
+        }
+
         @media (max-width: 768px) {
             header h1 {
                 font-size: 2rem;
@@ -267,6 +281,11 @@
 
     <!-- Click Sound -->
     <audio id="click-sound" src="hitmark.mp3"></audio>
+
+    <!-- Popup Image -->
+    <div id="popup-image">
+        <img src="rizz.jpg" alt="Popup Image">
+    </div>
 
     <!-- GIF in the top right corner -->
     <img src="eye.gif" id="corner-gif" alt="Animated GIF">
@@ -382,7 +401,7 @@
             button.id = 'randomButton';
             button.textContent = 'PSSST';
             button.onclick = function() {
-                alert('RIZZ');
+                playSoundAndShowImage();
                 moveButton(button);
             };
             document.body.appendChild(button);
@@ -396,13 +415,22 @@
             button.style.top = `${y}px`;
         }
 
-        window.onload = createButton;
-
-        // Play click sound on any click
-        document.addEventListener('click', () => {
+        function playSoundAndShowImage() {
+            // Play the click sound
             const clickSound = document.getElementById('click-sound');
             clickSound.play();
-        });
+
+            // Show the image
+            const popupImage = document.getElementById('popup-image');
+            popupImage.style.display = 'block';
+
+            // Hide the image after 3 seconds
+            setTimeout(() => {
+                popupImage.style.display = 'none';
+            }, 3000);
+        }
+
+        window.onload = createButton;
 
         // Ensure background music is playing
         window.addEventListener('load', () => {
