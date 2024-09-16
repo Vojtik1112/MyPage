@@ -166,6 +166,98 @@
             cursor: url('cursor.png'), auto; /* Keep custom cursor for button */
             z-index: 2;
         }
+
+        #corner-gif {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100px; /* Adjust size as needed */
+            height: auto;
+            z-index: 10; /* Ensure it's above other content */
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            header p {
+                font-size: 1rem;
+            }
+
+            nav {
+                margin: 1rem 0;
+            }
+
+            nav a {
+                display: block;
+                margin: 0.5rem 0;
+                font-size: 1.2rem;
+            }
+
+            section {
+                padding: 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+
+            section h2 {
+                font-size: 1.5rem;
+            }
+
+            .projects div, .skills div {
+                width: 100%;
+                margin-bottom: 1rem;
+            }
+
+            .projects h3, .skills h3 {
+                font-size: 1.2rem;
+            }
+
+            #randomButton {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            #corner-gif {
+                width: 75px; /* Adjust size for smaller screens */
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.5rem;
+            }
+
+            header p {
+                font-size: 0.9rem;
+            }
+
+            nav a {
+                font-size: 1rem;
+            }
+
+            section {
+                padding: 1rem;
+                margin-bottom: 1rem;
+            }
+
+            section h2 {
+                font-size: 1.2rem;
+            }
+
+            .projects h3, .skills h3 {
+                font-size: 1rem;
+            }
+
+            #randomButton {
+                padding: 0.5rem 1rem;
+                font-size: 0.8rem;
+            }
+
+            #corner-gif {
+                width: 50px; /* Further adjust size for smaller screens */
+            }
+        }
     </style>
 </head>
 <body>
@@ -175,6 +267,9 @@
 
     <!-- Click Sound -->
     <audio id="click-sound" src="hitmark.mp3"></audio>
+
+    <!-- GIF in the top right corner -->
+    <img src="eye.gif" id="corner-gif" alt="Animated GIF">
 
     <header>
         <h1>Vojta Novak</h1>
