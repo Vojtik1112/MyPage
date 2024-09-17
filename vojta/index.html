@@ -276,7 +276,6 @@
                 width: 50px; /* Further adjust size for smaller screens */
             }
         }
-
     </style>
 </head>
 <body>
@@ -373,6 +372,15 @@
         <script src="https://static.cbox.ws/embed/2.js" async></script>
     </div>
 
+    <!-- Add NekoType Configuration -->
+    <script>
+        NekoType = "neon";
+    </script>
+    <h1 id="nl">
+        <script src="https://webneko.net/n20171213.js"></script>
+        <a href="https://webneko.net">Neko</a>
+    </h1>
+
     <script>
         const charsContainer = document.getElementById('randomChars');
         const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()*&^%';
@@ -439,7 +447,6 @@
             const popupImage = document.getElementById('popup-image');
             popupImage.style.display = 'block';
 
-            // Hide the image after 3 seconds
             setTimeout(() => {
                 popupImage.style.display = 'none';
             }, 100);
