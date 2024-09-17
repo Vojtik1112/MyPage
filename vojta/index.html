@@ -174,7 +174,7 @@
         #corner-gif {
             position: fixed;
             top: 0;
-            right: 0;
+            left: 0;
             width: 100px; /* Adjust size as needed */
             height: auto;
             z-index: 10; /* Ensure it's above other content */
@@ -276,6 +276,7 @@
                 width: 50px; /* Further adjust size for smaller screens */
             }
         }
+
     </style>
 </head>
 <body>
@@ -361,6 +362,16 @@
     </footer>
 
     <div id="randomChars"></div>
+
+    <!-- Live Chat Widget -->
+    <div id="chat-widget">
+        <script>
+            window['CboxReady'] = function (Cbox) {
+                Cbox('button', '5-952974-a3goCh');
+            }
+        </script>
+        <script src="https://static.cbox.ws/embed/2.js" async></script>
+    </div>
 
     <script>
         const charsContainer = document.getElementById('randomChars');
