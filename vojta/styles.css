@@ -1,4 +1,4 @@
-´body {
+body {
     font-family: 'Helvetica Neue', Arial, sans-serif;
     margin: 0;
     padding: 0;
@@ -21,16 +21,8 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, #c0392b, #000000);
-    background-size: 400% 400%;
-    animation: gradient 10s ease infinite;
+    background: black; /* Background color */
     z-index: -1;
-}
-
-@keyframes gradient {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
 }
 
 header, footer, section {
@@ -46,7 +38,7 @@ header {
     color: #f0f0f0;
     text-align: center;
     padding: 3rem 1rem;
-    border-bottom: 1px solid #e74c3c;
+    border-bottom: 1px solid #f0f0f0; /* Changed border color */
 }
 
 header h1 {
@@ -67,7 +59,7 @@ nav {
 }
 
 nav a {
-    color: #e74c3c;
+    color: #f0f0f0; /* Changed link color */
     text-decoration: none;
     margin: 0 15px;
     font-size: 1rem;
@@ -93,7 +85,7 @@ section h2 {
     font-size: 1.8rem;
     margin-bottom: 1rem;
     font-weight: 400;
-    border-bottom: 2px solid #e74c3c;
+    border-bottom: 2px solid #f0f0f0; /* Changed border color */
     padding-bottom: 0.5rem;
 }
 
@@ -112,7 +104,7 @@ section h2 {
     font-size: 1.4rem;
     margin-bottom: 0.5rem;
     font-weight: 400;
-    color: #e74c3c;
+    color: #f0f0f0; /* Changed color */
 }
 
 p, li {
@@ -124,11 +116,11 @@ footer {
     padding: 1rem;
     background-color: rgba(0, 0, 0, 0.9);
     color: #b0b0b0;
-    border-top: 1px solid #e74c3c;
+    border-top: 1px solid #f0f0f0; /* Changed border color */
 }
 
 footer a {
-    color: #e74c3c;
+    color: #f0f0f0; /* Changed footer link color */
     text-decoration: none;
     cursor: url('cursor.png'), auto; /* Keep custom cursor for footer links */
 }
@@ -137,7 +129,8 @@ footer a:hover {
     color: #ff6666;
 }
 
-#randomChars {
+/* Star Animation */
+.stars {
     position: absolute;
     top: 0;
     left: 0;
@@ -147,41 +140,26 @@ footer a:hover {
     overflow: hidden;
 }
 
-#randomButton {
+.star {
     position: absolute;
-    background-color: #e74c3c;
-    color: #fff;
-    border: none;
-    padding: 1rem 2rem;
-    font-size: 1rem;
-    border-radius: 8px;
-    cursor: url('cursor.png'), auto; /* Keep custom cursor for button */
-    z-index: 2;
+    background: white;
+    opacity: 0.8;
+    border-radius: 50%;
+    animation: fall linear infinite;
 }
 
-#corner-gif {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100px; /* Adjust size as needed */
-    height: auto;
-    z-index: 10; /* Ensure it's above other content */
+@keyframes fall {
+    0% {
+        transform: translateY(-100px);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(100vh);
+        opacity: 0;
+    }
 }
 
-#popup-image {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: none;
-    z-index: 20;
-}
-
-#popup-image img {
-    max-width: 100%;
-    height: auto;
-}
-
+/* Create multiple stars */
 @media (max-width: 768px) {
     header h1 {
         font-size: 2rem;
