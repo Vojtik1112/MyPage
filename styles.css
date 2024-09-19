@@ -86,10 +86,6 @@ footer {
   padding: 10px;
 }
 
-#particles-container canvas {
-  filter: blur(1px);
-}
-
 /* Responsive Design */
 @media (max-width: 768px) {
   .navbar ul {
