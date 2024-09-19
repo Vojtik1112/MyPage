@@ -1,4 +1,3 @@
-/* Reset and global styles */
 * {
   margin: 0;
   padding: 0;
@@ -85,31 +84,6 @@ footer {
   color: rgba(255, 255, 255, 0.5);
   text-align: center;
   padding: 10px;
-}
-
-/* Loading screen styles */
-.loading-screen {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #ffffff; /* Choose your background color */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000; /* Ensure it's above other content */
-}
-
-.loading-text {
-  font-size: 24px;
-  color: #333333; /* Choose your text color */
-  text-align: center; /* Ensure text is centered */
-}
-
-/* Hide loading screen when content is loaded */
-.loaded .loading-screen {
-  display: none;
 }
 
 /* Responsive Design */
