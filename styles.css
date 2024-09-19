@@ -68,6 +68,7 @@ body {
 .content h1 {
   font-size: 3em;
   font-weight: 300;
+  color: rgba(255, 255, 255);
   line-height: 1.2;
 }
 
