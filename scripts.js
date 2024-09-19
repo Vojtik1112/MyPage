@@ -1,10 +1,22 @@
 const particlesConfig = {
     fullScreen: false,
     particles: {
-      number: { value: 50 },
-      move: { direction: "top", speed: 1.5 },
-      size: { value: 3 },
-      opacity: { value: 0.7 }
+      number: { value: 70 },
+      move: { direction: "top", speed: 2 },
+      size: { value: 4 },
+      opacity: { value: 0.8 },
+      color: { value: "#fff" },
+      glow: {
+        enable: true,
+        color: "#f0f0f0",
+        distance: 10
+      },
+      lineLinked: { enable: false },
+    },
+    interactivity: {
+      events: {
+        onHover: { enable: true, mode: "repulse" }
+      }
     }
   };
   
