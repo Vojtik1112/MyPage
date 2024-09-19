@@ -1,244 +1,82 @@
-body {
-    font-family: 'Helvetica Neue', Arial, sans-serif;
+* {
     margin: 0;
     padding: 0;
-    color: #f0f0f0;
-    overflow-x: hidden;
-    position: relative;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Arial', sans-serif;
+    color: #ffffff;
     background-color: #000000;
-    cursor: url('cursor.png'), auto; /* Custom cursor */
-}
-
-html, body {
-    height: 100%;
-    width: 100%;
-}
-
-body::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: black; /* Background color */
-    z-index: -1;
-}
-
-header, footer, section {
-    position: relative;
-    z-index: 1;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 2rem;
-}
-
-header {
-    background-color: rgba(0, 0, 0, 0.9);
-    color: #f0f0f0;
-    text-align: center;
-    padding: 3rem 1rem;
-    border-bottom: 1px solid #f0f0f0; /* Changed border color */
-}
-
-header h1 {
-    margin: 0;
-    font-size: 2.5rem;
-    font-weight: 300;
-}
-
-header p {
-    margin-top: 0.5rem;
-    font-size: 1.2rem;
-    color: #f0f0f0;
-}
-
-nav {
-    margin: 2rem 0;
-    text-align: center;
-}
-
-nav a {
-    color: #f0f0f0; /* Changed link color */
-    text-decoration: none;
-    margin: 0 15px;
-    font-size: 1rem;
-    padding: 0.5rem;
-    transition: color 0.3s ease;
-    cursor: url('cursor.png'), auto; /* Keep custom cursor for links */
-}
-
-nav a:hover {
-    color: #ff6666;
-}
-
-section {
-    background-color: rgba(0, 0, 0, 0.85);
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
-    color: #f0f0f0;
-    padding: 2rem;
-    margin-bottom: 2rem;
-}
-
-section h2 {
-    font-size: 1.8rem;
-    margin-bottom: 1rem;
-    font-weight: 400;
-    border-bottom: 2px solid #f0f0f0; /* Changed border color */
-    padding-bottom: 0.5rem;
-}
-
-.projects, .skills {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
-
-.projects div, .skills div {
-    width: 48%;
-    margin-bottom: 1.5rem;
-}
-
-.projects h3, .skills h3 {
-    font-size: 1.4rem;
-    margin-bottom: 0.5rem;
-    font-weight: 400;
-    color: #f0f0f0; /* Changed color */
-}
-
-p, li {
-    line-height: 1.6;
-}
-
-footer {
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
     text-align: center;
-    padding: 1rem;
-    background-color: rgba(0, 0, 0, 0.9);
-    color: #b0b0b0;
-    border-top: 1px solid #f0f0f0; /* Changed border color */
-}
-
-footer a {
-    color: #f0f0f0; /* Changed footer link color */
-    text-decoration: none;
-    cursor: url('cursor.png'), auto; /* Keep custom cursor for footer links */
-}
-
-footer a:hover {
-    color: #ff6666;
-}
-
-/* Star Animation */
-.stars {
-    position: absolute;
-    top: 0;
-    left: 0;
+  }
+  
+  .container {
+    position: relative;
     width: 100%;
     height: 100%;
-    pointer-events: none;
-    overflow: hidden;
-}
-
-.star {
+    background-image: url('background-image.jpg'); /* Placeholder for background swirl */
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: overlay;
+  }
+  
+  .navbar {
     position: absolute;
-    background: white;
-    opacity: 0.8;
-    border-radius: 50%;
-    animation: fall linear infinite;
-}
-
-@keyframes fall {
-    0% {
-        transform: translateY(-100px);
-        opacity: 0.8;
-    }
-    100% {
-        transform: translateY(100vh);
-        opacity: 0;
-    }
-}
-
-/* Create multiple stars */
-@media (max-width: 768px) {
-    header h1 {
-        font-size: 2rem;
-    }
-
-    header p {
-        font-size: 1rem;
-    }
-
-    nav {
-        margin: 1rem 0;
-    }
-
-    nav a {
-        display: block;
-        margin: 0.5rem 0;
-        font-size: 1.2rem;
-    }
-
-    section {
-        padding: 1.5rem;
-        margin-bottom: 1.5rem;
-    }
-
-    section h2 {
-        font-size: 1.5rem;
-    }
-
-    .projects div, .skills div {
-        width: 100%;
-        margin-bottom: 1rem;
-    }
-
-    .projects h3, .skills h3 {
-        font-size: 1.2rem;
-    }
-
-    #randomButton {
-        padding: 0.8rem 1.5rem;
-        font-size: 0.9rem;
-    }
-
-    #corner-gif {
-        width: 75px; /* Adjust size for smaller screens */
-    }
-}
-
-@media (max-width: 480px) {
-    header h1 {
-        font-size: 1.5rem;
-    }
-
-    header p {
-        font-size: 0.9rem;
-    }
-
-    nav a {
-        font-size: 1rem;
-    }
-
-    section {
-        padding: 1rem;
-        margin-bottom: 1rem;
-    }
-
-    section h2 {
-        font-size: 1.2rem;
-    }
-
-    .projects h3, .skills h3 {
-        font-size: 1rem;
-    }
-
-    #randomButton {
-        padding: 0.5rem 1rem;
-        font-size: 0.8rem;
-    }
-
-    #corner-gif {
-        width: 50px; /* Further adjust size for smaller screens */
-    }
-}
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .navbar .logo {
+    font-size: 1.5em;
+    font-weight: bold;
+    letter-spacing: 2px;
+  }
+  
+  .navbar ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+  }
+  
+  .navbar ul li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 0.9em;
+    letter-spacing: 1px;
+  }
+  
+  .navbar ul li a:hover {
+    text-decoration: underline;
+  }
+  
+  .content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .content h1 {
+    font-size: 3em;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.1); /* The translucent effect */
+    line-height: 1.2;
+  }
+  
+  footer {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.8em;
+    color: rgba(255, 255, 255, 0.5);
+  }  
