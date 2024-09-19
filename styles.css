@@ -86,36 +86,17 @@ footer {
   padding: 10px;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-  .navbar ul {
-    gap: 5px;
+/* CSS to show a message instead of the body content on screens narrower than 600px */
+@media (max-width: 600px) {
+  body {
+    display: none;
   }
-  
-  .content h1 {
-    font-size: 1.8em;
-  }
-  
-  .navbar .logo {
-    font-size: 1.2em;
-  }
-}
-
-@media (max-width: 480px) {
-  .navbar ul {
-    flex-direction: column;
-    gap: 5px;
-  }
-  
-  .content h1 {
-    font-size: 1.5em;
-  }
-  
-  .navbar .logo {
-    font-size: 1em;
-  }
-
-  footer {
-    font-size: 0.7em;
+  .phone-message {
+    display: block;
+    text-align: center;
+    padding: 20px;
+    font-size: 20px;
+    color: #fff;
+    background-color: #333;
   }
 }
