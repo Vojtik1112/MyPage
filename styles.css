@@ -20,7 +20,7 @@ body {
   position: relative;
   width: 100%;
   height: 100%;
-  background-image: url('jupiter.jpg');
+  background-image: url('images/jupiter.jpg'); /* Reference local file */
   background-size: cover;
   background-position: center;
   background-blend-mode: overlay;
