@@ -104,6 +104,7 @@ footer {
 .loading-text {
   font-size: 24px;
   color: #333333; /* Choose your text color */
+  text-align: center; /* Ensure text is centered */
 }
 
 /* Hide loading screen when content is loaded */
