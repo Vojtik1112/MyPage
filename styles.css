@@ -59,6 +59,13 @@ body {
   text-decoration: underline;
 }
 
+.navbar ul li.change-wallpaper {
+  cursor: pointer;
+  color: #ffffff;
+  font-size: 0.9em;
+  letter-spacing: 1px;
+}
+
 .content {
   position: absolute;
   top: 50%;
