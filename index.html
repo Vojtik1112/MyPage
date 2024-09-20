@@ -5,17 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Vojta Industries</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Roboto:wght@300&display=swap" rel="stylesheet">
-  <!-- Favicon -->
   <link rel="icon" href="favicon.ico" type="image/x-icon">
-  <!-- Stylesheet -->
   <link rel="stylesheet" href="style.css">
-  <!-- Background Music -->
   <audio id="bg-music" autoplay loop>
     <source src="music.mp3" type="audio/mpeg">
     Your browser does not support the audio element.
   </audio>
 </head>
 <body>
+  <canvas id="canvas"></canvas> <!-- Background Canvas -->
+  
   <header class="navbar">
     <div class="logo">VOJTA</div>
     <nav>
@@ -42,5 +41,8 @@
     <p>&copy; 2024 Novak Vojtech. All Rights Reserved.</p>
   </footer>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.6/dat.gui.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/simplex-noise/2.4.0/simplex-noise.min.js"></script> <!-- Include noise.js from CDN -->
+  <script src="script.js"></script> <!-- Link to your JavaScript file -->
 </body>
 </html>
