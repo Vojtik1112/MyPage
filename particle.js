@@ -39,6 +39,7 @@ class Particle {
   let canvas;
   let ctx;
   let particles;
+  let field; // Declare the field variable
   
   function setup() {
     canvas = document.querySelector("#canvas");
@@ -52,6 +53,7 @@ class Particle {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     initParticles();
+    createField(); // Call the function to create the field
   }
   
   function initParticles() {
@@ -63,13 +65,29 @@ class Particle {
     }
   }
   
+  function createField() {
+    const noiseScale = 0.1; // Adjust this value for noise frequency
+    const width = Math.floor(canvas.width / 10);
+    const height = Math.floor(canvas.height / 10);
+    field = new Array(width);
+    
+    for (let x = 0; x < width; x++) {
+      field[x] = new Array(height);
+      for (let y = 0; y < height; y++) {
+        const nx = x * noiseScale;
+        const ny = y * noiseScale;
+        const noiseValue = noise.simplex2(nx, ny); // Use your noise function
+        field[x][y] = new Vector(noiseValue, noiseValue); // Store noise values as vectors
+      }
+    }
+  }
+  
   function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     particles.forEach(p => {
       p.draw();
-      // Calculate movement based on noise
       let pos = p.pos.div(12); // Adjust based on your needs
-      let v = field[Math.floor(pos.x)][Math.floor(pos.y)];
+      let v = field[Math.floor(pos.x / 10)][Math.floor(pos.y / 10)]; // Adjust indexing based on field size
       p.move(v);
       p.wrap();
     });
@@ -77,4 +95,5 @@ class Particle {
   }
   
   setup();
-  draw();  
+  draw();
+  
