@@ -67,6 +67,16 @@ body {
   letter-spacing: 1px;
 }
 
+.navbar ul li span {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 0.9em;
+  letter-spacing: 1px;
+  cursor: pointer;
+  display: inline-block; /* Ensure same inline display as the anchor links */
+  vertical-align: middle; /* Align with the other items */
+}
+
 .content {
   position: absolute;
   top: 50%;
