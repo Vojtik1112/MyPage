@@ -7,10 +7,17 @@
 
 body {
   font-family: 'Roboto', sans-serif;
-  background-color: #0f0f0f;
+  background-image: url('image.jpg'); /* Adjust the path */
+  background-size: cover; /* Ensures the background covers the entire page */
+  background-position: center; /* Centers the image */
+  background-attachment: fixed; /* Fixes the image so it doesn't scroll with content */
   color: white;
-  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  height: 100vh; /* Ensures the body takes up the full height */
+  overflow: hidden; /* Prevents scrollbars if the content overflows */
 }
+
 
 .navbar {
   display: flex;
