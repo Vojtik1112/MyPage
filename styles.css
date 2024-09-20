@@ -1,3 +1,4 @@
+/* Basic Reset */
 * {
   margin: 0;
   padding: 0;
@@ -5,178 +6,121 @@
 }
 
 body {
-  font-family: 'Lato', sans-serif;
-  color: #ffffff;
-  background-color: #000000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  text-align: center;
-  overflow: hidden;
-  transition: background-image 1.5s ease-in-out;
-}
-
-.container {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  background-image: url('images/jupiter.jpg');
-  background-size: cover;
-  background-position: center;
-  background-blend-mode: overlay;
+  font-family: 'Roboto', sans-serif;
+  background-color: #0f0f0f;
+  color: white;
+  overflow-x: hidden;
 }
 
 .navbar {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  right: 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 20px;
+  position: absolute;
+  width: 100%;
+  z-index: 10;
 }
 
 .navbar .logo {
+  font-family: 'Orbitron', sans-serif;
   font-size: 1.5em;
-  font-weight: bold;
-  letter-spacing: 2px;
+  color: #ffffff;
 }
 
-.navbar ul {
+.navbar nav ul {
   list-style: none;
   display: flex;
-  gap: 10px;
+  gap: 30px;
 }
 
-.navbar ul li a {
-  color: #ffffff;
+.navbar nav ul li a {
   text-decoration: none;
+  color: #ffffff;
   font-size: 0.9em;
   letter-spacing: 1px;
+  transition: color 0.3s;
 }
 
-.navbar ul li a:hover {
-  text-decoration: underline;
+.navbar nav ul li a:hover {
+  color: #00b0ff;
 }
 
-.content {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  padding: 10px;
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100vh;
+  padding: 0 100px;
 }
 
-.content h1 {
-  font-size: 3em;
+.hero-text {
+  max-width: 50%;
+}
+
+.hero-text h1 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2.5em;
+  color: #00b0ff;
+  margin-bottom: 10px;
+}
+
+.hero-text h2 {
+  font-size: 6em;
   font-weight: bold;
-  color: rgba(0, 0, 0);
-  line-height: 1.2;
-  margin: 0;
+  letter-spacing: 5px;
+  margin-bottom: 20px;
+}
+
+.hero-text p {
+  font-size: 1.1em;
+  line-height: 1.6;
+  max-width: 400px;
+  margin-bottom: 40px;
+}
+
+.cta-button {
+  padding: 15px 30px;
+  background-color: #00b0ff;
+  color: white;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-size: 0.9em;
+  letter-spacing: 2px;
+  transition: background-color 0.3s;
+}
+
+.cta-button:hover {
+  background-color: #007bff;
+}
+
+.hero-image img {
+  width: 500px;
+  height: auto;
+  filter: drop-shadow(0 0 15px #00b0ff);
 }
 
 footer {
   position: absolute;
   bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%);
+  width: 100%;
+  text-align: center;
   font-size: 0.8em;
   color: rgba(255, 255, 255, 0.5);
-  text-align: center;
-  padding: 10px;
-}
-
-/* Timeline Styles */
-.timeline {
-  position: relative;
-  margin: 100px auto;
-  padding: 10px;
-  max-width: 600px;
-  text-align: left;
-  color: #ffffff;
-}
-
-.timeline h2 {
-  text-align: center;
-  font-size: 2em;
-  margin-bottom: 20px;
-}
-
-.timeline-item {
-  position: relative;
-  padding-left: 40px;
-  margin-bottom: 30px;
-  opacity: 0;
-  transform: translateY(50px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-
-.timeline-item.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.timeline-date {
-  position: absolute;
-  left: 0;
-  top: 0;
-  font-size: 1.2em;
-  font-weight: bold;
-  color: #ffa500;
-}
-
-.timeline-content {
-  background-color: rgba(255, 255, 255, 0.1);
-  padding: 10px;
-  border-radius: 8px;
-  transition: transform 0.3s ease;
-}
-
-.timeline-content h3 {
-  font-size: 1.5em;
-  margin-bottom: 5px;
-}
-
-.timeline-content p {
-  font-size: 1em;
-}
-
-.timeline-item:hover .timeline-content {
-  transform: scale(1.05);
-  background-color: rgba(255, 255, 255, 0.2);
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
-  .navbar ul {
-    gap: 5px;
-  }
-  
-  .content h1 {
-    font-size: 1.8em;
-  }
-  
-  .navbar .logo {
-    font-size: 1.2em;
-  }
-}
-
-@media (max-width: 480px) {
-  .navbar ul {
+@media (max-width: 1200px) {
+  .hero {
     flex-direction: column;
-    gap: 5px;
-  }
-  
-  .content h1 {
-    font-size: 1.5em;
-  }
-  
-  .navbar .logo {
-    font-size: 1em;
+    padding: 50px 20px;
   }
 
-  footer {
-    font-size: 0.7em;
+  .hero-text h2 {
+    font-size: 4em;
+  }
+
+  .hero-image img {
+    width: 400px;
   }
 }
