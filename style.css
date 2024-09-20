@@ -1,21 +1,15 @@
 /* Basic Reset */
-* { 
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-body, html {
-  margin: 0;
-  overflow: hidden; /* Prevent scrollbars */
-}
-
-canvas {
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 0; /* Make sure canvas is behind other elements */
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #0f0f0f;
+  color: white;
+  overflow-x: hidden;
 }
 
 .navbar {
@@ -23,8 +17,9 @@ canvas {
   justify-content: space-between;
   align-items: center;
   padding: 20px;
-  position: relative;
-  z-index: 10; /* Ensure navbar is above the canvas */
+  position: absolute;
+  width: 100%;
+  z-index: 10;
 }
 
 .navbar .logo {
@@ -51,6 +46,60 @@ canvas {
   color: #00b0ff;
 }
 
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100vh;
+  padding: 0 100px;
+}
+
+.hero-text {
+  max-width: 50%;
+}
+
+.hero-text h1 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2.5em;
+  color: #00b0ff;
+  margin-bottom: 10px;
+}
+
+.hero-text h2 {
+  font-size: 6em;
+  font-weight: bold;
+  letter-spacing: 5px;
+  margin-bottom: 20px;
+}
+
+.hero-text p {
+  font-size: 1.1em;
+  line-height: 1.6;
+  max-width: 400px;
+  margin-bottom: 40px;
+}
+
+.cta-button {
+  padding: 15px 30px;
+  background-color: #00b0ff;
+  color: white;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-size: 0.9em;
+  letter-spacing: 2px;
+  transition: background-color 0.3s;
+}
+
+.cta-button:hover {
+  background-color: #007bff;
+}
+
+.hero-image img {
+  width: 500px;
+  height: auto;
+  filter: drop-shadow(0 0 15px #00b0ff);
+}
+
 footer {
   position: absolute;
   bottom: 10px;
@@ -58,5 +107,20 @@ footer {
   text-align: center;
   font-size: 0.8em;
   color: rgba(255, 255, 255, 0.5);
-  z-index: 10; /* Ensure footer is above the canvas */
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .hero {
+    flex-direction: column;
+    padding: 50px 20px;
+  }
+
+  .hero-text h2 {
+    font-size: 4em;
+  }
+
+  .hero-image img {
+    width: 400px;
+  }
 }
