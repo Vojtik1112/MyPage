@@ -7,7 +7,7 @@
 
 body {
   font-family: 'Roboto', sans-serif;
-  background-image: url('image.jpg'); /* Adjust the path */
+  background-image: url('images/image.jpg'); /* Adjust the path */
   background-size: cover; /* Ensures the background covers the entire page */
   background-position: center; /* Centers the image */
   background-attachment: fixed; /* Fixes the image so it doesn't scroll with content */
