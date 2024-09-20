@@ -6,7 +6,7 @@
 }
 
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'CoFo Sans', sans-serif;
   background-color: #0f0f0f;
   color: white;
   overflow-x: hidden;
@@ -23,7 +23,7 @@ body {
 }
 
 .navbar .logo {
-  font-family: 'Orbitron', sans-serif;
+  font-family: 'CoFo Sans', sans-serif;
   font-size: 1.5em;
   color: #ffffff;
 }
@@ -59,7 +59,7 @@ body {
 }
 
 .hero-text h1 {
-  font-family: 'Orbitron', sans-serif;
+  font-family: 'CoFo Sans', sans-serif;
   font-size: 2.5em;
   color: #6f1465e0;
   margin-bottom: 10px;
