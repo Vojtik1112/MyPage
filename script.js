@@ -1,6 +1,9 @@
 // Particle effect code
-let canvas, ctx, field, w, h, columns, rows, noiseZ, particles; // Removed fieldSize declaration here
+let canvas, ctx, field, w, h, columns, rows, noiseZ, particles;
 noiseZ = 0;
+
+// Create an instance of SimplexNoise
+const noise = new SimplexNoise(); // Create an instance here
 
 const particleCount = 2000; // Changed to const
 const particleSize = 0.9; // Changed to const
@@ -21,7 +24,6 @@ window.addEventListener("resize", reset);
 function reset() {
   w = canvas.width = window.innerWidth;
   h = canvas.height = window.innerHeight;
-  noise.seed(Math.random());
   columns = Math.round(w / fieldSize) + 1;
   rows = Math.round(h / fieldSize) + 1;
   initParticles();
@@ -113,8 +115,8 @@ function initField() {
 function calcField() {
   for (let x = 0; x < columns; x++) {
     for (let y = 0; y < rows; y++) {
-      let angle = noise.simplex3(x / 20, y / 20, noiseZ) * Math.PI * 2;
-      let length = noise.simplex3(x / 40 + 40000, y / 40 + 40000, noiseZ) * fieldForce;
+      let angle = noise.noise3D(x / 20, y / 20, noiseZ) * Math.PI * 2; // Use noise.noise3D
+      let length = noise.noise3D(x / 40 + 40000, y / 40 + 40000, noiseZ) * fieldForce; // Use noise.noise3D
       field[x][y].setLength(length);
       field[x][y].setAngle(angle);
     }
