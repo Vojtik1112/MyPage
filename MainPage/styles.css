@@ -1,5 +1,5 @@
 /* Basic Reset */
-* { 
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -10,6 +10,8 @@ body {
   background-color: #0f0f0f;
   color: white;
   overflow-x: hidden;
+  background-image: url('MainPageImages/background.jpg');
+  cursor: url('MainPageImages/cursor.cur'), auto;
 }
 
 .navbar {
@@ -23,7 +25,6 @@ body {
 }
 
 .navbar .logo {
-  font-family: 'CoFo Sans', sans-serif;
   font-size: 1.5em;
   font-weight: 700;
   color: #ffffff;
@@ -60,7 +61,6 @@ body {
 }
 
 .hero-text h1 {
-  font-family: 'CoFo Sans', sans-serif;
   font-size: 2.5em;
   color: #6f1465e0;
   margin-bottom: 10px;
@@ -95,12 +95,6 @@ body {
   background-color: #007bff;
 }
 
-.hero-image img {
-  width: 500px;
-  height: auto;
-  filter: drop-shadow(0 0 15px #00b0ff);
-}
-
 footer {
   position: absolute;
   bottom: 10px;
@@ -113,15 +107,11 @@ footer {
 /* Responsive Design */
 @media (max-width: 1200px) {
   .hero {
-    flex-direction: column;
-    padding: 50px 20px;
+      flex-direction: column;
+      padding: 50px 20px;
   }
 
   .hero-text h2 {
-    font-size: 4em;
-  }
-
-  .hero-image img {
-    width: 400px;
+      font-size: 4em;
   }
 }
