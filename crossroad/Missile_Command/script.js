@@ -18,7 +18,7 @@ let counterMissiles = [];
 let explosions = [];
 
 // how many missiles to spawn at each interval of the level
-const levels = [ [4, 4] ];
+const levels = [ [4, 4], [5, 5, 6], [6, 7, 8] ];  // Added more levels for testing
 let currLevel = 0;
 let currInterval = 0;
 
@@ -96,6 +96,21 @@ function loop(time) {
 
     currInterval++;
     lastTime = time;
+  }
+
+  // Check if all intervals of the current level are finished and no missiles are left
+  if (currInterval >= levels[currLevel].length && missiles.length === 0) {
+    currLevel++;
+    currInterval = 0;  // Reset interval for the next level
+
+    // Check if there are no more levels
+    if (currLevel >= levels.length) {
+      // Handle game over or reset logic here
+      console.log("Game Over! No more levels.");
+      currLevel = 0;  // Restart the game (or reset as you see fit)
+    } else {
+      console.log("Starting new level: " + currLevel);
+    }
   }
 
   // draw cities
