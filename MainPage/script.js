@@ -12,7 +12,7 @@ renderer.setSize(400, 400); // Set the size of the 3D model container
 document.getElementById('model-container').appendChild(renderer.domElement);
 
 const loader = new THREE.GLTFLoader();
-loader.load('path/to/your/model.glb', function (gltf) {
+loader.load('MainPageImages/bone.glb', function (gltf) {
     scene.add(gltf.scene);
     gltf.scene.position.set(0, 0, 0); // Center the model
 }, undefined, function (error) {
