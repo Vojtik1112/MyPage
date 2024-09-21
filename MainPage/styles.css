@@ -104,6 +104,25 @@ footer {
   color: rgba(255, 255, 255, 0.5);
 }
 
+/* Overlay Styles */
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensure it's on top */
+}
+
+#gif {
+    max-width: 80%; /* Adjust size as needed */
+    max-height: 80%;
+}
+
 /* Responsive Design */
 @media (max-width: 1200px) {
   .hero {
