@@ -63,6 +63,15 @@ function distance(source, target) {
   return Math.hypot(source.x - target.x, source.y - target.y);
 }
 
+// Replenish missiles for all living silos
+function replenishMissiles() {
+  silos.forEach(silo => {
+    if (silo.alive) {
+      silo.missiles = 10;  // Replenish with 10 missiles
+    }
+  });
+}
+
 // spawn a missile
 function spawnMissile() {
   const targets = cities.concat(silos);
@@ -110,6 +119,7 @@ function loop(time) {
       currLevel = 0;  // Restart the game (or reset as you see fit)
     } else {
       console.log("Starting new level: " + currLevel);
+      replenishMissiles();  // Replenish missiles for the next level
     }
   }
 
