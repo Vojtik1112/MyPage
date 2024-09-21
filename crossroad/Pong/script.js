@@ -7,6 +7,10 @@ const maxPaddleY = canvas.height - grid - paddleHeight;
 var paddleSpeed = 6;
 var ballSpeed = 5;
 
+// Initialize scores
+let leftScore = 0;
+let rightScore = 0;
+
 const leftPaddle = {
   x: grid * 2,
   y: canvas.height / 2 - paddleHeight / 2,
@@ -44,6 +48,12 @@ function loop() {
   requestAnimationFrame(loop);
   context.clearRect(0, 0, canvas.width, canvas.height);
 
+  // Draw scores
+  context.fillStyle = 'white';
+  context.font = '24px Arial';
+  context.fillText(`Player_1: ${leftScore}`, 50, 30);
+  context.fillText(`Player_2: ${rightScore}`, canvas.width - 200, 30);
+
   leftPaddle.y += leftPaddle.dy;
   rightPaddle.y += rightPaddle.dy;
 
@@ -76,6 +86,14 @@ function loop() {
 
   if ((ball.x < 0 || ball.x > canvas.width) && !ball.resetting) {
     ball.resetting = true;
+
+    // Update score based on which side the ball goes past
+    if (ball.x < 0) {
+      rightScore++; // Right player scores
+    } else {
+      leftScore++; // Left player scores
+    }
+
     setTimeout(() => {
       ball.resetting = false;
       ball.x = canvas.width / 2;
@@ -126,5 +144,5 @@ document.addEventListener('keyup', function(e) {
   }
 });
 
-// start the game
+// Start the game
 requestAnimationFrame(loop);
