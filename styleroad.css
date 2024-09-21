@@ -4,7 +4,7 @@ body {
   align-items: center;
   height: 100vh; /* Full height of the viewport */
   margin: 0; /* Remove default margin */
-  background-color: #f0f0f0; /* Light gray background */
+  background-color: #5c0d5c; /* Light gray background */
 }
 
 .button-container {
@@ -16,7 +16,7 @@ body {
   padding: 20px 40px; /* Padding for the buttons */
   font-size: 24px; /* Text size */
   color: white; /* Text color */
-  background-color: #007BFF; /* Button color */
+  background-color: #000000; /* Button color */
   border: none; /* Remove border */
   border-radius: 5px; /* Rounded corners */
   cursor: pointer; /* Pointer cursor on hover */
