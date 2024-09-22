@@ -1,11 +1,17 @@
 const canvas = document.getElementById('game');
 const context = canvas.getContext('2d');
 const grid = 15;
-const paddleHeight = grid * 5; // 80
+const paddleHeight = grid * 5; // 75
 const maxPaddleY = canvas.height - grid - paddleHeight;
 
-var paddleSpeed = 6;
-var ballSpeed = 5;
+const PADDLE_SPEED = 6;
+const BALL_SPEED = 5;
+
+// Key codes
+const KEY_UP = 38;
+const KEY_DOWN = 40;
+const KEY_W = 87;
+const KEY_S = 83;
 
 // Initialize scores
 let leftScore = 0;
@@ -33,8 +39,8 @@ const ball = {
   width: grid,
   height: grid,
   resetting: false,
-  dx: ballSpeed,
-  dy: -ballSpeed
+  dx: BALL_SPEED,
+  dy: -BALL_SPEED
 };
 
 function collides(obj1, obj2) {
@@ -44,30 +50,41 @@ function collides(obj1, obj2) {
          obj1.y + obj1.height > obj2.y;
 }
 
+function resetBall() {
+  ball.resetting = true;
+  ball.x = canvas.width / 2;
+  ball.y = canvas.height / 2;
+  ball.dx = BALL_SPEED * (Math.random() < 0.5 ? 1 : -1);
+  ball.dy = BALL_SPEED * (Math.random() < 0.5 ? 1 : -1);
+  setTimeout(() => {
+    ball.resetting = false;
+  }, 400);
+}
+
+function updatePaddle(paddle) {
+  paddle.y += paddle.dy;
+  if (paddle.y < grid) {
+    paddle.y = grid;
+  } else if (paddle.y > maxPaddleY) {
+    paddle.y = maxPaddleY;
+  }
+}
+
+function drawScores() {
+  context.fillStyle = 'white';
+  context.font = '24px Arial';
+  context.fillText(`Player 1: ${leftScore}`, 50, 30);
+  context.fillText(`Player 2: ${rightScore}`, canvas.width - 200, 30);
+}
+
 function loop() {
   requestAnimationFrame(loop);
   context.clearRect(0, 0, canvas.width, canvas.height);
 
-  // Draw scores
-  context.fillStyle = 'white';
-  context.font = '24px Arial';
-  context.fillText(`Player_1: ${leftScore}`, 50, 30);
-  context.fillText(`Player_2: ${rightScore}`, canvas.width - 200, 30);
-
-  leftPaddle.y += leftPaddle.dy;
-  rightPaddle.y += rightPaddle.dy;
-
-  if (leftPaddle.y < grid) {
-    leftPaddle.y = grid;
-  } else if (leftPaddle.y > maxPaddleY) {
-    leftPaddle.y = maxPaddleY;
-  }
-
-  if (rightPaddle.y < grid) {
-    rightPaddle.y = grid;
-  } else if (rightPaddle.y > maxPaddleY) {
-    rightPaddle.y = maxPaddleY;
-  }
+  drawScores();
+  
+  updatePaddle(leftPaddle);
+  updatePaddle(rightPaddle);
 
   context.fillStyle = 'white';
   context.fillRect(leftPaddle.x, leftPaddle.y, leftPaddle.width, leftPaddle.height);
@@ -76,29 +93,18 @@ function loop() {
   ball.x += ball.dx;
   ball.y += ball.dy;
 
-  if (ball.y < grid) {
-    ball.y = grid;
+  if (ball.y < grid || ball.y + grid > canvas.height - grid) {
     ball.dy *= -1;
-  } else if (ball.y + grid > canvas.height - grid) {
-    ball.y = canvas.height - grid * 2;
-    ball.dy *= -1;
+    ball.y = Math.max(grid, Math.min(ball.y, canvas.height - grid * 2));
   }
 
   if ((ball.x < 0 || ball.x > canvas.width) && !ball.resetting) {
-    ball.resetting = true;
-
-    // Update score based on which side the ball goes past
     if (ball.x < 0) {
-      rightScore++; // Right player scores
+      rightScore++;
     } else {
-      leftScore++; // Left player scores
+      leftScore++;
     }
-
-    setTimeout(() => {
-      ball.resetting = false;
-      ball.x = canvas.width / 2;
-      ball.y = canvas.height / 2;
-    }, 400);
+    resetBall();
   }
 
   if (collides(ball, leftPaddle)) {
@@ -110,36 +116,36 @@ function loop() {
   }
 
   context.fillRect(ball.x, ball.y, ball.width, ball.height);
-
+  
   context.fillStyle = 'lightgrey';
   context.fillRect(0, 0, canvas.width, grid);
   context.fillRect(0, canvas.height - grid, canvas.width, canvas.height);
-
+  
   for (let i = grid; i < canvas.height - grid; i += grid * 2) {
     context.fillRect(canvas.width / 2 - grid / 2, i, grid, grid);
   }
 }
 
 document.addEventListener('keydown', function(e) {
-  if (e.which === 38) {
-    rightPaddle.dy = -paddleSpeed;
-  } else if (e.which === 40) {
-    rightPaddle.dy = paddleSpeed;
+  if (e.which === KEY_UP) {
+    rightPaddle.dy = -PADDLE_SPEED;
+  } else if (e.which === KEY_DOWN) {
+    rightPaddle.dy = PADDLE_SPEED;
   }
 
-  if (e.which === 87) {
-    leftPaddle.dy = -paddleSpeed;
-  } else if (e.which === 83) {
-    leftPaddle.dy = paddleSpeed;
+  if (e.which === KEY_W) {
+    leftPaddle.dy = -PADDLE_SPEED;
+  } else if (e.which === KEY_S) {
+    leftPaddle.dy = PADDLE_SPEED;
   }
 });
 
 document.addEventListener('keyup', function(e) {
-  if (e.which === 38 || e.which === 40) {
+  if (e.which === KEY_UP || e.which === KEY_DOWN) {
     rightPaddle.dy = 0;
   }
 
-  if (e.which === 83 || e.which === 87) {
+  if (e.which === KEY_W || e.which === KEY_S) {
     leftPaddle.dy = 0;
   }
 });
