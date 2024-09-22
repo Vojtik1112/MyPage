@@ -14,6 +14,7 @@ body {
   cursor: url('MainPageImages/cursor.cur'), auto;
 }
 
+/* Navbar Styles */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -48,6 +49,7 @@ body {
   color: #00b0ff;
 }
 
+/* Hero Section Styles */
 .hero {
   display: flex;
   justify-content: space-between;
@@ -95,6 +97,7 @@ body {
   background-color: #007bff;
 }
 
+/* Footer Styles */
 footer {
   position: absolute;
   bottom: 10px;
@@ -106,21 +109,21 @@ footer {
 
 /* Overlay Styles */
 #overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000; /* Ensure it's on top */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Ensure it's on top */
 }
 
 #gif {
-    max-width: 80%; /* Adjust size as needed */
-    max-height: 80%;
+  max-width: 80%; /* Adjust size as needed */
+  max-height: 80%;
 }
 
 /* Responsive Design */
