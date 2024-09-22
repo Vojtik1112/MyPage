@@ -1,16 +1,30 @@
 html, body {
-    height: 100%;
-    margin: 0;
-  }
-  
-  body {
-    background: black;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  canvas {
-    cursor: crosshair;
-    border: 1px solid white;
-  }  
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+canvas {
+  cursor: crosshair;
+  border: 2px solid white; /* Slightly thicker border for better visibility */
+  max-width: 100%; /* Responsive design */
+  max-height: 100%; /* Responsive design */
+  transition: border-color 0.3s; /* Smooth transition for hover effect */
+}
+
+/* Focus style for accessibility */
+canvas:focus {
+  outline: none; /* Remove default focus outline */
+  border-color: yellow; /* Highlight the canvas when focused */
+}
+
+/* Hover effect */
+canvas:hover {
+  border-color: lightgray; /* Change border color on hover */
+}
