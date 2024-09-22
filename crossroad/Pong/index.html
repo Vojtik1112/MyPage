@@ -10,11 +10,14 @@
   <!-- Background Music -->
   <audio autoplay loop>
     <source src="PongSongs/PongSong.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio> 
+    Your browser does not support the audio element. 
+    <a href="PongSongs/PongSong.mp3">Download the song</a> for offline listening.
+  </audio>
 </head>
 <body>
-  <canvas width="1920" height="947" id="game"></canvas>
+  <div id="game-container">
+    <canvas width="1920" height="940" id="game"></canvas>
+  </div>
   <script src="script.js"></script> <!-- Link to the external JavaScript file -->
 </body>
 </html>
