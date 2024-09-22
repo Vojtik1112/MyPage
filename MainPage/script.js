@@ -1,15 +1,17 @@
-window.onload = function() {
-    setTimeout(function() {
-        document.getElementById('overlay').style.display = 'none';
-    }, 2000); // 2000 milliseconds = 2 seconds
-};
-
-// JavaScript to delay audio playback
 window.addEventListener('load', function() {
+    const overlay = document.getElementById('overlay');
     const audio = document.getElementById('myAudio');
     const delay = 2000; // Delay in milliseconds (2000ms = 2 seconds)
 
+    // Hide overlay after a delay
     setTimeout(() => {
-        audio.play();
+        overlay.style.display = 'none';
+    }, delay);
+
+    // Delay audio playback
+    setTimeout(() => {
+        audio.play().catch(error => {
+            console.error("Audio playback failed:", error);
+        });
     }, delay);
 });
