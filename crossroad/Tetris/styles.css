@@ -1,15 +1,33 @@
 html, body {
-    height: 100%;
-    margin: 0;
-  }
-  
-  body {
-    background: black;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  canvas {
-    border: 1px solid white;
-  }  
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Arial', sans-serif; /* Improved font for readability */
+}
+
+canvas {
+  border: 1px solid white;
+  width: 320px; /* Fixed width for the canvas */
+  height: 640px; /* Fixed height for the canvas */
+  background: #222; /* Darker background for the canvas */
+}
+
+.game-over {
+  position: absolute; /* Positioning for the game over message */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.75); /* Semi-transparent background */
+  color: white;
+  font-size: 36px;
+  text-align: center;
+  padding: 20px;
+  border-radius: 10px; /* Rounded corners */
+  display: none; /* Hidden by default */
+}
