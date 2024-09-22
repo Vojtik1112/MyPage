@@ -4,6 +4,7 @@ body {
   align-items: center;
   height: 100vh; /* Full height of the viewport */
   margin: 0; /* Remove default margin */
+  font-family: 'CoFo Sans', sans-serif;
   background-color: #5c0d5c; /* Light gray background */
 }
 
