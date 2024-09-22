@@ -5,7 +5,7 @@ body {
   height: 100vh; /* Full height of the viewport */
   margin: 0; /* Remove default margin */
   font-family: 'CoFo Sans', sans-serif;
-  background-color: #5c0d5c; /* Light gray background */
+  background-color: #5c0d5c; /* Background color */
 }
 
 .button-container {
@@ -23,9 +23,16 @@ body {
   cursor: pointer; /* Pointer cursor on hover */
   text-decoration: none; /* Remove underline */
   text-align: center; /* Center text */
-  transition: background-color 0.3s; /* Smooth transition */
+  transition: background-color 0.3s, transform 0.3s; /* Smooth transition */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Slight shadow for depth */
 }
 
 .button:hover {
   background-color: #0056b3; /* Darker blue on hover */
+  transform: translateY(-2px); /* Lift effect on hover */
+}
+
+.button:focus {
+  outline: 2px solid #ffcc00; /* Outline for focus state */
+  outline-offset: 2px; /* Space between outline and button */
 }
