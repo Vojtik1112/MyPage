@@ -49,6 +49,27 @@ body {
   color: #00b0ff;
 }
 
+/* Header Left (Brand and Clock) */
+.header-left {
+  position: absolute;
+  top: 20px;  /* Adjust this based on your design */
+  left: 20px; /* Adjust this based on your design */
+  display: flex;
+  align-items: center;
+  gap: 10px;  /* Space between VOJTA and clock */
+  z-index: 20;
+}
+
+#brandName {
+  font-size: 24px;  /* Adjust the font size */
+  color: white;     /* Adjust color to fit your theme */
+}
+
+#liveClock {
+  font-size: 18px;  /* Adjust the clock size */
+  color: white;     /* Adjust the clock color */
+}
+
 /* Hero Section Styles */
 .hero {
   display: flex;
@@ -156,19 +177,20 @@ footer {
   }
 }
 
-          main {
-      display: flex;
-       justify-content: center;
-          align-items: center;
-          height: 100vh;
-  }
-  
-       model-viewer {
-          width: 40%;
-          height: 50vh;
-          max-width: 1000px;
-          background: transparent;
-      }
+/* Main Section Styling */
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+model-viewer {
+  width: 40%;
+  height: 50vh;
+  max-width: 1000px;
+  background: transparent;
+}
 
 /* Responsive Design */
 @media (max-width: 1200px) {
