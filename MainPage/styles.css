@@ -131,6 +131,7 @@ footer {
   font-weight: bold;
   margin-bottom: 20px;
   color: white; /* Adjust color to match your design */
+  z-index: 999;
 }
 
 /* Default block screen hidden */
