@@ -129,9 +129,8 @@ footer {
 #clock {
   font-size: 36px;
   font-weight: bold;
+  color: white; /* Make sure it's a visible color */
   margin-bottom: 20px;
-  color: white; /* Adjust color to match your design */
-  z-index: 999;
 }
 
 /* Default block screen hidden */

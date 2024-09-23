@@ -16,15 +16,18 @@ window.addEventListener('load', function() {
     }, delay);
 });
 
-function updateClock() {
-    const clockElement = document.getElementById('clock');
-    const now = new Date();
-    const hours = String(now.getHours()).padStart(2, '0');
-    const minutes = String(now.getMinutes()).padStart(2, '0');
-    const seconds = String(now.getSeconds()).padStart(2, '0');
-    clockElement.textContent = `${hours}:${minutes}:${seconds}`;
-}
+document.addEventListener("DOMContentLoaded", function() {
+    function updateClock() {
+        const clockElement = document.getElementById('clock');
+        if (!clockElement) return; // Ensure the element exists
 
-// Call updateClock immediately and then every second
-updateClock();
-setInterval(updateClock, 1000);
+        const now = new Date();
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+        clockElement.textContent = `${hours}:${minutes}:${seconds}`;
+    }
+
+    updateClock(); // Display the time immediately
+    setInterval(updateClock, 1000); // Update every second
+});
