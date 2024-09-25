@@ -97,6 +97,41 @@ body {
   background-color: #007bff;
 }
 
+/* Logo with glitch effect */
+.logo {
+  font-size: 2em;
+  font-weight: 700;
+  color: #ffffff;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  animation: glitch 1s infinite;
+}
+
+@keyframes glitch {
+  0% {
+    clip: rect(24px, 9999px, 75px, 0);
+    transform: skew(0.3deg);
+  }
+  10% {
+    clip: rect(15px, 9999px, 45px, 0);
+    transform: skew(0.5deg);
+  }
+  20%, 80% {
+    clip: rect(10px, 9999px, 60px, 0);
+    transform: skew(0.2deg);
+  }
+  90% {
+    clip: rect(5px, 9999px, 40px, 0);
+    transform: skew(0.7deg);
+  }
+  100% {
+    clip: rect(30px, 9999px, 80px, 0);
+    transform: skew(0.1deg);
+  }
+}
+
+
 /* Footer Styles */
 footer {
   position: absolute;
