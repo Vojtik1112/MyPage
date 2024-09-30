@@ -53,7 +53,7 @@ body {
 /* Hero Section Styles */
 .hero {
   display: flex;
-  justify-content: right;
+  justify-content: center;
   align-items: center;
   height: 100vh;
   padding: 0 100px;
