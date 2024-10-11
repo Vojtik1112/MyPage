@@ -1,12 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Forma</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Link to the external CSS file -->
-</head>
-<body>
-    
-</body>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <form>
+      <p>
+        <label>Jméno: </label>
+        <input type="text" placeholder="Jirka Kral" />
+      </p>
+      <p>
+        <label>Recenze: </label>
+        <textarea type="text" placeholder="Hezky"></textarea>
+      </p>
+      <p>
+        <label>Pocet kysliku: </label>
+        <textarea type="number" name="ihateniggers" placeholder="Cislo"></textarea>
+      </p>
+      <p>
+        <label>Třída:</label>
+        <select>
+          <option value="1">ITB1</option>
+          <option value="2" selected>ITB2</option>
+          <option value="3">ITB3</option>
+          <option value="4">ITB4</option>
+        </select>
+      </p>
+      <p>
+        <label>Expertiza v astralnim cestovani: </label>
+        <input type="radio" /> <br />
+        <label>Je fent reactor v pozici zapnuto: </label>
+        <input type="checkbox" /> <br />
+      </p>
+      <p>
+        Stvoritele: <br />
+        <label>Bill Gates:</label>
+        <input type="radio" class="obor" name="obor" /> <br />
+        <label>Elon Musk:</label>
+        <input type="radio" class="obor" name="obor" /> <br />
+        <label>Gejmr:</label>
+        <input type="radio" class="obor" name="obor" /> <br />
+      </p>
+    </form>
+  </body>
 </html>
