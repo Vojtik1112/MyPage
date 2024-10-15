@@ -1,57 +1,66 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="cs">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rizzz</title>
+    <title>Vojta Novák</title>
     <link href="https://fonts.cdnfonts.com/css/cofo-sans" rel="stylesheet">
     <link rel="icon" href="MainPage/MainPageImages/MainPageIcon.ico" type="image/x-icon">
     <link rel="stylesheet" href="MainPage/styles.css">
+</head>
+<body>
+
+<!-- Mobile Block Screen -->
+<div id="mobile-block" class="block-screen vhs-text" style="display:none;">
+    <p class="block-text">Only on desktop</p>
+</div>
+
+<header class="navbar">
+
     <audio id="myAudio" loop>
         <source src="MainPage/MainPageSongs/MainPageSong.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
-</head>
-<body>
-    <!-- Overlay for GIF -->
-    <div id="overlay">
-        <img src="MainPage/MainPageImages/loading.gif" alt="Loading GIF" id="gif">
+
+    <div class="logo">VOJTA</div>
+    <nav>
+        <ul>
+            <li><a href="MainPage/PC/index.html">Moje PC</a></li>
+            <li><a href="https://www.instagram.com/schizvojta/?next=%2F">Instagram</a></li>
+            <li><a href="https://steamcommunity.com/id/vojtik_tlamaku/">Steam</a></li>
+            <li><a href="https://github.com/Vojtik1112">GitHub</a></li>
+            <li><a href="https://novaka.4fan.cz/">Adam</a></li>
+            <li><a href="https://odehnalm.4fan.cz/">Matyas</a></li>
+            <li><a href="https://masteraj.4fan.cz/">Jirka</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main class="hero">
+    <div class="hero-text">
+        <div id="clock"></div> <!-- Live clock -->
+        <h2>VOJTA NOVÁK</h2>
+        <p>Moje projekty</p>
+        <a href="crossroad/index.html" class="cta-button">Let's Go</a>
     </div>
 
-    <!-- Mobile Block Screen -->
-    <div id="mobile-block" class="block-screen vhs-text">
-        <p class="block-text">Only on desktop</p>
-    </div>
+    <article class="omne">
+        <h3>Ahoj, já jsem Vojta</h3>
+        <section>Je mi 16 let a jsem mistr v HTML a CSS.</section>
+        <section>Žiji v metropoli jménem Polánka.</section>
+    </article>
 
-    <header class="navbar">
-        <div class="logo">VOJTA</div>
-        <nav>
-            <ul>
-                <li><a href="MainPage/PC/index.html">Moje PC</a></li>
-                <li><a href="https://www.instagram.com/schizvojta/?next=%2F">Instagram</a></li>
-                <li><a href="https://steamcommunity.com/id/vojtik_tlamaku/">Steam</a></li>
-                <li><a href="https://github.com/Vojtik1112">GitHub</a></li>
-                <li><a href="https://novaka.4fan.cz/">Adam</a></li>
-                <li><a href="https://odehnalm.4fan.cz/">Matyas</a></li>
-                <li><a href="https://masteraj.4fan.cz/">Jirka</a></li>
-            </ul>
-        </nav>
-    </header>
+    <article class="omne">
+        <h3>Recenze</h3>
+        <section>Matyáš Odehnal: "Ambiciozní, Sebevědomý, Milovník" 9/10</section>
+        <section>Adam Novák: "Artistický, Akustický, Antitalent" 10/10</section>
+    </article>
+</main>
 
-    <main class="hero">
-        <div class="hero-text">
-            <div id="clock"></div> <!-- Live clock -->
-            <h2>VOJTA NOVAK</h2>
-            <p>zahraj jsi hry tpe shi</p>
-            <a href="crossroad/index.html" class="cta-button">Let's Go</a>
-        </div>
-    </main>
-
-    <footer>
-        <p>&copy; 2024 Novak Vojtech. All Rights Reserved.</p>
-    </footer>
-
+<footer>
+    <p>&copy; 2024 Novak Vojtech. All Rights Reserved.</p>
     <script src="MainPage/script.js" defer></script>
+</footer>
 
 </body>
 </html>
