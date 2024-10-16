@@ -157,6 +157,12 @@ footer {
   opacity: 0.8;
 }
 
+.omne{
+
+margin-top: -500px;
+
+}
+
 /* Show the block screen on small/mobile screens */
 @media (max-width: 768px) {
   .block-screen {
