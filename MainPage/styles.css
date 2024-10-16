@@ -119,18 +119,21 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000; /* Ensure it's on top */
+  z-index: 1000;
+  /* Ensure it's on top */
 }
 
 #gif {
-  max-width: 80%; /* Adjust size as needed */
+  max-width: 80%;
+  /* Adjust size as needed */
   max-height: 80%;
 }
 
 #clock {
   font-size: 36px;
   font-weight: bold;
-  color: white; /* Make sure it's a visible color */
+  color: white;
+  /* Make sure it's a visible color */
   margin-bottom: 20px;
 }
 
@@ -147,7 +150,8 @@ footer {
   display: none;
   justify-content: center;
   align-items: center;
-  z-index: 1000; /* Ensures it stays on top */
+  z-index: 1000;
+  /* Ensures it stays on top */
 }
 
 /* Block screen text and button styling */
@@ -157,9 +161,26 @@ footer {
   opacity: 0.8;
 }
 
-.omne{
+.arti {
 
-margin-top: -500px;
+  margin-top: -500px;
+}
+
+.arti2 {
+  margin-right: 0;
+  margin-top: -500px;
+}
+
+
+
+.video {
+  width: 1000px;
+  height: 500px;
+  margin-top: 141px;
+  position: fixed;
+  margin-left: 800px;
+
+
 
 }
 
