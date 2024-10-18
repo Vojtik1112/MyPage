@@ -127,8 +127,8 @@ body, html {
 }
 
 #loading-gif {
-    max-width: 80%; /* Adjust size as needed */
-    max-height: 80%; /* Adjust size as needed */
+    max-width: 100%; /* Adjust size as needed */
+    max-height: 100%; /* Adjust size as needed */
 }
 
 #clock {
