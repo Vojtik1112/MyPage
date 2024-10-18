@@ -5,9 +5,12 @@ document.addEventListener("DOMContentLoaded", function() {
     const clockElement = document.getElementById('clock');
     let isMuted = false;
 
-    // Hide overlay after a delay
+    // Hide overlay after a delay and play audio
     setTimeout(() => {
         overlay.style.display = 'none';
+        audio.play().catch(error => {
+            console.error("Audio playback failed:", error);
+        });
     }, 2000); // Adjust delay if needed
 
     // Mute button functionality
@@ -15,16 +18,6 @@ document.addEventListener("DOMContentLoaded", function() {
         isMuted = !isMuted; // Toggle mute state
         audio.muted = isMuted; // Set audio muted state
         muteButton.textContent = isMuted ? "Unmute" : "Mute"; // Change button text
-    });
-
-    // Start audio playback only after the mute button is clicked
-    muteButton.addEventListener('click', function() {
-        if (!audio.paused) {
-            return; // If audio is already playing, do nothing
-        }
-        audio.play().catch(error => {
-            console.error("Audio playback failed:", error);
-        });
     });
 
     // Update clock
