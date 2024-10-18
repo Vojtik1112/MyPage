@@ -1,3 +1,4 @@
+document.write(document.lastModified)
 document.addEventListener("DOMContentLoaded", function() {
     const overlay = document.getElementById('overlay');
     const audio = document.getElementById('myAudio');
