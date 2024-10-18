@@ -1,26 +1,34 @@
-window.addEventListener('load', function() {
+document.addEventListener("DOMContentLoaded", function() {
     const overlay = document.getElementById('overlay');
     const audio = document.getElementById('myAudio');
-    const delay = 2000; // Delay in milliseconds (2000ms = 2 seconds)
+    const muteButton = document.getElementById('muteButton');
+    const clockElement = document.getElementById('clock');
+    let isMuted = false;
 
     // Hide overlay after a delay
     setTimeout(() => {
         overlay.style.display = 'none';
-    }, delay);
+    }, 2000); // Adjust delay if needed
 
-    // Delay audio playback
-    setTimeout(() => {
+    // Mute button functionality
+    muteButton.addEventListener('click', function() {
+        isMuted = !isMuted; // Toggle mute state
+        audio.muted = isMuted; // Set audio muted state
+        muteButton.textContent = isMuted ? "Unmute" : "Mute"; // Change button text
+    });
+
+    // Start audio playback only after the mute button is clicked
+    muteButton.addEventListener('click', function() {
+        if (!audio.paused) {
+            return; // If audio is already playing, do nothing
+        }
         audio.play().catch(error => {
             console.error("Audio playback failed:", error);
         });
-    }, delay);
-});
+    });
 
-document.addEventListener("DOMContentLoaded", function() {
+    // Update clock
     function updateClock() {
-        const clockElement = document.getElementById('clock');
-        if (!clockElement) return; // Ensure the element exists
-
         const now = new Date();
         const hours = String(now.getHours()).padStart(2, '0');
         const minutes = String(now.getMinutes()).padStart(2, '0');

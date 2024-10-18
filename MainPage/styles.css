@@ -110,34 +110,31 @@ footer {
 
 /* Overlay Styles */
 #overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-  /* Ensure it's on top */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensure it's on top */
 }
 
-#gif {
-  max-width: 80%;
-  /* Adjust size as needed */
-  max-height: 80%;
+#loading-gif {
+    max-width: 80%; /* Adjust size as needed */
+    max-height: 80%;
 }
 
 #clock {
   font-size: 36px;
   font-weight: bold;
   color: white;
-  /* Make sure it's a visible color */
   margin-bottom: 20px;
 }
 
-/* Default block screen hidden */
+/* Default Block Screen Styles */
 .block-screen {
   position: fixed;
   top: 0;
@@ -151,40 +148,34 @@ footer {
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  /* Ensures it stays on top */
 }
 
-/* Block screen text and button styling */
 .block-text {
   font-size: 3vh;
   margin-bottom: 20px;
   opacity: 0.8;
 }
 
-.arti {
-
+/* Article Styles */
+.arti,
+.arti2 {
   margin-top: -500px;
 }
 
 .arti2 {
   margin-right: 0;
-  margin-top: -500px;
 }
 
-
-
+/* Video Styles */
 .video {
   width: 1000px;
   height: 500px;
   margin-top: 141px;
   position: fixed;
   margin-left: 800px;
-
-
-
 }
 
-/* Show the block screen on small/mobile screens */
+/* Show Block Screen on Small Screens */
 @media (max-width: 768px) {
   .block-screen {
     display: flex;
