@@ -1,79 +1,49 @@
 <!DOCTYPE html>
-<html lang="cs">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vojta Novák</title>
-    <link href="https://fonts.cdnfonts.com/css/cofo-sans" rel="stylesheet">
-    <link rel="icon" href="MainPage/MainPageImages/MainPageIcon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="MainPage/styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vojta Novak</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Roboto+Condensed:wght@400;700&family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="Videos/waltuh.gif" type="image/gif">
 </head>
 <body>
 
-<!-- Overlay for loading screen -->
-<div id="overlay">
-    <img id="loading-gif" src="MainPage/MainPageImages/loading.gif" alt="Loading..." />
+<div id="mobile-block-screen">
+  <div class="block-message">
+    <h1>Access Restricted</h1>
+    <p>Our website is not available for mobile devices. Please visit us on a desktop for the best experience.</p>
+  </div>
 </div>
 
-<!-- Mobile Block Screen -->
-<div id="mobile-block" class="block-screen vhs-text" style="display:none;">
-    <p class="block-text">Only on desktop</p>
+<div id="loading-screen">
+  <div class="loading-bar-container">
+    <div class="loading-bar"></div>
+  </div>
+  <p>Website is loading.....</p>
 </div>
 
-<header class="navbar">
-    <audio id="myAudio" autoplay loop>
-        <source src="MainPage/MainPageSongs/MainPageSong.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
+<nav class="navbar">
+  <ul>
+    <li><a href="https://github.com" target="_blank">GitHub</a></li>
+    <li><a href="https://steamcommunity.com" target="_blank">Steam</a></li>
+    <li><a href="https://instagram.com" target="_blank">Instagram</a></li>
+  </ul>
+</nav>
 
-    <div class="logo">
-        VOJTA
-        <button id="muteButton" style="margin-left: 10px; background-color: #6f1465e0; color: white; border: none; padding: 5px 10px; cursor: pointer;">Mute</button>
-    </div>
-    <nav>
-        <ul>
-            <li><a href="MainPage/PC/index.html">Moje PC</a></li>
-            <li><a href="https://www.instagram.com/schizvojta/?next=%2F">Instagram</a></li>
-            <li><a href="https://steamcommunity.com/id/vojtik_tlamaku/">Steam</a></li>
-            <li><a href="https://github.com/Vojtik1112">GitHub</a></li>
-            <li><a href="https://novaka.4fan.cz/">Adam</a></li>
-            <li><a href="https://odehnalm.4fan.cz/">Matyas</a></li>
-            <li><a href="https://masteraj.4fan.cz/">Jirka</a></li>
-        </ul>
-    </nav>
-</header>
+<div class="video-container">
+  <video autoplay loop muted>
+    <source src="Videos/Odyssey.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+  <div class="content">
+    <h1>Vojta Novak</h1>
+    <p>This is a video background example.</p>
+  </div>
+</div>
 
-<main class="hero">
-    <div class="hero-text">
-        <div id="clock"></div> <!-- Live clock -->
-        <h2>VOJTA NOVÁK</h2>
-        <p>Moje projekty</p>
-        <a href="Ukoly/index.html" class="cta-button">Let's Go</a>
-    </div>
-
-    <article class="arti">
-        <h3>Ahoj, já jsem Vojta</h3>
-        <section>Je mi 16 let a jsem mistr v HTML a CSS.</section>
-        <section>Žiji v metropoli jménem Polánka.</section>
-    </article>
-
-    <article class="arti2">
-        <h3>Recenze</h3>
-        <section>Matyáš Odehnal: "Ambiciozní, Sebevědomý, Milovník" 9/10</section>
-        <section>Adam Novák: "Artistický, Akustický, Antitalent" 10/10</section>
-    </article>
-
-    <video class="video" controls autoplay loop>
-        <source src="MainPage/MainPageVideos/video.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
-
-</main>
-
-<footer>
-    <p>&copy; 2024 Novák Vojtěch. All Rights Reserved.</p>
-    <script src="MainPage/script.js" defer></script>
-</footer>
+<script src="script.js"></script>
 
 </body>
 </html>
