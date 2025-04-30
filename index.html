@@ -4,17 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- SEO Meta Tags -->
-    <title>Your Name - Web Developer Portfolio</title> <!-- Be descriptive -->
+    <title>Your Name - Web Developer Portfolio</title>
     <meta name="description" content="Personal portfolio website for [Your Name], showcasing web development projects, skills, and experience in [mention 1-2 key areas like React, Node.js, etc.].">
-    <!-- Add your actual favicon -->
     <link rel="icon" type="image/png" href="favicon.png">
 
-    <!-- Open Graph Meta Tags (for social sharing) -->
+    <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="Your Name - Web Developer Portfolio">
     <meta property="og:description" content="Explore the web development projects and skills of [Your Name].">
-    <!-- <meta property="og:image" content="images/og-image.jpg"> <! - Optional: Add a specific image for sharing -->
-    <meta property="og:url" content="https://your-website-url.com"> <!-- Replace with your actual URL when deployed -->
+    <!-- <meta property="og:image" content="images/og-image.jpg"> -->
+    <meta property="og:url" content="https://your-website-url.com">
     <meta property="og:type" content="website">
 
     <!-- Google Font -->
@@ -22,16 +20,22 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-    <!-- Link to your CSS -->
+    <!-- AOS (Animate On Scroll) Library CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+    <!-- GLightbox CSS (for portfolio image viewing) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
+
+    <!-- Your Custom CSS (Keep this last) -->
     <link rel="stylesheet" href="style.css">
 
-    <!-- Optional: Icon Library (Example: Font Awesome - uncomment and sign up for a kit if you want icons) -->
+    <!-- Optional: Icon Library -->
     <!-- <script src="https://kit.fontawesome.com/your-kit-code.js" crossorigin="anonymous"></script> -->
 
 </head>
 <body>
 
-    <header>
+    <header data-aos="fade-down"> <!-- Added AOS -->
         <nav>
             <ul>
                 <li><a href="#about">About</a></li>
@@ -41,16 +45,14 @@
             </ul>
         </nav>
         <div class="hero">
-             <!-- Make sure profile image exists in /images folder -->
-            <img src="images/profile.jpg" alt="A picture of Your Name" class="profile-pic">
-            <h1>Your Name</h1>
-            <p>Web Developer | Designer | Tech Enthusiast</p>
-            <!-- Maybe add 1-2 social links here too? -->
+            <img src="images/profile.jpg" alt="A picture of Your Name" class="profile-pic" data-aos="zoom-in" data-aos-delay="200"> <!-- Added AOS -->
+            <h1 data-aos="fade-up" data-aos-delay="300">Your Name</h1> <!-- Added AOS -->
+            <p data-aos="fade-up" data-aos-delay="400">Web Developer | Designer | Tech Enthusiast</p> <!-- Added AOS -->
         </div>
     </header>
 
     <main>
-        <section id="about">
+        <section id="about" data-aos="fade-right"> <!-- Added AOS -->
             <h2>About Me</h2>
             <p>
                 Hello! I'm [Your Name], passionate about building beautiful, functional, and accessible web experiences.
@@ -59,67 +61,50 @@
             <p>
                 I thrive on solving complex problems and continuously learning new things in the ever-evolving tech landscape. When I'm not coding, you might find me [mention a hobby or two, e.g., hiking, playing guitar, reading].
             </p>
-            <!-- Add a link to your resume PDF -->
             <a href="Your_Name_Resume.pdf" target="_blank" class="btn btn-resume">View My Resume</a>
-
             <button id="more-info-btn" class="btn">Tell Me a Fun Fact!</button>
             <p id="fun-fact" class="hidden">I can solve a Rubik's cube in under a minute! (Replace with your fun fact)</p>
         </section>
 
-        <section id="skills">
+        <section id="skills" data-aos="fade-left"> <!-- Added AOS -->
             <h2>Skills</h2>
             <p class="section-intro">Here are some of the technologies I work with:</p>
             <div class="skills-grid">
-                 <!-- Replace with your actual skills. Add icons if using a library -->
-                <div class="skill-item">
-                    <!-- <i class="fab fa-html5 skill-icon"></i> -->
-                    <span>HTML5</span>
-                </div>
-                <div class="skill-item">
-                    <!-- <i class="fab fa-css3-alt skill-icon"></i> -->
-                    <span>CSS3 / Sass</span>
-                </div>
-                 <div class="skill-item">
-                    <!-- <i class="fab fa-js-square skill-icon"></i> -->
-                    <span>JavaScript (ES6+)</span>
-                </div>
-                <div class="skill-item">
-                    <!-- <i class="fab fa-react skill-icon"></i> -->
-                    <span>React</span>
-                </div>
-                <div class="skill-item">
-                    <!-- <i class="fab fa-node-js skill-icon"></i> -->
-                    <span>Node.js</span>
-                </div>
-                 <div class="skill-item">
-                    <!-- <i class="fas fa-database skill-icon"></i> -->
-                    <span>SQL / NoSQL</span>
-                </div>
-                 <div class="skill-item">
-                    <!-- <i class="fab fa-git-alt skill-icon"></i> -->
-                    <span>Git / GitHub</span>
-                </div>
-                <div class="skill-item">
-                    <!-- <i class="fab fa-figma skill-icon"></i> -->
-                    <span>Figma / UI Design</span>
-                </div>
-                <!-- Add more skills -->
+                 <!-- Add data-aos attributes to individual items for staggered effect -->
+                <div class="skill-item" data-aos="fade-up" data-aos-delay="100"><span>HTML5</span></div>
+                <div class="skill-item" data-aos="fade-up" data-aos-delay="150"><span>CSS3 / Sass</span></div>
+                <div class="skill-item" data-aos="fade-up" data-aos-delay="200"><span>JavaScript (ES6+)</span></div>
+                <div class="skill-item" data-aos="fade-up" data-aos-delay="250"><span>React</span></div>
+                <div class="skill-item" data-aos="fade-up" data-aos-delay="300"><span>Node.js</span></div>
+                <div class="skill-item" data-aos="fade-up" data-aos-delay="350"><span>SQL / NoSQL</span></div>
+                <div class="skill-item" data-aos="fade-up" data-aos-delay="400"><span>Git / GitHub</span></div>
+                <div class="skill-item" data-aos="fade-up" data-aos-delay="450"><span>Figma / UI Design</span></div>
             </div>
         </section>
 
-        <section id="portfolio">
+        <section id="portfolio"> <!-- Removed AOS from section, added to items -->
             <h2>Portfolio</h2>
             <p class="section-intro">A selection of projects I've built or contributed to:</p>
             <div class="portfolio-grid">
 
                 <!-- Portfolio Item 1 -->
-                <article class="portfolio-item">
-                    <!-- Add project thumbnail to /images folder -->
-                    <img src="images/project-one-thumb.jpg" alt="Screenshot preview of Project One" class="portfolio-thumb" loading="lazy">
+                <article class="portfolio-item" data-aos="zoom-in-up"> <!-- Added AOS -->
+                    <!-- === Image Optimization Example Structure (using <picture>) === -->
+                    <!-- Create these files: images/project-one-thumb.webp, images/project-one-thumb.jpg -->
+                    <!-- Create these files: images/project-one-full.webp, images/project-one-full.jpg -->
+                    <!-- <a href="images/project-one-full.jpg" class="glightbox" data-gallery="portfolio">
+                        <picture>
+                            <source srcset="images/project-one-thumb.webp" type="image/webp">
+                            <source srcset="images/project-one-thumb.jpg" type="image/jpeg">
+                            <img src="images/project-one-thumb.jpg" alt="Screenshot preview of Project One" class="portfolio-thumb" loading="lazy">
+                        </picture>
+                    </a> -->
+                    <!-- === Fallback: Simple Image for Lightbox === -->
+                     <a href="images/project-one-full.jpg" class="glightbox" data-gallery="portfolio" data-title="Project One Title<br><small>React, Node.js, MongoDB</small>"> <!-- Link to FULL image, add data-title -->
+                         <img src="images/project-one-thumb.jpg" alt="Screenshot preview of Project One" class="portfolio-thumb" loading="lazy"> <!-- THUMBNAIL here -->
+                     </a>
                     <h3>Project One Title</h3>
-                    <p class="project-description">
-                        A short description of the project. What problem does it solve? What was the main goal?
-                    </p>
+                    <p class="project-description">...</p>
                     <p class="project-tech"><strong>Technologies:</strong> React, Node.js, Express, MongoDB, CSS Modules</p>
                     <p class="project-role"><strong>My Role:</strong> Developed the front-end components and integrated the API.</p>
                     <div class="project-links">
@@ -129,13 +114,13 @@
                 </article>
 
                 <!-- Portfolio Item 2 -->
-                 <article class="portfolio-item">
-                     <!-- Add project thumbnail to /images folder -->
-                    <img src="images/project-two-thumb.jpg" alt="Screenshot preview of Project Two" class="portfolio-thumb" loading="lazy">
+                 <article class="portfolio-item" data-aos="zoom-in-up" data-aos-delay="100"> <!-- Added AOS with delay -->
+                     <!-- Link to FULL image, use THUMBNAIL for display -->
+                     <a href="images/project-two-full.jpg" class="glightbox" data-gallery="portfolio" data-title="Project Two Title<br><small>HTML, CSS, JavaScript</small>">
+                        <img src="images/project-two-thumb.jpg" alt="Screenshot preview of Project Two" class="portfolio-thumb" loading="lazy">
+                     </a>
                     <h3>Project Two Title</h3>
-                    <p class="project-description">
-                        Another project description. Focus on challenges overcome or unique features.
-                    </p>
+                     <p class="project-description">...</p>
                     <p class="project-tech"><strong>Technologies:</strong> HTML, CSS, Vanilla JavaScript, REST API</p>
                     <p class="project-role"><strong>My Role:</strong> Designed and built the entire front-end interface.</p>
                      <div class="project-links">
@@ -145,13 +130,13 @@
                 </article>
 
                  <!-- Portfolio Item 3 -->
-                 <article class="portfolio-item">
-                     <!-- Add project thumbnail to /images folder -->
-                    <img src="images/project-three-thumb.jpg" alt="Screenshot preview of Project Three" class="portfolio-thumb" loading="lazy">
+                 <article class="portfolio-item" data-aos="zoom-in-up" data-aos-delay="200"> <!-- Added AOS with delay -->
+                     <!-- Link to FULL image, use THUMBNAIL for display -->
+                     <a href="images/project-three-full.jpg" class="glightbox" data-gallery="portfolio" data-title="Project Three Title<br><small>Python, Flask, PostgreSQL</small>">
+                         <img src="images/project-three-thumb.jpg" alt="Screenshot preview of Project Three" class="portfolio-thumb" loading="lazy">
+                     </a>
                     <h3>Project Three Title</h3>
-                     <p class="project-description">
-                        More details about this piece of work. Maybe mention collaboration or specific outcomes.
-                    </p>
+                     <p class="project-description">...</p>
                     <p class="project-tech"><strong>Technologies:</strong> Python (Flask), PostgreSQL, Jinja2, Bootstrap</p>
                     <p class="project-role"><strong>My Role:</strong> Full-stack development, including database design.</p>
                      <div class="project-links">
@@ -159,36 +144,36 @@
                         <a href="#" target="_blank" class="btn btn-small btn-secondary">Source Code</a>
                     </div>
                 </article>
-
-                <!-- Add more portfolio items as needed -->
-
             </div>
         </section>
 
-        <section id="contact">
+        <section id="contact" data-aos="fade-up"> <!-- Added AOS -->
             <h2>Get In Touch</h2>
             <p class="section-intro">
                 I'm currently open to new opportunities and collaborations. Feel free to send me a message!
             </p>
 
-            <!-- Basic Contact Form Structure -->
-            <!-- Needs backend or service like Formspree/Netlify Forms to actually send emails -->
-            <form id="contact-form" action="YOUR_FORMSPREE_ENDPOINT" method="POST"> <!-- Replace with your Formspree endpoint or remove action -->
+            <!-- Add div for form status messages -->
+            <div id="form-message" role="status" aria-live="polite"></div>
+
+            <!-- Replace YOUR_FORMSPREE_ENDPOINT with your actual endpoint -->
+            <form id="contact-form" action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST">
                 <div class="form-group">
                     <label for="name">Name:</label>
-                    <input type="text" id="name" name="name" required>
+                    <input type="text" id="name" name="name" required aria-required="true">
                 </div>
                 <div class="form-group">
                     <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" required>
+                    <input type="email" id="email" name="email" required aria-required="true">
                 </div>
                 <div class="form-group">
                     <label for="message">Message:</label>
-                    <textarea id="message" name="message" rows="5" required></textarea>
+                    <textarea id="message" name="message" rows="5" required aria-required="true"></textarea>
                 </div>
-                 <!-- If using Formspree, add a hidden field for redirection -->
-                 <!-- <input type="hidden" name="_next" value="https://your-website-url.com/thank-you.html"> -->
-                <button type="submit" class="btn btn-submit">Send Message</button>
+                <!-- Optional: Add a honeypot field for basic spam protection if not using Captcha -->
+                <input type="text" name="_gotcha" style="display:none">
+
+                <button type="submit" id="submit-button" class="btn btn-submit">Send Message</button>
             </form>
 
             <p class="contact-alternative">Or connect with me via:</p>
@@ -196,15 +181,21 @@
                 <li><a href="mailto:your.email@example.com">your.email@example.com</a></li>
                 <li><a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
                 <li><a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer">GitHub</a></li>
-                <!-- Add other links like Twitter, etc. -->
             </ul>
         </section>
     </main>
 
-    <footer>
+    <footer data-aos="fade-up"> <!-- Added AOS -->
         <p>© <span id="current-year"></span> Your Name. All rights reserved.</p>
     </footer>
 
+    <!-- GLightbox JS -->
+    <script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>
+
+    <!-- AOS (Animate On Scroll) Library JS -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+    <!-- Your Custom JS (Keep this last) -->
     <script src="script.js"></script>
 </body>
 </html>
