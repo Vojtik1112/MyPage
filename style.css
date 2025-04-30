@@ -1,132 +1,783 @@
-/* Import Google Font */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
-
-/* --- Variables --- */
-:root {
-    /* ... (variables remain the same) ... */
-    --success-color: #2ecc71;
-    --error-color: #e74c3c;
-}
-
-/* Basic Reset & Defaults */
-/* ... (reset remains the same) ... */
-
-html {
-    scroll-behavior: smooth;
+/* --- Reset & Base Styles --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
     font-family: 'Poppins', sans-serif;
-    line-height: 1.7;
-    color: var(--text-color);
-    font-weight: 300;
-    background: linear-gradient(135deg, var(--bg-color), var(--bg-color-alt), var(--primary-purple), var(--bg-color-alt));
-    background-size: 400% 400%;
-    /* Animation applied conditionally below */
+    background-color: #eef3f8; /* Light background */
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
-/* --- Reduced Motion Accessibility --- */
-@media (prefers-reduced-motion: no-preference) {
-    body {
-        /* Apply animations only if user has no preference for reduced motion */
-        animation: animateBackground 25s ease-in-out infinite;
-    }
-     /* You might wrap specific AOS styles here if you customize them heavily, */
-     /* but AOS itself respects this preference to some extent. */
+a {
+    text-decoration: none;
+    color: inherit;
 }
 
-@keyframes animateBackground {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+ul {
+    list-style: none;
 }
 
-/* ... (Rest of the styles for Container, Links, Headings, Buttons, Header, Nav, Sections, About, Skills remain largely the same) ... */
-
-/* --- Portfolio Item Adjustments for Lightbox --- */
-.portfolio-item a.glightbox {
-    display: block; /* Make the link wrap the image correctly */
-    position: relative; /* For potential overlay effects */
-    cursor: zoom-in; /* Indicate clickable image */
+button {
+    font-family: inherit;
+    cursor: pointer;
+    border: none;
+    background: none;
 }
 
-.portfolio-thumb {
+/* --- Preloader Styles --- */
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    aspect-ratio: 16 / 9;
-    object-fit: cover;
-    border-radius: 5px;
-    margin-bottom: 1.5rem;
-    border: 1px solid var(--border-color);
-    display: block; /* Remove extra space below image */
-    transition: transform 0.3s ease, opacity 0.3s ease; /* Add transition for hover */
+    height: 100%;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 1;
+    transition: opacity 0.8s ease-out;
 }
 
-.portfolio-item a.glightbox:hover .portfolio-thumb {
-    transform: scale(1.03); /* Subtle zoom on hover */
-    opacity: 0.85; /* Dim image slightly on hover */
+.preloader.hidden {
+    opacity: 0;
+    pointer-events: none;
 }
 
-
-/* ... (Styles for .portfolio-item h3, project-description, tech, role, links remain the same) ... */
-
-
-/* --- Contact Form Message Styling --- */
-#form-message {
-    padding: 15px;
-    margin: 1rem auto; /* Matches form margin */
-    max-width: 600px; /* Matches form width */
-    border-radius: 5px;
-    text-align: center;
-    font-weight: 500;
-    display: none; /* Hidden by default */
+.preloader-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Adjust as needed */
+    width: 80%;
+    max-width: 1200px;
+    position: relative;
 }
 
-#form-message.success {
-    background-color: rgba(46, 204, 113, 0.2); /* Semi-transparent success bg */
-    border: 1px solid var(--success-color);
-    color: var(--success-color);
-    display: block; /* Show when class is added */
+.preloader-text-left {
+    font-size: 1.2rem;
+    color: #555;
+    line-height: 1.6;
+    flex-basis: 25%; /* Give it some space */
+    text-align: left;
 }
 
-#form-message.error {
-    background-color: rgba(231, 76, 60, 0.2); /* Semi-transparent error bg */
-    border: 1px solid var(--error-color);
-    color: var(--error-color);
-    display: block; /* Show when class is added */
-}
-
-/* Style submit button when disabled */
-#submit-button:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-    background: #555; /* Grey out */
-    box-shadow: none;
-    transform: none;
-}
-
-/* ... (Rest of styles for form-group, inputs, footer, responsive adjustments remain the same) ... */
-
-/* GLightbox custom theme (optional) - Example: Dark theme */
-.goverlay {
-    background: rgba(26, 26, 46, 0.9); /* Dark overlay */
-}
-.gslide-description {
-    background: rgba(42, 42, 78, 0.85) !important; /* Match section bg */
-    color: var(--text-color);
-}
-.gslide-title {
-    color: var(--heading-color) !important;
+.preloader-letters {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    font-size: 10rem; /* Large letters */
     font-weight: 600;
+    color: #000;
+    position: relative; /* For subtext positioning */
 }
-.gslide-desc {
-    color: var(--secondary-purple) !important;
-    font-size: 0.9em;
+
+.preloader-letters .letter {
+    opacity: 0;
+    position: absolute; /* Stack letters */
+    animation-duration: 1s; /* Base duration for fade */
+    animation-fill-mode: forwards; /* Stay at final state */
+    animation-timing-function: ease-in-out;
 }
-.gclose, .gnext, .gprev {
-    background-color: rgba(42, 42, 78, 0.5) !important; /* Button background */
-    color: var(--primary-purple) !important;
+
+.preloader-letters .subtext {
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: #888;
+    position: absolute;
+    top: 10px; /* Adjust position */
+    right: -50px; /* Adjust position */
+    opacity: 0;
+    transition: opacity 0.5s 0.3s ease; /* Fade in slightly after letter */
 }
-.gclose:hover, .gnext:hover, .gprev:hover {
-    background-color: rgba(42, 42, 78, 0.8) !important;
-    color: var(--secondary-purple) !important;
+
+/* --- Letter Animations (Sequential Fade In/Out) --- */
+@keyframes fadeLetter {
+  0% { opacity: 0; transform: scale(0.9); }
+  25% { opacity: 1; transform: scale(1); }
+  75% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(0.9); }
+}
+
+/* Timing the animations */
+#letter-c1 { animation-name: fadeLetter; animation-delay: 0s; }
+#letter-b { animation-name: fadeLetter; animation-delay: 0.8s; }
+#letter-d { animation-name: fadeLetter; animation-delay: 1.6s; }
+#letter-c2 { animation-name: fadeLetter; animation-delay: 2.4s; }
+
+/* Make subtext visible when its letter is visible */
+#letter-c1.visible .subtext,
+#letter-b.visible .subtext,
+#letter-d.visible .subtext,
+#letter-c2.visible .subtext {
+    opacity: 1;
+}
+
+
+.preloader-line {
+    position: absolute;
+    bottom: -40px; /* Position below content */
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #eee;
+}
+
+
+/* --- Page Wrapper & Container --- */
+.page-wrapper {
+    position: relative; /* For background circles */
+    padding: 40px; /* Space around the main container */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0; /* Initially hidden */
+    transition: opacity 0.5s ease-in;
+}
+
+.page-wrapper.visible {
+    opacity: 1;
+}
+
+
+.background-circles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+        radial-gradient(circle at center, rgba(180, 210, 250, 0.1) 1px, transparent 1px),
+        radial-gradient(circle at center, rgba(180, 210, 250, 0.1) 1px, transparent 1px);
+    background-size: 100px 100px, 200px 200px; /* Adjust sizes for desired effect */
+    background-position: 0 0, 50px 50px;
+    opacity: 0.5;
+    z-index: 0;
+}
+
+.main-container {
+    background: linear-gradient(135deg, #ffffff 0%, #f0f5fb 100%);
+    border-radius: 35px; /* Smooth rounded corners */
+    box-shadow: 0 20px 50px rgba(0, 50, 100, 0.1);
+    padding: 30px 50px;
+    width: 90%;
+    max-width: 1400px; /* Limit maximum width */
+    min-height: 700px; /* Ensure enough height */
+    position: relative;
+    z-index: 1;
+    overflow: hidden; /* Clip corners */
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- Header & Navigation --- */
+.site-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+}
+
+.logo {
+    font-weight: 700;
+    font-size: 1.8rem;
+    color: #1a2a4a;
+}
+
+.main-nav ul {
+    display: flex;
+    gap: 25px;
+}
+
+.main-nav a {
+    color: #556a8f;
+    font-size: 0.95rem;
+    font-weight: 500;
+    padding: 8px 15px;
+    border-radius: 20px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    position: relative;
+}
+
+.main-nav a::after { /* Subtle underline effect */
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background-color: #0077ff;
+    transition: width 0.3s ease;
+}
+
+
+.main-nav a:hover,
+.main-nav a.active {
+    color: #0056b3;
+    background-color: rgba(0, 119, 255, 0.08);
+}
+
+.main-nav a.active::after {
+   width: 30%; /* Show underline for active */
+}
+.main-nav a:hover::after {
+   width: 30%; /* Show underline on hover */
+}
+
+
+.request-btn {
+    background: linear-gradient(100deg, #0077ff, #0056b3);
+    color: #fff;
+    padding: 12px 25px;
+    border-radius: 25px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    box-shadow: 0 5px 15px rgba(0, 119, 255, 0.3);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.request-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 119, 255, 0.4);
+}
+
+.request-btn .arrow {
+    margin-left: 8px;
+    transition: transform 0.2s ease;
+}
+
+.request-btn:hover .arrow {
+    transform: translateX(3px);
+}
+
+/* --- Content Area & Sections --- */
+.content-area {
+    flex-grow: 1;
+    position: relative; /* For positioning sections */
+}
+
+.content-section {
+    display: none; /* Hidden by default */
+    /* display: flex; */ /* Use flex when active */
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.6s ease-in-out;
+    gap: 20px; /* Space between columns */
+    padding: 20px 0;
+}
+
+.content-section.active {
+    display: flex;
+    opacity: 1;
+    z-index: 2; /* Bring active section to front */
+}
+
+.section-left, .section-right {
+    flex-basis: 25%; /* Adjust basis as needed */
+    padding: 0 20px;
+}
+.section-center {
+    flex-basis: 45%; /* Center takes more space */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative; /* For graphic overlay */
+}
+
+
+/* --- Home Section Specifics --- */
+#home-section .section-left .label {
+    display: block;
+    color: #778ca8;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+}
+
+#home-section .section-left p {
+    font-size: 1.8rem;
+    font-weight: 600;
+    line-height: 1.4;
+    color: #1a2a4a;
+}
+
+#home-section .section-right h2 {
+    font-size: 2.4rem;
+    font-weight: 600;
+    line-height: 1.3;
+    color: #1a2a4a;
+    text-align: right;
+}
+
+/* --- Central Graphic Area --- */
+.graphic-area {
+    position: relative;
+    width: 100%;
+    height: 450px; /* Adjust height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.center-graphic {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    opacity: 0.85; /* Slightly transparent */
+    filter: drop-shadow(0 10px 20px rgba(0, 86, 179, 0.2));
+    transition: opacity 0.5s ease;
+}
+
+.center-graphic.dimmed {
+    opacity: 0.3;
+}
+
+.graphic-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #003366; /* Dark blue text over graphic */
+}
+
+.percentage-container {
+    position: relative;
+    width: 100px; /* Adjust size */
+    height: 100px;
+    margin-bottom: 5px;
+}
+
+.circular-chart {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.circle-bg {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.3); /* Light background circle */
+    stroke-width: 2.8;
+}
+
+.circle {
+    fill: none;
+    stroke: #fff; /* White progress circle */
+    stroke-width: 3.2;
+    stroke-linecap: round;
+    transition: stroke-dasharray 0.6s ease;
+    transform-origin: center;
+    transform: rotate(-90deg); /* Start from top */
+}
+
+.percentage-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #fff; /* White text */
+}
+
+
+.center-letter {
+    font-size: 6rem;
+    font-weight: 700;
+    color: #fff; /* White letter */
+    line-height: 1;
+    margin-bottom: 10px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.graphic-subtext {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.5;
+}
+
+/* --- About Section Specifics --- */
+.about-label-left {
+    writing-mode: vertical-rl; /* Vertical text */
+    text-orientation: mixed;
+    transform: rotate(180deg); /* Orient text correctly */
+    color: #a0b0c8;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    align-self: flex-start; /* Align to top */
+    margin-top: 50px; /* Adjust position */
+    flex-basis: 5%; /* Small basis */
+    text-align: center;
+}
+
+.about-center {
+    flex-basis: 90%; /* Takes most space */
+    flex-direction: column; /* Stack title, graphic, details */
+    align-items: stretch; /* Stretch children */
+    position: relative;
+}
+
+.about-title {
+    font-size: 2rem;
+    font-weight: 600;
+    line-height: 1.3;
+    color: #1a2a4a;
+    margin-bottom: -40px; /* Overlap slightly with graphic */
+    z-index: 3; /* Ensure title is above graphic */
+    text-align: center;
+}
+
+.about-graphic-area {
+    height: 300px; /* Smaller graphic for about section */
+    margin-bottom: 20px;
+    width: 70%; /* Smaller width */
+    align-self: center;
+}
+
+.about-details {
+    display: flex;
+    justify-content: space-around;
+    gap: 30px;
+    padding: 0 5%; /* Add padding */
+    position: relative;
+}
+
+.detail-item {
+    flex-basis: 30%;
+    text-align: left;
+    position: relative;
+    padding-top: 30px; /* Space for number and title */
+}
+
+.detail-item .number {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 0.9rem;
+    color: #889cc1;
+    font-weight: 500;
+}
+
+.detail-item h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #0056b3; /* Blue heading */
+    margin-bottom: 10px;
+}
+
+.detail-item p {
+    font-size: 0.9rem;
+    color: #556a8f;
+    line-height: 1.6;
+}
+
+.detail-item .line {
+    position: absolute;
+    bottom: -15px; /* Below the text */
+    left: 0;
+    width: 70%;
+    height: 1px;
+    background: linear-gradient(to right, #a0b0c8, transparent); /* Fading line */
+}
+
+
+/* --- Placeholder Sections --- */
+.placeholder-section {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+.placeholder-section h2 {
+    color: #1a2a4a;
+    margin-bottom: 20px;
+}
+.placeholder-section p {
+    color: #556a8f;
+}
+.placeholder-section .graphic-area {
+    height: 300px;
+    margin-top: 30px;
+}
+
+
+/* --- Request Panel --- */
+.request-panel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 400px; /* Panel width */
+    max-width: 90%; /* Max width on small screens */
+    background-color: #fff;
+    box-shadow: 5px 0 25px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+    transform: translateX(-100%);
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smooth slide */
+    display: flex;
+    flex-direction: column;
+    border-top-right-radius: 20px;
+     border-bottom-right-radius: 20px;
+}
+
+.request-panel.open {
+    transform: translateX(0);
+}
+
+.panel-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); /* Dim overlay */
+    z-index: 998;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+}
+
+.panel-overlay.active {
+    opacity: 1;
+    pointer-events: auto; /* Allow clicking to close */
+}
+
+
+.close-panel-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 2rem;
+    color: #aaa;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.close-panel-btn:hover {
+    color: #555;
+}
+
+.panel-content {
+    padding: 60px 40px 40px; /* More padding top */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex-grow: 1; /* Allow content to take space */
+}
+
+.panel-content h3 {
+    font-size: 1.3rem;
+    color: #1a2a4a;
+    margin-bottom: 10px;
+}
+
+.panel-content input[type="tel"] {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #d0d9e8;
+    border-radius: 10px;
+    font-size: 1rem;
+    color: #333;
+    transition: border-color 0.3s ease;
+}
+
+.panel-content input[type="tel"]:focus {
+    outline: none;
+    border-color: #0077ff;
+    box-shadow: 0 0 0 3px rgba(0, 119, 255, 0.1);
+}
+
+.send-request-btn {
+     background: linear-gradient(100deg, #0077ff, #0056b3);
+    color: #fff;
+    padding: 15px 25px;
+    border-radius: 25px;
+    font-weight: 500;
+    font-size: 1rem;
+    box-shadow: 0 5px 15px rgba(0, 119, 255, 0.3);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    align-self: stretch; /* Make button full width */
+    text-align: center;
+}
+.send-request-btn:hover {
+     transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 119, 255, 0.4);
+}
+.send-request-btn .arrow {
+    margin-left: 8px;
+}
+
+.legal-text {
+    font-size: 0.8rem;
+    color: #889cc1;
+    line-height: 1.5;
+    margin-top: auto; /* Push to bottom */
+}
+
+.legal-text a {
+    color: #0077ff;
+    text-decoration: underline;
+}
+
+/* --- Responsive Adjustments (Basic Example) --- */
+@media (max-width: 1200px) {
+    .main-container {
+        width: 95%;
+        padding: 25px 35px;
+    }
+     #home-section .section-left p,
+     #home-section .section-right h2,
+     .about-title {
+        font-size: calc(1.5rem + 1vw); /* Scale font size */
+    }
+    .center-letter {
+        font-size: 5rem;
+    }
+     .graphic-area {
+        height: 400px;
+    }
+}
+
+@media (max-width: 992px) {
+    .site-header {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        margin-bottom: 20px;
+    }
+    .main-nav ul {
+        gap: 15px;
+        flex-wrap: wrap; /* Allow wrapping */
+        justify-content: center;
+    }
+    .content-section {
+        flex-direction: column;
+        text-align: center;
+        gap: 30px;
+        position: relative; /* Allow static positioning */
+        height: auto; /* Adjust height */
+        padding-bottom: 40px;
+    }
+    .content-section.active {
+        position: relative; /* Override absolute */
+    }
+    .section-left, .section-center, .section-right {
+        flex-basis: 100%;
+        padding: 0 10px;
+        text-align: center;
+    }
+    #home-section .section-right h2 {
+        text-align: center;
+    }
+     .graphic-area {
+        height: 350px;
+    }
+    .about-label-left {
+        writing-mode: horizontal-tb;
+        transform: none;
+        align-self: center;
+        margin-top: 0;
+        margin-bottom: 20px;
+        position: relative;
+        flex-basis: auto;
+    }
+    .about-center {
+        flex-basis: 100%;
+    }
+    .about-details {
+        flex-direction: column;
+        align-items: center;
+        gap: 25px;
+    }
+    .detail-item {
+        flex-basis: 80%;
+        max-width: 400px;
+        text-align: center;
+    }
+     .detail-item .line {
+        left: 50%;
+        transform: translateX(-50%);
+        width: 50%;
+     }
+     .detail-item .number {
+        position: relative;
+        top: auto; left: auto;
+        display: block;
+        margin-bottom: 5px;
+     }
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 0; /* Remove body padding */
+    }
+     .page-wrapper {
+        padding: 10px;
+     }
+    .main-container {
+        width: 100%;
+        border-radius: 20px;
+        padding: 20px;
+        min-height: auto;
+    }
+     .logo {
+        font-size: 1.5rem;
+     }
+     .main-nav a {
+        font-size: 0.9rem;
+        padding: 6px 10px;
+     }
+     .request-btn, .send-request-btn {
+        font-size: 0.9rem;
+        padding: 10px 20px;
+     }
+     #home-section .section-left p,
+     #home-section .section-right h2,
+     .about-title {
+        font-size: calc(1.3rem + 1.5vw);
+    }
+    .center-letter {
+        font-size: 4rem;
+    }
+     .graphic-area {
+        height: 300px;
+    }
+     .request-panel {
+        width: 90%;
+        border-radius: 0 15px 15px 0;
+     }
+     .preloader-content {
+        flex-direction: column;
+        gap: 30px;
+     }
+     .preloader-letters {
+        font-size: 6rem;
+     }
+     .preloader-text-left {
+        text-align: center;
+     }
+
 }
