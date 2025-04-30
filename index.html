@@ -1,49 +1,210 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vojta Novak</title>
-  <link rel="stylesheet" href="styles.css">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Roboto+Condensed:wght@400;700&family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="icon" href="Videos/waltuh.gif" type="image/gif">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO Meta Tags -->
+    <title>Your Name - Web Developer Portfolio</title> <!-- Be descriptive -->
+    <meta name="description" content="Personal portfolio website for [Your Name], showcasing web development projects, skills, and experience in [mention 1-2 key areas like React, Node.js, etc.].">
+    <!-- Add your actual favicon -->
+    <link rel="icon" type="image/png" href="favicon.png">
+
+    <!-- Open Graph Meta Tags (for social sharing) -->
+    <meta property="og:title" content="Your Name - Web Developer Portfolio">
+    <meta property="og:description" content="Explore the web development projects and skills of [Your Name].">
+    <!-- <meta property="og:image" content="images/og-image.jpg"> <! - Optional: Add a specific image for sharing -->
+    <meta property="og:url" content="https://your-website-url.com"> <!-- Replace with your actual URL when deployed -->
+    <meta property="og:type" content="website">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Link to your CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Optional: Icon Library (Example: Font Awesome - uncomment and sign up for a kit if you want icons) -->
+    <!-- <script src="https://kit.fontawesome.com/your-kit-code.js" crossorigin="anonymous"></script> -->
+
 </head>
 <body>
 
-<div id="mobile-block-screen">
-  <div class="block-message">
-    <h1>Access Restricted</h1>
-    <p>Our website is not available for mobile devices. Please visit us on a desktop for the best experience.</p>
-  </div>
-</div>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="hero">
+             <!-- Make sure profile image exists in /images folder -->
+            <img src="images/profile.jpg" alt="A picture of Your Name" class="profile-pic">
+            <h1>Your Name</h1>
+            <p>Web Developer | Designer | Tech Enthusiast</p>
+            <!-- Maybe add 1-2 social links here too? -->
+        </div>
+    </header>
 
-<div id="loading-screen">
-  <div class="loading-bar-container">
-    <div class="loading-bar"></div>
-  </div>
-  <p>Website is loading.....</p>
-</div>
+    <main>
+        <section id="about">
+            <h2>About Me</h2>
+            <p>
+                Hello! I'm [Your Name], passionate about building beautiful, functional, and accessible web experiences.
+                My journey into tech started with [mention your origin story briefly]. I specialize in front-end development using technologies like React and modern CSS, but I also enjoy working on the back-end with Node.js and databases.
+            </p>
+            <p>
+                I thrive on solving complex problems and continuously learning new things in the ever-evolving tech landscape. When I'm not coding, you might find me [mention a hobby or two, e.g., hiking, playing guitar, reading].
+            </p>
+            <!-- Add a link to your resume PDF -->
+            <a href="Your_Name_Resume.pdf" target="_blank" class="btn btn-resume">View My Resume</a>
 
-<nav class="navbar">
-  <ul>
-    <li><a href="https://github.com" target="_blank">GitHub</a></li>
-    <li><a href="https://steamcommunity.com" target="_blank">Steam</a></li>
-    <li><a href="https://instagram.com" target="_blank">Instagram</a></li>
-  </ul>
-</nav>
+            <button id="more-info-btn" class="btn">Tell Me a Fun Fact!</button>
+            <p id="fun-fact" class="hidden">I can solve a Rubik's cube in under a minute! (Replace with your fun fact)</p>
+        </section>
 
-<div class="video-container">
-  <video autoplay loop muted>
-    <source src="Videos/Odyssey.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-  </video>
-  <div class="content">
-    <h1>Vojta Novak</h1>
-    <p>This is a video background example.</p>
-  </div>
-</div>
+        <section id="skills">
+            <h2>Skills</h2>
+            <p class="section-intro">Here are some of the technologies I work with:</p>
+            <div class="skills-grid">
+                 <!-- Replace with your actual skills. Add icons if using a library -->
+                <div class="skill-item">
+                    <!-- <i class="fab fa-html5 skill-icon"></i> -->
+                    <span>HTML5</span>
+                </div>
+                <div class="skill-item">
+                    <!-- <i class="fab fa-css3-alt skill-icon"></i> -->
+                    <span>CSS3 / Sass</span>
+                </div>
+                 <div class="skill-item">
+                    <!-- <i class="fab fa-js-square skill-icon"></i> -->
+                    <span>JavaScript (ES6+)</span>
+                </div>
+                <div class="skill-item">
+                    <!-- <i class="fab fa-react skill-icon"></i> -->
+                    <span>React</span>
+                </div>
+                <div class="skill-item">
+                    <!-- <i class="fab fa-node-js skill-icon"></i> -->
+                    <span>Node.js</span>
+                </div>
+                 <div class="skill-item">
+                    <!-- <i class="fas fa-database skill-icon"></i> -->
+                    <span>SQL / NoSQL</span>
+                </div>
+                 <div class="skill-item">
+                    <!-- <i class="fab fa-git-alt skill-icon"></i> -->
+                    <span>Git / GitHub</span>
+                </div>
+                <div class="skill-item">
+                    <!-- <i class="fab fa-figma skill-icon"></i> -->
+                    <span>Figma / UI Design</span>
+                </div>
+                <!-- Add more skills -->
+            </div>
+        </section>
 
-<script src="script.js"></script>
+        <section id="portfolio">
+            <h2>Portfolio</h2>
+            <p class="section-intro">A selection of projects I've built or contributed to:</p>
+            <div class="portfolio-grid">
 
+                <!-- Portfolio Item 1 -->
+                <article class="portfolio-item">
+                    <!-- Add project thumbnail to /images folder -->
+                    <img src="images/project-one-thumb.jpg" alt="Screenshot preview of Project One" class="portfolio-thumb" loading="lazy">
+                    <h3>Project One Title</h3>
+                    <p class="project-description">
+                        A short description of the project. What problem does it solve? What was the main goal?
+                    </p>
+                    <p class="project-tech"><strong>Technologies:</strong> React, Node.js, Express, MongoDB, CSS Modules</p>
+                    <p class="project-role"><strong>My Role:</strong> Developed the front-end components and integrated the API.</p>
+                    <div class="project-links">
+                        <a href="#" target="_blank" class="btn btn-small">View Live</a>
+                        <a href="#" target="_blank" class="btn btn-small btn-secondary">Source Code</a>
+                    </div>
+                </article>
+
+                <!-- Portfolio Item 2 -->
+                 <article class="portfolio-item">
+                     <!-- Add project thumbnail to /images folder -->
+                    <img src="images/project-two-thumb.jpg" alt="Screenshot preview of Project Two" class="portfolio-thumb" loading="lazy">
+                    <h3>Project Two Title</h3>
+                    <p class="project-description">
+                        Another project description. Focus on challenges overcome or unique features.
+                    </p>
+                    <p class="project-tech"><strong>Technologies:</strong> HTML, CSS, Vanilla JavaScript, REST API</p>
+                    <p class="project-role"><strong>My Role:</strong> Designed and built the entire front-end interface.</p>
+                     <div class="project-links">
+                        <a href="#" target="_blank" class="btn btn-small">View Live</a>
+                        <a href="#" target="_blank" class="btn btn-small btn-secondary">Source Code</a>
+                    </div>
+                </article>
+
+                 <!-- Portfolio Item 3 -->
+                 <article class="portfolio-item">
+                     <!-- Add project thumbnail to /images folder -->
+                    <img src="images/project-three-thumb.jpg" alt="Screenshot preview of Project Three" class="portfolio-thumb" loading="lazy">
+                    <h3>Project Three Title</h3>
+                     <p class="project-description">
+                        More details about this piece of work. Maybe mention collaboration or specific outcomes.
+                    </p>
+                    <p class="project-tech"><strong>Technologies:</strong> Python (Flask), PostgreSQL, Jinja2, Bootstrap</p>
+                    <p class="project-role"><strong>My Role:</strong> Full-stack development, including database design.</p>
+                     <div class="project-links">
+                        <a href="#" target="_blank" class="btn btn-small">View Live</a>
+                        <a href="#" target="_blank" class="btn btn-small btn-secondary">Source Code</a>
+                    </div>
+                </article>
+
+                <!-- Add more portfolio items as needed -->
+
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>Get In Touch</h2>
+            <p class="section-intro">
+                I'm currently open to new opportunities and collaborations. Feel free to send me a message!
+            </p>
+
+            <!-- Basic Contact Form Structure -->
+            <!-- Needs backend or service like Formspree/Netlify Forms to actually send emails -->
+            <form id="contact-form" action="YOUR_FORMSPREE_ENDPOINT" method="POST"> <!-- Replace with your Formspree endpoint or remove action -->
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                </div>
+                 <!-- If using Formspree, add a hidden field for redirection -->
+                 <!-- <input type="hidden" name="_next" value="https://your-website-url.com/thank-you.html"> -->
+                <button type="submit" class="btn btn-submit">Send Message</button>
+            </form>
+
+            <p class="contact-alternative">Or connect with me via:</p>
+             <ul class="contact-links">
+                <li><a href="mailto:your.email@example.com">your.email@example.com</a></li>
+                <li><a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+                <li><a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                <!-- Add other links like Twitter, etc. -->
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>© <span id="current-year"></span> Your Name. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
