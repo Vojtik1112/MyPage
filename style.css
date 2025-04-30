@@ -1,0 +1,456 @@
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+/* --- Variables --- */
+:root {
+    --bg-color: #1a1a2e;
+    --bg-color-alt: #1f1f38;
+    --card-color: #2a2a4e;
+    --primary-purple: #a044ad;
+    --secondary-purple: #c77dff;
+    --text-color: #f0f0f0;
+    --heading-color: #ffffff;
+    --border-color: #4a4a6e;
+    --shadow-color: rgba(199, 125, 255, 0.1);
+    --focus-outline-color: var(--secondary-purple); /* Accessibility focus color */
+}
+
+/* Basic Reset & Defaults */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.7;
+    color: var(--text-color);
+    font-weight: 300;
+    background: linear-gradient(135deg, var(--bg-color), var(--bg-color-alt), var(--primary-purple), var(--bg-color-alt));
+    background-size: 400% 400%;
+    animation: animateBackground 25s ease-in-out infinite;
+}
+
+@keyframes animateBackground {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Container */
+main, header .hero {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 25px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Links */
+a {
+    color: var(--primary-purple);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+a:hover {
+    color: var(--secondary-purple);
+}
+
+/* Accessibility: Focus Indicator */
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+    outline: 2px solid var(--focus-outline-color);
+    outline-offset: 3px;
+    border-radius: 3px; /* Optional: makes outline match rounded corners */
+}
+/* Remove default outline when :focus-visible is supported and working */
+*:focus {
+    outline: none;
+}
+
+
+/* Headings */
+h1, h2, h3 {
+    color: var(--heading-color);
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+h1 { font-size: 3rem; }
+h2 { font-size: 2.2rem; }
+h3 { font-size: 1.4rem; color: var(--secondary-purple); }
+
+/* Buttons */
+.btn {
+    display: inline-block; /* Changed from block for flexibility */
+    margin: 1rem 0.5rem 1rem 0; /* Adjusted margin */
+    padding: 12px 25px;
+    background: linear-gradient(45deg, var(--primary-purple), var(--secondary-purple));
+    color: var(--heading-color);
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px var(--shadow-color);
+}
+/* Smaller button variant for project links */
+.btn-small {
+    padding: 8px 18px;
+    font-size: 0.9rem;
+    border-radius: 20px;
+    margin: 0.25rem;
+}
+/* Secondary button style */
+.btn-secondary {
+    background: transparent;
+    border: 2px solid var(--primary-purple);
+    color: var(--primary-purple);
+    box-shadow: none;
+}
+.btn-secondary:hover {
+    background: var(--primary-purple);
+    color: var(--heading-color);
+    transform: translateY(-2px); /* Less dramatic lift */
+    box-shadow: 0 4px 10px var(--shadow-color);
+}
+
+/* Header & Navigation */
+header {
+    background-color: rgba(26, 26, 46, 0.6); /* Slightly more transparent */
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    padding: 1.5rem 0 2rem 0; /* Adjusted padding */
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    border-bottom: 1px solid var(--border-color); /* Add subtle separator */
+}
+nav {
+    margin-bottom: 2rem;
+}
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 35px; /* Increased gap */
+}
+nav a {
+    color: var(--text-color);
+    font-weight: 400;
+    font-size: 1.1rem;
+    padding-bottom: 5px;
+    border-bottom: 2px solid transparent;
+    transition: color 0.3s ease, border-color 0.3s ease;
+}
+nav a:hover {
+    color: var(--primary-purple);
+    border-bottom-color: var(--primary-purple);
+}
+header .hero h1 {
+    margin-top: 1rem; /* Add space above name */
+    margin-bottom: 0.5rem;
+}
+header .hero p {
+    font-size: 1.3rem;
+    color: var(--secondary-purple);
+    font-weight: 300;
+}
+.profile-pic {
+    width: 150px; /* Adjusted size */
+    height: 150px;
+    border-radius: 50%;
+    /* margin-top: 1.5rem; */ /* Removed, space controlled by header padding */
+    border: 4px solid var(--primary-purple);
+    box-shadow: 0 0 20px var(--shadow-color); /* Enhanced shadow */
+    object-fit: cover; /* Ensure image covers the area */
+}
+
+/* Main Content Sections */
+section {
+    padding: 50px 25px;
+    margin-bottom: 40px; /* Increased space between sections */
+    background-color: rgba(42, 42, 78, 0.85);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25); /* Slightly stronger shadow */
+    border: 1px solid var(--border-color);
+    position: relative;
+    z-index: 1;
+}
+section h2 {
+    text-align: center;
+    color: var(--heading-color);
+    margin-bottom: 1rem; /* Reduced margin below h2 */
+    position: relative;
+    display: inline-block;
+    left: 50%;
+    transform: translateX(-50%);
+}
+section h2::after { /* Title underline */
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 60%;
+    height: 3px;
+    background-color: var(--primary-purple);
+    margin-left: 20%;
+}
+/* Intro text for sections */
+.section-intro {
+    text-align: center;
+    max-width: 700px;
+    margin: 1rem auto 2.5rem auto; /* Add space below intro */
+    font-size: 1.1rem;
+    color: var(--secondary-purple);
+}
+
+
+/* About Section */
+#about p {
+    margin-bottom: 1.5rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left; /* Justify text potentially? Or keep left */
+}
+#about .btn-resume {
+    display: block; /* Make resume button block */
+    width: fit-content; /* Fit width to content */
+    margin: 2rem auto; /* Center block button */
+}
+#about #more-info-btn { /* Style fun fact button specifically */
+     display: block;
+     margin: 1.5rem auto;
+}
+.hidden {
+    display: none;
+    text-align: center;
+    margin-top: 1.5rem;
+    font-style: italic;
+    color: var(--secondary-purple);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+.hidden:not(.display-none) {
+    display: block;
+    opacity: 1;
+}
+
+/* Skills Section */
+#skills .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Adjust minmax for desired item size */
+    gap: 20px;
+    margin-top: 2rem;
+    max-width: 800px; /* Limit width of skill grid */
+    margin-left: auto;
+    margin-right: auto;
+}
+.skill-item {
+    background-color: var(--bg-color);
+    padding: 15px 20px;
+    border-radius: 8px;
+    text-align: center;
+    border: 1px solid var(--border-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    font-weight: 400;
+}
+.skill-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 12px var(--shadow-color);
+    border-color: var(--secondary-purple);
+}
+.skill-icon { /* Placeholder for icon styling */
+    font-size: 2rem;
+    color: var(--primary-purple);
+    margin-bottom: 0.5rem;
+    display: block; /* Makes icon take its own space */
+}
+
+/* Portfolio Section */
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 0; /* Removed top margin, handled by section intro */
+}
+.portfolio-item {
+    background-color: rgba(26, 26, 46, 0.9); /* Slightly transparent item */
+    padding: 25px;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Ensure image corners are rounded */
+}
+.portfolio-item:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 8px 20px var(--shadow-color);
+    border-color: var(--secondary-purple);
+}
+.portfolio-thumb {
+    width: 100%;
+    /* height: 180px; */ /* Use aspect-ratio instead for responsiveness */
+    aspect-ratio: 16 / 9; /* Common aspect ratio */
+    object-fit: cover; /* Crop image nicely */
+    border-radius: 5px; /* Slightly rounded corners */
+    margin-bottom: 1.5rem; /* Space below image */
+    border: 1px solid var(--border-color); /* Subtle border */
+}
+.portfolio-item h3 {
+    margin-bottom: 0.8rem;
+}
+.project-description {
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+    flex-grow: 1; /* Pushes links to bottom */
+}
+.project-tech, .project-role {
+    font-size: 0.85rem;
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+    opacity: 0.9;
+}
+.project-tech strong, .project-role strong {
+    font-weight: 600;
+    color: var(--secondary-purple);
+}
+.project-links {
+    margin-top: auto; /* Push links to the bottom */
+    padding-top: 1rem; /* Add space above links */
+    text-align: right; /* Align buttons to the right */
+}
+
+/* Contact Section */
+#contact-form {
+    max-width: 600px; /* Limit form width */
+    margin: 2rem auto; /* Center form */
+}
+.form-group {
+    margin-bottom: 1.5rem;
+}
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 400;
+    color: var(--secondary-purple);
+}
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border-radius: 5px;
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: inherit;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: var(--primary-purple);
+    box-shadow: 0 0 8px var(--shadow-color);
+}
+textarea {
+    resize: vertical; /* Allow vertical resize only */
+    min-height: 120px;
+}
+.btn-submit {
+    display: block; /* Make submit button block */
+    width: 100%; /* Full width */
+    margin-top: 1rem;
+}
+.contact-alternative {
+    text-align: center;
+    margin-top: 3rem;
+    color: var(--secondary-purple);
+}
+.contact-links {
+    list-style: none;
+    text-align: center;
+    padding-left: 0;
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap; /* Allow wrapping on small screens */
+}
+.contact-links li {
+    font-size: 1.1rem;
+}
+.contact-links a {
+    font-weight: 400;
+}
+.contact-links a:hover {
+    text-decoration: underline;
+    text-decoration-color: var(--secondary-purple);
+}
+
+
+/* Footer */
+footer {
+    text-align: center;
+    margin-top: 40px;
+    padding: 25px;
+    background-color: rgba(26, 26, 46, 0.6);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-top: 1px solid var(--border-color);
+    color: #aaa;
+    font-size: 0.9rem;
+    position: relative;
+    z-index: 2;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    h1 { font-size: 2.5rem; }
+    h2 { font-size: 1.8rem; }
+    header .hero p { font-size: 1.1rem; }
+    .profile-pic { width: 120px; height: 120px; }
+
+    nav ul { gap: 20px; }
+    nav a { font-size: 1rem; }
+
+    section { padding: 40px 20px; }
+    .section-intro { font-size: 1rem; }
+
+    #skills .skills-grid { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); }
+
+    .portfolio-grid { grid-template-columns: 1fr; gap: 25px; }
+    .project-links { text-align: center; } /* Center buttons on mobile */
+    .project-links .btn { display: inline-block; margin: 5px; } /* Adjust button layout */
+
+    .contact-links { gap: 15px; }
+}
+
+@media (max-width: 480px) {
+    h1 { font-size: 2.1rem; }
+    h2 { font-size: 1.6rem; }
+    header .hero p { font-size: 1rem; }
+    .profile-pic { width: 100px; height: 100px; }
+
+    nav ul { flex-direction: column; gap: 10px; }
+    nav a { display: inline-block; padding: 5px 10px; border-bottom: none; }
+    nav a:hover { background-color: rgba(42, 42, 78, 0.8); border-radius: 5px; color: var(--secondary-purple); }
+
+    section { padding: 30px 15px; }
+    .btn { padding: 10px 20px; font-size: 0.9rem; }
+    .btn-small { padding: 6px 14px; font-size: 0.8rem;}
+
+    #skills .skills-grid { grid-template-columns: repeat(2, 1fr); } /* 2 columns on small mobile */
+}
