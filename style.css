@@ -1,112 +1,717 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const preloader = document.getElementById('preloader');
-    const pageWrapper = document.getElementById('page-wrapper');
-    const navLinks = document.querySelectorAll('.main-nav .nav-link');
-    const contentSections = document.querySelectorAll('.content-section');
-    const openRequestPanelBtn = document.getElementById('open-request-panel');
-    const closeRequestPanelBtn = document.getElementById('close-request-panel');
-    const requestPanel = document.getElementById('request-panel');
-    const panelOverlay = document.getElementById('panel-overlay');
+/* --- Reset & Base Styles --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-    // --- Preloader Logic ---
-    const letters = {
-        c1: document.getElementById('letter-c1'),
-        b: document.getElementById('letter-b'),
-        d: document.getElementById('letter-d'),
-        c2: document.getElementById('letter-c2'),
-    };
-    let animationTimeout;
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #eef3f8; /* Light background */
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+}
 
-    function showLetter(letterElement) {
-        if (letterElement) {
-            letterElement.style.animationPlayState = 'running'; // Ensure animation runs
-            letterElement.classList.add('visible'); // For subtext visibility
-        }
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+}
+
+button {
+    font-family: inherit;
+    cursor: pointer;
+    border: none;
+    background: none;
+}
+
+/* --- Preloader Styles --- */
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 1;
+    transition: opacity 0.8s ease-out;
+}
+
+.preloader.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.preloader-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 80%;
+    max-width: 1200px;
+    position: relative;
+}
+
+.preloader-text-left {
+    font-size: 1.2rem;
+    color: #555;
+    line-height: 1.6;
+    flex-basis: 25%;
+    text-align: left;
+}
+
+.preloader-letters {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    font-size: 10rem;
+    font-weight: 600;
+    color: #000;
+    position: relative;
+}
+
+.preloader-letters .letter {
+    opacity: 0;
+    position: absolute;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in-out;
+}
+
+.preloader-letters .subtext {
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: #888;
+    position: absolute;
+    top: 10px;
+    right: -50px;
+    opacity: 0;
+    transition: opacity 0.5s 0.3s ease;
+}
+
+@keyframes fadeLetter {
+  0% { opacity: 0; transform: scale(0.9); }
+  25% { opacity: 1; transform: scale(1); }
+  75% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(0.9); }
+}
+
+/* Timing the animations (Ensure these IDs match HTML) */
+#letter-c1 { animation-name: fadeLetter; animation-delay: 0s; }
+#letter-b { animation-name: fadeLetter; animation-delay: 0.8s; }
+/* Removed #letter-d and #letter-c2 animations */
+
+
+#letter-c1.visible .subtext,
+#letter-b.visible .subtext {
+    opacity: 1;
+}
+
+.preloader-line {
+    position: absolute;
+    bottom: -40px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #eee;
+}
+
+
+/* --- Page Wrapper & Container --- */
+.page-wrapper {
+    position: relative;
+    padding: 40px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.5s ease-in;
+}
+
+.page-wrapper.visible {
+    opacity: 1;
+}
+
+
+.background-circles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+        radial-gradient(circle at center, rgba(180, 210, 250, 0.1) 1px, transparent 1px),
+        radial-gradient(circle at center, rgba(180, 210, 250, 0.1) 1px, transparent 1px);
+    background-size: 100px 100px, 200px 200px;
+    background-position: 0 0, 50px 50px;
+    opacity: 0.5;
+    z-index: 0;
+}
+
+.main-container {
+    background: linear-gradient(135deg, #ffffff 0%, #f0f5fb 100%);
+    border-radius: 35px;
+    box-shadow: 0 20px 50px rgba(0, 50, 100, 0.1);
+    padding: 30px 50px;
+    width: 90%;
+    max-width: 1400px;
+    min-height: 700px;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- Header & Navigation --- */
+.site-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+}
+
+.logo {
+    font-weight: 700;
+    font-size: 1.8rem;
+    color: #1a2a4a;
+}
+
+.main-nav ul {
+    display: flex;
+    gap: 25px;
+}
+
+.main-nav a {
+    color: #556a8f;
+    font-size: 0.95rem;
+    font-weight: 500;
+    padding: 8px 15px;
+    border-radius: 20px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    position: relative;
+}
+
+.main-nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background-color: #0077ff;
+    transition: width 0.3s ease;
+}
+
+
+.main-nav a:hover,
+.main-nav a.active {
+    color: #0056b3;
+    background-color: rgba(0, 119, 255, 0.08);
+}
+
+.main-nav a.active::after {
+   width: 30%;
+}
+.main-nav a:hover::after {
+   width: 30%;
+}
+
+
+.request-btn {
+    background: linear-gradient(100deg, #0077ff, #0056b3);
+    color: #fff;
+    padding: 12px 25px;
+    border-radius: 25px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    box-shadow: 0 5px 15px rgba(0, 119, 255, 0.3);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.request-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 119, 255, 0.4);
+}
+
+.request-btn .arrow {
+    margin-left: 8px;
+    transition: transform 0.2s ease;
+}
+
+.request-btn:hover .arrow {
+    transform: translateX(3px);
+}
+
+/* --- Content Area & Sections --- */
+.content-area {
+    flex-grow: 1;
+    position: relative;
+}
+
+.content-section {
+    display: none; /* Hidden by default */
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.6s ease-in-out;
+    gap: 20px;
+    padding: 20px 0;
+}
+
+.content-section.active {
+    display: flex;
+    opacity: 1;
+    z-index: 2;
+}
+
+.section-left, .section-right {
+    flex-basis: 25%;
+    padding: 0 20px;
+}
+.section-center {
+    flex-basis: 45%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative; /* For graphic/canvas overlay */
+}
+
+
+/* --- Home Section Specifics --- */
+#home-section .section-left .label {
+    display: block;
+    color: #778ca8;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+}
+
+#home-section .section-left p {
+    font-size: 1.8rem;
+    font-weight: 600;
+    line-height: 1.4;
+    color: #1a2a4a;
+}
+
+#home-section .section-right h2 {
+    font-size: 2.4rem;
+    font-weight: 600;
+    line-height: 1.3;
+    color: #1a2a4a;
+    text-align: right;
+}
+
+/* --- Central Graphic Area (Now Canvas Container) --- */
+/* Styles moved to inline <style> in HTML for specificity */
+/* .graphic-area { ... } */
+/* #tesseract-canvas { ... } */
+
+
+.graphic-content { /* Overlay Text */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #003366; /* Dark blue text over graphic */
+     /* pointer-events: none; Added inline for reliability */
+}
+
+/* Removed percentage container styles */
+
+.center-letter {
+    font-size: 6rem;
+    font-weight: 700;
+    color: #fff; /* White letter */
+    line-height: 1;
+    margin-bottom: 10px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); /* Stronger shadow */
+}
+
+.graphic-subtext {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.9); /* More opaque text */
+    line-height: 1.5;
+     text-shadow: 0 1px 5px rgba(0, 0, 0, 0.2); /* Slight shadow */
+}
+
+/* --- About Section Specifics --- */
+.about-label-left {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    color: #a0b0c8;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    align-self: flex-start;
+    margin-top: 50px;
+    flex-basis: 5%;
+    text-align: center;
+}
+
+.about-center {
+    flex-basis: 90%;
+    flex-direction: column;
+    align-items: stretch;
+    position: relative;
+    /* margin-bottom: 0; Handled inline */
+     /* padding-top: 20px; Handled inline */
+}
+
+.about-title {
+    font-size: 2rem;
+    font-weight: 600;
+    line-height: 1.3;
+    color: #1a2a4a;
+     /* margin-bottom: -40px; Removed as graphic is gone */
+    z-index: 3;
+    text-align: center;
+     margin-bottom: 30px; /* Add space below title */
+}
+
+/* Removed .about-graphic-area styles */
+
+.about-details {
+    display: flex;
+    justify-content: space-around;
+    gap: 30px;
+    padding: 0 5%;
+    position: relative;
+}
+
+.detail-item {
+    flex-basis: 30%;
+    text-align: left;
+    position: relative;
+    padding-top: 30px;
+}
+
+.detail-item .number {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 0.9rem;
+    color: #889cc1;
+    font-weight: 500;
+}
+
+.detail-item h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #0056b3;
+    margin-bottom: 10px;
+}
+
+.detail-item p {
+    font-size: 0.9rem;
+    color: #556a8f;
+    line-height: 1.6;
+}
+
+.detail-item .line {
+    position: absolute;
+    bottom: -15px;
+    left: 0;
+    width: 70%;
+    height: 1px;
+    background: linear-gradient(to right, #a0b0c8, transparent);
+}
+
+
+/* --- Placeholder Sections (Projects, Skills) --- */
+.placeholder-section {
+    flex-direction: column;
+    justify-content: flex-start; /* Align content top */
+    text-align: center;
+    /* padding-bottom: 50px; Handled inline */
+    /* padding-top: 30px; Handled inline */
+}
+.placeholder-section h2 {
+    color: #1a2a4a;
+    margin-bottom: 20px;
+    font-size: 2rem; /* Match about title size */
+}
+.placeholder-section p {
+    color: #556a8f;
+    margin-bottom: 20px; /* Space before skills list */
+}
+.placeholder-section ul { /* Style the skills list */
+     margin: 0 auto; /* Center the list */
+     max-width: 400px; /* Limit width */
+     text-align: left; /* Align list items left */
+}
+.placeholder-section ul li {
+    margin-bottom: 10px;
+    padding-left: 20px;
+    position: relative;
+}
+.placeholder-section ul li::before { /* Add bullet points */
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: #0077ff; /* Blue bullet */
+    font-weight: bold;
+}
+
+
+/* --- Request Panel --- */
+.request-panel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 400px;
+    max-width: 90%;
+    background-color: #fff;
+    box-shadow: 5px 0 25px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+    transform: translateX(-100%);
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    display: flex;
+    flex-direction: column;
+    border-top-right-radius: 20px;
+     border-bottom-right-radius: 20px;
+}
+
+.request-panel.open {
+    transform: translateX(0);
+}
+
+.panel-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 998;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+}
+
+.panel-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+
+.close-panel-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 2rem;
+    color: #aaa;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.close-panel-btn:hover {
+    color: #555;
+}
+
+.panel-content {
+    padding: 60px 40px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Reduced gap slightly */
+    flex-grow: 1;
+}
+
+.panel-content h3 {
+    font-size: 1.3rem;
+    color: #1a2a4a;
+    margin-bottom: 5px; /* Reduced margin */
+}
+
+/* Removed input/textarea styles as using links now */
+
+.panel-content a { /* Style the contact links */
+    display: inline-block;
+    margin-top: 3px; /* Space below label */
+    word-break: break-all; /* Prevent long links overflowing */
+}
+.panel-content a:hover {
+    text-decoration: underline;
+}
+
+
+.legal-text {
+    font-size: 0.8rem;
+    color: #889cc1;
+    line-height: 1.5;
+    margin-top: auto; /* Push to bottom */
+}
+
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 1200px) {
+    .main-container {
+        width: 95%;
+        padding: 25px 35px;
     }
-
-    // Start animations manually for better control
-    letters.c1.style.animationPlayState = 'paused';
-    letters.b.style.animationPlayState = 'paused';
-    letters.d.style.animationPlayState = 'paused';
-    letters.c2.style.animationPlayState = 'paused';
-
-    // Sequence the letter animations
-    setTimeout(() => showLetter(letters.c1), 100); // Slight delay to start
-    setTimeout(() => showLetter(letters.b), 900);
-    setTimeout(() => showLetter(letters.d), 1700);
-    setTimeout(() => showLetter(letters.c2), 2500);
-
-    // Hide preloader after animations complete + extra delay
-    animationTimeout = setTimeout(() => {
-        preloader.classList.add('hidden');
-        pageWrapper.classList.add('visible'); // Fade in main content
-        // Clean up preloader from DOM after transition
-        setTimeout(() => {
-             if (preloader.parentNode) {
-                preloader.parentNode.removeChild(preloader);
-             }
-        }, 800); // Match preloader transition duration
-    }, 3500); // Total duration depends on last animation end time + buffer
-
-    // Optional: Hide preloader immediately if window loads faster than animation
-     window.addEventListener('load', () => {
-        // You might want to ensure minimum display time for the preloader
-        // For now, let the timeout handle it unless you want instant load
-        // clearTimeout(animationTimeout); // Uncomment to skip animation if loaded
-        // preloader.classList.add('hidden');
-        // pageWrapper.classList.add('visible');
-     });
-
-    // --- Navigation Logic ---
-    navLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            const targetId = link.getAttribute('data-target');
-            const targetSection = document.getElementById(targetId);
-
-            if (targetSection) {
-                // Deactivate all links and sections
-                navLinks.forEach(l => l.classList.remove('active'));
-                contentSections.forEach(s => s.classList.remove('active'));
-
-                // Activate the clicked link and target section
-                link.classList.add('active');
-                targetSection.classList.add('active');
-            }
-        });
-    });
-
-    // --- Request Panel Logic ---
-    function openPanel() {
-        requestPanel.classList.add('open');
-        panelOverlay.classList.add('active');
-        document.body.style.overflow = 'hidden'; // Prevent background scrolling
+     #home-section .section-left p,
+     #home-section .section-right h2,
+     .about-title {
+        font-size: calc(1.5rem + 1vw);
     }
-
-    function closePanel() {
-        requestPanel.classList.remove('open');
-        panelOverlay.classList.remove('active');
-        document.body.style.overflow = ''; // Restore scrolling
+    .center-letter {
+        font-size: 5rem;
     }
-
-    if (openRequestPanelBtn) {
-        openRequestPanelBtn.addEventListener('click', openPanel);
+     .graphic-area { /* Adjust canvas height */
+        height: 400px;
     }
+}
 
-    if (closeRequestPanelBtn) {
-        closeRequestPanelBtn.addEventListener('click', closePanel);
+@media (max-width: 992px) {
+    .site-header {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        margin-bottom: 20px;
     }
-
-    if (panelOverlay) {
-        // Close panel if overlay is clicked
-        panelOverlay.addEventListener('click', closePanel);
+    .main-nav ul {
+        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
     }
+    .content-section {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px; /* Reduced gap */
+        position: relative;
+        height: auto;
+        padding-bottom: 30px; /* Reduced padding */
+    }
+    .content-section.active {
+        position: relative;
+    }
+    .section-left, .section-center, .section-right {
+        flex-basis: 100%;
+        padding: 0 10px;
+        text-align: center;
+    }
+    #home-section .section-right h2 {
+        text-align: center;
+    }
+     .graphic-area { /* Adjust canvas height */
+        height: 350px;
+        margin-bottom: 20px; /* Add space below canvas */
+     }
+    .about-label-left {
+        writing-mode: horizontal-tb;
+        transform: none;
+        align-self: center;
+        margin-top: 0;
+        margin-bottom: 20px;
+        position: relative;
+        flex-basis: auto;
+    }
+    .about-center {
+        flex-basis: 100%;
+    }
+    .about-details {
+        flex-direction: column;
+        align-items: center;
+        gap: 25px;
+    }
+    .detail-item {
+        flex-basis: 80%;
+        max-width: 400px;
+        text-align: center;
+    }
+     .detail-item .line {
+        left: 50%;
+        transform: translateX(-50%);
+        width: 50%;
+     }
+     .detail-item .number {
+        position: relative;
+        top: auto; left: auto;
+        display: block;
+        margin-bottom: 5px;
+     }
+      #projects-section, #skills-section {
+            padding-top: 20px; /* Adjust padding */
+         }
+}
 
-    // Optional: Close panel with Escape key
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && requestPanel.classList.contains('open')) {
-            closePanel();
-        }
-    });
+@media (max-width: 768px) {
+    body {
+        padding: 0;
+    }
+     .page-wrapper {
+        padding: 10px;
+     }
+    .main-container {
+        width: 100%;
+        border-radius: 20px;
+        padding: 20px;
+        min-height: auto;
+    }
+     .logo {
+        font-size: 1.5rem;
+     }
+     .main-nav a {
+        font-size: 0.9rem;
+        padding: 6px 10px;
+     }
+     .request-btn, .send-request-btn {
+        font-size: 0.9rem;
+        padding: 10px 20px;
+     }
+     #home-section .section-left p,
+     #home-section .section-right h2,
+     .about-title {
+        font-size: calc(1.3rem + 1.5vw);
+    }
+    .center-letter {
+        font-size: 4rem;
+    }
+     .graphic-area { /* Adjust canvas height */
+        height: 300px;
+    }
+     .request-panel {
+        width: 90%;
+        border-radius: 0 15px 15px 0;
+     }
+     .preloader-content {
+        flex-direction: column;
+        gap: 30px;
+        width: 90%; /* Adjust width */
+     }
+     .preloader-letters {
+        font-size: 6rem;
+     }
+     .preloader-text-left {
+        text-align: center;
+        flex-basis: auto; /* Reset basis */
+     }
 
-});
+}
