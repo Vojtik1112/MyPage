@@ -3,12 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- UPDATE: Change Title -->
-    <title>Your Name - Portfolio</title>
+    <title>Vojtěch Novák - IT Student Portfolio</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Optional: Update Favicon to your initials or logo -->
     <link rel="icon" href="favicon.png" type="image/png">
+    <!-- Add Three.js library (Using CDN) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <!-- Inline style for canvas container and section adjustments -->
+    <style>
+        /* Ensure canvas container has defined size and position */
+        .graphic-area {
+            position: relative; /* Already set */
+            width: 100%;    /* Already set */
+            height: 450px;   /* Adjust if needed */
+            display: flex;   /* Already set */
+            justify-content: center; /* Already set */
+            align-items: center; /* Already set */
+            overflow: hidden; /* Hide parts of canvas if needed */
+        }
+        #tesseract-canvas {
+            display: block; /* Remove extra space below canvas */
+            width: 100%;
+            height: 100%;
+            cursor: grab; /* Indicate interactivity */
+        }
+         #tesseract-canvas:active {
+             cursor: grabbing;
+         }
+
+        /* Remove graphic from other sections */
+        #about-section .graphic-area,
+        #projects-section .graphic-area,
+        #skills-section .graphic-area {
+            display: none; /* Hide the graphic area in other sections */
+        }
+        /* Adjust layout if hiding graphic area causes issues */
+        #about-section .about-center {
+             /* Remove margin-bottom if graphic area is hidden */
+            margin-bottom: 0;
+             padding-top: 20px; /* Add some space if needed */
+        }
+         #projects-section, #skills-section {
+            /* Add padding if needed to compensate for removed graphic */
+            padding-bottom: 50px;
+            padding-top: 30px; /* Ensure consistent spacing */
+         }
+         /* Ensure overlay text is clickable */
+         .graphic-content {
+             pointer-events: none; /* Allows clicks/drags to pass through to the canvas */
+         }
+         .graphic-content * { /* Make sure children don't block either */
+             pointer-events: none;
+         }
+
+    </style>
 </head>
 <body>
 
@@ -16,44 +65,34 @@
     <div class="preloader" id="preloader">
         <div class="preloader-content">
             <div class="preloader-text-left">
-                <!-- UPDATE: Personal Attributes/Skills -->
-                Creative Thinker,<br>
-                Detail-Oriented,<br>
-                Problem Solver
+                Curious Learner,<br>
+                Tech Enthusiast,<br>
+                Future Innovator
             </div>
             <div class="preloader-letters">
-                <!-- NOTE: Keep C-B-D-C structure for animation timing,
-                     or update JS animation delays if you change letters (e.g., to your initials) -->
-                <div class="letter" id="letter-c1">W <span class="subtext">Web</span></div>
-                <div class="letter" id="letter-b">O <span class="subtext">Design</span></div>
-                <div class="letter" id="letter-d">R <span class="subtext">Develop</span></div>
-                <div class="letter" id="letter-c2">K <span class="subtext">Create</span></div>
-                <!-- Or use your initials, e.g., J D -->
-                <!-- <div class="letter" id="letter-c1">J <span class="subtext">Jane</span></div> -->
-                <!-- <div class="letter" id="letter-b">D <span class="subtext">Doe</span></div> -->
-                <!-- Make sure to remove/comment out unused letter divs -->
+                <div class="letter" id="letter-c1">V <span class="subtext">Vojtěch</span></div>
+                <div class="letter" id="letter-b">N <span class="subtext">Novák</span></div>
+                <!-- Removed letter-d and letter-c2 -->
             </div>
              <div class="preloader-line"></div>
         </div>
     </div>
 
-    <!-- Main Page Wrapper -->
+
     <div class="page-wrapper" id="page-wrapper">
         <div class="background-circles"></div>
         <div class="main-container">
+            <!-- Header -->
             <header class="site-header">
-                <!-- UPDATE: Change Logo to Your Name/Initials -->
-                <div class="logo">Your Name</div>
+                <div class="logo">Vojtěch Novák</div>
                 <nav class="main-nav">
                     <ul>
-                        <!-- UPDATE: Change Navigation Links -->
                         <li><a href="#home" class="nav-link active" data-target="home-section">Home</a></li>
-                        <li><a href="#about" class="nav-link" data-target="about-section">About Me</a></li>
+                        <li><a href="#about" class="nav-link" data-target="about-section">About</a></li>
                         <li><a href="#projects" class="nav-link" data-target="projects-section">Projects</a></li>
                         <li><a href="#skills" class="nav-link" data-target="skills-section">Skills</a></li>
                     </ul>
                 </nav>
-                <!-- UPDATE: Change Button Text -->
                 <button class="request-btn" id="open-request-panel">
                     Get in Touch <span class="arrow">→</span>
                 </button>
@@ -63,123 +102,101 @@
                 <!-- Home Section (Initial View) -->
                 <section id="home-section" class="content-section active">
                     <div class="section-left">
-                        <!-- UPDATE: Your Role/Title -->
-                        <span class="label">I am a</span>
-                        <p>Creative Developer,<br>UI/UX Enthusiast,<br>Digital Artist</p>
-                        <!-- Or adapt to your specific role -->
+                        <span class="label">I am an</span>
+                        <p>Information Technology<br>Student learning<br>C++, C#, AI & UE.</p>
                     </div>
-                    <div class="section-center graphic-area">
-                        <img src="graphic.png" alt="Abstract Personal Graphic" class="center-graphic">
-                         <!-- Content Over Graphic -->
+                    <div class="section-center graphic-area" id="canvas-container"> <!-- Added ID -->
+                        <!-- Canvas for Tesseract -->
+                        <canvas id="tesseract-canvas"></canvas>
+
+                         <!-- Content Over Canvas -->
                          <div class="graphic-content home-graphic-content">
-                            <!-- UPDATE: Replace financial content -->
-                            <!-- Option 1: Remove stats, keep clean graphic -->
-                             <!-- <div class="percentage-container"> ... </div> -->
-                             <!-- <div class="center-letter">YN</div> --> <!-- Your Initials -->
-                             <p class="graphic-subtext">Welcome to my creative space.<br>Exploring the intersection of<br>design and technology.</p>
-                             <!-- Option 2: Simple Welcome -->
-                             <!-- <h2>Welcome</h2> -->
+                            <div class="center-letter">VN</div>
+                            <p class="graphic-subtext">Exploring the world of technology<br>and building practical skills<br>through hands-on projects.</p>
                         </div>
                     </div>
                     <div class="section-right">
-                        <!-- UPDATE: Personal Headline/Greeting -->
-                        <h2>Crafting unique<br>and engaging digital<br>experiences.</h2>
+                         <h2>Passionate about code,<br>problem-solving, and<br>emerging tech like AI.</h2>
                     </div>
                 </section>
 
                 <!-- About Section -->
-                <!-- UPDATE: Section ID remains 'about-section', but content changes -->
                 <section id="about-section" class="content-section">
                      <div class="section-left about-label-left">
                         About Me
                      </div>
                      <div class="section-center about-center">
-                         <!-- UPDATE: Title -->
-                         <h2 class="about-title">My Journey &<br>What Drives Me</h2>
-                         <div class="graphic-area about-graphic-area">
-                            <img src="graphic.png" alt="Abstract Personal Graphic" class="center-graphic dimmed"> <!-- Dimmed graphic here -->
-                         </div>
+                         <h2 class="about-title">My Learning Journey<br>in Information Technology</h2>
+                         <!-- REMOVED Graphic Area -->
                          <div class="about-details">
-                            <!-- UPDATE: Replace financial details with personal ones -->
-                            <div class="detail-item">
+                             <div class="detail-item">
                                 <span class="number">.01</span>
-                                <h3>Who I Am</h3>
-                                <p>A passionate [Your Role, e.g., Web Developer] based in [Your Location/Remote]. I thrive on turning complex problems into beautiful, intuitive solutions.</p>
+                                <h3>Current Focus</h3>
+                                <p>As an IT student, I'm actively developing my understanding and practical skills in programming and technology concepts.</p>
                                 <div class="line"></div>
                             </div>
                             <div class="detail-item">
                                 <span class="number">.02</span>
-                                <h3>My Philosophy</h3>
-                                <p>I believe in continuous learning, user-centered design, and the power of collaboration to create impactful digital products.</p>
+                                <h3>Key Interests</h3>
+                                <p>I'm particularly interested in C++, C#, Artificial Intelligence, and game development with Unreal Engine. Always eager to learn more.</p>
                                 <div class="line"></div>
                             </div>
                             <div class="detail-item">
                                 <span class="number">.03</span>
-                                <h3>Interests</h3>
-                                <p>Beyond coding and design, I enjoy [Your Hobby 1], [Your Hobby 2], and exploring the latest trends in [Your Field/Interest].</p>
+                                <h3>Approach</h3>
+                                <p>I approach learning through hands-on experience, tackling school projects to solidify my knowledge and build my portfolio.</p>
                                 <div class="line"></div>
                             </div>
                          </div>
                      </div>
-                     <div class="section-right">
-                        <!-- Can add a photo of yourself here or leave empty -->
-                        <!-- <img src="your-photo.jpg" alt="Your Name" style="max-width: 80%; border-radius: 50%;"> -->
-                     </div>
+                     <div class="section-right"></div>
                 </section>
 
-                <!-- How to Use Section (Repurposed as Projects) -->
-                <!-- UPDATE: Change ID and content -->
+                <!-- Projects Section -->
                 <section id="projects-section" class="content-section placeholder-section">
-                    <h2>Featured Projects</h2>
-                    <p>Here's a selection of work I'm proud of. More details coming soon!</p>
-                    <!-- You would replace this paragraph with actual project cards/links later -->
-                     <div class="graphic-area">
-                         <img src="graphic.png" alt="Abstract Graphic" class="center-graphic dimmed">
-                     </div>
+                    <h2>My Projects</h2>
+                    <p>Here are some of the school projects I've worked on as part of my IT studies. Check out my GitHub for code examples!</p>
+                    <!-- REMOVED Graphic Area -->
                 </section>
 
-                <!-- Advantages Section (Repurposed as Skills) -->
-                 <!-- UPDATE: Change ID and content -->
+                <!-- Skills Section -->
                 <section id="skills-section" class="content-section placeholder-section">
-                     <h2>My Technical Toolkit</h2>
-                     <p>Languages, frameworks, and tools I work with. Full list under construction!</p>
-                      <!-- You would replace this paragraph with icons/lists of skills later -->
-                      <div class="graphic-area">
-                         <img src="graphic.png" alt="Abstract Graphic" class="center-graphic dimmed">
-                     </div>
+                     <h2>Technical Skills</h2>
+                     <p>Technologies I'm currently learning and using in my projects:</p>
+                      <ul style="list-style: none; padding: 20px 0; font-size: 1.1rem; color: #333;">
+                          <li>C++</li>
+                          <li>C#</li>
+                          <li>Artificial Intelligence (Concepts/Basic Implementation)</li>
+                          <li>Unreal Engine</li>
+                          <li>Git / GitHub</li>
+                      </ul>
+                     <!-- REMOVED Graphic Area -->
                 </section>
 
             </main>
 
-            <!-- Request Panel (Repurposed as Contact Panel) -->
+            <!-- Contact Panel -->
             <aside class="request-panel" id="request-panel">
                 <button class="close-panel-btn" id="close-request-panel">×</button>
                 <div class="panel-content">
-                     <!-- UPDATE: Panel Title -->
-                    <h3>Let's Connect!</h3>
-                    <!-- UPDATE: Change input to email or add a simple form -->
-                    <!-- Option 1: Simple Email Input -->
-                    <!-- <label for="email-input" style="font-size: 0.9rem; color: #555;">Your Email:</label>
-                    <input type="email" placeholder="your.email@example.com" id="email-input"> -->
+                    <h3>Contact Me</h3>
+                    <p style="color: #555; margin-bottom: 25px; font-size: 0.95rem;">Feel free to reach out or connect with me online:</p>
 
-                    <!-- Option 2: Basic Form (Needs backend/service like Formspree to actually send) -->
-                     <label for="name-input" style="font-size: 0.9rem; color: #555;">Your Name:</label>
-                     <input type="text" placeholder="Jane Doe" id="name-input" required style="margin-bottom: 15px; width: 100%; padding: 12px; border: 1px solid #d0d9e8; border-radius: 8px;">
+                    <div style="margin-bottom: 15px;">
+                        <strong style="color: #1a2a4a;">Email:</strong><br>
+                        <a href="mailto:vojtechnovak84@gmail.com" style="color: #0077ff; text-decoration: none;">vojtechnovak84@gmail.com</a>
+                    </div>
+                     <div style="margin-bottom: 15px;">
+                        <strong style="color: #1a2a4a;">GitHub:</strong><br>
+                        <a href="https://github.com/Vojtik1112" target="_blank" rel="noopener noreferrer" style="color: #0077ff; text-decoration: none;">github.com/Vojtik1112</a>
+                    </div>
+                     <div style="margin-bottom: 15px;">
+                        <strong style="color: #1a2a4a;">Instagram:</strong><br>
+                        <a href="https://www.instagram.com/schizvojta/?next=%2F" target="_blank" rel="noopener noreferrer" style="color: #0077ff; text-decoration: none;">@schizvojta</a>
+                    </div>
 
-                     <label for="email-input" style="font-size: 0.9rem; color: #555;">Your Email:</label>
-                    <input type="email" placeholder="your.email@example.com" id="email-input" required style="margin-bottom: 15px; width: 100%; padding: 12px; border: 1px solid #d0d9e8; border-radius: 8px;">
-
-                     <label for="message-input" style="font-size: 0.9rem; color: #555;">Message:</label>
-                     <textarea id="message-input" placeholder="How can I help?" required rows="4" style="margin-bottom: 15px; width: 100%; padding: 12px; border: 1px solid #d0d9e8; border-radius: 8px; font-family: inherit; resize: vertical;"></textarea>
-
-
-                    <!-- UPDATE: Button Text -->
-                    <button class="send-request-btn">Send Message <span class="arrow">→</span></button>
-                    <!-- UPDATE: Footer Text -->
-                    <p class="legal-text" style="margin-top: 20px;">
-                        Looking forward to hearing from you! You can also find me on
-                        <a href="[Your LinkedIn URL]" target="_blank">LinkedIn</a> or
-                        <a href="[Your GitHub URL]" target="_blank">GitHub</a>.
+                    <p class="legal-text" style="margin-top: auto;">
+                        Connecting with others passionate about technology.
                     </p>
                 </div>
             </aside>
@@ -188,6 +205,9 @@
         </div>
     </div>
 
+    <!-- Main script.js (Handles preloader, nav, panel) -->
     <script src="script.js"></script>
+    <!-- Tesseract animation script -->
+    <script src="tesseract.js"></script>
 </body>
 </html>
