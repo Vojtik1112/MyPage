@@ -1,115 +1,96 @@
+// script.js
+// (Handles preloader, navigation, slide-out panel)
+
 document.addEventListener('DOMContentLoaded', () => {
+    const preloader = document.getElementById('preloader');
+    const pageWrapper = document.getElementById('page-wrapper');
+    const navLinks = document.querySelectorAll('.main-nav .nav-link');
+    const contentSections = document.querySelectorAll('.content-section');
+    const openRequestPanelBtn = document.getElementById('open-request-panel');
+    const closeRequestPanelBtn = document.getElementById('close-request-panel');
+    const requestPanel = document.getElementById('request-panel');
+    const panelOverlay = document.getElementById('panel-overlay');
 
-    // --- Initialize AOS (Animate On Scroll) ---
-    AOS.init({
-        duration: 700, // Animation duration
-        easing: 'ease-in-out', // Animation timing function
-        once: true, // Whether animation should happen only once - while scrolling down
-        mirror: false, // Whether elements should animate out while scrolling past them
-        offset: 100 // Offset (in px) from the original trigger point
-    });
+    // --- Preloader Logic ---
+    const letters = {
+        c1: document.getElementById('letter-c1'), // Corresponds to 'V'
+        b: document.getElementById('letter-b')    // Corresponds to 'N'
+    };
+    let animationTimeout;
 
-    // --- Initialize GLightbox (Portfolio Lightbox) ---
-    const lightbox = GLightbox({
-        selector: '.glightbox', // Selector for links that trigger lightbox
-        touchNavigation: true, // Enable swipe navigation on touch devices
-        loop: false, // Loop through slides
-        autoplayVideos: true,
-        // You can add more options here: https://github.com/biati-digital/glightbox
-    });
-
-
-    // --- Fun Fact Button ---
-    const funFactButton = document.getElementById('more-info-btn');
-    const funFactParagraph = document.getElementById('fun-fact');
-    // ... (Fun fact logic remains the same) ...
-    if (funFactButton && funFactParagraph) {
-        funFactButton.addEventListener('click', () => {
-            const isHidden = funFactParagraph.classList.toggle('hidden');
-            funFactButton.textContent = isHidden ? 'Tell Me a Fun Fact!' : 'Hide Fun Fact';
-        });
+    function showLetter(letterElement) {
+        if (letterElement) {
+            letterElement.style.animationPlayState = 'running';
+            letterElement.classList.add('visible');
+        }
     }
 
-    // --- Smooth Scrolling ---
-    const navLinks = document.querySelectorAll('nav a[href^="#"]');
-    // ... (Smooth scroll logic remains the same, ensure header offset calculation is correct for your header height) ...
+    // Start animations manually
+    if (letters.c1) letters.c1.style.animationPlayState = 'paused';
+    if (letters.b) letters.b.style.animationPlayState = 'paused';
+
+    // Sequence the letter animations
+    setTimeout(() => showLetter(letters.c1), 100);
+    setTimeout(() => showLetter(letters.b), 900);
+
+    // Hide preloader after animations
+    animationTimeout = setTimeout(() => {
+        if (preloader) { // Check if preloader still exists
+            preloader.classList.add('hidden');
+        }
+        if (pageWrapper) { // Check if pageWrapper exists
+             pageWrapper.classList.add('visible');
+        }
+        // Clean up preloader from DOM after transition
+        setTimeout(() => {
+             if (preloader && preloader.parentNode) {
+                preloader.parentNode.removeChild(preloader);
+             }
+        }, 800); // Match preloader transition duration
+    }, 1800); // Adjusted timeout duration for fewer letters
+
+    // --- Navigation Logic ---
     navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
+        link.addEventListener('click', (e) => {
             e.preventDefault();
-            const targetId = this.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
-            if (targetElement) {
-                const headerOffset = document.querySelector('header')?.offsetHeight || 70; // Estimate header height
-                const elementPosition = targetElement.getBoundingClientRect().top;
-                const offsetPosition = elementPosition + window.pageYOffset - headerOffset - 20; // Extra padding
-                window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+            const targetId = link.getAttribute('data-target');
+            const targetSection = document.getElementById(targetId);
+
+            if (targetSection) {
+                navLinks.forEach(l => l.classList.remove('active'));
+                contentSections.forEach(s => s.classList.remove('active'));
+                link.classList.add('active');
+                targetSection.classList.add('active');
             }
         });
     });
 
-    // --- Update Footer Year ---
-    const yearSpan = document.getElementById('current-year');
-    if (yearSpan) {
-        yearSpan.textContent = new Date().getFullYear();
+    // --- Request Panel Logic ---
+    function openPanel() {
+        requestPanel.classList.add('open');
+        panelOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
     }
 
-    // --- Contact Form Handling (using Fetch API for Formspree) ---
-    const contactForm = document.getElementById('contact-form');
-    const formMessage = document.getElementById('form-message');
-    const submitButton = document.getElementById('submit-button');
-
-    if (contactForm && formMessage && submitButton) {
-        contactForm.addEventListener('submit', async (e) => {
-            e.preventDefault(); // Prevent default form submission
-
-            // Clear previous messages and disable button
-            formMessage.textContent = '';
-            formMessage.className = ''; // Reset classes
-            submitButton.disabled = true;
-            submitButton.textContent = 'Sending...';
-
-            const formData = new FormData(contactForm);
-            const formAction = contactForm.action; // Get URL from form's action attribute
-
-            try {
-                const response = await fetch(formAction, {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'Accept': 'application/json' // Important for Formspree to send JSON response
-                    }
-                });
-
-                if (response.ok) {
-                    // Success!
-                    formMessage.textContent = "Thank you! Your message has been sent successfully.";
-                    formMessage.classList.add('success');
-                    contactForm.reset(); // Clear the form fields
-                } else {
-                    // Handle server errors (e.g., Formspree validation error)
-                    const data = await response.json(); // Try to get error details
-                    if (data.errors && data.errors.length > 0) {
-                       formMessage.textContent = `Error: ${data.errors.map(err => err.message).join(', ')}`;
-                    } else {
-                       formMessage.textContent = 'Oops! There was a problem submitting your form. Please try again.';
-                    }
-                    formMessage.classList.add('error');
-                }
-
-            } catch (error) {
-                // Handle network errors
-                console.error('Form submission error:', error);
-                formMessage.textContent = 'An error occurred. Please check your connection and try again.';
-                formMessage.classList.add('error');
-
-            } finally {
-                // Re-enable button regardless of outcome
-                submitButton.disabled = false;
-                submitButton.textContent = 'Send Message';
-            }
-        });
-    } else {
-        console.warn("Contact form elements not found.");
+    function closePanel() {
+        requestPanel.classList.remove('open');
+        panelOverlay.classList.remove('active');
+        document.body.style.overflow = '';
     }
 
-}); // End DOMContentLoaded
+    if (openRequestPanelBtn) {
+        openRequestPanelBtn.addEventListener('click', openPanel);
+    }
+    if (closeRequestPanelBtn) {
+        closeRequestPanelBtn.addEventListener('click', closePanel);
+    }
+    if (panelOverlay) {
+        panelOverlay.addEventListener('click', closePanel);
+    }
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && requestPanel.classList.contains('open')) {
+            closePanel();
+        }
+    });
+
+});
