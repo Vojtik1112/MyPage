@@ -16,7 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let rotation4D_Angle2 = 0; // YZ rotation (can be linked or independent)
     let targetRotationX = 0;
     let targetRotationY = 0;
-    let mouseX = 0, mouseY = 0;
     let windowHalfX = window.innerWidth / 2;
     let windowHalfY = window.innerHeight / 2;
     let isDragging = false;
@@ -48,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
         scene = new THREE.Scene();
 
         // Camera
-        const fov = 60; // Adjust FOV for better view
+        const fov = 60; // Adjust FOV for a better view
         const aspect = container.clientWidth / container.clientHeight;
         const near = 0.1;
         const far = 100;
@@ -82,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
         container.addEventListener('pointerdown', onPointerDown, false); // Use pointer events for broader compatibility
         container.addEventListener('pointermove', onPointerMove, false);
         container.addEventListener('pointerup', onPointerUp, false);
-        container.addEventListener('pointerout', onPointerUp, false); // Stop dragging if pointer leaves
+        container.addEventListener('pointerout', onPointerUp, false); // Stop dragging if the pointer leaves
 
         animate();
     }
@@ -198,7 +197,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     }
 
-    function onPointerUp(event) {
+    function onPointerUp() {
         isDragging = false;
         container.style.cursor = 'grab'; // Restore cursor
     }

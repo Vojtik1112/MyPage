@@ -16,8 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
         c1: document.getElementById('letter-c1'), // Corresponds to 'V'
         b: document.getElementById('letter-b')    // Corresponds to 'N'
     };
-    let animationTimeout;
-
     function showLetter(letterElement) {
         if (letterElement) {
             letterElement.style.animationPlayState = 'running';
@@ -34,18 +32,18 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => showLetter(letters.b), 900);
 
     // Hide preloader after animations
-    animationTimeout = setTimeout(() => {
+    setTimeout(() => {
         if (preloader) { // Check if preloader still exists
             preloader.classList.add('hidden');
         }
         if (pageWrapper) { // Check if pageWrapper exists
-             pageWrapper.classList.add('visible');
+            pageWrapper.classList.add('visible');
         }
         // Clean up preloader from DOM after transition
         setTimeout(() => {
-             if (preloader && preloader.parentNode) {
+            if (preloader && preloader.parentNode) {
                 preloader.parentNode.removeChild(preloader);
-             }
+            }
         }, 800); // Match preloader transition duration
     }, 1800); // Adjusted timeout duration for fewer letters
 
