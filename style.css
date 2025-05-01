@@ -784,3 +784,263 @@ button {
      }
 
 }
+
+/* --- Responsive Styles --- */
+
+/* Tablet Breakpoint (Example: screens <= 992px) */
+@media (max-width: 992px) {
+    .main-container {
+        padding: 25px 30px;
+        width: 95%;
+    }
+
+    .site-header {
+        flex-wrap: wrap; /* Allow header items to wrap if needed */
+        margin-bottom: 20px;
+    }
+
+    .main-nav ul {
+        gap: 15px; /* Reduce gap between nav items */
+    }
+
+    .main-nav a, .request-btn {
+        font-size: 0.9rem; /* Slightly smaller text */
+        padding: 10px 20px;
+    }
+
+    #home-section .section-left p,
+    #home-section .section-right h2 {
+        font-size: 1.5rem; /* Adjust font sizes */
+    }
+
+    .about-title {
+        font-size: 1.8rem;
+    }
+
+    .detail-item h3 {
+        font-size: 1.1rem;
+    }
+
+    .detail-item p {
+        font-size: 0.85rem;
+    }
+
+    .graphic-area {
+        height: 450px; /* Adjust canvas area height */
+    }
+
+    .center-letter {
+        font-size: 5rem;
+    }
+
+}
+
+/* Mobile Breakpoint (Example: screens <= 768px) */
+@media (max-width: 768px) {
+    body {
+        min-height: auto; /* Allow body height to adjust */
+        padding: 10px 0; /* Reduce padding around container */
+    }
+
+    .page-wrapper {
+        padding: 15px; /* Reduce wrapper padding */
+    }
+
+    .main-container {
+        padding: 20px 15px;
+        min-height: auto;
+        border-radius: 20px;
+    }
+
+    .site-header {
+        flex-direction: column; /* Stack header items */
+        align-items: center;
+        gap: 15px;
+    }
+
+    .main-nav {
+        width: 100%;
+    }
+
+    .main-nav ul {
+        justify-content: center; /* Center nav items */
+        flex-wrap: wrap; /* Allow nav items to wrap */
+        gap: 10px;
+    }
+
+    .main-nav a {
+        padding: 8px 12px;
+    }
+
+    .request-btn {
+        margin-top: 10px;
+    }
+
+    .content-section {
+        flex-direction: column; /* Stack main layout columns */
+        align-items: center; /* Center items when stacked */
+        text-align: center; /* Center text within sections */
+        position: relative; /* Change from absolute for stacking */
+        opacity: 1; /* Ensure sections are visible if display:flex is changed */
+        display: none; /* Keep original hide/show logic */
+        padding: 10px 0;
+        height: auto; /* Allow height to adjust to content */
+    }
+
+    /* Override absolute positioning for active section */
+    .content-section.active {
+        display: flex; /* Keep this for the active section */
+        position: relative;
+        opacity: 1;
+    }
+
+
+    .section-left, .section-center, .section-right {
+        flex-basis: 100%; /* Make columns full width */
+        padding: 15px 0; /* Adjust padding */
+        text-align: center;
+    }
+
+    #home-section .section-right h2 {
+        text-align: center; /* Center right section text */
+    }
+
+
+    .graphic-area {
+        height: 300px; /* Smaller graphic area */
+        order: 2; /* Change order if needed, e.g., put graphic below text */
+    }
+
+    .graphic-content {
+        position: relative; /* Make overlay relative within the centered column */
+        transform: none;
+        top: auto;
+        left: auto;
+        margin-top: 15px; /* Space below canvas if graphic is first */
+    }
+
+    /* Or adjust if canvas is below text */
+    #home-section .section-center {
+        order: 1; /* Example: Put text above graphic */
+    }
+
+    #home-section .section-left {
+        order: 0;
+    }
+
+    #home-section .section-right {
+        order: 2;
+    }
+
+    .graphic-area {
+        order: 1;
+    }
+
+    /* Adjust graphic order */
+    .graphic-content {
+        order: 1;
+        margin-top: 0;
+        margin-bottom: 15px;
+    }
+
+    /* Ensure graphic content stays with graphic */
+    .center-letter {
+        font-size: 4rem;
+    }
+
+    .graphic-subtext {
+        font-size: 0.8rem;
+    }
+
+
+    /* About Section Adjustments */
+    .about-label-left {
+        writing-mode: horizontal-tb; /* Normal text flow */
+        transform: none;
+        align-self: center;
+        margin-top: 0;
+        margin-bottom: 15px;
+        flex-basis: auto;
+    }
+
+    .about-center {
+        flex-basis: 100%;
+        padding: 0 10px; /* Add some padding */
+    }
+
+    .about-details {
+        flex-direction: column; /* Stack detail items */
+        align-items: center;
+        gap: 20px;
+        padding: 0;
+    }
+
+    .detail-item {
+        flex-basis: 100%; /* Full width */
+        max-width: 350px; /* Limit width for readability */
+        text-align: center;
+        padding-top: 25px;
+    }
+
+    .detail-item .number {
+        left: 50%;
+        transform: translateX(-50%); /* Center the number */
+    }
+
+    .detail-item .line {
+        left: 50%;
+        transform: translateX(-50%); /* Center the line */
+        width: 50%;
+    }
+
+    /* Placeholder Sections Adjustments */
+    .placeholder-section h2 {
+        font-size: 1.6rem;
+    }
+
+    .placeholder-section p {
+        font-size: 0.9rem;
+    }
+
+    .projects-grid {
+        grid-template-columns: 1fr; /* Stack project cards */
+        gap: 15px;
+        padding: 0 10px;
+    }
+
+    .project-card {
+        text-align: left; /* Align card text left */
+    }
+}
+
+/* Optional: Smaller Mobile Breakpoint (Example: screens <= 480px) */
+@media (max-width: 480px) {
+    .logo {
+        font-size: 1.5rem;
+    }
+
+    #home-section .section-left p,
+    #home-section .section-right h2 {
+        font-size: 1.3rem; /* Further reduce text size */
+    }
+
+    .center-letter {
+        font-size: 3rem;
+    }
+
+    .graphic-area {
+        height: 250px;
+    }
+
+    .about-title {
+        font-size: 1.5rem;
+    }
+
+    .placeholder-section h2 {
+        font-size: 1.4rem;
+    }
+
+    .placeholder-section ul {
+        padding: 10px 0
+    }
+}
