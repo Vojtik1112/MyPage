@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Objednávka Vlastního Trička</title>
+    <link href="style.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="container">
+    <h1>Objednávka Vlastního Trička</h1>
+    <p>
+        Vyplňte prosím níže uvedené údaje pro objednání vašeho unikátního
+        trička.
+    </p>
+
+    <form
+            action="mailto:novakv.08@spst.eu"
+            enctype="text/plain"
+            id="orderForm"
+            method="POST"
+            novalidate
+    >
+        <fieldset>
+            <legend>Kontaktní údaje</legend>
+            <div>
+                <label for="name">Jméno a Příjmení:</label>
+                <input
+                        aria-describedby="nameError"
+                        id="name"
+                        name="jmeno_prijmeni"
+                        placeholder="Např. Jan Novák"
+                        required
+                        type="text"
+                />
+                <span class="error-message" id="nameError"></span> {/* Chybová
+                hláška pro jméno */}
+            </div>
+            <div>
+                <label for="email">Váš E-mail:</label>
+                <input
+                        aria-describedby="emailError"
+                        id="email"
+                        name="email"
+                        placeholder="např. jan.novak@email.cz"
+                        required
+                        type="email"
+                />
+                <span class="error-message" id="emailError"></span> {/* Chybová
+                hláška pro email */}
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Specifikace Trička</legend>
+            <div>
+                <label for="size">Velikost:</label>
+                <select id="size" name="velikost">
+                    <option value="S">S</option>
+                    <option selected value="M">M</option>
+                    <option value="L">L</option>
+                    <option value="XL">XL</option>
+                    <option value="XXL">XXL</option>
+                </select>
+                {/* Combobox obvykle nepotřebuje složitou validaci, pokud má
+                předvolenou hodnotu */}
+            </div>
+
+            <div class="radio-group">
+                <span>Barva:</span>
+                <input
+                        checked
+                        id="colorWhite"
+                        name="barva"
+                        type="radio"
+                        value="bila"
+                />
+                <label for="colorWhite">Bílá</label>
+                <input id="colorBlack" name="barva" type="radio" value="cerna"/>
+                <label for="colorBlack">Černá</label>
+                <input id="colorBlue" name="barva" type="radio" value="modra"/>
+                <label for="colorBlue">Modrá</label>
+                {/* Radio buttony s 'checked' nepotřebují validaci nevyplnění */}
+            </div>
+
+            <div>
+                <label for="customText"
+                >Vlastní text na tričko (volitelné, max 50 znaků, pouze písmena,
+                    čísla, mezery):</label
+                >
+                <input
+                        aria-describedby="customTextError"
+                        id="customText"
+                        maxlength="50"
+                        name="vlastni_text"
+                        placeholder="Váš text zde..."
+                        type="text"
+                />
+                <span class="error-message" id="customTextError"></span> {/* Chybová
+                hláška pro vlastní text */}
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Doplňující informace</legend>
+            <div class="checkbox-group">
+                <input id="giftWrap" name="darek" type="checkbox" value="ano"/>
+                <label for="giftWrap">Zabalit jako dárek (+50 Kč)</label>
+            </div>
+            <div>
+                <label for="notes">Poznámka k objednávce:</label>
+                <textarea
+                        id="notes"
+                        name="poznamka"
+                        placeholder="Speciální požadavky..."
+                        rows="3"
+                ></textarea>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Souhlas a Odeslání</legend>
+            <div class="checkbox-group required-check">
+                <input
+                        aria-describedby="consentError"
+                        id="consent"
+                        name="souhlas_gdpr"
+                        required
+                        type="checkbox"
+                        value="souhlasim"
+                />
+                <label for="consent"
+                >Souhlasím se zpracováním osobních údajů pro účely této
+                    objednávky.*</label
+                >
+                <span class="error-message" id="consentError"></span> {/* Chybová
+                hláška pro souhlas */}
+            </div>
+            <p class="required-notice">* Toto pole je povinné.</p>
+        </fieldset>
+
+        <div class="form-buttons">
+            <input type="submit" value="Odeslat objednávku"/>
+            <input type="reset" value="Vymazat formulář"/>
+        </div>
+
+        <p class="info">
+            Po kliknutí na "Odeslat objednávku" se otevře váš e-mailový klient s
+            předvyplněnými údaji. Pro dokončení objednávky musíte e-mail ručně
+            odeslat.
+        </p>
+    </form>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

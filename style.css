@@ -457,7 +457,7 @@ button {
 }
 .placeholder-section p {
     color: #556a8f;
-    margin-bottom: 20px; /* Space before skills list */
+    margin-bottom: 20px; /* Space before skills list OR project grid */
 }
 .placeholder-section ul { /* Style the skills list */
      margin: 0 auto; /* Center the list */
@@ -475,6 +475,75 @@ button {
     left: 0;
     color: #0077ff; /* Blue bullet */
     font-weight: bold;
+}
+
+/* --- Projects Grid & Cards --- */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive grid columns */
+    gap: 30px; /* Space between cards */
+    width: 100%;
+    max-width: 1100px; /* Limit grid width */
+    margin-top: 30px; /* Space below the intro paragraph */
+    padding: 0 15px; /* Padding on the sides of the grid */
+}
+
+.project-card {
+    display: block; /* Make the anchor tag behave like a block */
+    background: #fff; /* White background */
+    border-radius: 15px; /* Rounded corners */
+    padding: 25px;
+    box-shadow: 0 6px 20px rgba(0, 86, 179, 0.08); /* Subtle shadow */
+    text-decoration: none;
+    color: inherit; /* Inherit text color */
+    text-align: left; /* Align text left within card */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative; /* Needed for absolute positioning of arrow */
+}
+
+.project-card:hover {
+    transform: translateY(-5px); /* Lift card on hover */
+    box-shadow: 0 10px 25px rgba(0, 86, 179, 0.15); /* Enhanced shadow on hover */
+}
+
+.project-card h3 {
+    color: #1a2a4a; /* Dark blue heading */
+    font-size: 1.15rem;
+    margin-bottom: 10px;
+}
+
+.project-card p {
+    color: #556a8f; /* Standard paragraph color */
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 15px; /* Space before potential arrow/footer */
+}
+
+.project-card .card-link-arrow {
+    position: absolute;
+    bottom: 15px;
+    right: 20px;
+    font-size: 1.5rem;
+    color: #0077ff; /* Accent blue */
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.project-card:hover .card-link-arrow {
+    opacity: 1;
+    transform: translateX(-5px); /* Move arrow slightly left on hover */
+}
+
+/* Adjust grid padding in responsive views if necessary */
+@media (max-width: 768px) {
+    .projects-grid {
+        padding: 0 5px;
+        gap: 20px;
+    }
+
+    .project-card {
+        padding: 20px;
+    }
 }
 
 
