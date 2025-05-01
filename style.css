@@ -5,10 +5,72 @@
     box-sizing: border-box;
 }
 
+/* --- Root Variables (Light Theme - Default) --- */
+:root {
+    --bg-color: #eef3f8; /* Light page background */
+    --text-color: #333; /* Default text color */
+    --panel-bg: linear-gradient(135deg, #ffffff 0%, #f0f5fb 100%); /* Main container background */
+    --header-logo-color: #1a2a4a; /* Logo color */
+    --nav-link-color: #556a8f; /* Navigation link color */
+    --nav-link-hover-bg: rgba(0, 119, 255, 0.08); /* Nav link hover/active background */
+    --nav-link-active-color: #0056b3; /* Active nav link color */
+    --primary-accent: #0077ff; /* Main blue accent */
+    --primary-accent-darker: #0056b3; /* Darker blue accent */
+    --button-text-color: #fff; /* Text color for primary button */
+    --section-title-color: #1a2a4a; /* Color for section titles like h2 */
+    --section-subtitle-color: #556a8f; /* Color for less prominent text */
+    --tesseract-line-color: #000000; /* Tesseract lines color */
+    --tesseract-text-color: #000; /* Text over tesseract color */
+    --card-bg: #fff; /* Project card background */
+    --card-shadow: 0 8px 25px rgba(0, 80, 160, 0.08); /* Card shadow */
+    --card-hover-shadow: 0 12px 35px rgba(0, 80, 160, 0.12); /* Card hover shadow */
+    --link-arrow-color: #0077ff; /* Arrow color on cards/buttons */
+    /* --- Add more variables for other colors you use --- */
+
+    /* Timing for smooth transition */
+    --theme-transition-duration: 0.3s;
+}
+
+/* --- Dark Mode Variables --- */
+body.dark-mode {
+    --bg-color: #1a1a2e; /* Dark page background (very similar dark blue) */
+    --text-color: #f0f0f0; /* Light default text */
+    --panel-bg: linear-gradient(135deg, #2c2c44 0%, #1f1f35 100%); /* Dark container background */
+    --header-logo-color: #c0c0ff; /* Lighter logo color */
+    --nav-link-color: #a0a0cc; /* Lighter nav link color */
+    --section-title-color: #f5f5f5; /* Light section titles */
+    --nav-link-hover-bg: rgba(100, 100, 220, 0.15); /* Adjusted hover background */
+    --nav-link-active-color: #d0d0ff; /* Lighter active nav color */
+    --primary-accent: #4d94ff; /* Brighter blue accent */
+    --primary-accent-darker: #80b3ff; /* Even brighter blue for gradients */
+    --button-text-color: #1a1a2e; /* Dark text on light buttons */
+    /* MODIFIED: Made subtitles brighter */
+    --section-subtitle-color: #bdbddd; /* Lighter subtitles (was #a0a0cc) */
+    --tesseract-line-color: #cccccc; /* Lighter Tesseract lines */
+    /* MODIFIED: Made text over tesseract brighter (matching main text) */
+    --tesseract-text-color: #f0f0f0; /* Light text over tesseract (was #e0e0e0) */
+    --card-bg: #2c2c44; /* Dark card background */
+    --card-shadow: 0 8px 25px rgba(0, 0, 0, 0.2); /* Darker shadow */
+    --card-hover-shadow: 0 12px 35px rgba(0, 0, 0, 0.3); /* Darker hover shadow */
+    --link-arrow-color: #4d94ff; /* Brighter arrow color */
+
+    /* --- Override other variables as needed --- */
+}
+
+/* --- Refactored Base Styles (Examples) --- */
+/* Add transitions for smooth theme changes */
+body, .main-container, .logo, .main-nav a, .request-btn, h2, p, .project-card, #theme-toggle-btn, .center-letter, .graphic-subtext {
+    transition: background-color var(--theme-transition-duration) ease,
+    color var(--theme-transition-duration) ease,
+    border-color var(--theme-transition-duration) ease,
+    background var(--theme-transition-duration) ease,
+    box-shadow var(--theme-transition-duration) ease;
+}
+
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: #eef3f8; /* Light background */
-    color: #333;
+    background-color: var(--bg-color); /* Use variable */
+    color: var(--text-color); /* Use variable */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -32,6 +94,13 @@ button {
     background: none;
 }
 
+/* --- Add transitions for theme-affected preloader elements --- */
+.preloader, .preloader-content, .preloader-text-left, .preloader-letters .letter, .preloader-letters .subtext {
+    transition: background-color var(--theme-transition-duration) ease,
+    color var(--theme-transition-duration) ease;
+}
+
+
 /* --- Preloader Styles --- */
 .preloader {
     position: fixed;
@@ -39,13 +108,14 @@ button {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #fff;
+    /* Use variable for background */
+    background-color: var(--bg-color); 
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 1000;
     opacity: 1;
-    transition: opacity 0.8s ease-out;
+    transition: opacity 0.8s ease-out, background-color var(--theme-transition-duration) ease; /* Add background transition */
 }
 
 .preloader.hidden {
@@ -64,7 +134,8 @@ button {
 
 .preloader-text-left {
     font-size: 1.2rem;
-    color: #555;
+    /* Use variable for text color */
+    color: var(--section-subtitle-color); 
     line-height: 1.6;
     flex-basis: 25%;
     text-align: left;
@@ -77,7 +148,8 @@ button {
     flex-grow: 1;
     font-size: 10rem;
     font-weight: 600;
-    color: #000;
+    /* Use variable for main letter color */
+    color: var(--header-logo-color); 
     position: relative;
 }
 
@@ -92,12 +164,13 @@ button {
 .preloader-letters .subtext {
     font-size: 0.8rem;
     font-weight: 400;
-    color: #888;
+    /* Use variable for subtext color */
+    color: var(--nav-link-color); 
     position: absolute;
     top: 10px;
     right: -50px;
     opacity: 0;
-    transition: opacity 0.5s 0.3s ease;
+    transition: opacity 0.5s 0.3s ease, color var(--theme-transition-duration) ease; /* Add color transition */
 }
 
 @keyframes fadeLetter {
@@ -124,7 +197,9 @@ button {
     left: 0;
     width: 100%;
     height: 2px;
-    background-color: #eee;
+    /* Use a subtle color, maybe related to text or borders */
+    background-color: var(--nav-link-hover-bg);
+    transition: background-color var(--theme-transition-duration) ease;
 }
 
 
@@ -161,7 +236,7 @@ button {
 }
 
 .main-container {
-    background: linear-gradient(135deg, #ffffff 0%, #f0f5fb 100%);
+    background: var(--panel-bg); /* Use variable */
     border-radius: 35px;
     box-shadow: 0 20px 50px rgba(0, 50, 100, 0.1);
     padding: 30px 50px;
@@ -182,12 +257,13 @@ button {
     align-items: center;
     padding-bottom: 20px;
     margin-bottom: 30px;
+    gap: 15px; /* Adjust gap if needed */
 }
 
 .logo {
     font-weight: 700;
     font-size: 1.8rem;
-    color: #1a2a4a;
+    color: var(--header-logo-color); /* Use variable */
 }
 
 .main-nav ul {
@@ -196,7 +272,7 @@ button {
 }
 
 .main-nav a {
-    color: #556a8f;
+    color: var(--nav-link-color); /* Use variable */
     font-size: 0.95rem;
     font-weight: 500;
     padding: 8px 15px;
@@ -213,15 +289,15 @@ button {
     transform: translateX(-50%);
     width: 0;
     height: 2px;
-    background-color: #0077ff;
+    background-color: var(--primary-accent); /* Use variable */
     transition: width 0.3s ease;
 }
 
 
 .main-nav a:hover,
 .main-nav a.active {
-    color: #0056b3;
-    background-color: rgba(0, 119, 255, 0.08);
+    color: var(--nav-link-active-color); /* Use variable */
+    background-color: var(--nav-link-hover-bg); /* Use variable */
 }
 
 .main-nav a.active::after {
@@ -233,8 +309,9 @@ button {
 
 
 .request-btn {
-    background: linear-gradient(100deg, #0077ff, #0056b3);
-    color: #fff;
+    /* Use variables for gradient and text */
+    background: linear-gradient(100deg, var(--primary-accent), var(--primary-accent-darker));
+    color: var(--button-text-color); 
     padding: 12px 25px;
     border-radius: 25px;
     font-weight: 500;
@@ -345,7 +422,7 @@ button {
 .center-letter {
     font-size: 6rem;
     font-weight: 700;
-    color: #000; /* Changed to Black letter */
+    color: var(--tesseract-text-color); /* Use variable */
     line-height: 1;
     margin-bottom: 10px;
     /* text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); /* Removed shadow */
@@ -353,7 +430,7 @@ button {
 
 .graphic-subtext {
     font-size: 0.85rem;
-    color: #000; /* Changed to Black text */
+    color: var(--tesseract-text-color); /* Use variable */
     line-height: 1.5;
     /* text-shadow: 0 1px 5px rgba(0, 0, 0, 0.2); /* Removed shadow */
 }
@@ -490,10 +567,10 @@ button {
 
 .project-card {
     display: block; /* Make the anchor tag behave like a block */
-    background: #fff; /* White background */
+    background-color: var(--card-bg); /* Use variable */
     border-radius: 15px; /* Rounded corners */
     padding: 25px;
-    box-shadow: 0 6px 20px rgba(0, 86, 179, 0.08); /* Subtle shadow */
+    box-shadow: var(--card-shadow); /* Use variable */
     text-decoration: none;
     color: inherit; /* Inherit text color */
     text-align: left; /* Align text left within card */
@@ -503,28 +580,28 @@ button {
 
 .project-card:hover {
     transform: translateY(-5px); /* Lift card on hover */
-    box-shadow: 0 10px 25px rgba(0, 86, 179, 0.15); /* Enhanced shadow on hover */
+    box-shadow: var(--card-hover-shadow); /* Use variable */
 }
 
 .project-card h3 {
-    color: #1a2a4a; /* Dark blue heading */
+    color: var(--section-title-color); /* Use variable */
     font-size: 1.15rem;
     margin-bottom: 10px;
 }
 
 .project-card p {
-    color: #556a8f; /* Standard paragraph color */
+    color: var(--text-color); /* Use variable */
     font-size: 0.9rem;
     line-height: 1.6;
     margin-bottom: 15px; /* Space before potential arrow/footer */
 }
 
 .project-card .card-link-arrow {
+    color: var(--link-arrow-color); /* Use variable */
     position: absolute;
     bottom: 15px;
     right: 20px;
     font-size: 1.5rem;
-    color: #0077ff; /* Accent blue */
     opacity: 0;
     transition: opacity 0.3s ease, transform 0.3s ease;
 }
@@ -551,23 +628,22 @@ button {
 .request-panel {
     position: fixed;
     top: 0;
-    left: 0;
+    right: -400px; /* Position off-screen to the right */
     height: 100%;
     width: 400px;
     max-width: 90%;
     background-color: #fff;
-    box-shadow: 5px 0 25px rgba(0, 0, 0, 0.1);
+    box-shadow: -5px 0 25px rgba(0, 0, 0, 0.1); /* Shadow on left side */
     z-index: 999;
-    transform: translateX(-100%);
     transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
     display: flex;
     flex-direction: column;
-    border-top-right-radius: 20px;
-     border-bottom-right-radius: 20px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
 }
 
 .request-panel.open {
-    transform: translateX(0);
+    transform: translateX(-400px); /* Move panel to the left by its width */
 }
 
 .panel-overlay {
@@ -638,6 +714,152 @@ button {
     margin-top: auto; /* Push to bottom */
 }
 
+/* --- Theme Toggle Button Styles --- */
+#theme-toggle-btn {
+    display: inline-flex; /* Use flexbox to align items horizontally */
+    align-items: center; /* Vertically center icon and text */
+    gap: 6px; /* Add space between icon and text */
+    padding: 8px 12px; /* Adjust padding as needed */
+    border-radius: 20px;
+    /* Use existing variables for consistency */
+    border: 1px solid var(--nav-link-color);
+    color: var(--nav-link-color);
+    background-color: transparent; /* Explicitly set background */
+    font-size: 0.9rem; /* Base font size */
+    cursor: pointer;
+    /* Inherit transitions defined elsewhere or add specific ones */
+    transition: background-color var(--theme-transition-duration) ease,
+    color var(--theme-transition-duration) ease,
+    border-color var(--theme-transition-duration) ease;
+}
+
+#theme-toggle-btn:hover {
+    background-color: var(--nav-link-hover-bg);
+    border-color: var(--nav-link-active-color); /* Example hover effect */
+}
+
+#theme-toggle-btn .theme-icon {
+    line-height: 1; /* Helps prevent extra space around the icon */
+    /* Icon size can be adjusted via font-size on the button or here */
+}
+
+#theme-toggle-btn .theme-beta {
+    font-size: 0.75em; /* Make "BETA" slightly smaller */
+    font-weight: 500;
+    line-height: 1; /* Consistent line height */
+    opacity: 0.8; /* Make it slightly less prominent */
+}
+
+/* Ensure button is positioned correctly within the header flex layout */
+.site-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+    gap: 15px; /* Adjust gap if needed */
+}
+
+
+/* --- Content Area & Sections --- */
+.content-area {
+    flex-grow: 1;
+    position: relative;
+}
+
+
+.content-section.active {
+    display: flex;
+    opacity: 1;
+    z-index: 2;
+}
+
+.section-left, .section-right {
+    flex-basis: 25%;
+    padding: 0 20px;
+}
+
+.section-center {
+    flex-basis: 45%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative; /* For graphic/canvas overlay */
+}
+
+
+/* --- Skills Section Fix --- */
+#skills-section ul {
+    list-style: none;
+    padding: 20px 0;
+    font-size: 1.1rem;
+    /* Use text color variable */
+    color: var(--text-color);
+}
+
+/* --- Slide-Out Request Panel --- */
+#request-panel {
+    position: fixed;
+    top: 0;
+    /* Change from 'right: 0;' to 'left: 0;' */
+    left: 0;
+    width: 400px; /* Or your desired panel width */
+    max-width: 90%;
+    height: 100%;
+    /* Use a variable or specific color */
+    background: var(--panel-bg, linear-gradient(135deg, #ffffff 0%, #f0f5fb 100%));
+    box-shadow: -5px 0 25px rgba(0, 0, 0, 0.1); /* Shadow on the right side now */
+    z-index: 1002; /* Ensure it's above the overlay */
+    padding: 40px;
+    overflow-y: auto;
+    /* Change initial transform to be off-screen left */
+    transform: translateX(-100%);
+    transition: transform 0.4s ease-in-out; /* Smooth transition */
+    color: var(--text-color); /* Ensure text color contrasts with background */
+}
+
+#request-panel.open {
+    /* Slide it into view */
+    transform: translateX(0);
+}
+
+/* Optional: Style the overlay */
+#panel-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+    z-index: 1001; /* Below the panel but above content */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0s 0.4s linear;
+}
+
+#panel-overlay.active {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.4s ease;
+}
+
+/* Add styles for close button, form elements inside the panel as needed */
+#close-request-panel {
+    position: absolute;
+    top: 15px;
+    right: 15px; /* Position close button inside the panel */
+    font-size: 2rem;
+    color: var(--text-color);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    line-height: 1;
+}
+
+#close-request-panel:hover {
+    color: var(--primary-accent);
+}
 
 /* --- Responsive Adjustments --- */
 @media (max-width: 1200px) {
@@ -645,402 +867,7 @@ button {
         width: 95%;
         padding: 25px 35px;
     }
-     #home-section .section-left p,
-     #home-section .section-right h2,
-     .about-title {
-        font-size: calc(1.5rem + 1vw);
-    }
-    .center-letter {
-        font-size: 5rem;
-    }
-     .graphic-area { /* Adjust canvas height */
-        height: 400px;
-    }
-}
-
-@media (max-width: 992px) {
-    .site-header {
-        flex-direction: column;
-        align-items: center;
-        gap: 20px;
-        margin-bottom: 20px;
-    }
-    .main-nav ul {
-        gap: 15px;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-    .content-section {
-        flex-direction: column;
-        text-align: center;
-        gap: 20px; /* Reduced gap */
-        position: relative;
-        height: auto;
-        padding-bottom: 30px; /* Reduced padding */
-    }
-    .content-section.active {
-        position: relative;
-    }
-    .section-left, .section-center, .section-right {
-        flex-basis: 100%;
-        padding: 0 10px;
-        text-align: center;
-    }
-    #home-section .section-right h2 {
-        text-align: center;
-    }
-     .graphic-area { /* Adjust canvas height */
-        height: 350px;
-        margin-bottom: 20px; /* Add space below canvas */
-     }
-    .about-label-left {
-        writing-mode: horizontal-tb;
-        transform: none;
-        align-self: center;
-        margin-top: 0;
-        margin-bottom: 20px;
-        position: relative;
-        flex-basis: auto;
-    }
-    .about-center {
-        flex-basis: 100%;
-    }
-    .about-details {
-        flex-direction: column;
-        align-items: center;
-        gap: 25px;
-    }
-    .detail-item {
-        flex-basis: 80%;
-        max-width: 400px;
-        text-align: center;
-    }
-     .detail-item .line {
-        left: 50%;
-        transform: translateX(-50%);
-        width: 50%;
-     }
-     .detail-item .number {
-        position: relative;
-        top: auto; left: auto;
-        display: block;
-        margin-bottom: 5px;
-     }
-      #projects-section, #skills-section {
-            padding-top: 20px; /* Adjust padding */
-         }
-}
-
-@media (max-width: 768px) {
-    body {
-        padding: 0;
-    }
-     .page-wrapper {
-        padding: 10px;
-     }
-    .main-container {
-        width: 100%;
-        border-radius: 20px;
-        padding: 20px;
-        min-height: auto;
-    }
-     .logo {
-        font-size: 1.5rem;
-     }
-     .main-nav a {
-        font-size: 0.9rem;
-        padding: 6px 10px;
-     }
-     .request-btn, .send-request-btn {
-        font-size: 0.9rem;
-        padding: 10px 20px;
-     }
-     #home-section .section-left p,
-     #home-section .section-right h2,
-     .about-title {
-        font-size: calc(1.3rem + 1.5vw);
-    }
-    .center-letter {
-        font-size: 4rem;
-    }
-     .graphic-area { /* Adjust canvas height */
-        height: 300px;
-    }
-     .request-panel {
-        width: 90%;
-        border-radius: 0 15px 15px 0;
-     }
-     .preloader-content {
-        flex-direction: column;
-        gap: 30px;
-        width: 90%; /* Adjust width */
-     }
-     .preloader-letters {
-        font-size: 6rem;
-     }
-     .preloader-text-left {
-        text-align: center;
-        flex-basis: auto; /* Reset basis */
-     }
-
-}
-
-/* --- Responsive Styles --- */
-
-/* Tablet Breakpoint (Example: screens <= 992px) */
-@media (max-width: 992px) {
-    .main-container {
-        padding: 25px 30px;
-        width: 95%;
-    }
-
-    .site-header {
-        flex-wrap: wrap; /* Allow header items to wrap if needed */
-        margin-bottom: 20px;
-    }
-
-    .main-nav ul {
-        gap: 15px; /* Reduce gap between nav items */
-    }
-
-    .main-nav a, .request-btn {
-        font-size: 0.9rem; /* Slightly smaller text */
-        padding: 10px 20px;
-    }
 
     #home-section .section-left p,
-    #home-section .section-right h2 {
-        font-size: 1.5rem; /* Adjust font sizes */
-    }
-
-    .about-title {
-        font-size: 1.8rem;
-    }
-
-    .detail-item h3 {
-        font-size: 1.1rem;
-    }
-
-    .detail-item p {
-        font-size: 0.85rem;
-    }
-
-    .graphic-area {
-        height: 450px; /* Adjust canvas area height */
-    }
-
-    .center-letter {
-        font-size: 5rem;
-    }
-
-}
-
-/* Mobile Breakpoint (Example: screens <= 768px) */
-@media (max-width: 768px) {
-    body {
-        min-height: auto; /* Allow body height to adjust */
-        padding: 10px 0; /* Reduce padding around container */
-    }
-
-    .page-wrapper {
-        padding: 15px; /* Reduce wrapper padding */
-    }
-
-    .main-container {
-        padding: 20px 15px;
-        min-height: auto;
-        border-radius: 20px;
-    }
-
-    .site-header {
-        flex-direction: column; /* Stack header items */
-        align-items: center;
-        gap: 15px;
-    }
-
-    .main-nav {
-        width: 100%;
-    }
-
-    .main-nav ul {
-        justify-content: center; /* Center nav items */
-        flex-wrap: wrap; /* Allow nav items to wrap */
-        gap: 10px;
-    }
-
-    .main-nav a {
-        padding: 8px 12px;
-    }
-
-    .request-btn {
-        margin-top: 10px;
-    }
-
-    .content-section {
-        flex-direction: column; /* Stack main layout columns */
-        align-items: center; /* Center items when stacked */
-        text-align: center; /* Center text within sections */
-        position: relative; /* Change from absolute for stacking */
-        opacity: 1; /* Ensure sections are visible if display:flex is changed */
-        display: none; /* Keep original hide/show logic */
-        padding: 10px 0;
-        height: auto; /* Allow height to adjust to content */
-    }
-
-    /* Override absolute positioning for active section */
-    .content-section.active {
-        display: flex; /* Keep this for the active section */
-        position: relative;
-        opacity: 1;
-    }
-
-
-    .section-left, .section-center, .section-right {
-        flex-basis: 100%; /* Make columns full width */
-        padding: 15px 0; /* Adjust padding */
-        text-align: center;
-    }
-
-    #home-section .section-right h2 {
-        text-align: center; /* Center right section text */
-    }
-
-
-    .graphic-area {
-        height: 300px; /* Smaller graphic area */
-        order: 2; /* Change order if needed, e.g., put graphic below text */
-    }
-
-    .graphic-content {
-        position: relative; /* Make overlay relative within the centered column */
-        transform: none;
-        top: auto;
-        left: auto;
-        margin-top: 15px; /* Space below canvas if graphic is first */
-    }
-
-    /* Or adjust if canvas is below text */
-    #home-section .section-center {
-        order: 1; /* Example: Put text above graphic */
-    }
-
-    #home-section .section-left {
-        order: 0;
-    }
-
-    #home-section .section-right {
-        order: 2;
-    }
-
-    .graphic-area {
-        order: 1;
-    }
-
-    /* Adjust graphic order */
-    .graphic-content {
-        order: 1;
-        margin-top: 0;
-        margin-bottom: 15px;
-    }
-
-    /* Ensure graphic content stays with graphic */
-    .center-letter {
-        font-size: 4rem;
-    }
-
-    .graphic-subtext {
-        font-size: 0.8rem;
-    }
-
-
-    /* About Section Adjustments */
-    .about-label-left {
-        writing-mode: horizontal-tb; /* Normal text flow */
-        transform: none;
-        align-self: center;
-        margin-top: 0;
-        margin-bottom: 15px;
-        flex-basis: auto;
-    }
-
-    .about-center {
-        flex-basis: 100%;
-        padding: 0 10px; /* Add some padding */
-    }
-
-    .about-details {
-        flex-direction: column; /* Stack detail items */
-        align-items: center;
-        gap: 20px;
-        padding: 0;
-    }
-
-    .detail-item {
-        flex-basis: 100%; /* Full width */
-        max-width: 350px; /* Limit width for readability */
-        text-align: center;
-        padding-top: 25px;
-    }
-
-    .detail-item .number {
-        left: 50%;
-        transform: translateX(-50%); /* Center the number */
-    }
-
-    .detail-item .line {
-        left: 50%;
-        transform: translateX(-50%); /* Center the line */
-        width: 50%;
-    }
-
-    /* Placeholder Sections Adjustments */
-    .placeholder-section h2 {
-        font-size: 1.6rem;
-    }
-
-    .placeholder-section p {
-        font-size: 0.9rem;
-    }
-
-    .projects-grid {
-        grid-template-columns: 1fr; /* Stack project cards */
-        gap: 15px;
-        padding: 0 10px;
-    }
-
-    .project-card {
-        text-align: left; /* Align card text left */
-    }
-}
-
-/* Optional: Smaller Mobile Breakpoint (Example: screens <= 480px) */
-@media (max-width: 480px) {
-    .logo {
-        font-size: 1.5rem;
-    }
-
-    #home-section .section-left p,
-    #home-section .section-right h2 {
-        font-size: 1.3rem; /* Further reduce text size */
-    }
-
-    .center-letter {
-        font-size: 3rem;
-    }
-
-    .graphic-area {
-        height: 250px;
-    }
-
-    .about-title {
-        font-size: 1.5rem;
-    }
-
-    .placeholder-section h2 {
-        font-size: 1.4rem;
-    }
-
-    .placeholder-section ul {
-        padding: 10px 0
-    }
+    #home-
 }

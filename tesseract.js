@@ -1,4 +1,5 @@
 // tesseract.js
+let tesseractMaterial; // <-- Make material variable accessible in a wider scope
 
 document.addEventListener('DOMContentLoaded', () => {
     const container = document.getElementById('canvas-container');
@@ -68,12 +69,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const positions = new Float32Array(edges.length * 2 * 3);
         geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
 
-        // *** UPDATED COLOR HERE ***
-        const material = new THREE.LineBasicMaterial({
-            color: 0x000000, // Black lines
-            linewidth: 1 // Linewidth > 1 might not work reliably
+        // Initialize with the default (light theme) color
+        tesseractMaterial = new THREE.LineBasicMaterial({ // <-- Assign to the wider scope variable
+            // ** Set initial color using CSS variable or default **
+            // We'll set it dynamically from script.js after checking theme
+            color: 0x000000, // Default light theme color
+            linewidth: 1 
         });
-        tesseractLines = new THREE.LineSegments(geometry, material);
+        tesseractLines = new THREE.LineSegments(geometry, tesseractMaterial); // <-- Use the variable
         scene.add(tesseractLines);
 
         // Event Listeners
@@ -85,6 +88,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
         animate();
     }
+
+    // --- Function to update color --- Add this function ---
+    window.updateTesseractColor = (hexColor) => {
+        if (tesseractMaterial) {
+            tesseractMaterial.color.setHex(hexColor);
+        } else {
+            // Optionally wait or queue if called before init
+            console.warn("Tesseract material not initialized yet for color update.");
+        }
+    };
 
     // --- 4D Projection and Rotation ---
     function projectAndRotate4D(point4D, angleXW, angleYZ) {
@@ -204,6 +217,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // --- Run ---
-    init();
+    init(); // Call init at the end of DOMContentLoaded
 
-});
+}); // End of DOMContentLoaded listener

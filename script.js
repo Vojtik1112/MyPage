@@ -1,5 +1,5 @@
 // script.js
-// (Handles preloader, navigation, slide-out panel)
+// (Handles preloader, navigation, slide-out panel, AND THEME TOGGLE)
 
 document.addEventListener('DOMContentLoaded', () => {
     const preloader = document.getElementById('preloader');
@@ -10,6 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeRequestPanelBtn = document.getElementById('close-request-panel');
     const requestPanel = document.getElementById('request-panel');
     const panelOverlay = document.getElementById('panel-overlay');
+    const themeToggleBtn = document.getElementById('theme-toggle-btn');
+    const body = document.body;
 
     // --- Preloader Logic ---
     const letters = {
@@ -83,7 +85,14 @@ document.addEventListener('DOMContentLoaded', () => {
     function closePanel() {
         requestPanel.classList.remove('open');
         panelOverlay.classList.remove('active');
-        document.body.style.overflow = '';
+        document.body.style.overflow = ''; // Restore default overflow
+
+        // Give time for the panel animation to complete before enabling scroll
+        setTimeout(() => {
+            if (!requestPanel.classList.contains('open')) {
+                document.body.style.overflow = '';
+            }
+        }, 400); // Match the transition duration
     }
 
     if (openRequestPanelBtn) {
@@ -101,4 +110,65 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-});
+
+    // --- Theme Toggle Logic ---
+    const lightModeIcon = '☀️';
+    const darkModeIcon = '🌙';
+    const lightTesseractColor = 0x000000; // Black (match CSS --tesseract-line-color light)
+    const darkTesseractColor = 0xcccccc;  // Light grey (match CSS --tesseract-line-color dark)
+
+    function applyTheme(theme) {
+        if (theme === 'dark') {
+            body.classList.add('dark-mode');
+            if (themeToggleBtn) themeToggleBtn.textContent = lightModeIcon + ' BETA'; // Show sun icon + BETA
+            // Update tesseract color if the function exists (i.e., tesseract.js loaded)
+            if (typeof window.updateTesseractColor === 'function') {
+                window.updateTesseractColor(darkTesseractColor);
+            }
+            localStorage.setItem('theme', 'dark');
+        } else {
+            body.classList.remove('dark-mode');
+            if (themeToggleBtn) themeToggleBtn.textContent = darkModeIcon + ' BETA'; // Show moon icon + BETA
+            if (typeof window.updateTesseractColor === 'function') {
+                window.updateTesseractColor(lightTesseractColor);
+            }
+            localStorage.setItem('theme', 'light');
+        }
+    }
+
+    function toggleTheme() {
+        if (body.classList.contains('dark-mode')) {
+            applyTheme('light');
+        } else {
+            applyTheme('dark');
+        }
+    }
+
+    if (themeToggleBtn) {
+        themeToggleBtn.addEventListener('click', toggleTheme);
+    }
+
+    // --- Initial Theme Load ---
+    // Check local storage first, then system preference
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    if (savedTheme) {
+        applyTheme(savedTheme);
+    } else if (prefersDark) {
+        applyTheme('dark');
+    } else {
+        applyTheme('light'); // Default to light
+    }
+
+    // Optional: Listen for system preference changes
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+        // Only change if no theme is explicitly saved by the user
+        if (!localStorage.getItem('theme')) {
+            applyTheme(event.matches ? 'dark' : 'light');
+        }
+    });
+    // --- End Theme Toggle Logic ---
+
+
+}); // End of DOMContentLoaded

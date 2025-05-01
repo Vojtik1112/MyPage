@@ -6,7 +6,7 @@
     <title>Vojtěch Novák - IT Student Portfolio</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="icon" href="favicon.png" type="image/png">
+    <link href="assets/favicon.png" rel="icon" type="image/png">
     <!-- Add Three.js library (Using CDN) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
@@ -93,6 +93,11 @@
                         <li><a href="#skills" class="nav-link" data-target="skills-section">Skills</a></li>
                     </ul>
                 </nav>
+                <!-- Moved the theme toggle button here -->
+                <button aria-label="Toggle theme" id="theme-toggle-btn">
+                    <span class="theme-icon"></span> <span class="theme-beta">BETA</span>
+                </button>
+
                 <button class="request-btn" id="open-request-panel">
                     Get in Touch <span class="arrow">→</span>
                 </button>
@@ -185,16 +190,17 @@
 
                 <!-- Skills Section -->
                 <section id="skills-section" class="content-section placeholder-section">
-                     <h2>Technical Skills</h2>
-                     <p>Technologies I'm currently learning and using in my projects:</p>
-                      <ul style="list-style: none; padding: 20px 0; font-size: 1.1rem; color: #333;">
-                          <li>C++</li>
-                          <li>C#</li>
-                          <li>Artificial Intelligence (Concepts/Basic Implementation)</li>
-                          <li>Unreal Engine</li>
-                          <li>Git / GitHub</li>
-                      </ul>
-                     <!-- REMOVED Graphic Area -->
+                    <h2>Technical Skills</h2>
+                    <p>Technologies I'm currently learning and using in my projects:</p>
+                    <!-- REMOVED inline style="... color: #333;" -->
+                    <ul style="list-style: none; padding: 20px 0; font-size: 1.1rem;">
+                        <li>C++</li>
+                        <li>C#</li>
+                        <li>Artificial Intelligence (Concepts/Basic Implementation)</li>
+                        <li>Unreal Engine</li>
+                        <li>Git / GitHub</li>
+                    </ul>
+                    <!-- REMOVED Graphic Area -->
                 </section>
 
             </main>
@@ -204,21 +210,35 @@
                 <button class="close-panel-btn" id="close-request-panel">×</button>
                 <div class="panel-content">
                     <h3>Contact Me</h3>
-                    <p style="color: #555; margin-bottom: 25px; font-size: 0.95rem;">Feel free to reach out or connect with me online:</p>
+                    <!-- REMOVED inline style="color: #555; ..." -->
+                    <p style="margin-bottom: 25px; font-size: 0.95rem;">Feel free to reach out or connect with me
+                        online:</p>
 
+                    <!-- REMOVED inline style="..." -->
                     <div style="margin-bottom: 15px;">
-                        <strong style="color: #1a2a4a;">Email:</strong><br>
-                        <a href="mailto:vojtechnovak84@gmail.com" style="color: #0077ff; text-decoration: none;">vojtechnovak84@gmail.com</a>
+                        <!-- REMOVED inline style="color: #1a2a4a;" -->
+                        <strong>Email:</strong><br>
+                        <!-- REMOVED inline style="color: #0077ff; ..." -->
+                        <a href="mailto:vojtechnovak84@gmail.com" style="text-decoration: none;">vojtechnovak84@gmail.com</a>
                     </div>
+                    <!-- REMOVED inline style="..." -->
                      <div style="margin-bottom: 15px;">
-                        <strong style="color: #1a2a4a;">GitHub:</strong><br>
-                        <a href="https://github.com/Vojtik1112" target="_blank" rel="noopener noreferrer" style="color: #0077ff; text-decoration: none;">github.com/Vojtik1112</a>
+                         <!-- REMOVED inline style="color: #1a2a4a;" -->
+                         <strong>GitHub:</strong><br>
+                         <!-- REMOVED inline style="color: #0077ff; ..." -->
+                         <a href="https://github.com/Vojtik1112" rel="noopener noreferrer" style="text-decoration: none;"
+                            target="_blank">github.com/Vojtik1112</a>
                     </div>
+                    <!-- REMOVED inline style="..." -->
                      <div style="margin-bottom: 15px;">
-                        <strong style="color: #1a2a4a;">Instagram:</strong><br>
-                        <a href="https://www.instagram.com/schizvojta/?next=%2F" target="_blank" rel="noopener noreferrer" style="color: #0077ff; text-decoration: none;">@schizvojta</a>
+                         <!-- REMOVED inline style="color: #1a2a4a;" -->
+                         <strong>Instagram:</strong><br>
+                         <!-- REMOVED inline style="color: #0077ff; ..." -->
+                         <a href="https://www.instagram.com/schizvojta/?next=%2F" rel="noopener noreferrer"
+                            style="text-decoration: none;" target="_blank">@schizvojta</a>
                     </div>
 
+                    <!-- REMOVED inline style="..." -->
                     <p class="legal-text" style="margin-top: auto;">
                         Connecting with others passionate about technology.
                     </p>
@@ -238,7 +258,7 @@
     <audio
             id="background-music"
             preload="auto"
-            src="song.mp3"
+            src="assets/song.mp3"
     ></audio>
 </body>
 </html>
