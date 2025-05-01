@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fd7f821a-f96c-4dc7-82a6-b5432aca8538" name="Changes" comment="Add project files and update layout and scripts&#10;&#10;Introduce project-specific IDE configurations under `.idea/`. Revise `index.html` to showcase updated project details and implement changes to `script.js` and `tesseract.js` for improved functionality. Clean up unused variables and refine layout for better user experience.">
+    <list default="true" id="fd7f821a-f96c-4dc7-82a6-b5432aca8538" name="Changes" comment="Update project files and improve layout and responsiveness&#10;&#10;Refined layout and styling in `style.css` with new responsive designs, targeting various screen sizes. Revised project-specific configurations under `.idea/`, updated `index.html`, and optimized scripts for functionality and readability. These changes enhance user experience and adapt the application to be more mobile-friendly.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/script.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,27 +39,27 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="SIGN_OFF_COMMIT" value="true" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "Vojtik1112"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Vojtik1112&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/Vojtik1112/MyPage.git",
-    "accountId": "28c9a0e4-c864-4c8a-9d8e-7d39c545c50a"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Vojtik1112/MyPage.git&quot;,
+    &quot;accountId&quot;: &quot;28c9a0e4-c864-4c8a-9d8e-7d39c545c50a&quot;
   }
-}]]></component>
+}</component>
   <component name="MaliciousPackageCheckinHandlerState">
     <option name="packageCheck" value="true" />
   </component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="ProjectErrors" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 4
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
   <component name="ProjectId" id="2wUkwoImbqmobxxAWW3ufGmSuzX" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -67,28 +68,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "DefaultHtmlFileTemplate": "HTML File",
-    "JavaScript Debug.index.html.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "junie.onboarding.icon.badge.shown": "true",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "ml.llm.LLMConfigurable",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;JavaScript Debug.index.html.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;ml.llm.LLMConfigurable&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -103,7 +104,9 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1746103781247</updated>
-      <workItem from="1746103783048" duration="4700000" />
+      <workItem from="1746103783048" duration="4763000" />
+      <workItem from="1746135214777" duration="11000" />
+      <workItem from="1746135279886" duration="375000" />
     </task>
     <task id="LOCAL-00001" summary="Update styles and layout; add IDE workspace config&#10;&#10;Increased height of graphic area in HTML for better layout. Changed text colors to black and removed shadows in CSS for improved readability. Added `.idea/workspace.xml` for local IDE configuration.">
       <option name="closed" value="true" />
@@ -129,7 +132,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746107289004</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Update project files and improve layout and responsiveness&#10;&#10;Refined layout and styling in `style.css` with new responsive designs, targeting various screen sizes. Revised project-specific configurations under `.idea/`, updated `index.html`, and optimized scripts for functionality and readability. These changes enhance user experience and adapt the application to be more mobile-friendly.">
+      <option name="closed" value="true" />
+      <created>1746108569892</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1746108569892</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -154,9 +165,10 @@
     <MESSAGE value="Rename favicon.ico to favicon.png" />
     <MESSAGE value="Update styles and layout; add IDE workspace config&#10;&#10;Increased height of graphic area in HTML for better layout. Changed text colors to black and removed shadows in CSS for improved readability. Added `.idea/workspace.xml` for local IDE configuration." />
     <MESSAGE value="Add project pages, styles, and scripts for new projects&#10;&#10;This commit creates new components for &quot;Project 2&quot; and &quot;Project 3.&quot; It includes a CSS file for consistent styling, HTML structures for both projects, and JavaScript functionalities for forms and keyboard interaction. Additionally, modifies the main index.html to showcase these projects with a grid layout." />
-    <MESSAGE value="Merge remote-tracking branch 'origin/main'" />
     <MESSAGE value="Add project files and update layout and scripts&#10;&#10;Introduce project-specific IDE configurations under `.idea/`. Revise `index.html` to showcase updated project details and implement changes to `script.js` and `tesseract.js` for improved functionality. Clean up unused variables and refine layout for better user experience." />
-    <option name="LAST_COMMIT_MESSAGE" value="Add project files and update layout and scripts&#10;&#10;Introduce project-specific IDE configurations under `.idea/`. Revise `index.html` to showcase updated project details and implement changes to `script.js` and `tesseract.js` for improved functionality. Clean up unused variables and refine layout for better user experience." />
+    <MESSAGE value="Merge remote-tracking branch 'origin/main'" />
+    <MESSAGE value="Update project files and improve layout and responsiveness&#10;&#10;Refined layout and styling in `style.css` with new responsive designs, targeting various screen sizes. Revised project-specific configurations under `.idea/`, updated `index.html`, and optimized scripts for functionality and readability. These changes enhance user experience and adapt the application to be more mobile-friendly." />
+    <option name="LAST_COMMIT_MESSAGE" value="Update project files and improve layout and responsiveness&#10;&#10;Refined layout and styling in `style.css` with new responsive designs, targeting various screen sizes. Revised project-specific configurations under `.idea/`, updated `index.html`, and optimized scripts for functionality and readability. These changes enhance user experience and adapt the application to be more mobile-friendly." />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />

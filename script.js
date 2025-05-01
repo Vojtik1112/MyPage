@@ -33,18 +33,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Hide preloader after animations
     setTimeout(() => {
-        if (preloader) { // Check if preloader still exists
+        if (preloader) {
             preloader.classList.add('hidden');
         }
-        if (pageWrapper) { // Check if pageWrapper exists
+        if (pageWrapper) {
             pageWrapper.classList.add('visible');
         }
+
+        // START MUSIC AFTER INTRO
+        const bgMusic = document.getElementById('background-music');
+        if (bgMusic) {
+            bgMusic.play().catch(err => {
+                // Autoplay might be blocked; you could show a “▶” button instead
+                console.warn('Audio play failed:', err);
+            });
+        }
+
         // Clean up preloader from DOM after transition
         setTimeout(() => {
             if (preloader && preloader.parentNode) {
                 preloader.parentNode.removeChild(preloader);
             }
-        }, 800); // Match preloader transition duration
+        }, 800);
     }, 1800); // Adjusted timeout duration for fewer letters
 
     // --- Navigation Logic ---
