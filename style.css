@@ -345,17 +345,17 @@ button {
 .center-letter {
     font-size: 6rem;
     font-weight: 700;
-    color: #fff; /* White letter */
+    color: #000; /* Changed to Black letter */
     line-height: 1;
     margin-bottom: 10px;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); /* Stronger shadow */
+    /* text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); /* Removed shadow */
 }
 
 .graphic-subtext {
     font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.9); /* More opaque text */
+    color: #000; /* Changed to Black text */
     line-height: 1.5;
-     text-shadow: 0 1px 5px rgba(0, 0, 0, 0.2); /* Slight shadow */
+    /* text-shadow: 0 1px 5px rgba(0, 0, 0, 0.2); /* Removed shadow */
 }
 
 /* --- About Section Specifics --- */
