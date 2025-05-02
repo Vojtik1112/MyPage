@@ -25,6 +25,10 @@
     --card-shadow: 0 8px 25px rgba(0, 80, 160, 0.08); /* Card shadow */
     --card-hover-shadow: 0 12px 35px rgba(0, 80, 160, 0.12); /* Card hover shadow */
     --link-arrow-color: #0077ff; /* Arrow color on cards/buttons */
+    --preloader-text-color: #556a8f; /* Use a variable for preloader text */
+    --preloader-logo-color: #1a2a4a; /* Use a variable for preloader logo */
+    --error-bg-color: #ffebee; /* Light red background for errors */
+    --error-text-color: #c62828; /* Dark red text for errors */
     /* --- Add more variables for other colors you use --- */
 
     /* Timing for smooth transition */
@@ -53,6 +57,10 @@ body.dark-mode {
     --card-shadow: 0 8px 25px rgba(0, 0, 0, 0.2); /* Darker shadow */
     --card-hover-shadow: 0 12px 35px rgba(0, 0, 0, 0.3); /* Darker hover shadow */
     --link-arrow-color: #4d94ff; /* Brighter arrow color */
+    --preloader-text-color: #a0a0cc; /* Lighter preloader text */
+    --preloader-logo-color: #c0c0ff; /* Lighter preloader logo */
+    --error-bg-color: #3e2723; /* Dark red background for errors */
+    --error-text-color: #ef9a9a; /* Light red text for errors */
 
     /* --- Override other variables as needed --- */
 }
@@ -97,7 +105,7 @@ button {
 }
 
 /* --- Add transitions for theme-affected preloader elements --- */
-.preloader, .preloader-content, .preloader-text-left, .preloader-letters .letter, .preloader-letters .subtext {
+.preloader, .preloader-content, .preloader-text-left, .preloader-letters .letter, .preloader-letters .subtext, .preloader-line {
     transition: background-color var(--theme-transition-duration) ease,
     color var(--theme-transition-duration) ease;
 }
@@ -137,7 +145,7 @@ button {
 .preloader-text-left {
     font-size: 1.2rem;
     /* Use variable for text color */
-    color: var(--section-subtitle-color);
+    color: var(--preloader-text-color);
     line-height: 1.6;
     flex-basis: 25%;
     text-align: left;
@@ -151,7 +159,7 @@ button {
     font-size: 10rem;
     font-weight: 600;
     /* Use variable for main letter color */
-    color: var(--header-logo-color);
+    color: var(--preloader-logo-color);
     position: relative;
 }
 
@@ -167,7 +175,7 @@ button {
     font-size: 0.8rem;
     font-weight: 400;
     /* Use variable for subtext color */
-    color: var(--nav-link-color);
+    color: var(--preloader-text-color); /* Match side text color */
     position: absolute;
     top: 10px;
     right: -50px;
@@ -421,8 +429,8 @@ button {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    color: #003366; /* Dark blue text over graphic */
-     /* pointer-events: none; Added inline for reliability */
+    color: var(--tesseract-text-color); /* Use variable */
+    pointer-events: none; /* Prevent blocking canvas interaction */
 }
 
 /* Removed percentage container styles */
@@ -797,6 +805,28 @@ button {
     display: none;
 }
 
+/* --- Audio Error Message Styles --- */
+.audio-error {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--error-bg-color);
+    color: var(--error-text-color);
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1010; /* Above most elements */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0s 0.3s linear;
+}
+
+.audio-error.visible {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s ease;
+}
 
 /* --- Skills Section Fix --- */
 .skills-list { /* Target specifically */

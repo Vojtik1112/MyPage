@@ -11,12 +11,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const requestPanel = document.getElementById('request-panel');
     const panelOverlay = document.getElementById('panel-overlay');
     const themeToggleBtn = document.getElementById('theme-toggle-btn');
+    // The theme toggle button is expected to contain a child element with the class '.theme-icon' to display the current theme icon.
+    const themeIconSpan = themeToggleBtn ? themeToggleBtn.querySelector('.theme-icon') : null;
     const body = document.body;
     const bgMusic = document.getElementById('background-music'); // Get audio element
     const audioToggleBtn = document.getElementById('audio-toggle-btn'); // Get audio button
     const playIcon = document.getElementById('play-icon');
     const pauseIcon = document.getElementById('pause-icon');
     const panelFirstFocusable = document.getElementById('panel-first-focusable'); // First focusable element in panel
+    const audioErrorMessage = document.getElementById('audio-error-message'); // Get error message div
 
     let elementToFocusOnPanelClose = null; // To store the element that opened the panel
 
@@ -140,7 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function applyTheme(theme) {
         if (theme === 'dark') {
             body.classList.add('dark-mode');
-            if (themeToggleBtn) themeToggleBtn.textContent = lightModeIcon + ' BETA'; // Show sun icon + BETA
+            if (themeIconSpan) themeIconSpan.textContent = lightModeIcon; // Show sun icon
             // Update tesseract color if the function exists (i.e., tesseract.js loaded)
             if (typeof window.updateTesseractColor === 'function') {
                 window.updateTesseractColor(darkTesseractColor);
@@ -148,7 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
             localStorage.setItem('theme', 'dark');
         } else {
             body.classList.remove('dark-mode');
-            if (themeToggleBtn) themeToggleBtn.textContent = darkModeIcon + ' BETA'; // Show moon icon + BETA
+            if (themeIconSpan) themeIconSpan.textContent = darkModeIcon; // Show moon icon
             if (typeof window.updateTesseractColor === 'function') {
                 window.updateTesseractColor(lightTesseractColor);
             }
@@ -193,6 +196,11 @@ document.addEventListener('DOMContentLoaded', () => {
     function toggleAudio() {
         if (!bgMusic) return;
 
+        // Hide any previous error messages
+        if (audioErrorMessage) {
+            audioErrorMessage.classList.remove('visible');
+        }
+
         if (bgMusic.paused) {
             bgMusic.play().then(() => {
                 // Update button on successful play
@@ -202,12 +210,21 @@ document.addEventListener('DOMContentLoaded', () => {
             }).catch(err => {
                 console.warn('Audio play failed:', err);
                 // Provide user feedback that play failed
-                const errorMessage = document.getElementById('audio-error-message');
-                if (errorMessage) {
-                    errorMessage.textContent = 'Unable to play audio. Please check your settings.';
-                    errorMessage.classList.add('visible');
-                    setTimeout(() => errorMessage.classList.remove('visible'), 5000); // Hide after 5 seconds
+                if (audioErrorMessage) {
+                    // Check for NotAllowedError which often indicates user interaction needed
+                    if (err.name === 'NotAllowedError') {
+                         audioErrorMessage.textContent = 'Audio playback requires user interaction first. Try clicking anywhere on the page.';
+                    } else {
+                         audioErrorMessage.textContent = 'Unable to play audio. Please check browser settings.';
+                    }
+                    audioErrorMessage.classList.add('visible');
+                    // Hide after 5 seconds
+                    setTimeout(() => audioErrorMessage.classList.remove('visible'), 5000);
                 }
+                // Ensure button reflects paused state if play failed
+                playIcon.classList.remove('hidden');
+                pauseIcon.classList.add('hidden');
+                audioToggleBtn.setAttribute('aria-label', 'Play background music');
             });
         } else {
             bgMusic.pause();

@@ -6,7 +6,10 @@ Welcome to **MyPage**, my personal webpage repository! This project serves as th
 
 - **HTML**: Structure of the webpage.
 - **CSS**: Styling for an elegant and responsive design.
-- **JavaScript**: Dynamic interaction and functionality.
+- **JavaScript**: Dynamic interaction, navigation, preloader, and panel logic.
+- **Three.js**: Interactive 4D Tesseract animation on the homepage.
+- **Theme Toggle**: Switch between light and dark modes (BETA).
+- **Background Audio**: Optional background music with play/pause controls.
 
 ## 🚀 How to Use
 
@@ -21,7 +24,8 @@ Welcome to **MyPage**, my personal webpage repository! This project serves as th
 
 - `index.html`: The main HTML file for the webpage.
 - `style.css`: The CSS file for styling the webpage.
-- `script.js`: The JavaScript file for adding interactivity.
+- `script.js`: The main JavaScript file (navigation, theme, audio, panel, preloader).
+- `tesseract.js`: The JavaScript file for the Three.js Tesseract animation.
 - `assets/`: Contains images, fonts, and other assets (like `favicon.png`, `song.mp3`).
 - `projects/`: Contains subdirectories for individual projects (`project1`, `project2`, `project3`).
 
@@ -36,6 +40,7 @@ This repository is a personal project to develop and maintain my personal webpag
 - **HTML (53.1%)**
 - **CSS (26.1%)**
 - **JavaScript (20.8%)**
+- **Three.js** (via CDN)
 
 ## 📜 License
 

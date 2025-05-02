@@ -75,7 +75,9 @@
           </nav>
           <!-- Moved the theme toggle button here -->
           <button aria-label="Toggle theme" id="theme-toggle-btn">
-            <span class="theme-icon"></span>
+            <!-- Default content for initial load/no JS -->
+            <span class="theme-icon">🌙</span>
+            <!-- Default to moon (light theme) -->
             <span class="theme-beta">BETA</span>
           </button>
 
@@ -134,7 +136,11 @@
               <canvas id="tesseract-canvas"></canvas>
 
               <!-- Content Over Canvas -->
-              <div class="graphic-content home-graphic-content">
+              <!-- Added inline style to prevent blocking canvas interaction -->
+              <div
+                class="graphic-content home-graphic-content"
+                style="pointer-events: none"
+              >
                 <div class="center-letter">VN</div>
                 <p class="graphic-subtext">
                   Exploring the world of technology<br />and building practical
@@ -247,6 +253,8 @@
             <h2>Technical Skills</h2>
             <p>Technologies I'm currently learning and using in my projects:</p>
             <ul class="skills-list">
+              <li>HTML, CSS, JavaScript</li>
+              <!-- Added web basics -->
               <li>C++</li>
               <li>C#</li>
               <li>Artificial Intelligence (Concepts/Basic Implementation)</li>
@@ -304,6 +312,8 @@
           </div>
         </aside>
         <div class="panel-overlay" id="panel-overlay" aria-hidden="true"></div>
+        <!-- Added audio error message container -->
+        <div id="audio-error-message" class="audio-error"></div>
       </div>
     </div>
 
