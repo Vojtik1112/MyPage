@@ -13,55 +13,7 @@
     <!-- Add Three.js library (Using CDN) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
-    <!-- Inline style for canvas container and section adjustments -->
-    <style>
-      /* Ensure canvas container has defined size and position */
-      .graphic-area {
-        position: relative; /* Already set */
-        width: 100%; /* Already set */
-        height: 520px; /* MODIFIED - Increased height */
-        display: flex; /* Already set */
-        justify-content: center; /* Already set */
-        align-items: center; /* Already set */
-        overflow: hidden; /* Hide parts of canvas if needed */
-      }
-      #tesseract-canvas {
-        display: block; /* Remove extra space below canvas */
-        width: 100%;
-        height: 100%;
-        cursor: grab; /* Indicate interactivity */
-      }
-      #tesseract-canvas:active {
-        cursor: grabbing;
-      }
-
-      /* Remove graphic from other sections */
-      #about-section .graphic-area,
-      #projects-section .graphic-area,
-      #skills-section .graphic-area {
-        display: none; /* Hide the graphic area in other sections */
-      }
-      /* Adjust layout if hiding graphic area causes issues */
-      #about-section .about-center {
-        /* Remove margin-bottom if graphic area is hidden */
-        margin-bottom: 0;
-        padding-top: 20px; /* Add some space if needed */
-      }
-      #projects-section,
-      #skills-section {
-        /* Add padding if needed to compensate for removed graphic */
-        padding-bottom: 50px;
-        padding-top: 30px; /* Ensure consistent spacing */
-      }
-      /* Ensure overlay text is clickable */
-      .graphic-content {
-        pointer-events: none; /* Allows clicks/drags to pass through to the canvas */
-      }
-      .graphic-content * {
-        /* Make sure children don't block either */
-        pointer-events: none;
-      }
-    </style>
+    <!-- Inline style moved to external stylesheet -->
   </head>
   <body>
     <!-- Preloader -->
@@ -79,7 +31,6 @@
           <div class="letter" id="letter-b">
             N <span class="subtext">Novák</span>
           </div>
-          <!-- Removed letter-d and letter-c2 -->
         </div>
         <div class="preloader-line"></div>
       </div>
@@ -98,6 +49,7 @@
                   href="#home"
                   class="nav-link active"
                   data-target="home-section"
+                  aria-current="page"
                   >Home</a
                 >
               </li>
@@ -125,6 +77,40 @@
           <button aria-label="Toggle theme" id="theme-toggle-btn">
             <span class="theme-icon"></span>
             <span class="theme-beta">BETA</span>
+          </button>
+
+          <!-- Added Audio Controls -->
+          <button
+            id="audio-toggle-btn"
+            class="audio-control-btn"
+            aria-label="Play background music"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-play-fill"
+              viewBox="0 0 16 16"
+              id="play-icon"
+            >
+              <path
+                d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393"
+              />
+            </svg>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-pause-fill hidden"
+              viewBox="0 0 16 16"
+              id="pause-icon"
+            >
+              <path
+                d="M5.5 3.5A1.5 1.5 0 0 1 7 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5m5 0A1.5 1.5 0 0 1 12 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5"
+              />
+            </svg>
           </button>
 
           <button class="request-btn" id="open-request-panel">
@@ -165,13 +151,16 @@
           </section>
 
           <!-- About Section -->
-          <section id="about-section" class="content-section">
+          <section
+            id="about-section"
+            class="content-section"
+            aria-hidden="true"
+          >
             <div class="section-left about-label-left">About Me</div>
             <div class="section-center about-center">
               <h2 class="about-title">
                 My Learning Journey<br />in Information Technology
               </h2>
-              <!-- REMOVED Graphic Area -->
               <div class="about-details">
                 <div class="detail-item">
                   <span class="number">.01</span>
@@ -211,13 +200,13 @@
           <section
             id="projects-section"
             class="content-section placeholder-section"
+            aria-hidden="true"
           >
             <h2>My Projects</h2>
             <p>
               Here are some of the school projects I've worked on as part of my
               IT studies. Check out my GitHub for code examples!
             </p>
-            <!-- REMOVED Graphic Area -->
 
             <!-- Added Project Cards Grid -->
             <div class="projects-grid">
@@ -253,11 +242,10 @@
           <section
             id="skills-section"
             class="content-section placeholder-section"
+            aria-hidden="true"
           >
             <h2>Technical Skills</h2>
             <p>Technologies I'm currently learning and using in my projects:</p>
-            <!-- REMOVED inline style="... color: #333;" -->
-            <!-- Use CSS variables for color -->
             <ul class="skills-list">
               <li>C++</li>
               <li>C#</li>
@@ -265,34 +253,34 @@
               <li>Unreal Engine</li>
               <li>Git / GitHub</li>
             </ul>
-            <!-- REMOVED Graphic Area -->
           </section>
         </main>
 
         <!-- Contact Panel -->
-        <aside class="request-panel" id="request-panel">
-          <button class="close-panel-btn" id="close-request-panel">×</button>
+        <aside class="request-panel" id="request-panel" aria-hidden="true">
+          <button
+            class="close-panel-btn"
+            id="close-request-panel"
+            aria-label="Close contact panel"
+          >
+            ×
+          </button>
           <div class="panel-content">
             <h3>Contact Me</h3>
-            <!-- Removed inline style -->
             <p class="panel-intro">
               Feel free to reach out or connect with me online:
             </p>
 
-            <!-- Removed inline style -->
             <div class="contact-item">
-              <!-- Removed inline style -->
               <strong>Email:</strong><br />
-              <!-- Removed inline style -->
-              <a href="mailto:vojtechnovak84@gmail.com"
+              <a
+                href="mailto:vojtechnovak84@gmail.com"
+                id="panel-first-focusable"
                 >vojtechnovak84@gmail.com</a
               >
             </div>
-            <!-- Removed inline style -->
             <div class="contact-item">
-              <!-- Removed inline style -->
               <strong>GitHub:</strong><br />
-              <!-- Removed inline style -->
               <a
                 href="https://github.com/Vojtik1112"
                 rel="noopener noreferrer"
@@ -300,11 +288,8 @@
                 >github.com/Vojtik1112</a
               >
             </div>
-            <!-- Removed inline style -->
             <div class="contact-item">
-              <!-- Removed inline style -->
               <strong>Instagram:</strong><br />
-              <!-- Removed inline style -->
               <a
                 href="https://www.instagram.com/schizvojta/?next=%2F"
                 rel="noopener noreferrer"
@@ -313,13 +298,12 @@
               >
             </div>
 
-            <!-- Removed inline style -->
             <p class="legal-text">
               Connecting with others passionate about technology.
             </p>
           </div>
         </aside>
-        <div class="panel-overlay" id="panel-overlay"></div>
+        <div class="panel-overlay" id="panel-overlay" aria-hidden="true"></div>
       </div>
     </div>
 
@@ -329,6 +313,11 @@
     <script src="tesseract.js"></script>
 
     <!-- Add this just before </body> -->
-    <audio id="background-music" preload="auto" src="assets/song.mp3"></audio>
+    <audio
+      id="background-music"
+      loop
+      preload="auto"
+      src="assets/song.mp3"
+    ></audio>
   </body>
 </html>

@@ -400,9 +400,15 @@ button {
 }
 
 /* --- Central Graphic Area (Now Canvas Container) --- */
-/* Styles moved to inline <style> in HTML for specificity */
-/* .graphic-area { ... } */
-/* #tesseract-canvas { ... } */
+.graphic-area {
+    position: relative;
+    width: 100%;
+    height: 520px; /* Moved from inline style */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
 
 
 .graphic-content { /* Overlay Text */
@@ -457,8 +463,7 @@ button {
     flex-direction: column;
     align-items: stretch;
     position: relative;
-    /* margin-bottom: 0; Handled inline */
-     /* padding-top: 20px; Handled inline */
+    padding-top: 20px;
 }
 
 .about-title {
@@ -466,13 +471,10 @@ button {
     font-weight: 600;
     line-height: 1.3;
     color: var(--section-title-color);
-     /* margin-bottom: -40px; Removed as graphic is gone */
     z-index: 3;
     text-align: center;
-     margin-bottom: 30px; /* Add space below title */
+    margin-bottom: 30px; /* Add space below title */
 }
-
-/* Removed .about-graphic-area styles */
 
 .about-details {
     display: flex;
@@ -526,8 +528,6 @@ button {
     flex-direction: column;
     justify-content: flex-start; /* Align content top */
     text-align: center;
-    /* padding-bottom: 50px; Handled inline */
-    /* padding-top: 30px; Handled inline */
 }
 .placeholder-section h2 {
     color: var(--section-title-color);
@@ -537,23 +537,6 @@ button {
 .placeholder-section p {
     color: var(--section-subtitle-color);
     margin-bottom: 20px; /* Space before skills list OR project grid */
-}
-.placeholder-section ul { /* Style the skills list */
-     margin: 0 auto; /* Center the list */
-     max-width: 400px; /* Limit width */
-     text-align: left; /* Align list items left */
-}
-.placeholder-section ul li {
-    margin-bottom: 10px;
-    padding-left: 20px;
-    position: relative;
-}
-.placeholder-section ul li::before { /* Add bullet points */
-    content: '•';
-    position: absolute;
-    left: 0;
-    color: var(--primary-accent); /* Blue bullet */
-    font-weight: bold;
 }
 
 /* --- Projects Grid & Cards --- */
@@ -640,7 +623,8 @@ button {
     z-index: 1002;
     overflow-y: auto;
     transform: translateX(-100%); /* Start off-screen left */
-    transition: transform 0.4s ease-in-out;
+    visibility: hidden; /* Initially hidden for accessibility */
+    transition: transform 0.4s ease-in-out, visibility 0s 0.4s linear; /* Delay visibility change */
     color: var(--text-color);
     display: flex;
     flex-direction: column;
@@ -650,6 +634,8 @@ button {
 
 #request-panel.open {
     transform: translateX(0); /* Slide into view */
+    visibility: visible; /* Make visible when open */
+    transition: transform 0.4s ease-in-out; /* Only transition transform */
 }
 
 /* Styles for the overlay */
@@ -779,23 +765,45 @@ button {
     opacity: 0.8; /* Make it slightly less prominent */
 }
 
-/* Ensure button is positioned correctly within the header flex layout */
-.site-header {
-    display: flex;
-    justify-content: space-between;
+/* --- Audio Control Button Styles --- */
+.audio-control-btn {
+    display: inline-flex;
     align-items: center;
-    padding-bottom: 20px;
-    margin-bottom: 30px;
-    gap: 15px; /* Adjust gap if needed */
+    justify-content: center;
+    padding: 8px; /* Adjust padding for icon-only */
+    border-radius: 50%; /* Make it circular */
+    border: 1px solid var(--nav-link-color);
+    color: var(--nav-link-color);
+    background-color: transparent;
+    cursor: pointer;
+    transition: background-color var(--theme-transition-duration) ease,
+                color var(--theme-transition-duration) ease,
+                border-color var(--theme-transition-duration) ease;
+    line-height: 1; /* Ensure icon is centered */
+}
+
+.audio-control-btn:hover {
+    background-color: var(--nav-link-hover-bg);
+    border-color: var(--nav-link-active-color);
+}
+
+.audio-control-btn svg {
+    width: 1em; /* Match font size */
+    height: 1em;
+    display: block; /* Remove extra space */
+}
+
+.audio-control-btn .hidden {
+    display: none;
 }
 
 
 /* --- Skills Section Fix --- */
-.skills-list { /* Target specifically if needed */
+.skills-list { /* Target specifically */
     list-style: none;
-    padding: 20px 0;
-    font-size: 1.1rem;
-    color: var(--text-color);
+    padding: 20px 0; /* Add padding here */
+    font-size: 1.1rem; /* Use desired font size */
+    color: var(--text-color); /* Use variable */
     margin: 0 auto; /* Center the list */
     max-width: 400px; /* Limit width */
     text-align: left; /* Align list items left */
@@ -864,6 +872,10 @@ button {
         align-self: flex-start; /* Align button left */
         margin-top: 10px;
     }
+    .audio-control-btn {
+        align-self: flex-start;
+        margin-top: 10px;
+    }
 
     .content-section {
         flex-direction: column; /* Stack sections vertically */
@@ -905,13 +917,17 @@ button {
          flex-basis: auto;
      }
      .about-center {
-         padding-top: 0;
+         padding-top: 20px;
      }
      .about-title {
          font-size: 1.8rem;
      }
      .projects-grid {
          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+     }
+     #about-section, #projects-section, #skills-section {
+         padding-bottom: 50px;
+         padding-top: 30px;
      }
 }
 

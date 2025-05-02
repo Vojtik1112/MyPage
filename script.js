@@ -1,5 +1,5 @@
 // script.js
-// (Handles preloader, navigation, slide-out panel, AND THEME TOGGLE)
+// (Handles preloader, navigation, slide-out panel, THEME TOGGLE, AND AUDIO)
 
 document.addEventListener('DOMContentLoaded', () => {
     const preloader = document.getElementById('preloader');
@@ -12,6 +12,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const panelOverlay = document.getElementById('panel-overlay');
     const themeToggleBtn = document.getElementById('theme-toggle-btn');
     const body = document.body;
+    const bgMusic = document.getElementById('background-music'); // Get audio element
+    const audioToggleBtn = document.getElementById('audio-toggle-btn'); // Get audio button
+    const playIcon = document.getElementById('play-icon');
+    const pauseIcon = document.getElementById('pause-icon');
+    const panelFirstFocusable = document.getElementById('panel-first-focusable'); // First focusable element in panel
+
+    let elementToFocusOnPanelClose = null; // To store the element that opened the panel
 
     // --- Preloader Logic ---
     const letters = {
@@ -42,15 +49,6 @@ document.addEventListener('DOMContentLoaded', () => {
             pageWrapper.classList.add('visible');
         }
 
-        // START MUSIC AFTER INTRO
-        const bgMusic = document.getElementById('background-music');
-        if (bgMusic) {
-            bgMusic.play().catch(err => {
-                // Autoplay might be blocked; you could show a “▶” button instead
-                console.warn('Audio play failed:', err);
-            });
-        }
-
         // Clean up preloader from DOM after transition
         setTimeout(() => {
             if (preloader && preloader.parentNode) {
@@ -67,32 +65,55 @@ document.addEventListener('DOMContentLoaded', () => {
             const targetSection = document.getElementById(targetId);
 
             if (targetSection) {
-                navLinks.forEach(l => l.classList.remove('active'));
-                contentSections.forEach(s => s.classList.remove('active'));
-                link.classList.add('active');
-                targetSection.classList.add('active');
+                // Update Sections
+                contentSections.forEach(s => {
+                    const isActive = s.id === targetId;
+                    s.classList.toggle('active', isActive);
+                    s.setAttribute('aria-hidden', !isActive); // Toggle aria-hidden
+                });
+
+                // Update Nav Links
+                navLinks.forEach(l => {
+                    const isCurrent = l === link;
+                    l.classList.toggle('active', isCurrent);
+                    if (isCurrent) {
+                        l.setAttribute('aria-current', 'page'); // Set aria-current
+                    } else {
+                        l.removeAttribute('aria-current'); // Remove aria-current
+                    }
+                });
             }
         });
     });
 
     // --- Request Panel Logic ---
     function openPanel() {
+        elementToFocusOnPanelClose = document.activeElement; // Store currently focused element
         requestPanel.classList.add('open');
+        requestPanel.removeAttribute('aria-hidden'); // Make accessible
         panelOverlay.classList.add('active');
+        panelOverlay.removeAttribute('aria-hidden'); // Make accessible
         document.body.style.overflow = 'hidden';
+        // Focus the first focusable element inside the panel
+        if (panelFirstFocusable) {
+            panelFirstFocusable.focus();
+        } else if (closeRequestPanelBtn) {
+            closeRequestPanelBtn.focus(); // Fallback to close button
+        }
     }
 
     function closePanel() {
         requestPanel.classList.remove('open');
+        requestPanel.setAttribute('aria-hidden', 'true'); // Hide from accessibility tree
         panelOverlay.classList.remove('active');
+        panelOverlay.setAttribute('aria-hidden', 'true'); // Hide from accessibility tree
         document.body.style.overflow = ''; // Restore default overflow
 
-        // Give time for the panel animation to complete before enabling scroll
-        setTimeout(() => {
-            if (!requestPanel.classList.contains('open')) {
-                document.body.style.overflow = '';
-            }
-        }, 400); // Match the transition duration
+        // Restore focus to the element that opened the panel
+        if (elementToFocusOnPanelClose) {
+            elementToFocusOnPanelClose.focus();
+            elementToFocusOnPanelClose = null; // Clear reference
+        }
     }
 
     if (openRequestPanelBtn) {
@@ -109,7 +130,6 @@ document.addEventListener('DOMContentLoaded', () => {
             closePanel();
         }
     });
-
 
     // --- Theme Toggle Logic ---
     const lightModeIcon = '☀️';
@@ -168,7 +188,59 @@ document.addEventListener('DOMContentLoaded', () => {
             applyTheme(event.matches ? 'dark' : 'light');
         }
     });
-    // --- End Theme Toggle Logic ---
 
+    // --- Audio Control Logic ---
+    function toggleAudio() {
+        if (!bgMusic) return;
+
+        if (bgMusic.paused) {
+            bgMusic.play().then(() => {
+                // Update button on successful play
+                playIcon.classList.add('hidden');
+                pauseIcon.classList.remove('hidden');
+                audioToggleBtn.setAttribute('aria-label', 'Pause background music');
+            }).catch(err => {
+                console.warn('Audio play failed:', err);
+                // Provide user feedback that play failed
+                const errorMessage = document.getElementById('audio-error-message');
+                if (errorMessage) {
+                    errorMessage.textContent = 'Unable to play audio. Please check your settings.';
+                    errorMessage.classList.add('visible');
+                    setTimeout(() => errorMessage.classList.remove('visible'), 5000); // Hide after 5 seconds
+                }
+            });
+        } else {
+            bgMusic.pause();
+            // Update button immediately on pause
+            playIcon.classList.remove('hidden');
+            pauseIcon.classList.add('hidden');
+            audioToggleBtn.setAttribute('aria-label', 'Play background music');
+        }
+    }
+
+    if (audioToggleBtn && bgMusic) {
+        audioToggleBtn.addEventListener('click', toggleAudio);
+
+        // Optional: Update button if music ends naturally
+        bgMusic.addEventListener('ended', () => {
+             playIcon.classList.remove('hidden');
+             pauseIcon.classList.add('hidden');
+             audioToggleBtn.setAttribute('aria-label', 'Play background music');
+        });
+         // Optional: Update button state if paused/played by other means (e.g. browser controls)
+         bgMusic.addEventListener('pause', () => {
+             if (!bgMusic.ended) { // Don't override if it just ended
+                 playIcon.classList.remove('hidden');
+                 pauseIcon.classList.add('hidden');
+                 audioToggleBtn.setAttribute('aria-label', 'Play background music');
+             }
+         });
+         bgMusic.addEventListener('play', () => {
+             playIcon.classList.add('hidden');
+             pauseIcon.classList.remove('hidden');
+             audioToggleBtn.setAttribute('aria-label', 'Pause background music');
+         });
+    }
+    // --- End Audio Control Logic ---
 
 }); // End of DOMContentLoaded
