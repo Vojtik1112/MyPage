@@ -371,7 +371,6 @@ a:focus, button:focus, .project-card:focus {
 
 .content-section {
     display: none; /* Hidden by default */
-    justify-content: space-between;
     align-items: center;
     position: absolute;
     top: 0;
@@ -382,6 +381,11 @@ a:focus, button:focus, .project-card:focus {
     transition: opacity 0.6s ease-in-out;
     gap: 20px;
     padding: 20px 0;
+}
+
+/* --- Home Section Specifics --- */
+#home-section {
+    justify-content: space-between; /* Keep space-between for home */
 }
 
 .content-section.active {
@@ -402,6 +406,61 @@ a:focus, button:focus, .project-card:focus {
     position: relative; /* For graphic/canvas overlay */
 }
 
+/* --- About Section Specifics --- */
+#about-section {
+    justify-content: center; /* Center the main content block */
+    flex-direction: column; /* Stack label and center vertically initially */
+    align-items: center; /* Center items horizontally */
+    text-align: center; /* Center text within the section */
+}
+
+.about-label-left {
+    writing-mode: horizontal-tb; /* Change back to horizontal */
+    text-orientation: mixed;
+    transform: none; /* Remove rotation */
+    color: #a0b0c8;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: center;
+    margin-bottom: 20px; /* Add space below the label */
+    width: 100%; /* Take full width */
+}
+
+.about-center {
+    flex-direction: column;
+    align-items: center; /* Center items within this container */
+    position: relative;
+    width: 100%; /* Ensure it can take width */
+    max-width: 900px; /* Limit max width for better readability */
+}
+
+.about-title {
+    font-size: 2rem;
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--section-title-color);
+    z-index: 3;
+    text-align: center;
+    margin-bottom: 40px; /* Increased space below title */
+}
+
+.about-details {
+    display: flex;
+    justify-content: center; /* Center the detail items */
+    gap: 30px;
+    position: relative;
+    width: 100%; /* Take full width */
+    flex-wrap: wrap; /* Allow wrapping on smaller screens if needed */
+}
+
+.detail-item {
+    flex: 1 1 250px; /* Allow grow/shrink, base width */
+    max-width: 300px; /* Limit max width of individual items */
+    text-align: left; /* Keep text left-aligned within item */
+    position: relative;
+    padding-top: 30px;
+}
 
 /* --- Home Section Specifics --- */
 #home-section .section-left .label {
@@ -469,86 +528,6 @@ a:focus, button:focus, .project-card:focus {
     line-height: 1.5;
     /* text-shadow: 0 1px 5px rgba(0, 0, 0, 0.2); /* Removed shadow */
 }
-
-/* --- About Section Specifics --- */
-.about-label-left {
-    writing-mode: vertical-rl;
-    text-orientation: mixed;
-    transform: rotate(180deg);
-    color: #a0b0c8;
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    align-self: flex-start;
-    margin-top: 50px;
-    flex-basis: 5%;
-    text-align: center;
-}
-
-.about-center {
-    flex-basis: 90%;
-    flex-direction: column;
-    align-items: stretch;
-    position: relative;
-    padding-top: 20px;
-}
-
-.about-title {
-    font-size: 2rem;
-    font-weight: 600;
-    line-height: 1.3;
-    color: var(--section-title-color);
-    z-index: 3;
-    text-align: center;
-    margin-bottom: 30px; /* Add space below title */
-}
-
-.about-details {
-    display: flex;
-    justify-content: space-around;
-    gap: 30px;
-    padding: 0 5%;
-    position: relative;
-}
-
-.detail-item {
-    flex-basis: 30%;
-    text-align: left;
-    position: relative;
-    padding-top: 30px;
-}
-
-.detail-item .number {
-    position: absolute;
-    top: 0;
-    left: 0;
-    font-size: 0.9rem;
-    color: #889cc1;
-    font-weight: 500;
-}
-
-.detail-item h3 {
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: var(--primary-accent-darker);
-    margin-bottom: 10px;
-}
-
-.detail-item p {
-    font-size: 0.9rem;
-    color: var(--section-subtitle-color);
-    line-height: 1.6;
-}
-
-.detail-item .line {
-    position: absolute;
-    bottom: -15px;
-    left: 0;
-    width: 70%;
-    height: 1px;
-    background: linear-gradient(to right, #a0b0c8, transparent);
-}
-
 
 /* --- Placeholder Sections (Projects, Skills) --- */
 .placeholder-section {
@@ -1230,13 +1209,10 @@ body.dark-mode .education-item {
     }
 
     .about-details {
-        flex-direction: column; /* Stack details vertically */
-        align-items: center; /* Center items */
-        gap: 40px; /* Adjust gap */
+        gap: 30px; /* Adjust gap */
     }
     .detail-item {
-        flex-basis: 80%; /* Allow items to take more width */
-        max-width: 400px;
+        max-width: 300px; /* Keep max-width */
     }
     .resume-download-container {
         margin-top: 20px; /* Adjust spacing */
@@ -1313,17 +1289,14 @@ body.dark-mode .education-item {
          font-size: 4rem;
      }
      .about-label-left {
-         writing-mode: horizontal-tb; /* Horizontal text */
-         transform: none;
          text-align: center;
          margin: 0 0 20px 0;
-         flex-basis: auto;
      }
      .about-center {
-         padding-top: 20px;
+         max-width: 90%; /* Adjust max-width for smaller screens */
      }
-     .about-title {
-         font-size: 1.8rem;
+     .about-details {
+         gap: 25px; /* Adjust gap for smaller screens */
      }
      .projects-grid {
          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
