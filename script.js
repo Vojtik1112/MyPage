@@ -56,6 +56,30 @@ document.addEventListener('DOMContentLoaded', () => {
             pageWrapper.classList.add('visible');
         }
 
+        // --- Attempt to autoplay audio ---
+        if (bgMusic && bgMusic.paused) { // Check if music exists and is paused
+            // Use a small delay to ensure the page is fully visible and interactive
+            setTimeout(() => {
+                bgMusic.play().then(() => {
+                    // Update button on successful autoplay
+                    if (playIcon && pauseIcon && audioToggleBtn) {
+                        playIcon.classList.add('hidden');
+                        pauseIcon.classList.remove('hidden');
+                        audioToggleBtn.setAttribute('aria-label', 'Pause background music');
+                    }
+                }).catch(err => {
+                    console.warn('Audio autoplay failed:', err);
+                    // Ensure button reflects paused state if autoplay failed
+                    if (playIcon && pauseIcon && audioToggleBtn) {
+                        playIcon.classList.remove('hidden');
+                        pauseIcon.classList.add('hidden');
+                        audioToggleBtn.setAttribute('aria-label', 'Play background music');
+                    }
+                });
+            }, 100); // Small delay (100ms)
+        }
+        // --- End Autoplay Attempt ---
+
         // Clean up preloader from DOM after transition
         setTimeout(() => {
             if (preloader && preloader.parentNode) {
