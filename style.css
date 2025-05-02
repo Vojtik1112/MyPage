@@ -43,7 +43,7 @@ body.dark-mode {
     --nav-link-active-color: #d0d0ff; /* Lighter active nav color */
     --primary-accent: #4d94ff; /* Brighter blue accent */
     --primary-accent-darker: #80b3ff; /* Even brighter blue for gradients */
-    --button-text-color: #1a1a2e; /* Dark text on light buttons */
+    --button-text-color: #fff; /* Keep button text light for contrast */
     /* MODIFIED: Made subtitles brighter */
     --section-subtitle-color: #bdbddd; /* Lighter subtitles (was #a0a0cc) */
     --tesseract-line-color: #cccccc; /* Lighter Tesseract lines */
@@ -59,7 +59,9 @@ body.dark-mode {
 
 /* --- Refactored Base Styles (Examples) --- */
 /* Add transitions for smooth theme changes */
-body, .main-container, .logo, .main-nav a, .request-btn, h2, p, .project-card, #theme-toggle-btn, .center-letter, .graphic-subtext {
+/* Added .panel-content elements to transition */
+body, .main-container, .logo, .main-nav a, .request-btn, h2, p, .project-card, #theme-toggle-btn, .center-letter, .graphic-subtext,
+.request-panel, .panel-content, .panel-content h3, .panel-content p, .panel-content a, .panel-content strong, .close-panel-btn {
     transition: background-color var(--theme-transition-duration) ease,
     color var(--theme-transition-duration) ease,
     border-color var(--theme-transition-duration) ease,
@@ -109,7 +111,7 @@ button {
     width: 100%;
     height: 100%;
     /* Use variable for background */
-    background-color: var(--bg-color); 
+    background-color: var(--bg-color);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -135,7 +137,7 @@ button {
 .preloader-text-left {
     font-size: 1.2rem;
     /* Use variable for text color */
-    color: var(--section-subtitle-color); 
+    color: var(--section-subtitle-color);
     line-height: 1.6;
     flex-basis: 25%;
     text-align: left;
@@ -149,7 +151,7 @@ button {
     font-size: 10rem;
     font-weight: 600;
     /* Use variable for main letter color */
-    color: var(--header-logo-color); 
+    color: var(--header-logo-color);
     position: relative;
 }
 
@@ -165,7 +167,7 @@ button {
     font-size: 0.8rem;
     font-weight: 400;
     /* Use variable for subtext color */
-    color: var(--nav-link-color); 
+    color: var(--nav-link-color);
     position: absolute;
     top: 10px;
     right: -50px;
@@ -311,7 +313,7 @@ button {
 .request-btn {
     /* Use variables for gradient and text */
     background: linear-gradient(100deg, var(--primary-accent), var(--primary-accent-darker));
-    color: var(--button-text-color); 
+    color: var(--button-text-color);
     padding: 12px 25px;
     border-radius: 25px;
     font-weight: 500;
@@ -393,7 +395,7 @@ button {
     font-size: 2.4rem;
     font-weight: 600;
     line-height: 1.3;
-    color: #1a2a4a;
+    color: var(--section-title-color);
     text-align: right;
 }
 
@@ -463,7 +465,7 @@ button {
     font-size: 2rem;
     font-weight: 600;
     line-height: 1.3;
-    color: #1a2a4a;
+    color: var(--section-title-color);
      /* margin-bottom: -40px; Removed as graphic is gone */
     z-index: 3;
     text-align: center;
@@ -499,13 +501,13 @@ button {
 .detail-item h3 {
     font-size: 1.2rem;
     font-weight: 600;
-    color: #0056b3;
+    color: var(--primary-accent-darker);
     margin-bottom: 10px;
 }
 
 .detail-item p {
     font-size: 0.9rem;
-    color: #556a8f;
+    color: var(--section-subtitle-color);
     line-height: 1.6;
 }
 
@@ -528,12 +530,12 @@ button {
     /* padding-top: 30px; Handled inline */
 }
 .placeholder-section h2 {
-    color: #1a2a4a;
+    color: var(--section-title-color);
     margin-bottom: 20px;
     font-size: 2rem; /* Match about title size */
 }
 .placeholder-section p {
-    color: #556a8f;
+    color: var(--section-subtitle-color);
     margin-bottom: 20px; /* Space before skills list OR project grid */
 }
 .placeholder-section ul { /* Style the skills list */
@@ -550,7 +552,7 @@ button {
     content: '•';
     position: absolute;
     left: 0;
-    color: #0077ff; /* Blue bullet */
+    color: var(--primary-accent); /* Blue bullet */
     font-weight: bold;
 }
 
@@ -625,94 +627,121 @@ button {
 
 
 /* --- Request Panel --- */
-.request-panel {
+/* Styles for the left slide-in panel */
+#request-panel {
     position: fixed;
     top: 0;
-    right: -400px; /* Position off-screen to the right */
-    height: 100%;
+    left: 0; /* Correct position */
     width: 400px;
     max-width: 90%;
-    background-color: #fff;
-    box-shadow: -5px 0 25px rgba(0, 0, 0, 0.1); /* Shadow on left side */
-    z-index: 999;
-    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    height: 100%;
+    background: var(--panel-bg);
+    box-shadow: 5px 0 25px rgba(0, 0, 0, 0.1);
+    z-index: 1002;
+    overflow-y: auto;
+    transform: translateX(-100%); /* Start off-screen left */
+    transition: transform 0.4s ease-in-out;
+    color: var(--text-color);
     display: flex;
     flex-direction: column;
-    border-top-left-radius: 20px;
-    border-bottom-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
 }
 
-.request-panel.open {
-    transform: translateX(-400px); /* Move panel to the left by its width */
+#request-panel.open {
+    transform: translateX(0); /* Slide into view */
 }
 
-.panel-overlay {
+/* Styles for the overlay */
+#panel-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.4);
-    z-index: 998;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1001;
     opacity: 0;
-    pointer-events: none;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0s 0.4s linear;
+}
+
+#panel-overlay.active {
+    opacity: 1;
+    visibility: visible;
     transition: opacity 0.4s ease;
 }
 
-.panel-overlay.active {
-    opacity: 1;
-    pointer-events: auto;
-}
-
-
-.close-panel-btn {
+/* Styles for close button */
+#close-request-panel {
     position: absolute;
     top: 15px;
     right: 15px;
     font-size: 2rem;
-    color: #aaa;
+    color: var(--text-color);
     background: none;
     border: none;
     cursor: pointer;
-    transition: color 0.2s ease;
+    padding: 5px;
+    line-height: 1;
+    opacity: 0.7;
 }
 
-.close-panel-btn:hover {
-    color: #555;
+#close-request-panel:hover {
+    color: var(--primary-accent);
+    opacity: 1;
 }
 
+/* Styles for panel content */
 .panel-content {
-    padding: 60px 40px 40px;
+    padding: 60px 40px 40px; /* Top padding accounts for close button */
     display: flex;
     flex-direction: column;
-    gap: 15px; /* Reduced gap slightly */
-    flex-grow: 1;
+    gap: 20px; /* Spacing between items */
+    flex-grow: 1; /* Allow content to fill panel */
 }
 
 .panel-content h3 {
-    font-size: 1.3rem;
-    color: #1a2a4a;
-    margin-bottom: 5px; /* Reduced margin */
+    font-size: 1.4rem; /* Slightly larger */
+    color: var(--section-title-color);
+    margin-bottom: 10px; /* Space after heading */
 }
 
-/* Removed input/textarea styles as using links now */
-
-.panel-content a { /* Style the contact links */
-    display: inline-block;
-    margin-top: 3px; /* Space below label */
-    word-break: break-all; /* Prevent long links overflowing */
+.panel-content .panel-intro {
+    font-size: 0.95rem;
+    color: var(--section-subtitle-color);
+    margin-bottom: 25px; /* Space before contact items */
 }
-.panel-content a:hover {
+
+.panel-content .contact-item {
+    margin-bottom: 15px; /* Space between contact items */
+}
+
+.panel-content .contact-item strong {
+    color: var(--section-title-color);
+    display: block; /* Ensure strong is on its own line */
+    margin-bottom: 3px; /* Small space before link */
+}
+
+.panel-content .contact-item a {
+    color: var(--primary-accent);
+    text-decoration: none;
+    word-break: break-all;
+    display: inline-block; /* Keep link inline */
+}
+
+.panel-content .contact-item a:hover {
     text-decoration: underline;
 }
 
-
-.legal-text {
+.panel-content .legal-text {
     font-size: 0.8rem;
-    color: #889cc1;
+    color: var(--section-subtitle-color);
     line-height: 1.5;
     margin-top: auto; /* Push to bottom */
+    padding-top: 20px; /* Add some space above */
 }
+
 
 /* --- Theme Toggle Button Styles --- */
 #theme-toggle-btn {
@@ -761,105 +790,29 @@ button {
 }
 
 
-/* --- Content Area & Sections --- */
-.content-area {
-    flex-grow: 1;
-    position: relative;
-}
-
-
-.content-section.active {
-    display: flex;
-    opacity: 1;
-    z-index: 2;
-}
-
-.section-left, .section-right {
-    flex-basis: 25%;
-    padding: 0 20px;
-}
-
-.section-center {
-    flex-basis: 45%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative; /* For graphic/canvas overlay */
-}
-
-
 /* --- Skills Section Fix --- */
-#skills-section ul {
+.skills-list { /* Target specifically if needed */
     list-style: none;
     padding: 20px 0;
     font-size: 1.1rem;
-    /* Use text color variable */
     color: var(--text-color);
+    margin: 0 auto; /* Center the list */
+    max-width: 400px; /* Limit width */
+    text-align: left; /* Align list items left */
 }
-
-/* --- Slide-Out Request Panel --- */
-#request-panel {
-    position: fixed;
-    top: 0;
-    /* Change from 'right: 0;' to 'left: 0;' */
-    left: 0;
-    width: 400px; /* Or your desired panel width */
-    max-width: 90%;
-    height: 100%;
-    /* Use a variable or specific color */
-    background: var(--panel-bg, linear-gradient(135deg, #ffffff 0%, #f0f5fb 100%));
-    box-shadow: -5px 0 25px rgba(0, 0, 0, 0.1); /* Shadow on the right side now */
-    z-index: 1002; /* Ensure it's above the overlay */
-    padding: 40px;
-    overflow-y: auto;
-    /* Change initial transform to be off-screen left */
-    transform: translateX(-100%);
-    transition: transform 0.4s ease-in-out; /* Smooth transition */
-    color: var(--text-color); /* Ensure text color contrasts with background */
+.skills-list li {
+    margin-bottom: 10px;
+    padding-left: 20px;
+    position: relative;
 }
-
-#request-panel.open {
-    /* Slide it into view */
-    transform: translateX(0);
-}
-
-/* Optional: Style the overlay */
-#panel-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
-    z-index: 1001; /* Below the panel but above content */
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.4s ease, visibility 0s 0.4s linear;
-}
-
-#panel-overlay.active {
-    opacity: 1;
-    visibility: visible;
-    transition: opacity 0.4s ease;
-}
-
-/* Add styles for close button, form elements inside the panel as needed */
-#close-request-panel {
+.skills-list li::before { /* Add bullet points */
+    content: '•';
     position: absolute;
-    top: 15px;
-    right: 15px; /* Position close button inside the panel */
-    font-size: 2rem;
-    color: var(--text-color);
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 5px;
-    line-height: 1;
+    left: 0;
+    color: var(--primary-accent); /* Blue bullet */
+    font-weight: bold;
 }
 
-#close-request-panel:hover {
-    color: var(--primary-accent);
-}
 
 /* --- Responsive Adjustments --- */
 @media (max-width: 1200px) {
@@ -869,5 +822,139 @@ button {
     }
 
     #home-section .section-left p,
-    #home-
+    #home-section .section-right h2 {
+        font-size: 1.5rem;
+        color: var(--section-title-color);
+    }
+
+    .about-details {
+        flex-direction: column; /* Stack details vertically */
+        align-items: center; /* Center items */
+        gap: 40px; /* Adjust gap */
+    }
+    .detail-item {
+        flex-basis: 80%; /* Allow items to take more width */
+        max-width: 400px;
+    }
+}
+
+@media (max-width: 992px) {
+    .main-container {
+        padding: 20px 25px;
+        min-height: auto; /* Allow container to shrink */
+    }
+    .site-header {
+        flex-direction: column; /* Stack header items */
+        align-items: flex-start; /* Align left */
+        margin-bottom: 20px;
+    }
+    .main-nav ul {
+        gap: 10px; /* Reduce nav gap */
+        flex-wrap: wrap; /* Allow nav items to wrap */
+    }
+    .main-nav a {
+        padding: 6px 10px;
+        font-size: 0.9rem;
+    }
+    .request-btn {
+        align-self: flex-start; /* Align button left */
+        margin-top: 10px;
+    }
+    #theme-toggle-btn {
+        align-self: flex-start; /* Align button left */
+        margin-top: 10px;
+    }
+
+    .content-section {
+        flex-direction: column; /* Stack sections vertically */
+        position: relative; /* Change from absolute */
+        display: none; /* Keep hidden until active */
+        height: auto; /* Allow height to adjust */
+        opacity: 0; /* Keep transition */
+        padding: 30px 0;
+    }
+    .content-section.active {
+        display: flex; /* Show active section */
+        opacity: 1;
+    }
+    .section-left, .section-center, .section-right {
+        flex-basis: 100%; /* Full width */
+        padding: 0 10px; /* Adjust padding */
+        text-align: center; /* Center text */
+    }
+     #home-section .section-left p,
+     #home-section .section-right h2 {
+        text-align: center; /* Center text */
+        font-size: 1.3rem;
+     }
+     #home-section .section-left .label {
+         text-align: center;
+     }
+     .graphic-area {
+         height: 350px; /* Reduce canvas height */
+         margin: 20px 0;
+     }
+     .center-letter {
+         font-size: 4rem;
+     }
+     .about-label-left {
+         writing-mode: horizontal-tb; /* Horizontal text */
+         transform: none;
+         text-align: center;
+         margin: 0 0 20px 0;
+         flex-basis: auto;
+     }
+     .about-center {
+         padding-top: 0;
+     }
+     .about-title {
+         font-size: 1.8rem;
+     }
+     .projects-grid {
+         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+     }
+}
+
+@media (max-width: 480px) {
+    .main-container {
+        padding: 15px;
+        border-radius: 20px;
+    }
+    .logo {
+        font-size: 1.5rem;
+    }
+    .main-nav a {
+        font-size: 0.85rem;
+    }
+    .request-btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+    #theme-toggle-btn {
+        padding: 6px 10px;
+        font-size: 0.85rem;
+    }
+    .graphic-area {
+        height: 280px;
+    }
+    .center-letter {
+        font-size: 3rem;
+    }
+    .graphic-subtext {
+        font-size: 0.8rem;
+    }
+    .preloader-letters {
+        font-size: 6rem;
+    }
+    .preloader-text-left {
+        font-size: 1rem;
+    }
+    #request-panel {
+        width: 100%;
+        max-width: 100%;
+        border-radius: 0;
+    }
+    .panel-content {
+        padding: 50px 20px 20px;
+    }
 }

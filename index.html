@@ -1,252 +1,326 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vojtěch Novák - IT Student Portfolio</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="assets/favicon.png" rel="icon" type="image/png">
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link href="assets/favicon.png" rel="icon" type="image/png" />
     <!-- Add Three.js library (Using CDN) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
     <!-- Inline style for canvas container and section adjustments -->
     <style>
-        /* Ensure canvas container has defined size and position */
-        .graphic-area {
-            position: relative; /* Already set */
-            width: 100%;    /* Already set */
-            height: 520px; /* MODIFIED - Increased height */
-            display: flex;   /* Already set */
-            justify-content: center; /* Already set */
-            align-items: center; /* Already set */
-            overflow: hidden; /* Hide parts of canvas if needed */
-        }
-        #tesseract-canvas {
-            display: block; /* Remove extra space below canvas */
-            width: 100%;
-            height: 100%;
-            cursor: grab; /* Indicate interactivity */
-        }
-         #tesseract-canvas:active {
-             cursor: grabbing;
-         }
+      /* Ensure canvas container has defined size and position */
+      .graphic-area {
+        position: relative; /* Already set */
+        width: 100%; /* Already set */
+        height: 520px; /* MODIFIED - Increased height */
+        display: flex; /* Already set */
+        justify-content: center; /* Already set */
+        align-items: center; /* Already set */
+        overflow: hidden; /* Hide parts of canvas if needed */
+      }
+      #tesseract-canvas {
+        display: block; /* Remove extra space below canvas */
+        width: 100%;
+        height: 100%;
+        cursor: grab; /* Indicate interactivity */
+      }
+      #tesseract-canvas:active {
+        cursor: grabbing;
+      }
 
-        /* Remove graphic from other sections */
-        #about-section .graphic-area,
-        #projects-section .graphic-area,
-        #skills-section .graphic-area {
-            display: none; /* Hide the graphic area in other sections */
-        }
-        /* Adjust layout if hiding graphic area causes issues */
-        #about-section .about-center {
-             /* Remove margin-bottom if graphic area is hidden */
-            margin-bottom: 0;
-             padding-top: 20px; /* Add some space if needed */
-        }
-         #projects-section, #skills-section {
-            /* Add padding if needed to compensate for removed graphic */
-            padding-bottom: 50px;
-            padding-top: 30px; /* Ensure consistent spacing */
-         }
-         /* Ensure overlay text is clickable */
-         .graphic-content {
-             pointer-events: none; /* Allows clicks/drags to pass through to the canvas */
-         }
-         .graphic-content * { /* Make sure children don't block either */
-             pointer-events: none;
-         }
-
+      /* Remove graphic from other sections */
+      #about-section .graphic-area,
+      #projects-section .graphic-area,
+      #skills-section .graphic-area {
+        display: none; /* Hide the graphic area in other sections */
+      }
+      /* Adjust layout if hiding graphic area causes issues */
+      #about-section .about-center {
+        /* Remove margin-bottom if graphic area is hidden */
+        margin-bottom: 0;
+        padding-top: 20px; /* Add some space if needed */
+      }
+      #projects-section,
+      #skills-section {
+        /* Add padding if needed to compensate for removed graphic */
+        padding-bottom: 50px;
+        padding-top: 30px; /* Ensure consistent spacing */
+      }
+      /* Ensure overlay text is clickable */
+      .graphic-content {
+        pointer-events: none; /* Allows clicks/drags to pass through to the canvas */
+      }
+      .graphic-content * {
+        /* Make sure children don't block either */
+        pointer-events: none;
+      }
     </style>
-</head>
-<body>
-
+  </head>
+  <body>
     <!-- Preloader -->
     <div class="preloader" id="preloader">
-        <div class="preloader-content">
-            <div class="preloader-text-left">
-                Curious Learner,<br>
-                Tech Enthusiast,<br>
-                Future Innovator
-            </div>
-            <div class="preloader-letters">
-                <div class="letter" id="letter-c1">V <span class="subtext">Vojtěch</span></div>
-                <div class="letter" id="letter-b">N <span class="subtext">Novák</span></div>
-                <!-- Removed letter-d and letter-c2 -->
-            </div>
-             <div class="preloader-line"></div>
+      <div class="preloader-content">
+        <div class="preloader-text-left">
+          Curious Learner,<br />
+          Tech Enthusiast,<br />
+          Future Innovator
         </div>
+        <div class="preloader-letters">
+          <div class="letter" id="letter-c1">
+            V <span class="subtext">Vojtěch</span>
+          </div>
+          <div class="letter" id="letter-b">
+            N <span class="subtext">Novák</span>
+          </div>
+          <!-- Removed letter-d and letter-c2 -->
+        </div>
+        <div class="preloader-line"></div>
+      </div>
     </div>
 
-
     <div class="page-wrapper" id="page-wrapper">
-        <div class="background-circles"></div>
-        <div class="main-container">
-            <!-- Header -->
-            <header class="site-header">
-                <div class="logo">Vojtěch Novák</div>
-                <nav class="main-nav">
-                    <ul>
-                        <li><a href="#home" class="nav-link active" data-target="home-section">Home</a></li>
-                        <li><a href="#about" class="nav-link" data-target="about-section">About</a></li>
-                        <li><a href="#projects" class="nav-link" data-target="projects-section">Projects</a></li>
-                        <li><a href="#skills" class="nav-link" data-target="skills-section">Skills</a></li>
-                    </ul>
-                </nav>
-                <!-- Moved the theme toggle button here -->
-                <button aria-label="Toggle theme" id="theme-toggle-btn">
-                    <span class="theme-icon"></span> <span class="theme-beta">BETA</span>
-                </button>
+      <div class="background-circles"></div>
+      <div class="main-container">
+        <!-- Header -->
+        <header class="site-header">
+          <div class="logo">Vojtěch Novák</div>
+          <nav class="main-nav">
+            <ul>
+              <li>
+                <a
+                  href="#home"
+                  class="nav-link active"
+                  data-target="home-section"
+                  >Home</a
+                >
+              </li>
+              <li>
+                <a href="#about" class="nav-link" data-target="about-section"
+                  >About</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#projects"
+                  class="nav-link"
+                  data-target="projects-section"
+                  >Projects</a
+                >
+              </li>
+              <li>
+                <a href="#skills" class="nav-link" data-target="skills-section"
+                  >Skills</a
+                >
+              </li>
+            </ul>
+          </nav>
+          <!-- Moved the theme toggle button here -->
+          <button aria-label="Toggle theme" id="theme-toggle-btn">
+            <span class="theme-icon"></span>
+            <span class="theme-beta">BETA</span>
+          </button>
 
-                <button class="request-btn" id="open-request-panel">
-                    Get in Touch <span class="arrow">→</span>
-                </button>
-            </header>
+          <button class="request-btn" id="open-request-panel">
+            Get in Touch <span class="arrow">→</span>
+          </button>
+        </header>
 
-            <main class="content-area">
-                <!-- Home Section (Initial View) -->
-                <section id="home-section" class="content-section active">
-                    <div class="section-left">
-                        <span class="label">I am an</span>
-                        <p>Information Technology<br>Student learning<br>C++, C#, AI & UE.</p>
-                    </div>
-                    <div class="section-center graphic-area" id="canvas-container"> <!-- Added ID -->
-                        <!-- Canvas for Tesseract -->
-                        <canvas id="tesseract-canvas"></canvas>
+        <main class="content-area">
+          <!-- Home Section (Initial View) -->
+          <section id="home-section" class="content-section active">
+            <div class="section-left">
+              <span class="label">I am an</span>
+              <p>
+                Information Technology<br />Student learning<br />C++, C#, AI &
+                UE.
+              </p>
+            </div>
+            <div class="section-center graphic-area" id="canvas-container">
+              <!-- Added ID -->
+              <!-- Canvas for Tesseract -->
+              <canvas id="tesseract-canvas"></canvas>
 
-                         <!-- Content Over Canvas -->
-                         <div class="graphic-content home-graphic-content">
-                            <div class="center-letter">VN</div>
-                            <p class="graphic-subtext">Exploring the world of technology<br>and building practical skills<br>through hands-on projects.</p>
-                        </div>
-                    </div>
-                    <div class="section-right">
-                         <h2>Passionate about code,<br>problem-solving, and<br>emerging tech like AI.</h2>
-                    </div>
-                </section>
+              <!-- Content Over Canvas -->
+              <div class="graphic-content home-graphic-content">
+                <div class="center-letter">VN</div>
+                <p class="graphic-subtext">
+                  Exploring the world of technology<br />and building practical
+                  skills<br />through hands-on projects.
+                </p>
+              </div>
+            </div>
+            <div class="section-right">
+              <h2>
+                Passionate about code,<br />problem-solving, and<br />emerging
+                tech like AI.
+              </h2>
+            </div>
+          </section>
 
-                <!-- About Section -->
-                <section id="about-section" class="content-section">
-                     <div class="section-left about-label-left">
-                        About Me
-                     </div>
-                     <div class="section-center about-center">
-                         <h2 class="about-title">My Learning Journey<br>in Information Technology</h2>
-                         <!-- REMOVED Graphic Area -->
-                         <div class="about-details">
-                             <div class="detail-item">
-                                <span class="number">.01</span>
-                                <h3>Current Focus</h3>
-                                <p>As an IT student, I'm actively developing my understanding and practical skills in programming and technology concepts.</p>
-                                <div class="line"></div>
-                            </div>
-                            <div class="detail-item">
-                                <span class="number">.02</span>
-                                <h3>Key Interests</h3>
-                                <p>I'm particularly interested in C++, C#, Artificial Intelligence, and game development with Unreal Engine. Always eager to learn more.</p>
-                                <div class="line"></div>
-                            </div>
-                            <div class="detail-item">
-                                <span class="number">.03</span>
-                                <h3>Approach</h3>
-                                <p>I approach learning through hands-on experience, tackling school projects to solidify my knowledge and build my portfolio.</p>
-                                <div class="line"></div>
-                            </div>
-                         </div>
-                     </div>
-                     <div class="section-right"></div>
-                </section>
-
-                <!-- Projects Section -->
-                <section id="projects-section" class="content-section placeholder-section">
-                    <h2>My Projects</h2>
-                    <p>Here are some of the school projects I've worked on as part of my IT studies. Check out my GitHub for code examples!</p>
-                    <!-- REMOVED Graphic Area -->
-
-                    <!-- Added Project Cards Grid -->
-                    <div class="projects-grid">
-                        <a class="project-card" href="projects/project1/index.html">
-                            <h3>Objednávka Trička</h3>
-                            <p>A web form for ordering custom t-shirts, featuring validation for user inputs like name,
-                                email, and custom text.</p>
-                            <span class="card-link-arrow">→</span>
-                        </a>
-                        <a class="project-card" href="projects/project2/index.html">
-                            <h3>ATM Withdrawal Simulation</h3>
-                            <p>A simple ATM interface that allows users to input an amount and calculates the banknote
-                                denominations for withdrawal.</p>
-                            <span class="card-link-arrow">→</span>
-                        </a>
-                        <a class="project-card" href="projects/project3/index.html">
-                            <h3>Interactive Keyboard</h3>
-                            <p>An on-screen representation of a keyboard layout. Demonstrates HTML structure and basic
-                                CSS styling.</p>
-                            <span class="card-link-arrow">→</span>
-                        </a>
-                    </div>
-                    <!-- End Project Cards Grid -->
-                </section>
-
-
-                <!-- Skills Section -->
-                <section id="skills-section" class="content-section placeholder-section">
-                    <h2>Technical Skills</h2>
-                    <p>Technologies I'm currently learning and using in my projects:</p>
-                    <!-- REMOVED inline style="... color: #333;" -->
-                    <ul style="list-style: none; padding: 20px 0; font-size: 1.1rem;">
-                        <li>C++</li>
-                        <li>C#</li>
-                        <li>Artificial Intelligence (Concepts/Basic Implementation)</li>
-                        <li>Unreal Engine</li>
-                        <li>Git / GitHub</li>
-                    </ul>
-                    <!-- REMOVED Graphic Area -->
-                </section>
-
-            </main>
-
-            <!-- Contact Panel -->
-            <aside class="request-panel" id="request-panel">
-                <button class="close-panel-btn" id="close-request-panel">×</button>
-                <div class="panel-content">
-                    <h3>Contact Me</h3>
-                    <!-- REMOVED inline style="color: #555; ..." -->
-                    <p style="margin-bottom: 25px; font-size: 0.95rem;">Feel free to reach out or connect with me
-                        online:</p>
-
-                    <!-- REMOVED inline style="..." -->
-                    <div style="margin-bottom: 15px;">
-                        <!-- REMOVED inline style="color: #1a2a4a;" -->
-                        <strong>Email:</strong><br>
-                        <!-- REMOVED inline style="color: #0077ff; ..." -->
-                        <a href="mailto:vojtechnovak84@gmail.com" style="text-decoration: none;">vojtechnovak84@gmail.com</a>
-                    </div>
-                    <!-- REMOVED inline style="..." -->
-                     <div style="margin-bottom: 15px;">
-                         <!-- REMOVED inline style="color: #1a2a4a;" -->
-                         <strong>GitHub:</strong><br>
-                         <!-- REMOVED inline style="color: #0077ff; ..." -->
-                         <a href="https://github.com/Vojtik1112" rel="noopener noreferrer" style="text-decoration: none;"
-                            target="_blank">github.com/Vojtik1112</a>
-                    </div>
-                    <!-- REMOVED inline style="..." -->
-                     <div style="margin-bottom: 15px;">
-                         <!-- REMOVED inline style="color: #1a2a4a;" -->
-                         <strong>Instagram:</strong><br>
-                         <!-- REMOVED inline style="color: #0077ff; ..." -->
-                         <a href="https://www.instagram.com/schizvojta/?next=%2F" rel="noopener noreferrer"
-                            style="text-decoration: none;" target="_blank">@schizvojta</a>
-                    </div>
-
-                    <!-- REMOVED inline style="..." -->
-                    <p class="legal-text" style="margin-top: auto;">
-                        Connecting with others passionate about technology.
-                    </p>
+          <!-- About Section -->
+          <section id="about-section" class="content-section">
+            <div class="section-left about-label-left">About Me</div>
+            <div class="section-center about-center">
+              <h2 class="about-title">
+                My Learning Journey<br />in Information Technology
+              </h2>
+              <!-- REMOVED Graphic Area -->
+              <div class="about-details">
+                <div class="detail-item">
+                  <span class="number">.01</span>
+                  <h3>Current Focus</h3>
+                  <p>
+                    As an IT student, I'm actively developing my understanding
+                    and practical skills in programming and technology concepts.
+                  </p>
+                  <div class="line"></div>
                 </div>
-            </aside>
-            <div class="panel-overlay" id="panel-overlay"></div>
+                <div class="detail-item">
+                  <span class="number">.02</span>
+                  <h3>Key Interests</h3>
+                  <p>
+                    I'm particularly interested in C++, C#, Artificial
+                    Intelligence, and game development with Unreal Engine.
+                    Always eager to learn more.
+                  </p>
+                  <div class="line"></div>
+                </div>
+                <div class="detail-item">
+                  <span class="number">.03</span>
+                  <h3>Approach</h3>
+                  <p>
+                    I approach learning through hands-on experience, tackling
+                    school projects to solidify my knowledge and build my
+                    portfolio.
+                  </p>
+                  <div class="line"></div>
+                </div>
+              </div>
+            </div>
+            <div class="section-right"></div>
+          </section>
 
-        </div>
+          <!-- Projects Section -->
+          <section
+            id="projects-section"
+            class="content-section placeholder-section"
+          >
+            <h2>My Projects</h2>
+            <p>
+              Here are some of the school projects I've worked on as part of my
+              IT studies. Check out my GitHub for code examples!
+            </p>
+            <!-- REMOVED Graphic Area -->
+
+            <!-- Added Project Cards Grid -->
+            <div class="projects-grid">
+              <a class="project-card" href="projects/project1/index.html">
+                <h3>ATM Withdrawal Simulation</h3>
+                <p>
+                  A simple ATM interface that allows users to input an amount
+                  and calculates the banknote denominations for withdrawal.
+                </p>
+                <span class="card-link-arrow">→</span>
+              </a>
+              <a class="project-card" href="projects/project2/index.html">
+                <h3>Objednávka Trička</h3>
+                <p>
+                  A web form for ordering custom t-shirts, featuring validation
+                  for user inputs like name, email, and custom text.
+                </p>
+                <span class="card-link-arrow">→</span>
+              </a>
+              <a class="project-card" href="projects/project3/index.html">
+                <h3>Interactive Keyboard</h3>
+                <p>
+                  An on-screen representation of a keyboard layout. Demonstrates
+                  HTML structure and basic CSS styling.
+                </p>
+                <span class="card-link-arrow">→</span>
+              </a>
+            </div>
+            <!-- End Project Cards Grid -->
+          </section>
+
+          <!-- Skills Section -->
+          <section
+            id="skills-section"
+            class="content-section placeholder-section"
+          >
+            <h2>Technical Skills</h2>
+            <p>Technologies I'm currently learning and using in my projects:</p>
+            <!-- REMOVED inline style="... color: #333;" -->
+            <!-- Use CSS variables for color -->
+            <ul class="skills-list">
+              <li>C++</li>
+              <li>C#</li>
+              <li>Artificial Intelligence (Concepts/Basic Implementation)</li>
+              <li>Unreal Engine</li>
+              <li>Git / GitHub</li>
+            </ul>
+            <!-- REMOVED Graphic Area -->
+          </section>
+        </main>
+
+        <!-- Contact Panel -->
+        <aside class="request-panel" id="request-panel">
+          <button class="close-panel-btn" id="close-request-panel">×</button>
+          <div class="panel-content">
+            <h3>Contact Me</h3>
+            <!-- Removed inline style -->
+            <p class="panel-intro">
+              Feel free to reach out or connect with me online:
+            </p>
+
+            <!-- Removed inline style -->
+            <div class="contact-item">
+              <!-- Removed inline style -->
+              <strong>Email:</strong><br />
+              <!-- Removed inline style -->
+              <a href="mailto:vojtechnovak84@gmail.com"
+                >vojtechnovak84@gmail.com</a
+              >
+            </div>
+            <!-- Removed inline style -->
+            <div class="contact-item">
+              <!-- Removed inline style -->
+              <strong>GitHub:</strong><br />
+              <!-- Removed inline style -->
+              <a
+                href="https://github.com/Vojtik1112"
+                rel="noopener noreferrer"
+                target="_blank"
+                >github.com/Vojtik1112</a
+              >
+            </div>
+            <!-- Removed inline style -->
+            <div class="contact-item">
+              <!-- Removed inline style -->
+              <strong>Instagram:</strong><br />
+              <!-- Removed inline style -->
+              <a
+                href="https://www.instagram.com/schizvojta/?next=%2F"
+                rel="noopener noreferrer"
+                target="_blank"
+                >@schizvojta</a
+              >
+            </div>
+
+            <!-- Removed inline style -->
+            <p class="legal-text">
+              Connecting with others passionate about technology.
+            </p>
+          </div>
+        </aside>
+        <div class="panel-overlay" id="panel-overlay"></div>
+      </div>
     </div>
 
     <!-- Main script.js (Handles preloader, nav, panel) -->
@@ -255,10 +329,6 @@
     <script src="tesseract.js"></script>
 
     <!-- Add this just before </body> -->
-    <audio
-            id="background-music"
-            preload="auto"
-            src="assets/song.mp3"
-    ></audio>
-</body>
+    <audio id="background-music" preload="auto" src="assets/song.mp3"></audio>
+  </body>
 </html>
