@@ -8,7 +8,7 @@ Welcome to **MyPage**, my personal webpage repository! This project serves as th
 - **CSS**: Styling for an elegant and responsive design.
 - **JavaScript**: Dynamic interaction, navigation, preloader, and panel logic.
 - **Three.js**: Interactive 4D Tesseract animation on the homepage.
-- **Theme Toggle**: Switch between light and dark modes (BETA).
+- **Theme Toggle**: Switch between light and dark modes (currently in BETA, visual refinements ongoing).
 - **Background Audio**: Optional background music with play/pause controls.
 
 ## 🚀 How to Use
@@ -41,6 +41,10 @@ This repository is a personal project to develop and maintain my personal webpag
 - **CSS (26.1%)**
 - **JavaScript (20.8%)**
 - **Three.js** (via CDN)
+
+## 📬 Contact
+
+You can reach me via the contact details provided on the website itself (click "Get in Touch") or through my GitHub profile.
 
 ## 📜 License
 

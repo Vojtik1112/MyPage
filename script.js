@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const requestPanel = document.getElementById('request-panel');
     const panelOverlay = document.getElementById('panel-overlay');
     const themeToggleBtn = document.getElementById('theme-toggle-btn');
-    // The theme toggle button is expected to contain a child element with the class '.theme-icon' to display the current theme icon.
     const themeIconSpan = themeToggleBtn ? themeToggleBtn.querySelector('.theme-icon') : null;
     const body = document.body;
     const bgMusic = document.getElementById('background-music'); // Get audio element
@@ -20,6 +19,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const pauseIcon = document.getElementById('pause-icon');
     const panelFirstFocusable = document.getElementById('panel-first-focusable'); // First focusable element in panel
     const audioErrorMessage = document.getElementById('audio-error-message'); // Get error message div
+
+    // --- Check if essential elements exist ---
+    if (!pageWrapper || !requestPanel || !panelOverlay) {
+        console.error("Essential layout elements (pageWrapper, requestPanel, panelOverlay) not found. Some functionality might be broken.");
+    }
 
     let elementToFocusOnPanelClose = null; // To store the element that opened the panel
 
@@ -91,26 +95,40 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Request Panel Logic ---
     function openPanel() {
+        if (!requestPanel || !panelOverlay) return; // Guard clause
+
         elementToFocusOnPanelClose = document.activeElement; // Store currently focused element
         requestPanel.classList.add('open');
         requestPanel.removeAttribute('aria-hidden'); // Make accessible
         panelOverlay.classList.add('active');
         panelOverlay.removeAttribute('aria-hidden'); // Make accessible
         document.body.style.overflow = 'hidden';
-        // Focus the first focusable element inside the panel
-        if (panelFirstFocusable) {
-            panelFirstFocusable.focus();
-        } else if (closeRequestPanelBtn) {
-            closeRequestPanelBtn.focus(); // Fallback to close button
+
+        // Focus management
+        const focusableElementsString = 'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
+        const focusableElements = requestPanel.querySelectorAll(focusableElementsString);
+        const firstFocusable = focusableElements[0] || closeRequestPanelBtn; // Fallback to close button
+        const lastFocusable = focusableElements[focusableElements.length - 1] || closeRequestPanelBtn;
+
+        if (firstFocusable) {
+            firstFocusable.focus();
         }
+
+        // Add focus trap listener
+        requestPanel.addEventListener('keydown', trapFocus);
     }
 
     function closePanel() {
+        if (!requestPanel || !panelOverlay) return; // Guard clause
+
         requestPanel.classList.remove('open');
         requestPanel.setAttribute('aria-hidden', 'true'); // Hide from accessibility tree
         panelOverlay.classList.remove('active');
         panelOverlay.setAttribute('aria-hidden', 'true'); // Hide from accessibility tree
         document.body.style.overflow = ''; // Restore default overflow
+
+        // Remove focus trap listener
+        requestPanel.removeEventListener('keydown', trapFocus);
 
         // Restore focus to the element that opened the panel
         if (elementToFocusOnPanelClose) {
@@ -119,17 +137,47 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Focus Trap function
+    function trapFocus(e) {
+        if (e.key !== 'Tab') return;
+        if (!requestPanel) return; // Should not happen if listener is attached correctly
+
+        const focusableElementsString = 'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
+        const focusableElements = requestPanel.querySelectorAll(focusableElementsString);
+        const firstFocusable = focusableElements[0] || closeRequestPanelBtn;
+        const lastFocusable = focusableElements[focusableElements.length - 1] || closeRequestPanelBtn;
+
+        if (e.shiftKey) { // Shift + Tab
+            if (document.activeElement === firstFocusable) {
+                lastFocusable.focus();
+                e.preventDefault();
+            }
+        } else { // Tab
+            if (document.activeElement === lastFocusable) {
+                firstFocusable.focus();
+                e.preventDefault();
+            }
+        }
+    }
+
+    // Add listeners only if elements exist
     if (openRequestPanelBtn) {
         openRequestPanelBtn.addEventListener('click', openPanel);
+    } else {
+        console.warn("Open request panel button not found.");
     }
+
     if (closeRequestPanelBtn) {
         closeRequestPanelBtn.addEventListener('click', closePanel);
+    } else {
+        console.warn("Close request panel button not found.");
     }
+
     if (panelOverlay) {
         panelOverlay.addEventListener('click', closePanel);
     }
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && requestPanel.classList.contains('open')) {
+        if (e.key === 'Escape' && requestPanel && requestPanel.classList.contains('open')) {
             closePanel();
         }
     });
@@ -169,6 +217,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (themeToggleBtn) {
         themeToggleBtn.addEventListener('click', toggleTheme);
+    } else {
+        console.warn("Theme toggle button not found.");
     }
 
     // --- Initial Theme Load ---
@@ -235,7 +285,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    if (audioToggleBtn && bgMusic) {
+    if (audioToggleBtn && bgMusic && playIcon && pauseIcon) {
         audioToggleBtn.addEventListener('click', toggleAudio);
 
         // Optional: Update button if music ends naturally
@@ -257,6 +307,10 @@ document.addEventListener('DOMContentLoaded', () => {
              pauseIcon.classList.remove('hidden');
              audioToggleBtn.setAttribute('aria-label', 'Pause background music');
          });
+    } else {
+         console.warn("Audio control elements (button, audio tag, icons) not all found. Audio controls disabled.");
+         // Optionally hide the button if elements are missing
+         if(audioToggleBtn) audioToggleBtn.style.display = 'none';
     }
     // --- End Audio Control Logic ---
 

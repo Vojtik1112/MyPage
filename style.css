@@ -104,12 +104,31 @@ button {
     background: none;
 }
 
+/* --- Accessibility: Add distinct focus styles for keyboard users --- */
+a:focus-visible,
+button:focus-visible,
+.project-card:focus-visible {
+    outline: 2px solid var(--primary-accent);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px var(--nav-link-hover-bg); /* Optional glow effect */
+}
+/* Ensure high-contrast focus on dark mode */
+body.dark-mode a:focus-visible,
+body.dark-mode button:focus-visible,
+body.dark-mode .project-card:focus-visible {
+    outline-color: var(--primary-accent-darker);
+    box-shadow: 0 0 0 4px rgba(100, 100, 220, 0.3); /* Adjusted glow */
+}
+/* Remove default outline when focus-visible is supported */
+a:focus, button:focus, .project-card:focus {
+    outline: none;
+}
+
 /* --- Add transitions for theme-affected preloader elements --- */
 .preloader, .preloader-content, .preloader-text-left, .preloader-letters .letter, .preloader-letters .subtext, .preloader-line {
     transition: background-color var(--theme-transition-duration) ease,
     color var(--theme-transition-duration) ease;
 }
-
 
 /* --- Preloader Styles --- */
 .preloader {
@@ -686,6 +705,13 @@ button {
     opacity: 1;
 }
 
+/* Add focus style for panel close button */
+#close-request-panel:focus-visible {
+    outline: 2px solid var(--primary-accent);
+    outline-offset: 1px;
+    opacity: 1;
+}
+
 /* Styles for panel content */
 .panel-content {
     padding: 60px 40px 40px; /* Top padding accounts for close button */
@@ -728,6 +754,13 @@ button {
     text-decoration: underline;
 }
 
+/* Add focus style for panel links */
+.panel-content .contact-item a:focus-visible {
+    outline: 2px solid var(--primary-accent);
+    outline-offset: 1px;
+    text-decoration: none; /* Remove underline on focus if desired */
+}
+
 .panel-content .legal-text {
     font-size: 0.8rem;
     color: var(--section-subtitle-color);
@@ -754,6 +787,7 @@ button {
     transition: background-color var(--theme-transition-duration) ease,
     color var(--theme-transition-duration) ease,
     border-color var(--theme-transition-duration) ease;
+    margin-left: 10px; /* Add some space from nav/other buttons */
 }
 
 #theme-toggle-btn:hover {
@@ -788,6 +822,7 @@ button {
                 color var(--theme-transition-duration) ease,
                 border-color var(--theme-transition-duration) ease;
     line-height: 1; /* Ensure icon is centered */
+    margin-left: 10px; /* Add some space */
 }
 
 .audio-control-btn:hover {
@@ -897,14 +932,17 @@ button {
     .request-btn {
         align-self: flex-start; /* Align button left */
         margin-top: 10px;
+        margin-left: 0; /* Reset margin */
     }
     #theme-toggle-btn {
         align-self: flex-start; /* Align button left */
         margin-top: 10px;
+        margin-left: 0; /* Reset margin */
     }
     .audio-control-btn {
         align-self: flex-start;
         margin-top: 10px;
+        margin-left: 0; /* Reset margin */
     }
 
     .content-section {
