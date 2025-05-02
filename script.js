@@ -17,13 +17,50 @@ document.addEventListener('DOMContentLoaded', () => {
     const audioToggleBtn = document.getElementById('audio-toggle-btn'); // Get audio button
     const playIcon = document.getElementById('play-icon');
     const pauseIcon = document.getElementById('pause-icon');
-    const panelFirstFocusable = document.getElementById('panel-first-focusable'); // First focusable element in panel
+    // Removed unused variable 'panelFirstFocusable' to reduce clutter
     const audioErrorMessage = document.getElementById('audio-error-message'); // Get error message div
+
+    // --- Project Modal Elements ---
+    const projectModal = document.getElementById('project-modal');
+    const projectCards = document.querySelectorAll('.project-card[data-modal-target]');
+    const modalCloseBtns = document.querySelectorAll('[data-modal-close]');
 
     // --- Check if essential elements exist ---
     if (!pageWrapper || !requestPanel || !panelOverlay) {
         console.error("Essential layout elements (pageWrapper, requestPanel, panelOverlay) not found. Some functionality might be broken.");
     }
+
+    // --- Project Data (Replace with actual details) ---
+    const projectDetails = {
+        project1: {
+            title: "ATM Withdrawal Simulation",
+            image: "assets/projects/atm_screenshot.png", // Example path
+            description: "A command-line application built with C# that simulates the process of withdrawing cash from an ATM. The user inputs the desired amount, and the program calculates the optimal combination of banknotes (e.g., 1000s, 500s, 200s, 100s) to dispense. It includes basic input validation.",
+            tech: "C#, .NET Console Application",
+            challenges: "Handling edge cases like amounts not dispensable with available notes and ensuring correct calculation logic were key challenges. Improved understanding of basic algorithms and user input handling.",
+            liveLink: null, // No live demo for console app
+            repoLink: "https://github.com/Vojtik1112/MyPage/tree/main/projects/project1" // Example link
+        },
+        project2: {
+            title: "Objednávka Trička (T-Shirt Order Form)",
+            image: "assets/projects/tshirt_screenshot.png", // Example path
+            description: "A simple web form developed using HTML, CSS, and JavaScript for ordering custom t-shirts. It allows users to enter their name, email, choose a size, color, and specify custom text for the shirt. Includes client-side JavaScript validation to ensure required fields are filled correctly.",
+            tech: "HTML, CSS, JavaScript",
+            challenges: "Implementing robust client-side validation and ensuring cross-browser compatibility for the form elements. Practiced DOM manipulation and event handling in JavaScript.",
+            liveLink: "projects/project2/index.html", // Link to the project page
+            repoLink: "https://github.com/Vojtik1112/MyPage/tree/main/projects/project2" // Example link
+        },
+        project3: {
+            title: "Interactive Keyboard Layout",
+            image: "assets/projects/keyboard_screenshot.png", // Example path
+            description: "A visual representation of a standard keyboard layout created purely with HTML and CSS. This project focused on structuring content semantically using HTML and applying CSS for precise layout, styling, and visual appearance. Potential future enhancement includes adding JavaScript for key press feedback.",
+            tech: "HTML, CSS",
+            challenges: "Achieving accurate key positioning and spacing using CSS, particularly flexbox or grid layouts. Reinforced understanding of HTML structure and CSS selectors.",
+            liveLink: "projects/project3/index.html", // Link to the project page
+            repoLink: "https://github.com/Vojtik1112/MyPage/tree/main/projects/project3" // Example link
+        }
+        // Add details for other projects here
+    };
 
     let elementToFocusOnPanelClose = null; // To store the element that opened the panel
 
@@ -337,5 +374,103 @@ document.addEventListener('DOMContentLoaded', () => {
          if(audioToggleBtn) audioToggleBtn.style.display = 'none';
     }
     // --- End Audio Control Logic ---
+
+    // --- Project Modal Logic ---
+    function openProjectModal(projectId) {
+        const details = projectDetails[projectId];
+        if (!details || !projectModal) return;
+
+        // Populate modal content
+        const titleEl = projectModal.querySelector('#project-modal-title');
+        const imgEl = projectModal.querySelector('#project-modal-image');
+        const descEl = projectModal.querySelector('#project-modal-description');
+        const techEl = projectModal.querySelector('#project-modal-tech');
+        const chalEl = projectModal.querySelector('#project-modal-challenges');
+        const liveLinkEl = projectModal.querySelector('#project-modal-live-link');
+        const repoLinkEl = projectModal.querySelector('#project-modal-repo-link');
+
+        if (titleEl) titleEl.textContent = details.title;
+        if (descEl) descEl.textContent = details.description;
+        if (techEl) techEl.textContent = details.tech;
+        if (chalEl) chalEl.textContent = details.challenges;
+
+        // Handle image
+        if (imgEl && details.image) {
+            imgEl.src = details.image;
+            imgEl.style.display = 'block';
+            imgEl.alt = details.title + " Screenshot";
+        } else if (imgEl) {
+            imgEl.style.display = 'none';
+        }
+
+        // Handle links
+        if (liveLinkEl) {
+            if (details.liveLink) {
+                liveLinkEl.href = details.liveLink;
+                liveLinkEl.style.display = 'inline-block';
+            } else {
+                liveLinkEl.style.display = 'none';
+            }
+        }
+         if (repoLinkEl) {
+            if (details.repoLink) {
+                repoLinkEl.href = details.repoLink;
+                repoLinkEl.style.display = 'inline-block';
+            } else {
+                repoLinkEl.style.display = 'none';
+            }
+        }
+
+
+        // Open the modal
+        projectModal.classList.add('open');
+        projectModal.setAttribute('aria-hidden', 'false');
+        // Optional: Focus management for modal
+        const firstFocusable = projectModal.querySelector('button, [href]');
+        if(firstFocusable) firstFocusable.focus();
+        // Optional: Trap focus within modal (more complex, similar to panel)
+    }
+
+    function closeProjectModal() {
+        if (!projectModal) return;
+        projectModal.classList.remove('open');
+        projectModal.setAttribute('aria-hidden', 'true');
+        // Optional: Return focus to the card that opened the modal
+    }
+
+    // Add listeners to project cards
+    projectCards.forEach(card => {
+        card.addEventListener('click', () => {
+            const projectId = card.getAttribute('data-project-id');
+            openProjectModal(projectId);
+        });
+         // Add keyboard accessibility (Enter key)
+         card.addEventListener('keydown', (e) => {
+             if (e.key === 'Enter' || e.key === ' ') {
+                 e.preventDefault(); // Prevent space bar scrolling
+                 const projectId = card.getAttribute('data-project-id');
+                 openProjectModal(projectId);
+             }
+         });
+         // Make card focusable if not already an anchor
+         if (card.tagName !== 'A') {
+             card.setAttribute('tabindex', '0');
+             card.setAttribute('role', 'button');
+         }
+    });
+
+    // Add listeners to close buttons/overlay
+    modalCloseBtns.forEach(button => {
+        button.addEventListener('click', closeProjectModal);
+    });
+
+    // Close modal on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && projectModal && projectModal.classList.contains('open')) {
+            closeProjectModal();
+        }
+    });
+
+    // --- End Project Modal Logic ---
 
 }); // End of DOMContentLoaded

@@ -71,6 +71,14 @@
                   >Skills</a
                 >
               </li>
+              <li>
+                <a
+                  href="#education"
+                  class="nav-link"
+                  data-target="education-section"
+                  >Education</a
+                >
+              </li>
             </ul>
           </nav>
           <!-- Moved the theme toggle button here -->
@@ -198,6 +206,15 @@
                   <div class="line"></div>
                 </div>
               </div>
+              <div class="resume-download-container">
+                <a
+                  href="assets/resume.pdf"
+                  download="Vojtech_Novak_Resume.pdf"
+                  class="resume-download-btn"
+                >
+                  Download Resume (PDF) <span class="arrow">↓</span>
+                </a>
+              </div>
             </div>
             <div class="section-right"></div>
           </section>
@@ -210,38 +227,52 @@
           >
             <h2>My Projects</h2>
             <p>
-              Here are some of the school projects I've worked on as part of my
-              IT studies. Check out my GitHub for code examples!
+              Click on a project to see more details. Check out my GitHub for
+              code examples!
             </p>
 
-            <!-- Added Project Cards Grid -->
+            <!-- Modified Project Cards Grid -->
             <div class="projects-grid">
-              <a class="project-card" href="projects/project1/index.html">
+              <div
+                class="project-card"
+                data-modal-target="#project-modal"
+                data-project-id="project1"
+              >
                 <h3>ATM Withdrawal Simulation</h3>
                 <p>
-                  A simple ATM interface that allows users to input an amount
-                  and calculates the banknote denominations for withdrawal.
+                  A simple C# console application simulating ATM withdrawals.
+                  Calculates banknote denominations based on user input.
+                  Demonstrates basic input/output and logic.
                 </p>
                 <span class="card-link-arrow">→</span>
-              </a>
-              <a class="project-card" href="projects/project2/index.html">
+              </div>
+              <div
+                class="project-card"
+                data-modal-target="#project-modal"
+                data-project-id="project2"
+              >
                 <h3>Objednávka Trička</h3>
                 <p>
-                  A web form for ordering custom t-shirts, featuring validation
-                  for user inputs like name, email, and custom text.
+                  A web form (HTML/CSS/JS) for ordering custom t-shirts.
+                  Features client-side validation for user inputs like name,
+                  email, size, and custom text.
                 </p>
                 <span class="card-link-arrow">→</span>
-              </a>
-              <a class="project-card" href="projects/project3/index.html">
+              </div>
+              <div
+                class="project-card"
+                data-modal-target="#project-modal"
+                data-project-id="project3"
+              >
                 <h3>Interactive Keyboard</h3>
                 <p>
-                  An on-screen representation of a keyboard layout. Demonstrates
-                  HTML structure and basic CSS styling.
+                  An on-screen keyboard layout created with HTML and CSS.
+                  Highlights key structure and styling techniques. Basic
+                  interactivity could be added with JS.
                 </p>
                 <span class="card-link-arrow">→</span>
-              </a>
+              </div>
             </div>
-            <!-- End Project Cards Grid -->
           </section>
 
           <!-- Skills Section -->
@@ -251,18 +282,143 @@
             aria-hidden="true"
           >
             <h2>Technical Skills</h2>
-            <p>Technologies I'm currently learning and using in my projects:</p>
-            <ul class="skills-list">
-              <li>HTML, CSS, JavaScript</li>
-              <!-- Added web basics -->
-              <li>C++</li>
-              <li>C#</li>
-              <li>Artificial Intelligence (Concepts/Basic Implementation)</li>
-              <li>Unreal Engine</li>
-              <li>Git / GitHub</li>
-            </ul>
+            <p>Technologies I'm currently learning and using:</p>
+            <div class="skills-categories">
+              <div class="skill-category">
+                <h3>Programming Languages</h3>
+                <ul class="skills-list">
+                  <li>C++ (University Coursework, Personal Projects)</li>
+                  <li>C# (University Coursework, Simple Applications)</li>
+                  <li>JavaScript (Web Development Basics, Learning)</li>
+                </ul>
+              </div>
+              <div class="skill-category">
+                <h3>Web Technologies</h3>
+                <ul class="skills-list">
+                  <li>HTML (Structuring Web Content)</li>
+                  <li>CSS (Styling Web Content, Basic Layouts)</li>
+                </ul>
+              </div>
+              <div class="skill-category">
+                <h3>Game Development</h3>
+                <ul class="skills-list">
+                  <li>Unreal Engine (Learning, Basic Blueprints & Concepts)</li>
+                </ul>
+              </div>
+              <div class="skill-category">
+                <h3>Concepts & Tools</h3>
+                <ul class="skills-list">
+                  <li>
+                    Artificial Intelligence (Foundational Concepts, Exploring)
+                  </li>
+                  <li>Git / GitHub (Version Control Basics)</li>
+                  <li>Visual Studio / VS Code</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <!-- Education Section -->
+          <section
+            id="education-section"
+            class="content-section placeholder-section"
+            aria-hidden="true"
+          >
+            <h2>Education & Experience</h2>
+            <div class="education-content">
+              <div class="education-item">
+                <h3>Current Education</h3>
+                <p>
+                  <strong>School:</strong> [Your School Name], [City,
+                  Country]<br />
+                  <strong>Program:</strong> Information Technology (or specific
+                  degree)<br />
+                  <strong>Expected Graduation:</strong> [Month, Year]
+                </p>
+              </div>
+              <div class="education-item">
+                <h3>Relevant Coursework</h3>
+                <ul>
+                  <li>Introduction to Programming (C++)</li>
+                  <li>Object-Oriented Programming (C#)</li>
+                  <li>Data Structures & Algorithms (Learning)</li>
+                  <li>Web Development Fundamentals (HTML, CSS, JS)</li>
+                  <li>Database Basics (Conceptual)</li>
+                </ul>
+              </div>
+              <div class="education-item">
+                <h3>Experience</h3>
+                <p>
+                  Currently focusing on academic projects and building
+                  foundational skills. Eager to apply my learning in practical
+                  settings.
+                </p>
+              </div>
+            </div>
           </section>
         </main>
+
+        <!-- Project Detail Modal -->
+        <div
+          class="modal"
+          id="project-modal"
+          aria-hidden="true"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="project-modal-title"
+        >
+          <div class="modal-overlay" data-modal-close></div>
+          <div class="modal-content">
+            <button
+              class="modal-close-btn"
+              data-modal-close
+              aria-label="Close project details"
+            >
+              &times;
+            </button>
+            <h3 id="project-modal-title">Project Title</h3>
+            <div class="modal-body">
+              <img
+                src=""
+                alt="Project Screenshot"
+                id="project-modal-image"
+                style="
+                  max-width: 100%;
+                  height: auto;
+                  margin-bottom: 15px;
+                  display: none;
+                "
+              />
+              <p id="project-modal-description">
+                Detailed project description goes here.
+              </p>
+              <h4>Technologies Used:</h4>
+              <p id="project-modal-tech"></p>
+              <h4>Challenges & Learning:</h4>
+              <p id="project-modal-challenges"></p>
+              <div class="modal-links">
+                <a
+                  href="#"
+                  id="project-modal-live-link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="modal-link-btn"
+                  style="display: none"
+                  >Live Demo</a
+                >
+                <a
+                  href="#"
+                  id="project-modal-repo-link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="modal-link-btn"
+                  style="display: none"
+                  >Code Repository</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
 
         <!-- Contact Panel -->
         <aside class="request-panel" id="request-panel" aria-hidden="true">
@@ -276,7 +432,8 @@
           <div class="panel-content">
             <h3>Contact Me</h3>
             <p class="panel-intro">
-              Feel free to reach out or connect with me online:
+              Feel free to reach out via email, connect online, or use the form
+              below.
             </p>
 
             <div class="contact-item">
@@ -306,13 +463,48 @@
               >
             </div>
 
+            <form
+              id="contact-form"
+              action="https://formspree.io/f/YOUR_FORMSPREE_ID"
+              method="POST"
+            >
+              <h4>Send a Message:</h4>
+              <div class="form-group">
+                <label for="contact-name">Name:</label>
+                <input type="text" id="contact-name" name="name" required />
+              </div>
+              <div class="form-group">
+                <label for="contact-email">Email:</label>
+                <input
+                  type="email"
+                  id="contact-email"
+                  name="_replyto"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="contact-message">Message:</label>
+                <textarea
+                  id="contact-message"
+                  name="message"
+                  rows="4"
+                  required
+                ></textarea>
+              </div>
+              <button type="submit" class="form-submit-btn">
+                Send Message
+              </button>
+              <p class="form-note">
+                Note: This form requires a service like Formspree to function.
+              </p>
+            </form>
+
             <p class="legal-text">
               Connecting with others passionate about technology.
             </p>
           </div>
         </aside>
         <div class="panel-overlay" id="panel-overlay" aria-hidden="true"></div>
-        <!-- Added audio error message container -->
         <div
           id="audio-error-message"
           class="audio-error"
