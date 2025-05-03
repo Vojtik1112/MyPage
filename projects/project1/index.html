@@ -1,225 +1,229 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <head>
+    <meta charset="UTF-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>Modern ATM</title>
     <style>
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-            Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-            "Segoe UI Symbol";
-            background-color: #f0f2f5;
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            box-sizing: border-box;
-        }
+      body {
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+          "Segoe UI Symbol";
+          background-color: #f0f2f5;
+          margin: 0;
+          padding: 20px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          min-height: 100vh;
+          box-sizing: border-box;
+      }
 
-        /* Main Content Container */
-        main {
-            background-color: #ffffff;
-            padding: 30px 40px;
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            max-width: 450px;
-            width: 100%;
-            text-align: box-sizing: border-box;
-        }
-
-
-        h1 {
-            color: #1c1e21;
-            margin-bottom: 25px;
-            font-size: 1.8em;
-            font-weight: 600;
-        }
+      /* Main Content Container */
+      main {
+          background-color: #ffffff;
+          padding: 30px 40px;
+          border-radius: 12px;
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+          max-width: 450px;
+          width: 100%;
+          text-align: box-sizing: border-box;
+      }
 
 
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: #606770;
-            text-align: left;
-        }
+      h1 {
+          color: #1c1e21;
+          margin-bottom: 25px;
+          font-size: 1.8em;
+          font-weight: 600;
+      }
 
 
-        #moneyamount {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #ccd0d5;
-            border-radius: 6px;
-            font-size: 1.1em;
-            margin-bottom: 20px;
-            box-sizing: border-box;
-            text-align: right;
-        }
-
-        #moneyamount::-webkit-inner-spin-button,
-        #moneyamount::-webkit-outer-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
-
-        #moneyamount {
-            -moz-appearance: textfield;
-        }
+      label {
+          display: block;
+          margin-bottom: 8px;
+          font-weight: 500;
+          color: #606770;
+          text-align: left;
+      }
 
 
-        /* Button */
-        button {
-            width: 100%;
-            padding: 12px 20px;
-            background-color: #1877f2;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-size: 1.1em;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background-color 0.2s ease, transform 0.1s ease;
-            margin-bottom: 20px;
-        }
+      #moneyamount {
+          width: 100%;
+          padding: 12px 15px;
+          border: 1px solid #ccd0d5;
+          border-radius: 6px;
+          font-size: 1.1em;
+          margin-bottom: 20px;
+          box-sizing: border-box;
+          text-align: right;
+      }
 
-        button:hover {
-            background-color: #166fe5;
-        }
+      #moneyamount::-webkit-inner-spin-button,
+      #moneyamount::-webkit-outer-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+      }
 
-        button:active {
-            transform: scale(0.98);
-        }
-
-        /* Result Area */
-        #result {
-            margin-top: 25px;
-            padding-top: 20px;
-            border-top: 1px solid #e4e6eb;
-            font-size: 1em;
-            color: #333;
-            text-align: left;
-            line-height: 1.6;
-            min-height: 40px;
-        }
-
-        #result span {
-            font-weight: bold;
-            color: #1877f2;
-            display: inline-block;
-            min-width: 30px;
-            text-align: right;
-            margin-right: 5px;
-        }
+      #moneyamount {
+          -moz-appearance: textfield;
+      }
 
 
-        #error {
-            color: #fa383e;
-            font-weight: bold;
-            margin-top: 15px;
-            min-height: 20px;
-            text-align: center;
-        }
+      /* Button */
+      button {
+          width: 100%;
+          padding: 12px 20px;
+          background-color: #1877f2;
+          color: white;
+          border: none;
+          border-radius: 6px;
+          font-size: 1.1em;
+          font-weight: bold;
+          cursor: pointer;
+          transition: background-color 0.2s ease, transform 0.1s ease;
+          margin-bottom: 20px;
+      }
 
+      button:hover {
+          background-color: #166fe5;
+      }
+
+      button:active {
+          transform: scale(0.98);
+      }
+
+      /* Result Area */
+      #result {
+          margin-top: 25px;
+          padding-top: 20px;
+          border-top: 1px solid #e4e6eb;
+          font-size: 1em;
+          color: #333;
+          text-align: left;
+          line-height: 1.6;
+          min-height: 40px;
+      }
+
+      #result span {
+          font-weight: bold;
+          color: #1877f2;
+          display: inline-block;
+          min-width: 30px;
+          text-align: right;
+          margin-right: 5px;
+      }
+
+
+      #error {
+          color: #fa383e;
+          font-weight: bold;
+          margin-top: 15px;
+          min-height: 20px;
+          text-align: center;
+      }
     </style>
-</head>
-<body>
-<main>
-    <h1>ATM Withdrawal</h1>
+  </head>
+  <body>
+    <main>
+      <h1>ATM Withdrawal</h1>
 
-    <label for="moneyamount">Amount (100 - 50,000 Kč):</label>
-    <input
-            id="moneyamount"
-            max="50000"
-            min="100"
-            name="moneyamount"
-            placeholder="Enter amount"
-            type="number"
-    />
+      <label for="moneyamount">Amount (100 - 50,000 Kč):</label>
+      <input
+        id="moneyamount"
+        max="50000"
+        min="100"
+        name="moneyamount"
+        placeholder="Enter amount"
+        type="number"
+      />
 
-    <button id="withdrawBtn">Withdraw</button>
+      <button id="withdrawBtn">Withdraw</button>
 
-    <p id="error"></p>
-    <p id="result"></p>
+      <p id="error"></p>
+      <p id="result"></p>
+    </main>
 
-</main>
+    <script>
+      let amountInDay = 0;
+      const dailyLimit = 50000;
+      const minWithdrawal = 100;
+      const maxWithdrawal = 50000;
+      const smallestBanknote = 100; // Define smallest banknote
 
-<script>
-    let amountInDay = 0;
-    const dailyLimit = 50000;
-    const minWithdrawal = 100;
-    const maxWithdrawal = 50000;
+      const amountInput = document.getElementById("moneyamount");
+      const resultDisplay = document.getElementById("result");
+      const errorDisplay = document.getElementById("error");
+      const withdrawButton = document.getElementById("withdrawBtn");
 
-    const amountInput = document.getElementById("moneyamount");
-    const resultDisplay = document.getElementById("result");
-    const errorDisplay = document.getElementById("error");
-    const withdrawButton = document.getElementById("withdrawBtn");
+      withdrawButton.addEventListener("click", handleWithdrawal);
 
-    withdrawButton.addEventListener("click", handleWithdrawal);
-
-    function handleWithdrawal() {
+      function handleWithdrawal() {
         resultDisplay.innerHTML = "";
         errorDisplay.textContent = "";
 
         const amountStr = amountInput.value;
         if (!amountStr) {
-            errorDisplay.textContent = "Please enter an amount.";
-            return;
+          errorDisplay.textContent = "Please enter an amount.";
+          return;
         }
 
         const amount = parseInt(amountStr, 10);
 
         if (isNaN(amount)) {
-            errorDisplay.textContent = "Invalid input. Please enter a number.";
-            return;
+          errorDisplay.textContent = "Invalid input. Please enter a number.";
+          return;
         }
         if (amount < minWithdrawal) {
-            errorDisplay.textContent = `Minimum withdrawal amount is ${minWithdrawal} Kč.`;
-            return;
+          errorDisplay.textContent = `Minimum withdrawal amount is ${minWithdrawal} Kč.`;
+          return;
         }
         if (amount > maxWithdrawal) {
-            errorDisplay.textContent = `Maximum withdrawal amount per transaction is ${maxWithdrawal} Kč.`;
-            return;
+          errorDisplay.textContent = `Maximum withdrawal amount per transaction is ${maxWithdrawal} Kč.`;
+          return;
         }
-
+        // --- Added Check: Amount must be multiple of smallest banknote ---
+        if (amount % smallestBanknote !== 0) {
+          errorDisplay.textContent = `Amount must be a multiple of ${smallestBanknote} Kč.`;
+          return;
+        }
+        // --- End Added Check ---
 
         if (amountInDay + amount > dailyLimit) {
-            errorDisplay.textContent = `Daily limit of ${dailyLimit} Kč exceeded. You can withdraw up to ${dailyLimit - amountInDay} Kč today.`;
-
-            return;
+          errorDisplay.textContent = `Daily limit of ${dailyLimit} Kč exceeded. You can withdraw up to ${
+            dailyLimit - amountInDay
+          } Kč today.`;
+          return;
         }
-
 
         amountInDay += amount;
         let remainingAmount = amount;
-        const denominations = [5000, 2000, 1000, 500, 200, 100, 50, 20, 10, 5, 2, 1];
+        // --- Updated Denominations: Removed coins ---
+        const denominations = [5000, 2000, 1000, 500, 200, 100];
+        // --- End Updated Denominations ---
         const result = {};
 
         for (const denomination of denominations) {
-            const count = Math.floor(remainingAmount / denomination);
-            if (count > 0) {
-                result[denomination] = count;
-                remainingAmount %= denomination;
-            }
+          const count = Math.floor(remainingAmount / denomination);
+          if (count > 0) {
+            result[denomination] = count;
+            remainingAmount %= denomination;
+          }
         }
-
 
         let resultHTML = "Dispensing:<br>";
         for (const denomination in result) {
-            const count = result[denomination];
+          const count = result[denomination];
 
-            resultHTML += `<span>${count}</span> x ${denomination} Kč<br>`;
+          resultHTML += `<span>${count}</span> x ${denomination} Kč<br>`;
         }
         resultDisplay.innerHTML = resultHTML;
 
-
         if (amountInDay === dailyLimit) {
-            errorDisplay.textContent = `You have reached your daily limit of ${dailyLimit} Kč.`;
+          errorDisplay.textContent = `You have reached your daily limit of ${dailyLimit} Kč.`;
         }
-    }
-</script>
-</body>
+      }
+    </script>
+  </body>
 </html>

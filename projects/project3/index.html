@@ -168,53 +168,53 @@
     <hr>
     <h2>KLAVESNICE</h2>
     <div class="lajna">
-        <button id="esc" onclick="Esc()">ESC</button>
+        <button id="esc" onclick="handleNonCharKey('Esc')">ESC</button>
         <div class="Fka">
             <div>
-                <button onclick="F1()">F1</button>
-                <button onclick="F2()">F2</button>
-                <button onclick="F3()">F3</button>
-                <button onclick="F4()">F4</button>
+                <button onclick="handleNonCharKey('F1')">F1</button>
+                <button onclick="handleNonCharKey('F2')">F2</button>
+                <button onclick="handleNonCharKey('F3')">F3</button>
+                <button onclick="handleNonCharKey('F4')">F4</button>
             </div>
             <div>
-                <button onclick="F5()">F5</button>
-                <button onclick="F6()">F6</button>
-                <button onclick="F7()">F7</button>
-                <button onclick="F8()">F8</button>
+                <button onclick="handleNonCharKey('F5')">F5</button>
+                <button onclick="handleNonCharKey('F6')">F6</button>
+                <button onclick="handleNonCharKey('F7')">F7</button>
+                <button onclick="handleNonCharKey('F8')">F8</button>
             </div>
             <div>
-                <button onclick="F9()">F9</button>
-                <button onclick="F10()">F10</button>
-                <button onclick="F11()">F11</button>
-                <button onclick="F12()">F12</button>
+                <button onclick="handleNonCharKey('F9')">F9</button>
+                <button onclick="handleNonCharKey('F10')">F10</button>
+                <button onclick="handleNonCharKey('F11')">F11</button>
+                <button onclick="handleNonCharKey('F12')">F12</button>
             </div>
         </div>
         <div class="tri">
-            <button onclick="PRTSCR()">PRNT</button>
-            <button onclick="SCROLLLOCK()">SCR</button>
-            <button class="pause" onclick="PAUSE()">Pause</button>
+            <button onclick="handleNonCharKey('PrtScr')">PRNT</button>
+            <button onclick="handleNonCharKey('ScrollLock')">SCR</button>
+            <button class="pause" onclick="handleNonCharKey('Pause')">Pause</button>
         </div>
     </div>
     <div class="klavesnice">
         <div>
             <div>
-                <button class="klavesa" onclick="Vlnka()">~</button>
-                <button class="klavesa" onclick="Plus()">+</button>
-                <button class="klavesa" onclick="ě()">ě</button>
-                <button class="klavesa" onclick="š()">š</button>
-                <button class="klavesa" onclick="č()">č</button>
-                <button class="klavesa" onclick="ř()">ř</button>
-                <button class="klavesa" onclick="ž()">ž</button>
-                <button class="klavesa" onclick="ý()">ý</button>
-                <button class="klavesa" onclick="á()">á</button>
-                <button class="klavesa" onclick="í()">í</button>
-                <button class="klavesa" onclick="é()">é</button>
-                <button class="klavesa" onclick="RovnaSe()">=</button>
-                <button class="klavesa" onclick="divne()">&acute;</button>
+                <button class="klavesa" onclick="TildeChar()">~</button>
+                <button class="klavesa" onclick="PlusChar()">+</button>
+                <button class="klavesa" onclick="EChar()">ě</button>
+                <button class="klavesa" onclick="SChar()">š</button>
+                <button class="klavesa" onclick="CChar()">č</button>
+                <button class="klavesa" onclick="RChar()">ř</button>
+                <button class="klavesa" onclick="ZChar()">ž</button>
+                <button class="klavesa" onclick="YChar()">ý</button>
+                <button class="klavesa" onclick="AChar()">á</button>
+                <button class="klavesa" onclick="IChar()">í</button>
+                <button class="klavesa" onclick="EAcuteChar()">é</button>
+                <button class="klavesa" onclick="EqualsChar()">=</button>
+                <button class="klavesa" onclick="AcuteChar()">&acute;</button>
                 <button class="backspace" onclick="BACKSPACE()">Backspace</button>
             </div>
             <div>
-                <button class="tab" onclick="Tab()">Tab</button>
+                <button class="tab" onclick="handleNonCharKey('Tab')">Tab</button>
                 <button class="klavesa" onclick="Q()">Q</button>
                 <button class="klavesa" onclick="W()">W</button>
                 <button class="klavesa" onclick="E()">E</button>
@@ -225,12 +225,12 @@
                 <button class="klavesa" onclick="I()">I</button>
                 <button class="klavesa" onclick="O()">O</button>
                 <button class="klavesa" onclick="P()">P</button>
-                <button class="klavesa" onclick="LeftBracket()">[</button>
-                <button class="klavesa" onclick="RightBracket()">]</button>
-                <button class="under-backspace" onclick="Backslash()">\</button>
+                <button class="klavesa" onclick="LBracketChar()">[</button>
+                <button class="klavesa" onclick="RBracketChar()">]</button>
+                <button class="under-backspace" onclick="BackslashChar()">\</button>
             </div>
             <div>
-                <button onclick="CapsLock()">Caps Lock</button>
+                <button onclick="handleNonCharKey('CapsLock')">Caps Lock</button>
                 <button class="klavesa" onclick="A()">A</button>
                 <button class="klavesa" onclick="S()">S</button>
                 <button class="klavesa" onclick="D()">D</button>
@@ -240,12 +240,12 @@
                 <button class="klavesa" onclick="J()">J</button>
                 <button class="klavesa" onclick="K()">K</button>
                 <button class="klavesa" onclick="L()">L</button>
-                <button class="klavesa" onclick="SEMICOLON()">;</button>
-                <button class="klavesa" onclick="Quote()">'</button>
+                <button class="klavesa" onclick="SemicolonChar()">;</button>
+                <button class="klavesa" onclick="QuoteChar()">'</button>
                 <button class="enter" onclick="ENTER()">Enter</button>
             </div>
             <div>
-                <button class="shift" onclick="SHIFT()">Shift</button>
+                <button class="shift" onclick="handleNonCharKey('Shift')">Shift</button>
                 <button class="klavesa" onclick="Z()">Z</button>
                 <button class="klavesa" onclick="X()">X</button>
                 <button class="klavesa" onclick="C()">C</button>
@@ -253,43 +253,43 @@
                 <button class="klavesa" onclick="B()">B</button>
                 <button class="klavesa" onclick="N()">N</button>
                 <button class="klavesa" onclick="M()">M</button>
-                <button class="klavesa" onclick="CARKA()">,</button>
-                <button class="klavesa" onclick="TECKA()">.</button>
-                <button class="klavesa" onclick="LOMITKO()">/</button>
-                <button class="shift" onclick="SHIFT()">Shift</button>
+                <button class="klavesa" onclick="CommaChar()">,</button>
+                <button class="klavesa" onclick="DotChar()">.</button>
+                <button class="klavesa" onclick="SlashChar()">/</button>
+                <button class="shift" onclick="handleNonCharKey('Shift')">Shift</button>
             </div>
             <div>
-                <button class="ctrl" onclick="CTRL()">Ctrl</button>
-                <button class="klavesa" onclick="WIN()">Win</button>
-                <button class="klavesa" onclick="Alt()">Alt</button>
-                <button class="space" onclick="MEZERNÍK()">Space</button>
-                <button class="klavesa" onclick="ALT()">Alt</button>
-                <button class="klavesa" onclick="WIN()">Win</button>
-                <button class="menu" onclick="MENU()">Menu</button>
-                <button class="ctrl" onclick="CTRL()">Ctrl</button>
+                <button class="ctrl" onclick="handleNonCharKey('Ctrl')">Ctrl</button>
+                <button class="klavesa" onclick="handleNonCharKey('Win')">Win</button>
+                <button class="klavesa" onclick="handleNonCharKey('Alt')">Alt</button>
+                <button class="space" onclick="SpaceChar()">Space</button>
+                <button class="klavesa" onclick="handleNonCharKey('AltGr')">Alt</button>
+                <button class="klavesa" onclick="handleNonCharKey('Win')">Win</button>
+                <button class="menu" onclick="handleNonCharKey('Menu')">Menu</button>
+                <button class="ctrl" onclick="handleNonCharKey('Ctrl')">Ctrl</button>
             </div>
         </div>
         <div class="mid">
             <div>
-                <button class="insert" onclick="INSERT()">Insert</button>
-                <button class="home" onclick="HOME()">Home</button>
-                <button onclick="PAGEUP()">PgUp</button>
+                <button class="insert" onclick="handleNonCharKey('Insert')">Insert</button>
+                <button class="home" onclick="handleNonCharKey('Home')">Home</button>
+                <button onclick="handleNonCharKey('PageUp')">PgUp</button>
             </div>
             <div>
                 <button class="delete" onclick="DELETE()">Delete</button>
-                <button class="end" onclick="END()">End</button>
-                <button onclick="PAGEDOWN()">PgDn</button>
+                <button class="end" onclick="handleNonCharKey('End')">End</button>
+                <button onclick="handleNonCharKey('PageDown')">PgDn</button>
             </div>
-            <button class="horni-sipka" onclick="ARROWUP()">ʌ</button>
+            <button class="horni-sipka" onclick="handleNonCharKey('ArrowUp')">ʌ</button>
             <div class="dolni-sipky">
-                <button onclick="ARROWLEFT()">&lt;</button>
-                <button onclick="ARROWDOWN()">v</button>
-                <button onclick="ARROWRIGHT()">&gt;</button>
+                <button onclick="handleNonCharKey('ArrowLeft')">&lt;</button>
+                <button onclick="handleNonCharKey('ArrowDown')">v</button>
+                <button onclick="handleNonCharKey('ArrowRight')">&gt;</button>
             </div>
         </div>
         <div>
             <div>
-                <button class="num" onclick="NUMLOCK()">Num</button>
+                <button class="num" onclick="handleNonCharKey('NumLock')">Num</button>
                 <button class="znak" onclick="NUMDIVIDE()">/</button>
                 <button class="znak" onclick="NUMMULTIPLY()">*</button>
             </div>
@@ -316,7 +316,7 @@
         <div class="prava">
             <button class="znak" onclick="NUMMINUS()">-</button>
             <button class="plus" onclick="NUMPLUS()">+</button>
-            <button class="long-enter" onclick="ENTER()">Enter</button>
+            <button class="long-enter" onclick="NUMENTER()">Enter</button>
         </div>
     </div>
     <textarea id="textbox"></textarea>
@@ -350,329 +350,72 @@
         function zapisTextbox(key) {
             let textbox = document.getElementById("textbox");
             textbox.value += key;
+            textbox.scrollTop = textbox.scrollHeight;
         }
 
-
-        function Esc() {
-            alert("Esc");
+        function handleNonCharKey(keyName) {
+            console.log(keyName + " pressed");
         }
 
-        function F1() {
-            alert("F1");
-        }
+        function TildeChar() { zapisTextbox("~"); }
+        function PlusChar() { zapisTextbox("+"); }
+        function EChar() { zapisTextbox("ě"); }
+        function SChar() { zapisTextbox("š"); }
+        function CChar() { zapisTextbox("č"); }
+        function RChar() { zapisTextbox("ř"); }
+        function ZChar() { zapisTextbox("ž"); }
+        function YChar() { zapisTextbox("ý"); }
+        function AChar() { zapisTextbox("á"); }
+        function IChar() { zapisTextbox("í"); }
+        function EAcuteChar() { zapisTextbox("é"); }
+        function EqualsChar() { zapisTextbox("="); }
+        function AcuteChar() { zapisTextbox("´"); }
+        function LBracketChar() { zapisTextbox("["); }
+        function RBracketChar() { zapisTextbox("]"); }
+        function BackslashChar() { zapisTextbox("\\"); }
+        function SemicolonChar() { zapisTextbox(";"); }
+        function QuoteChar() { zapisTextbox("'"); }
+        function CommaChar() { zapisTextbox(","); }
+        function DotChar() { zapisTextbox("."); }
+        function SlashChar() { zapisTextbox("/"); }
+        function SpaceChar() { zapisTextbox(" "); }
 
-        function F2() {
-            alert("F2");
-        }
-
-        function F3() {
-            alert("F3");
-        }
-
-        function F4() {
-            alert("F4");
-        }
-
-        function F5() {
-            alert("F5");
-        }
-
-        function F6() {
-            alert("F6");
-        }
-
-        function F7() {
-            alert("F7");
-        }
-
-        function F8() {
-            alert("F8");
-        }
-
-        function F9() {
-            alert("F9");
-        }
-
-        function F10() {
-            alert("F10");
-        }
-
-        function F11() {
-            alert("F11");
-        }
-
-        function F12() {
-            alert("F12");
-        }
-
-        function PRTSCR() {
-            alert("PrtScr");
-        }
-
-        function SCROLLLOCK() {
-            alert("Scroll Lock");
-        }
-
-        function PAUSE() {
-            alert("Pause");
-        }
-
-        function TILDA() {
-            zapisTextbox(";");
-        }
-
-        function PLUSKO() {
-            zapisTextbox("+");
-        }
-
-        function ě() {
-            zapisTextbox("ě");
-        }
-
-        function š() {
-            zapisTextbox("š");
-        }
-
-        function č() {
-            zapisTextbox("č");
-        }
-
-        function ř() {
-            zapisTextbox("ř");
-        }
-
-        function ž() {
-            zapisTextbox("ž");
-        }
-
-        function ý() {
-            zapisTextbox("ý");
-        }
-
-        function á() {
-            zapisTextbox("á");
-        }
-
-        function í() {
-            zapisTextbox("í");
-        }
-
-        function é() {
-            zapisTextbox("é");
-        }
-
-        function MINUS() {
-            zapisTextbox("=");
-        }
-
-        function PLUS() {
-            zapisTextbox("´");
-        }
+        function Q() { zapisTextbox("Q"); }
+        function W() { zapisTextbox("W"); }
+        function E() { zapisTextbox("E"); }
+        function R() { zapisTextbox("R"); }
+        function T() { zapisTextbox("T"); }
+        function Y() { zapisTextbox("Y"); }
+        function U() { zapisTextbox("U"); }
+        function I() { zapisTextbox("I"); }
+        function O() { zapisTextbox("O"); }
+        function P() { zapisTextbox("P"); }
+        function A() { zapisTextbox("A"); }
+        function S() { zapisTextbox("S"); }
+        function D() { zapisTextbox("D"); }
+        function F() { zapisTextbox("F"); }
+        function G() { zapisTextbox("G"); }
+        function H() { zapisTextbox("H"); }
+        function J() { zapisTextbox("J"); }
+        function K() { zapisTextbox("K"); }
+        function L() { zapisTextbox("L"); }
+        function Z() { zapisTextbox("Z"); }
+        function X() { zapisTextbox("X"); }
+        function C() { zapisTextbox("C"); }
+        function V() { zapisTextbox("V"); }
+        function B() { zapisTextbox("B"); }
+        function N() { zapisTextbox("N"); }
+        function M() { zapisTextbox("M"); }
 
         function BACKSPACE() {
-            zapisTextbox("");
+            let textbox = document.getElementById("textbox");
             textbox.value = textbox.value.slice(0, -1);
-        }
-
-        function TAB() {
-            alert("Tab");
-        }
-
-        function Q() {
-            zapisTextbox("Q");
-        }
-
-        function W() {
-            zapisTextbox("W");
-        }
-
-        function E() {
-            zapisTextbox("E");
-        }
-
-        function R() {
-            zapisTextbox("R");
-        }
-
-        function T() {
-            zapisTextbox("T");
-        }
-
-        function Z() {
-            zapisTextbox("Z");
-        }
-
-        function U() {
-            zapisTextbox("U");
-        }
-
-        function I() {
-            zapisTextbox("I");
-        }
-
-        function O() {
-            zapisTextbox("O");
-        }
-
-        function P() {
-            zapisTextbox("P");
-        }
-
-        function LZAVORKA() {
-            zapisTextbox("[");
-        }
-
-        function PZAVORKA() {
-            zapisTextbox("]");
-        }
-
-        function CAPSLOCK() {
-            alert("Caps Lock");
-        }
-
-        function A() {
-            zapisTextbox("A");
-        }
-
-        function S() {
-            zapisTextbox("S");
-        }
-
-        function D() {
-            zapisTextbox("D");
-        }
-
-        function F() {
-            zapisTextbox("F");
-        }
-
-        function G() {
-            zapisTextbox("G");
-        }
-
-        function H() {
-            zapisTextbox("H");
-        }
-
-        function J() {
-            zapisTextbox("J");
-        }
-
-        function K() {
-            zapisTextbox("K");
-        }
-
-        function L() {
-            zapisTextbox("L");
-        }
-
-        function SEMICOLON() {
-            zapisTextbox(";");
-        }
-
-        function APOSTROF() {
-            zapisTextbox("´");
         }
 
         function ENTER() {
             let textbox = document.getElementById("textbox");
             textbox.value += "\n";
-        }
-
-        function BACKSLASH() {
-            zapisTextbox("\\");
-        }
-
-        function SHIFT() {
-            alert("Shift");
-        }
-
-        function Y() {
-            zapisTextbox("Y");
-        }
-
-        function X() {
-            zapisTextbox("X");
-        }
-
-        function C() {
-            zapisTextbox("C");
-        }
-
-        function V() {
-            zapisTextbox("V");
-        }
-
-        function B() {
-            zapisTextbox("B");
-        }
-
-        function N() {
-            zapisTextbox("N");
-        }
-
-        function M() {
-            zapisTextbox("M");
-        }
-
-        function CARKA() {
-            zapisTextbox(",");
-        }
-
-        function TECKA() {
-            zapisTextbox(".");
-        }
-
-        function LOMITKO() {
-            zapisTextbox("/");
-        }
-
-        function SHIFT() {
-            alert("Shift");
-        }
-
-        function CTRL() {
-            alert("Ctrl");
-        }
-
-        function WIN() {
-            alert("Win");
-        }
-
-        function ALT() {
-            alert("Alt");
-        }
-
-        function MEZERNÍK() {
-            zapisTextbox(" ");
-        }
-
-        function ALTGR() {
-            alert("AltGr");
-        }
-
-        function WIN() {
-            alert("Win");
-        }
-
-        function MENU() {
-            alert("Menu");
-        }
-
-        function CTRL() {
-            alert("Ctrl");
-        }
-
-        function INSERT() {
-            alert("Insert");
-        }
-
-        function HOME() {
-            alert("Home");
-        }
-
-        function PAGEUP() {
-            alert("Page Up");
+            textbox.scrollTop = textbox.scrollHeight;
         }
 
         function DELETE() {
@@ -680,99 +423,26 @@
             textbox.value = "";
         }
 
-        function END() {
-            alert("End");
-        }
-
-        function PAGEDOWN() {
-            alert("Page Down");
-        }
-
-        function ARROWUP() {
-            alert("ʌ");
-        }
-
-        function ARROWLEFT() {
-            alert("<");
-        }
-
-        function ARROWDOWN() {
-            alert("v");
-        }
-
-        function ARROWRIGHT() {
-            alert(">");
-        }
-
-        function NUMLOCK() {
-            alert("Num Lock");
-        }
-
-        function NUMDIVIDE() {
-            zapisTextbox("/");
-        }
-
-        function NUMMULTIPLY() {
-            zapisTextbox("*");
-        }
-
-        function NUMMINUS() {
-            zapisTextbox("-");
-        }
-
-        function NUM7() {
-            zapisTextbox("7");
-        }
-
-        function NUM8() {
-            zapisTextbox("8");
-        }
-
-        function NUM9() {
-            zapisTextbox("9");
-        }
-
-        function NUMPLUS() {
-            zapisTextbox("+");
-        }
-
-        function NUM4() {
-            zapisTextbox("4");
-        }
-
-        function NUM5() {
-            zapisTextbox("5");
-        }
-
-        function NUM6() {
-            zapisTextbox("6");
-        }
-
-        function NUM1() {
-            zapisTextbox("1");
-        }
-
-        function NUM2() {
-            zapisTextbox("2");
-        }
-
-        function NUM3() {
-            zapisTextbox("3");
-        }
-
+        function NUMDIVIDE() { zapisTextbox("/"); }
+        function NUMMULTIPLY() { zapisTextbox("*"); }
+        function NUMMINUS() { zapisTextbox("-"); }
+        function NUM7() { zapisTextbox("7"); }
+        function NUM8() { zapisTextbox("8"); }
+        function NUM9() { zapisTextbox("9"); }
+        function NUMPLUS() { zapisTextbox("+"); }
+        function NUM4() { zapisTextbox("4"); }
+        function NUM5() { zapisTextbox("5"); }
+        function NUM6() { zapisTextbox("6"); }
+        function NUM1() { zapisTextbox("1"); }
+        function NUM2() { zapisTextbox("2"); }
+        function NUM3() { zapisTextbox("3"); }
+        function NUM0() { zapisTextbox("0"); }
+        function NUMDOT() { zapisTextbox("."); }
         function NUMENTER() {
             let textbox = document.getElementById("textbox");
             textbox.value += "\n";
+            textbox.scrollTop = textbox.scrollHeight;
         }
-
-        function NUM0() {
-            zapisTextbox("0");
-        }
-
-        function NUMDOT() {
-            zapisTextbox(".");
-        }
-
 
     </script>
 

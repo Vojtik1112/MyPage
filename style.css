@@ -25,6 +25,10 @@
     --card-shadow: 0 8px 25px rgba(0, 80, 160, 0.08); /* Card shadow */
     --card-hover-shadow: 0 12px 35px rgba(0, 80, 160, 0.12); /* Card hover shadow */
     --link-arrow-color: #0077ff; /* Arrow color on cards/buttons */
+    --preloader-text-color: #556a8f; /* Use a variable for preloader text */
+    --preloader-logo-color: #1a2a4a; /* Use a variable for preloader logo */
+    --error-bg-color: #ffebee; /* Light red background for errors */
+    --error-text-color: #c62828; /* Dark red text for errors */
     /* --- Add more variables for other colors you use --- */
 
     /* Timing for smooth transition */
@@ -43,7 +47,7 @@ body.dark-mode {
     --nav-link-active-color: #d0d0ff; /* Lighter active nav color */
     --primary-accent: #4d94ff; /* Brighter blue accent */
     --primary-accent-darker: #80b3ff; /* Even brighter blue for gradients */
-    --button-text-color: #1a1a2e; /* Dark text on light buttons */
+    --button-text-color: #fff; /* Keep button text light for contrast */
     /* MODIFIED: Made subtitles brighter */
     --section-subtitle-color: #bdbddd; /* Lighter subtitles (was #a0a0cc) */
     --tesseract-line-color: #cccccc; /* Lighter Tesseract lines */
@@ -53,13 +57,19 @@ body.dark-mode {
     --card-shadow: 0 8px 25px rgba(0, 0, 0, 0.2); /* Darker shadow */
     --card-hover-shadow: 0 12px 35px rgba(0, 0, 0, 0.3); /* Darker hover shadow */
     --link-arrow-color: #4d94ff; /* Brighter arrow color */
+    --preloader-text-color: #a0a0cc; /* Lighter preloader text */
+    --preloader-logo-color: #c0c0ff; /* Lighter preloader logo */
+    --error-bg-color: #3e2723; /* Dark red background for errors */
+    --error-text-color: #ef9a9a; /* Light red text for errors */
 
     /* --- Override other variables as needed --- */
 }
 
 /* --- Refactored Base Styles (Examples) --- */
 /* Add transitions for smooth theme changes */
-body, .main-container, .logo, .main-nav a, .request-btn, h2, p, .project-card, #theme-toggle-btn, .center-letter, .graphic-subtext {
+/* Added .panel-content elements to transition */
+body, .main-container, .logo, .main-nav a, .request-btn, h2, p, .project-card, #theme-toggle-btn, .center-letter, .graphic-subtext,
+.request-panel, .panel-content, .panel-content h3, .panel-content p, .panel-content a, .panel-content strong, .close-panel-btn {
     transition: background-color var(--theme-transition-duration) ease,
     color var(--theme-transition-duration) ease,
     border-color var(--theme-transition-duration) ease,
@@ -94,12 +104,31 @@ button {
     background: none;
 }
 
+/* --- Accessibility: Add distinct focus styles for keyboard users --- */
+a:focus-visible,
+button:focus-visible,
+.project-card:focus-visible {
+    outline: 2px solid var(--primary-accent);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px var(--nav-link-hover-bg); /* Optional glow effect */
+}
+/* Ensure high-contrast focus on dark mode */
+body.dark-mode a:focus-visible,
+body.dark-mode button:focus-visible,
+body.dark-mode .project-card:focus-visible {
+    outline-color: var(--primary-accent-darker);
+    box-shadow: 0 0 0 4px rgba(100, 100, 220, 0.3); /* Adjusted glow */
+}
+/* Remove default outline when focus-visible is supported */
+a:focus, button:focus, .project-card:focus {
+    outline: none;
+}
+
 /* --- Add transitions for theme-affected preloader elements --- */
-.preloader, .preloader-content, .preloader-text-left, .preloader-letters .letter, .preloader-letters .subtext {
+.preloader, .preloader-content, .preloader-text-left, .preloader-letters .letter, .preloader-letters .subtext, .preloader-line {
     transition: background-color var(--theme-transition-duration) ease,
     color var(--theme-transition-duration) ease;
 }
-
 
 /* --- Preloader Styles --- */
 .preloader {
@@ -109,7 +138,7 @@ button {
     width: 100%;
     height: 100%;
     /* Use variable for background */
-    background-color: var(--bg-color); 
+    background-color: var(--bg-color);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -135,7 +164,7 @@ button {
 .preloader-text-left {
     font-size: 1.2rem;
     /* Use variable for text color */
-    color: var(--section-subtitle-color); 
+    color: var(--preloader-text-color);
     line-height: 1.6;
     flex-basis: 25%;
     text-align: left;
@@ -149,7 +178,7 @@ button {
     font-size: 10rem;
     font-weight: 600;
     /* Use variable for main letter color */
-    color: var(--header-logo-color); 
+    color: var(--preloader-logo-color);
     position: relative;
 }
 
@@ -165,7 +194,7 @@ button {
     font-size: 0.8rem;
     font-weight: 400;
     /* Use variable for subtext color */
-    color: var(--nav-link-color); 
+    color: var(--preloader-text-color); /* Match side text color */
     position: absolute;
     top: 10px;
     right: -50px;
@@ -311,7 +340,7 @@ button {
 .request-btn {
     /* Use variables for gradient and text */
     background: linear-gradient(100deg, var(--primary-accent), var(--primary-accent-darker));
-    color: var(--button-text-color); 
+    color: var(--button-text-color);
     padding: 12px 25px;
     border-radius: 25px;
     font-weight: 500;
@@ -342,7 +371,6 @@ button {
 
 .content-section {
     display: none; /* Hidden by default */
-    justify-content: space-between;
     align-items: center;
     position: absolute;
     top: 0;
@@ -353,6 +381,11 @@ button {
     transition: opacity 0.6s ease-in-out;
     gap: 20px;
     padding: 20px 0;
+}
+
+/* --- Home Section Specifics --- */
+#home-section {
+    justify-content: space-between; /* Keep space-between for home */
 }
 
 .content-section.active {
@@ -373,6 +406,61 @@ button {
     position: relative; /* For graphic/canvas overlay */
 }
 
+/* --- About Section Specifics --- */
+#about-section {
+    justify-content: center; /* Center the main content block */
+    flex-direction: column; /* Stack label and center vertically initially */
+    align-items: center; /* Center items horizontally */
+    text-align: center; /* Center text within the section */
+}
+
+.about-label-left {
+    writing-mode: horizontal-tb; /* Change back to horizontal */
+    text-orientation: mixed;
+    transform: none; /* Remove rotation */
+    color: #a0b0c8;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: center;
+    margin-bottom: 20px; /* Add space below the label */
+    width: 100%; /* Take full width */
+}
+
+.about-center {
+    flex-direction: column;
+    align-items: center; /* Center items within this container */
+    position: relative;
+    width: 100%; /* Ensure it can take width */
+    max-width: 900px; /* Limit max width for better readability */
+}
+
+.about-title {
+    font-size: 2rem;
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--section-title-color);
+    z-index: 3;
+    text-align: center;
+    margin-bottom: 40px; /* Increased space below title */
+}
+
+.about-details {
+    display: flex;
+    justify-content: center; /* Center the detail items */
+    gap: 30px;
+    position: relative;
+    width: 100%; /* Take full width */
+    flex-wrap: wrap; /* Allow wrapping on smaller screens if needed */
+}
+
+.detail-item {
+    flex: 1 1 250px; /* Allow grow/shrink, base width */
+    max-width: 300px; /* Limit max width of individual items */
+    text-align: left; /* Keep text left-aligned within item */
+    position: relative;
+    padding-top: 30px;
+}
 
 /* --- Home Section Specifics --- */
 #home-section .section-left .label {
@@ -393,14 +481,20 @@ button {
     font-size: 2.4rem;
     font-weight: 600;
     line-height: 1.3;
-    color: #1a2a4a;
+    color: var(--section-title-color);
     text-align: right;
 }
 
 /* --- Central Graphic Area (Now Canvas Container) --- */
-/* Styles moved to inline <style> in HTML for specificity */
-/* .graphic-area { ... } */
-/* #tesseract-canvas { ... } */
+.graphic-area {
+    position: relative;
+    width: 100%;
+    height: 570px; /* Moved from inline style */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
 
 
 .graphic-content { /* Overlay Text */
@@ -413,8 +507,8 @@ button {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    color: #003366; /* Dark blue text over graphic */
-     /* pointer-events: none; Added inline for reliability */
+    color: var(--tesseract-text-color); /* Use variable */
+    pointer-events: none; /* Prevent blocking canvas interaction */
 }
 
 /* Removed percentage container styles */
@@ -435,123 +529,20 @@ button {
     /* text-shadow: 0 1px 5px rgba(0, 0, 0, 0.2); /* Removed shadow */
 }
 
-/* --- About Section Specifics --- */
-.about-label-left {
-    writing-mode: vertical-rl;
-    text-orientation: mixed;
-    transform: rotate(180deg);
-    color: #a0b0c8;
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    align-self: flex-start;
-    margin-top: 50px;
-    flex-basis: 5%;
-    text-align: center;
-}
-
-.about-center {
-    flex-basis: 90%;
-    flex-direction: column;
-    align-items: stretch;
-    position: relative;
-    /* margin-bottom: 0; Handled inline */
-     /* padding-top: 20px; Handled inline */
-}
-
-.about-title {
-    font-size: 2rem;
-    font-weight: 600;
-    line-height: 1.3;
-    color: #1a2a4a;
-     /* margin-bottom: -40px; Removed as graphic is gone */
-    z-index: 3;
-    text-align: center;
-     margin-bottom: 30px; /* Add space below title */
-}
-
-/* Removed .about-graphic-area styles */
-
-.about-details {
-    display: flex;
-    justify-content: space-around;
-    gap: 30px;
-    padding: 0 5%;
-    position: relative;
-}
-
-.detail-item {
-    flex-basis: 30%;
-    text-align: left;
-    position: relative;
-    padding-top: 30px;
-}
-
-.detail-item .number {
-    position: absolute;
-    top: 0;
-    left: 0;
-    font-size: 0.9rem;
-    color: #889cc1;
-    font-weight: 500;
-}
-
-.detail-item h3 {
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: #0056b3;
-    margin-bottom: 10px;
-}
-
-.detail-item p {
-    font-size: 0.9rem;
-    color: #556a8f;
-    line-height: 1.6;
-}
-
-.detail-item .line {
-    position: absolute;
-    bottom: -15px;
-    left: 0;
-    width: 70%;
-    height: 1px;
-    background: linear-gradient(to right, #a0b0c8, transparent);
-}
-
-
 /* --- Placeholder Sections (Projects, Skills) --- */
 .placeholder-section {
     flex-direction: column;
     justify-content: flex-start; /* Align content top */
     text-align: center;
-    /* padding-bottom: 50px; Handled inline */
-    /* padding-top: 30px; Handled inline */
 }
 .placeholder-section h2 {
-    color: #1a2a4a;
+    color: var(--section-title-color);
     margin-bottom: 20px;
     font-size: 2rem; /* Match about title size */
 }
 .placeholder-section p {
-    color: #556a8f;
+    color: var(--section-subtitle-color);
     margin-bottom: 20px; /* Space before skills list OR project grid */
-}
-.placeholder-section ul { /* Style the skills list */
-     margin: 0 auto; /* Center the list */
-     max-width: 400px; /* Limit width */
-     text-align: left; /* Align list items left */
-}
-.placeholder-section ul li {
-    margin-bottom: 10px;
-    padding-left: 20px;
-    position: relative;
-}
-.placeholder-section ul li::before { /* Add bullet points */
-    content: '•';
-    position: absolute;
-    left: 0;
-    color: #0077ff; /* Blue bullet */
-    font-weight: bold;
 }
 
 /* --- Projects Grid & Cards --- */
@@ -576,6 +567,7 @@ button {
     text-align: left; /* Align text left within card */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     position: relative; /* Needed for absolute positioning of arrow */
+    cursor: pointer;
 }
 
 .project-card:hover {
@@ -611,108 +603,480 @@ button {
     transform: translateX(-5px); /* Move arrow slightly left on hover */
 }
 
-/* Adjust grid padding in responsive views if necessary */
-@media (max-width: 768px) {
-    .projects-grid {
-        padding: 0 5px;
-        gap: 20px;
-    }
-
-    .project-card {
-        padding: 20px;
-    }
-}
-
-
-/* --- Request Panel --- */
-.request-panel {
-    position: fixed;
-    top: 0;
-    right: -400px; /* Position off-screen to the right */
-    height: 100%;
-    width: 400px;
-    max-width: 90%;
-    background-color: #fff;
-    box-shadow: -5px 0 25px rgba(0, 0, 0, 0.1); /* Shadow on left side */
-    z-index: 999;
-    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+/* --- Skills Section Enhancements --- */
+.skills-categories {
     display: flex;
+    flex-wrap: wrap; /* Allow categories to wrap on smaller screens */
+    justify-content: space-around; /* Distribute categories */
+    gap: 30px; /* Space between categories */
+    width: 100%;
+    max-width: 1000px; /* Adjust max-width as needed */
+    margin: 30px auto 0; /* Center and add top margin */
+    text-align: left; /* Align text left within categories */
+}
+
+.skill-category {
+    flex: 1 1 250px; /* Allow categories to grow and shrink, base width 250px */
+    min-width: 200px; /* Minimum width before wrapping */
+}
+
+.skill-category h3 {
+    color: var(--primary-accent-darker);
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    border-bottom: 1px solid var(--nav-link-hover-bg); /* Subtle separator */
+    padding-bottom: 5px;
+}
+
+.skills-list { /* Target specifically */
+    list-style: none;
+    padding: 0; /* Remove default padding */
+    font-size: 0.95rem; /* Adjust font size */
+    color: var(--text-color); /* Use variable */
+    margin: 0; /* Remove margin */
+    text-align: left; /* Align list items left */
+}
+.skills-list li {
+    margin-bottom: 8px; /* Adjust spacing */
+    padding-left: 18px; /* Indent text */
+    position: relative;
+    line-height: 1.5;
+}
+.skills-list li::before { /* Add bullet points */
+    content: '▹'; /* Use a different bullet */
+    position: absolute;
+    left: 0;
+    color: var(--primary-accent); /* Blue bullet */
+    font-weight: bold;
+    font-size: 1.1em; /* Slightly larger bullet */
+}
+
+/* --- Education Section --- */
+#education-section {
     flex-direction: column;
-    border-top-left-radius: 20px;
-    border-bottom-left-radius: 20px;
+    align-items: center; /* Center content horizontally */
+    justify-content: flex-start; /* Align content to the top */
+    text-align: center;
 }
 
-.request-panel.open {
-    transform: translateX(-400px); /* Move panel to the left by its width */
+#education-section h2 {
+    color: var(--section-title-color);
+    margin-bottom: 30px; /* Space below main title */
+    font-size: 2rem;
 }
 
-.panel-overlay {
+.education-content {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    gap: 30px; /* Space between education items */
+    width: 100%;
+    max-width: 800px; /* Limit content width */
+    text-align: left; /* Align text left within items */
+}
+
+.education-item {
+    background-color: rgba(255, 255, 255, 0.05); /* Very subtle background */
+    padding: 20px;
+    border-radius: 10px;
+    border-left: 3px solid var(--primary-accent); /* Accent border */
+}
+
+body.dark-mode .education-item {
+    background-color: rgba(0, 0, 0, 0.1); /* Subtle dark background */
+}
+
+.education-item h3 {
+    color: var(--primary-accent-darker);
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.education-item p,
+.education-item ul {
+    color: var(--text-color);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.education-item ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.education-item li {
+    margin-bottom: 5px;
+    padding-left: 15px;
+    position: relative;
+}
+
+.education-item li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--primary-accent);
+}
+
+/* --- Resume Download Button --- */
+.resume-download-container {
+    text-align: center; /* Center the button */
+    margin-top: 30px; /* Space above the button */
+}
+
+.resume-download-btn {
+    display: inline-block; /* Allow padding and margin */
+    /* Use variables similar to request-btn */
+    background: linear-gradient(100deg, var(--primary-accent), var(--primary-accent-darker));
+    color: var(--button-text-color);
+    padding: 12px 25px;
+    border-radius: 25px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    box-shadow: 0 5px 15px rgba(0, 119, 255, 0.3);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    text-decoration: none;
+}
+
+.resume-download-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 119, 255, 0.4);
+}
+
+.resume-download-btn .arrow {
+    margin-left: 8px;
+    display: inline-block; /* Ensure arrow is treated correctly */
+    transition: transform 0.2s ease;
+}
+
+.resume-download-btn:hover .arrow {
+    transform: translateY(2px); /* Slight downward movement */
+}
+
+
+/* --- Project Modal Styles --- */
+.modal {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.4);
-    z-index: 998;
+    z-index: 1050; /* Above panel overlay */
+    display: flex;
+    align-items: center;
+    justify-content: center;
     opacity: 0;
-    pointer-events: none;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0s 0.3s linear;
+}
+
+.modal.open {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Darker overlay */
+    cursor: pointer;
+}
+
+.modal-content {
+    position: relative;
+    background: var(--panel-bg); /* Use panel background */
+    color: var(--text-color);
+    padding: 30px 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    z-index: 1051;
+    width: 90%;
+    max-width: 700px; /* Limit modal width */
+    max-height: 85vh; /* Limit modal height */
+    overflow-y: auto; /* Allow scrolling if content overflows */
+    transform: scale(0.95);
+    transition: transform 0.3s ease;
+}
+
+.modal.open .modal-content {
+    transform: scale(1);
+}
+
+.modal-close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 2.5rem;
+    font-weight: 300;
+    color: var(--text-color);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0 5px;
+    line-height: 1;
+    opacity: 0.7;
+    transition: opacity 0.2s ease, color 0.2s ease;
+}
+
+.modal-close-btn:hover {
+    color: var(--primary-accent);
+    opacity: 1;
+}
+
+#project-modal-title {
+    font-size: 1.6rem;
+    color: var(--section-title-color);
+    margin-bottom: 20px;
+    padding-right: 30px; /* Space for close button */
+}
+
+.modal-body h4 {
+    font-size: 1.1rem;
+    color: var(--primary-accent-darker);
+    margin-top: 20px;
+    margin-bottom: 8px;
+}
+
+.modal-body p {
+    font-size: 0.95rem;
+    color: var(--text-color);
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.modal-links {
+    margin-top: 25px;
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.modal-link-btn {
+    display: inline-block;
+    padding: 8px 18px;
+    border-radius: 20px;
+    background-color: var(--primary-accent);
+    color: var(--button-text-color);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+}
+
+.modal-link-btn:hover {
+    background-color: var(--primary-accent-darker);
+}
+
+
+/* --- Contact Form Styles (within panel) --- */
+#contact-form {
+    margin-top: 30px; /* Space above form */
+    border-top: 1px solid var(--nav-link-hover-bg); /* Separator */
+    padding-top: 20px;
+}
+
+#contact-form h4 {
+    font-size: 1.1rem;
+    color: var(--section-title-color);
+    margin-bottom: 15px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--section-subtitle-color);
+    margin-bottom: 5px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--nav-link-color); /* Use nav link color for border */
+    border-radius: 5px;
+    background-color: var(--bg-color); /* Match page background */
+    color: var(--text-color);
+    font-size: 0.95rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-accent);
+    box-shadow: 0 0 0 2px var(--nav-link-hover-bg);
+}
+
+.form-group textarea {
+    resize: vertical; /* Allow vertical resize */
+    min-height: 80px;
+}
+
+.form-submit-btn {
+    /* Style similar to request-btn */
+    background: linear-gradient(100deg, var(--primary-accent), var(--primary-accent-darker));
+    color: var(--button-text-color);
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-submit-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(0, 119, 255, 0.3);
+}
+
+.form-note {
+    font-size: 0.8rem;
+    color: var(--section-subtitle-color);
+    margin-top: 15px;
+    font-style: italic;
+}
+
+
+/* --- Request Panel --- */
+/* Styles for the left slide-in panel */
+#request-panel {
+    position: fixed;
+    top: 0;
+    left: 0; /* Correct position */
+    width: 400px;
+    max-width: 90%;
+    height: 100%;
+    background: var(--panel-bg);
+    box-shadow: 5px 0 25px rgba(0, 0, 0, 0.1);
+    z-index: 1002;
+    overflow-y: auto;
+    transform: translateX(-100%); /* Start off-screen left */
+    visibility: hidden; /* Initially hidden for accessibility */
+    transition: transform 0.4s ease-in-out, visibility 0s 0.4s linear; /* Delay visibility change */
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+#request-panel.open {
+    transform: translateX(0); /* Slide into view */
+    visibility: visible; /* Make visible when open */
+    transition: transform 0.4s ease-in-out; /* Only transition transform */
+}
+
+/* Styles for the overlay */
+#panel-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1001;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0s 0.4s linear;
+}
+
+#panel-overlay.active {
+    opacity: 1;
+    visibility: visible;
     transition: opacity 0.4s ease;
 }
 
-.panel-overlay.active {
-    opacity: 1;
-    pointer-events: auto;
-}
-
-
-.close-panel-btn {
+/* Styles for close button */
+#close-request-panel {
     position: absolute;
     top: 15px;
     right: 15px;
     font-size: 2rem;
-    color: #aaa;
+    color: var(--text-color);
     background: none;
     border: none;
     cursor: pointer;
-    transition: color 0.2s ease;
+    padding: 5px;
+    line-height: 1;
+    opacity: 0.7;
 }
 
-.close-panel-btn:hover {
-    color: #555;
+#close-request-panel:hover {
+    color: var(--primary-accent);
+    opacity: 1;
 }
 
+/* Add focus style for panel close button */
+#close-request-panel:focus-visible {
+    outline: 2px solid var(--primary-accent);
+    outline-offset: 1px;
+    opacity: 1;
+}
+
+/* Styles for panel content */
 .panel-content {
-    padding: 60px 40px 40px;
+    padding: 60px 40px 40px; /* Top padding accounts for close button */
     display: flex;
     flex-direction: column;
-    gap: 15px; /* Reduced gap slightly */
-    flex-grow: 1;
+    gap: 20px; /* Spacing between items */
+    flex-grow: 1; /* Allow content to fill panel */
 }
 
 .panel-content h3 {
-    font-size: 1.3rem;
-    color: #1a2a4a;
-    margin-bottom: 5px; /* Reduced margin */
+    font-size: 1.4rem; /* Slightly larger */
+    color: var(--section-title-color);
+    margin-bottom: 10px; /* Space after heading */
 }
 
-/* Removed input/textarea styles as using links now */
-
-.panel-content a { /* Style the contact links */
-    display: inline-block;
-    margin-top: 3px; /* Space below label */
-    word-break: break-all; /* Prevent long links overflowing */
+.panel-content .panel-intro {
+    font-size: 0.95rem;
+    color: var(--section-subtitle-color);
+    margin-bottom: 25px; /* Space before contact items */
 }
-.panel-content a:hover {
+
+.panel-content .contact-item {
+    margin-bottom: 15px; /* Space between contact items */
+}
+
+.panel-content .contact-item strong {
+    color: var(--section-title-color);
+    display: block; /* Ensure strong is on its own line */
+    margin-bottom: 3px; /* Small space before link */
+}
+
+.panel-content .contact-item a {
+    color: var(--primary-accent);
+    text-decoration: none;
+    word-break: break-all;
+    display: inline-block; /* Keep link inline */
+}
+
+.panel-content .contact-item a:hover {
     text-decoration: underline;
 }
 
+/* Add focus style for panel links */
+.panel-content .contact-item a:focus-visible {
+    outline: 2px solid var(--primary-accent);
+    outline-offset: 1px;
+    text-decoration: none; /* Remove underline on focus if desired */
+}
 
-.legal-text {
+.panel-content .legal-text {
     font-size: 0.8rem;
-    color: #889cc1;
+    color: var(--section-subtitle-color);
     line-height: 1.5;
     margin-top: auto; /* Push to bottom */
+    padding-top: 20px; /* Add some space above */
 }
+
 
 /* --- Theme Toggle Button Styles --- */
 #theme-toggle-btn {
@@ -731,6 +1095,7 @@ button {
     transition: background-color var(--theme-transition-duration) ease,
     color var(--theme-transition-duration) ease,
     border-color var(--theme-transition-duration) ease;
+    margin-left: 10px; /* Add some space from nav/other buttons */
 }
 
 #theme-toggle-btn:hover {
@@ -750,116 +1115,85 @@ button {
     opacity: 0.8; /* Make it slightly less prominent */
 }
 
-/* Ensure button is positioned correctly within the header flex layout */
-.site-header {
-    display: flex;
-    justify-content: space-between;
+/* --- Audio Control Button Styles --- */
+.audio-control-btn {
+    display: inline-flex;
     align-items: center;
-    padding-bottom: 20px;
-    margin-bottom: 30px;
-    gap: 15px; /* Adjust gap if needed */
-}
-
-
-/* --- Content Area & Sections --- */
-.content-area {
-    flex-grow: 1;
-    position: relative;
-}
-
-
-.content-section.active {
-    display: flex;
-    opacity: 1;
-    z-index: 2;
-}
-
-.section-left, .section-right {
-    flex-basis: 25%;
-    padding: 0 20px;
-}
-
-.section-center {
-    flex-basis: 45%;
-    display: flex;
     justify-content: center;
-    align-items: center;
-    position: relative; /* For graphic/canvas overlay */
+    padding: 8px; /* Adjust padding for icon-only */
+    border-radius: 50%; /* Make it circular */
+    border: 1px solid var(--nav-link-color);
+    color: var(--nav-link-color);
+    background-color: transparent;
+    cursor: pointer;
+    transition: background-color var(--theme-transition-duration) ease,
+                color var(--theme-transition-duration) ease,
+                border-color var(--theme-transition-duration) ease;
+    line-height: 1; /* Ensure icon is centered */
+    margin-left: 10px; /* Add some space */
 }
 
-
-/* --- Skills Section Fix --- */
-#skills-section ul {
-    list-style: none;
-    padding: 20px 0;
-    font-size: 1.1rem;
-    /* Use text color variable */
-    color: var(--text-color);
+.audio-control-btn:hover {
+    background-color: var(--nav-link-hover-bg);
+    border-color: var(--nav-link-active-color);
 }
 
-/* --- Slide-Out Request Panel --- */
-#request-panel {
+.audio-control-btn svg {
+    width: 1em; /* Match font size */
+    height: 1em;
+    display: block; /* Remove extra space */
+}
+
+.audio-control-btn .hidden {
+    display: none;
+}
+
+/* --- Audio Error Message Styles --- */
+.audio-error {
     position: fixed;
-    top: 0;
-    /* Change from 'right: 0;' to 'left: 0;' */
-    left: 0;
-    width: 400px; /* Or your desired panel width */
-    max-width: 90%;
-    height: 100%;
-    /* Use a variable or specific color */
-    background: var(--panel-bg, linear-gradient(135deg, #ffffff 0%, #f0f5fb 100%));
-    box-shadow: -5px 0 25px rgba(0, 0, 0, 0.1); /* Shadow on the right side now */
-    z-index: 1002; /* Ensure it's above the overlay */
-    padding: 40px;
-    overflow-y: auto;
-    /* Change initial transform to be off-screen left */
-    transform: translateX(-100%);
-    transition: transform 0.4s ease-in-out; /* Smooth transition */
-    color: var(--text-color); /* Ensure text color contrasts with background */
-}
-
-#request-panel.open {
-    /* Slide it into view */
-    transform: translateX(0);
-}
-
-/* Optional: Style the overlay */
-#panel-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
-    z-index: 1001; /* Below the panel but above content */
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--error-bg-color);
+    color: var(--error-text-color);
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1010; /* Above most elements */
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.4s ease, visibility 0s 0.4s linear;
+    transition: opacity 0.3s ease, visibility 0s 0.3s linear;
 }
 
-#panel-overlay.active {
+.audio-error.visible {
     opacity: 1;
     visibility: visible;
-    transition: opacity 0.4s ease;
+    transition: opacity 0.3s ease;
 }
 
-/* Add styles for close button, form elements inside the panel as needed */
-#close-request-panel {
+/* --- Skills Section Fix --- */
+.skills-list { /* Target specifically */
+    list-style: none;
+    padding: 20px 0; /* Add padding here */
+    font-size: 1.1rem; /* Use desired font size */
+    color: var(--text-color); /* Use variable */
+    margin: 0 auto; /* Center the list */
+    max-width: 400px; /* Limit width */
+    text-align: left; /* Align list items left */
+}
+.skills-list li {
+    margin-bottom: 10px;
+    padding-left: 20px;
+    position: relative;
+}
+.skills-list li::before { /* Add bullet points */
+    content: '•';
     position: absolute;
-    top: 15px;
-    right: 15px; /* Position close button inside the panel */
-    font-size: 2rem;
-    color: var(--text-color);
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 5px;
-    line-height: 1;
+    left: 0;
+    color: var(--primary-accent); /* Blue bullet */
+    font-weight: bold;
 }
 
-#close-request-panel:hover {
-    color: var(--primary-accent);
-}
 
 /* --- Responsive Adjustments --- */
 @media (max-width: 1200px) {
@@ -869,5 +1203,191 @@ button {
     }
 
     #home-section .section-left p,
-    #home-
+    #home-section .section-right h2 {
+        font-size: 1.5rem;
+        color: var(--section-title-color);
+    }
+
+    .about-details {
+        gap: 30px; /* Adjust gap */
+    }
+    .detail-item {
+        max-width: 300px; /* Keep max-width */
+    }
+    .resume-download-container {
+        margin-top: 20px; /* Adjust spacing */
+    }
+    .skills-categories {
+        gap: 20px;
+    }
+}
+
+@media (max-width: 992px) {
+    .main-container {
+        padding: 20px 25px;
+        min-height: auto; /* Allow container to shrink */
+    }
+    .site-header {
+        flex-direction: column; /* Stack header items */
+        align-items: flex-start; /* Align left */
+        margin-bottom: 20px;
+    }
+    .main-nav ul {
+        gap: 10px; /* Reduce nav gap */
+        flex-wrap: wrap; /* Allow nav items to wrap */
+    }
+    .main-nav a {
+        padding: 6px 10px;
+        font-size: 0.9rem;
+    }
+    .request-btn {
+        align-self: flex-start; /* Align button left */
+        margin-top: 10px;
+        margin-left: 0; /* Reset margin */
+    }
+    #theme-toggle-btn {
+        align-self: flex-start; /* Align button left */
+        margin-top: 10px;
+        margin-left: 0; /* Reset margin */
+    }
+    .audio-control-btn {
+        align-self: flex-start;
+        margin-top: 10px;
+        margin-left: 0; /* Reset margin */
+    }
+
+    .content-section {
+        flex-direction: column; /* Stack sections vertically */
+        position: relative; /* Change from absolute */
+        display: none; /* Keep hidden until active */
+        height: auto; /* Allow height to adjust */
+        opacity: 0; /* Keep transition */
+        padding: 30px 10px; /* Consistent padding */
+    }
+    .content-section.active {
+        display: flex; /* Show active section */
+        opacity: 1;
+    }
+    .section-left, .section-center, .section-right {
+        flex-basis: 100%; /* Full width */
+        padding: 0 10px; /* Adjust padding */
+        text-align: center; /* Center text */
+    }
+     #home-section .section-left p,
+     #home-section .section-right h2 {
+        text-align: center; /* Center text */
+        font-size: 1.3rem;
+     }
+     #home-section .section-left .label {
+         text-align: center;
+     }
+     .graphic-area {
+         height: 350px; /* Reduce canvas height */
+         margin: 20px 0;
+     }
+     .center-letter {
+         font-size: 4rem;
+     }
+     .about-label-left {
+         text-align: center;
+         margin: 0 0 20px 0;
+     }
+     .about-center {
+         max-width: 90%; /* Adjust max-width for smaller screens */
+     }
+     .about-details {
+         gap: 25px; /* Adjust gap for smaller screens */
+     }
+     .projects-grid {
+         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+     }
+     #about-section, #projects-section, #skills-section, #education-section {
+         padding-bottom: 50px;
+         padding-top: 30px;
+     }
+     .skills-categories {
+         flex-direction: column; /* Stack categories vertically */
+         align-items: center; /* Center categories */
+     }
+     .skill-category {
+         width: 90%; /* Take more width when stacked */
+         max-width: 400px;
+     }
+     .education-content {
+         max-width: 90%;
+     }
+}
+
+@media (max-width: 768px) {
+    .modal-content {
+        padding: 20px;
+        max-height: 90vh;
+    }
+    #project-modal-title {
+        font-size: 1.4rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-container {
+        padding: 15px;
+        border-radius: 20px;
+    }
+    .logo {
+        font-size: 1.5rem;
+    }
+    .main-nav a {
+        font-size: 0.85rem;
+    }
+    .request-btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+    #theme-toggle-btn {
+        padding: 6px 10px;
+        font-size: 0.85rem;
+    }
+    .graphic-area {
+        height: 280px;
+    }
+    .center-letter {
+        font-size: 3rem;
+    }
+    .graphic-subtext {
+        font-size: 0.8rem;
+    }
+    .preloader-letters {
+        font-size: 6rem;
+    }
+    .preloader-text-left {
+        font-size: 1rem;
+    }
+    #request-panel {
+        width: 100%;
+        max-width: 100%;
+        border-radius: 0;
+    }
+    .panel-content {
+        padding: 50px 20px 20px;
+    }
+    .modal-content {
+        width: 95%;
+        padding: 15px;
+    }
+    #project-modal-title {
+        font-size: 1.2rem;
+    }
+    .modal-link-btn {
+        padding: 6px 12px;
+        font-size: 0.85rem;
+    }
+    .education-item {
+        padding: 15px;
+    }
+    .education-item h3 {
+        font-size: 1.1rem;
+    }
+    .education-item p, .education-item ul {
+        font-size: 0.9rem;
+    }
 }
