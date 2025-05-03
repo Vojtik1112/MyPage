@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fd7f821a-f96c-4dc7-82a6-b5432aca8538" name="Changes" comment="Add theme toggle and implement dynamic theming variables&#10;&#10;Introduced a theme toggle button in `index.html` for switching between light and dark modes. Refactored `style.css` to leverage CSS variables, enabling smooth theme transitions. Updated project files to improve maintainability and enhance the user experience.">
+    <list default="true" id="fd7f821a-f96c-4dc7-82a6-b5432aca8538" name="Changes" comment="Fix typos and improve comments across multiple files&#10;&#10;Resolved spelling and grammatical issues in comments and updated phrasing for clarity and consistency in `index.html`, `.idea/workspace.xml`, and `script.js`. These changes enhance code readability and maintainability without altering functionality.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/script.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,7 +85,7 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "ml.llm.LLMConfigurable",
+    "settings.editor.selected.configurable": "preferences.updates",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -112,7 +111,8 @@
       <workItem from="1746103783048" duration="4763000" />
       <workItem from="1746135214777" duration="11000" />
       <workItem from="1746135279886" duration="4071000" />
-      <workItem from="1746299504714" duration="1594000" />
+      <workItem from="1746299504714" duration="2837000" />
+      <workItem from="1746369324061" duration="550000" />
     </task>
     <task id="LOCAL-00001" summary="Update styles and layout; add IDE workspace config&#10;&#10;Increased height of graphic area in HTML for better layout. Changed text colors to black and removed shadows in CSS for improved readability. Added `.idea/workspace.xml` for local IDE configuration.">
       <option name="closed" value="true" />
@@ -170,7 +170,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746299677017</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Fix typos and improve comments across multiple files&#10;&#10;Resolved spelling and grammatical issues in comments and updated phrasing for clarity and consistency in `index.html`, `.idea/workspace.xml`, and `script.js`. These changes enhance code readability and maintainability without altering functionality.">
+      <option name="closed" value="true" />
+      <created>1746301229233</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1746301229233</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -199,9 +207,10 @@
     <MESSAGE value="Update project files and improve layout and responsiveness&#10;&#10;Refined layout and styling in `style.css` with new responsive designs, targeting various screen sizes. Revised project-specific configurations under `.idea/`, updated `index.html`, and optimized scripts for functionality and readability. These changes enhance user experience and adapt the application to be more mobile-friendly." />
     <MESSAGE value="Add background music functionality and improve layout&#10;&#10;Introduced a background music player to `index.html` and updated `script.js` to handle music playback after the preloader animation. Adjusted IDE configuration in `.idea/workspace.xml` and refined layout responsiveness for a better user experience." />
     <MESSAGE value="Add theme toggle and implement dynamic theming variables&#10;&#10;Introduced a theme toggle button in `index.html` to switch between light and dark modes. Refactored `style.css` to use CSS variables for theme-specific styles, enabling dynamic updates with smooth transitions. Updated various project files to enhance maintainability and user experience." />
-    <MESSAGE value="Merge remote-tracking branch 'origin/main'" />
     <MESSAGE value="Add theme toggle and implement dynamic theming variables&#10;&#10;Introduced a theme toggle button in `index.html` for switching between light and dark modes. Refactored `style.css` to leverage CSS variables, enabling smooth theme transitions. Updated project files to improve maintainability and enhance the user experience." />
-    <option name="LAST_COMMIT_MESSAGE" value="Add theme toggle and implement dynamic theming variables&#10;&#10;Introduced a theme toggle button in `index.html` for switching between light and dark modes. Refactored `style.css` to leverage CSS variables, enabling smooth theme transitions. Updated project files to improve maintainability and enhance the user experience." />
+    <MESSAGE value="Merge remote-tracking branch 'origin/main'" />
+    <MESSAGE value="Fix typos and improve comments across multiple files&#10;&#10;Resolved spelling and grammatical issues in comments and updated phrasing for clarity and consistency in `index.html`, `.idea/workspace.xml`, and `script.js`. These changes enhance code readability and maintainability without altering functionality." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix typos and improve comments across multiple files&#10;&#10;Resolved spelling and grammatical issues in comments and updated phrasing for clarity and consistency in `index.html`, `.idea/workspace.xml`, and `script.js`. These changes enhance code readability and maintainability without altering functionality." />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
