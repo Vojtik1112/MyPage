@@ -117,95 +117,96 @@ textarea.input-error,
 select.input-error {
     border-color: #e74c3c !important;
     box-shadow: 0 0 5px rgba(231, 76, 60, 0.5) !important;
+}
 
-    .checkbox-group.input-error label,
-    .radio-group.input-error span {
+/* --- Corrected Error Styling Selectors --- */
+.checkbox-group.input-error label,
+.radio-group.input-error span {
+    color: #e74c3c;
+    font-weight: bold;
+}
 
-        color: #e74c3c;
-        font-weight: bold;
-    }
+.checkbox-group.input-error input[type="checkbox"],
+.radio-group.input-error input[type="radio"] {
+    outline: 1px solid #e74c3c;
+}
 
-    .checkbox-group.input-error input[type="checkbox"],
-    .radio-group.input-error input[type="radio"] {
-        outline: 1px solid #e74c3c;
-    }
+.error-message {
+    color: #e74c3c;
+    font-size: 0.85em;
+    display: block;
+    margin-top: -10px; /* Adjust as needed */
+    margin-bottom: 10px;
+    min-height: 1.2em; /* Reserve space */
+    visibility: hidden; /* Hide initially */
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out, visibility 0s linear 0.3s;
+}
 
-    .error-message {
-        color: #e74c3c;
-        font-size: 0.85em;
-        display: block;
-        margin-top: -10px;
-        margin-bottom: 10px;
-        min-height: 1.2em;
-        visibility: hidden;
-        opacity: 0;
-        transition: opacity 0.3s ease-in-out, visibility 0s linear 0.3s;
-    }
+.error-message.visible {
+    visibility: visible; /* Show when error occurs */
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+}
+/* --- End Corrected Selectors --- */
 
-    .error-message.visible {
-        visibility: visible;
-        opacity: 1;
-        transition: opacity 0.3s ease-in-out;
-    }
+.form-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
 
+input[type="submit"],
+input[type="reset"] {
+    background-color: #3498db;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+    flex-basis: 48%;
+}
+
+input[type="reset"] {
+    background-color: #e74c3c;
+}
+
+input[type="submit"]:hover,
+input[type="submit"]:focus {
+    background-color: #2980b9;
+    outline: none;
+}
+
+input[type="reset"]:hover,
+input[type="reset"]:focus {
+    background-color: #c0392b;
+    outline: none;
+}
+
+.info {
+    margin-top: 20px;
+    font-size: 0.9em;
+    color: #555;
+    background-color: #ecf0f1;
+    padding: 10px;
+    border-left: 4px solid #3498db;
+    border-radius: 0 4px 4px 0;
+}
+
+@media (max-width: 480px) {
     .form-buttons {
-        display: flex;
-        justify-content: space-between;
-        margin-top: 20px;
+        flex-direction: column;
     }
 
     input[type="submit"],
     input[type="reset"] {
-        background-color: #3498db;
-        color: white;
-        padding: 12px 20px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 1rem;
-        transition: background-color 0.3s ease;
-        flex-basis: 48%;
+        width: 100%;
+        margin-bottom: 10px;
     }
 
     input[type="reset"] {
-        background-color: #e74c3c;
-    }
-
-    input[type="submit"]:hover,
-    input[type="submit"]:focus {
-        background-color: #2980b9;
-        outline: none;
-    }
-
-    input[type="reset"]:hover,
-    input[type="reset"]:focus {
-        background-color: #c0392b;
-        outline: none;
-    }
-
-    .info {
-        margin-top: 20px;
-        font-size: 0.9em;
-        color: #555;
-        background-color: #ecf0f1;
-        padding: 10px;
-        border-left: 4px solid #3498db;
-        border-radius: 0 4px 4px 0;
-    }
-
-    @media (max-width: 480px) {
-        .form-buttons {
-            flex-direction: column;
-        }
-
-        input[type="submit"],
-        input[type="reset"] {
-            width: 100%;
-            margin-bottom: 10px;
-        }
-
-        input[type="reset"] {
-            margin-bottom: 0;
-        }
+        margin-bottom: 0;
     }
 }

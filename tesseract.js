@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
         scene = new THREE.Scene();
 
         // Camera
-        const fov = 60; // Adjust FOV for a better view
+        const fov = 68; // Adjust FOV for a better view
         const aspect = container.clientWidth / container.clientHeight;
         const near = 0.1;
         const far = 100;
@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // ** Set initial color using CSS variable or default **
             // We'll set it dynamically from script.js after checking theme
             color: 0x000000, // Default light theme color
-            linewidth: 1 
+            linewidth: 1
         });
         tesseractLines = new THREE.LineSegments(geometry, tesseractMaterial); // <-- Use the variable
         scene.add(tesseractLines);
