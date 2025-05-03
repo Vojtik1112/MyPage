@@ -378,6 +378,26 @@ document.addEventListener('DOMContentLoaded', () => {
         const details = projectDetails[projectId];
         if (!details || !projectModal) return;
 
+        // Find elements within the modal template to update
+        const modalTitle = projectModal.querySelector('.modal-title');
+        const modalImage = projectModal.querySelector('.modal-image'); // Assuming you have an <img> tag
+        const modalDescription = projectModal.querySelector('.modal-description');
+        const modalTech = projectModal.querySelector('.modal-tech');
+        const modalChallenges = projectModal.querySelector('.modal-challenges');
+        const modalLiveLink = projectModal.querySelector('.modal-live-link');
+        const modalRepoLink = projectModal.querySelector('.modal-repo-link');
+
+        if (modalTitle) modalTitle.textContent = details.title;
+
+        // *** ADD ALT TEXT HERE ***
+        if (modalImage) {
+            modalImage.src = details.image;
+            modalImage.alt = `Screenshot of the ${details.title} project`; // Add descriptive alt text
+        }
+
+        if (modalDescription) modalDescription.textContent = details.description;
+        // ... (rest of the assignments)
+
         // Populate modal content
         const titleEl = projectModal.querySelector('#project-modal-title');
         const imgEl = projectModal.querySelector('#project-modal-image');
@@ -470,5 +490,51 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- End Project Modal Logic ---
+
+    // --- Navigation Logic ---
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = link.getAttribute('data-target');
+            const targetSection = document.getElementById(targetId);
+
+            if (targetSection) {
+                let isHomeSectionActive = false; // Track if home is becoming active
+                // Update Sections
+                contentSections.forEach(s => {
+                    const isActive = s.id === targetId;
+                    s.classList.toggle('active', isActive);
+                    s.setAttribute('aria-hidden', !isActive); // Toggle aria-hidden
+                    if (isActive && s.id === 'home-section') {
+                        isHomeSectionActive = true; // Home section is now active
+                    }
+                });
+
+                // *** Control Tesseract Animation ***
+                if (typeof window.setTesseractActive === 'function') {
+                    window.setTesseractActive(isHomeSectionActive);
+                }
+                // *** End Control ***
+
+                // Update Nav Links
+                navLinks.forEach(l => {
+                    const isCurrent = l === link;
+                    l.classList.toggle('active', isCurrent);
+                    if (isCurrent) {
+                        l.setAttribute('aria-current', 'page'); // Set aria-current
+                    } else {
+                        l.removeAttribute('aria-current'); // Remove aria-current
+                    }
+                });
+            }
+        });
+    });
+
+    // Also set the initial state based on the default active section (usually home)
+    if (typeof window.setTesseractActive === 'function') {
+        const initialActiveSection = document.querySelector('.content-section.active');
+        window.setTesseractActive(initialActiveSection && initialActiveSection.id === 'home-section');
+    }
+
 
 }); // End of DOMContentLoaded
