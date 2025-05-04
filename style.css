@@ -7,91 +7,109 @@
 
 /* --- Root Variables (Light Theme - Default) --- */
 :root {
-    --bg-color: #eef3f8; /* Light page background */
-    --text-color: #333; /* Default text color */
-    --panel-bg: linear-gradient(135deg, #ffffff 0%, #f0f5fb 100%); /* Main container background */
-    --header-logo-color: #1a2a4a; /* Logo color */
-    --nav-link-color: #556a8f; /* Navigation link color */
-    --nav-link-hover-bg: rgba(0, 119, 255, 0.08); /* Nav link hover/active background */
-    --nav-link-active-color: #0056b3; /* Active nav link color */
-    --primary-accent: #0077ff; /* Main blue accent */
-    --primary-accent-darker: #0056b3; /* Darker blue accent */
-    --button-text-color: #fff; /* Text color for primary button */
-    --section-title-color: #1a2a4a; /* Color for section titles like h2 */
-    --section-subtitle-color: #556a8f; /* Color for less prominent text */
-    --tesseract-line-color: #000000; /* Tesseract lines color */
-    --tesseract-text-color: #000; /* Text over tesseract color */
-    --card-bg: #fff; /* Project card background */
-    --card-shadow: 0 8px 25px rgba(0, 80, 160, 0.08); /* Card shadow */
-    --card-hover-shadow: 0 12px 35px rgba(0, 80, 160, 0.12); /* Card hover shadow */
-    --link-arrow-color: #0077ff; /* Arrow color on cards/buttons */
-    --preloader-text-color: #556a8f; /* Use a variable for preloader text */
-    --preloader-logo-color: #1a2a4a; /* Use a variable for preloader logo */
-    --error-bg-color: #ffebee; /* Light red background for errors */
-    --error-text-color: #c62828; /* Dark red text for errors */
-    /* --- Add more variables for other colors you use --- */
+    --bg-color: #eef3f8;
+    --text-color: #333;
+    --panel-bg: linear-gradient(135deg, #ffffff 0%, #f0f5fb 100%);
+    --header-logo-color: #1a2a4a;
+    --nav-link-color: #556a8f;
+    --nav-link-hover-bg: rgba(0, 119, 255, 0.08);
+    --nav-link-active-color: #0056b3;
+    --primary-accent: #0077ff;
+    --primary-accent-darker: #0056b3;
+    --button-text-color: #fff;
+    --section-title-color: #1a2a4a;
+    --section-subtitle-color: #556a8f;
+    --tesseract-line-color: #000000; /* Default Tesseract color */
+    --tesseract-text-color: #000;
+    --card-bg: #fff;
+    --card-shadow: 0 8px 25px rgba(0, 80, 160, 0.08);
+    --card-hover-shadow: 0 12px 35px rgba(0, 80, 160, 0.12);
+    --link-arrow-color: #0077ff;
+    --preloader-text-color: #556a8f;
+    --preloader-logo-color: #1a2a4a;
+    --error-bg-color: #ffebee;
+    --error-text-color: #c62828;
+    --footer-text-color: #556a8f;
+    --footer-link-color: #0056b3;
+    --input-border-color: var(--nav-link-color); /* Use existing var */
+    --input-focus-border-color: var(--primary-accent);
+    --input-focus-shadow-color: var(--nav-link-hover-bg);
+    --input-bg-color: var(--bg-color); /* Match page bg */
 
-    /* Timing for smooth transition */
     --theme-transition-duration: 0.3s;
 }
 
 /* --- Dark Mode Variables --- */
 body.dark-mode {
-    --bg-color: #1a1a2e; /* Dark page background */
-    --text-color: #f0f0f0; /* Light default text */
-    --panel-bg: linear-gradient(135deg, #2c2c44 0%, #1f1f35 100%); /* Dark container background */
-    --header-logo-color: #c0c0ff; /* Lighter logo color */
-    --nav-link-color: #a0a0cc; /* Lighter nav link color */
-    --section-title-color: #f5f5f5; /* Light section titles */
-    --nav-link-hover-bg: rgba(100, 100, 220, 0.15); /* Adjusted hover background */
-    --nav-link-active-color: #d0d0ff; /* Lighter active nav color */
-    --primary-accent: #4d94ff; /* Brighter blue accent */
-    --primary-accent-darker: #80b3ff; /* Even brighter blue for gradients */
-    --button-text-color: #fff; /* Keep button text light for contrast */
-    --section-subtitle-color: #bdbddd; /* Lighter subtitles */
-    --tesseract-line-color: #cccccc; /* Lighter Tesseract lines */
-    --tesseract-text-color: #f0f0f0; /* Light text over tesseract */
-    --card-bg: #2c2c44; /* Dark card background */
-    --card-shadow: 0 8px 25px rgba(0, 0, 0, 0.2); /* Darker shadow */
-    --card-hover-shadow: 0 12px 35px rgba(0, 0, 0, 0.3); /* Darker hover shadow */
-    --link-arrow-color: #4d94ff; /* Brighter arrow color */
-    --preloader-text-color: #a0a0cc; /* Lighter preloader text */
-    --preloader-logo-color: #c0c0ff; /* Lighter preloader logo */
-    --error-bg-color: #3e2723; /* Dark red background for errors */
-    --error-text-color: #ef9a9a; /* Light red text for errors */
-    /* --- Override other variables as needed --- */
+    --bg-color: #1a1a2e;
+    --text-color: #f0f0f0;
+    --panel-bg: linear-gradient(135deg, #2c2c44 0%, #1f1f35 100%);
+    --header-logo-color: #c0c0ff;
+    --nav-link-color: #a0a0cc;
+    --nav-link-hover-bg: rgba(100, 100, 220, 0.15);
+    --nav-link-active-color: #d0d0ff;
+    --primary-accent: #4d94ff;
+    --primary-accent-darker: #80b3ff;
+    --button-text-color: #fff; /* Keep light */
+    --section-title-color: #f5f5f5;
+    --section-subtitle-color: #bdbddd;
+    --tesseract-line-color: #cccccc; /* Dark mode Tesseract color */
+    --tesseract-text-color: #f0f0f0;
+    --card-bg: #2c2c44;
+    --card-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    --card-hover-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
+    --link-arrow-color: #4d94ff;
+    --preloader-text-color: #a0a0cc;
+    --preloader-logo-color: #c0c0ff;
+    --error-bg-color: #3e2723;
+    --error-text-color: #ef9a9a;
+    --footer-text-color: #a0a0cc;
+    --footer-link-color: #80b3ff;
+    --input-border-color: var(--nav-link-color);
+    --input-focus-border-color: var(--primary-accent);
+    --input-focus-shadow-color: rgba(100, 100, 220, 0.3);
+    --input-bg-color: #2c2c44; /* Darker input background */
 }
 
-/* --- Refactored Base Styles --- */
-/* Add transitions for smooth theme changes */
-/* Added .panel-content elements and preloader elements to transition */
-body, .main-container, .logo, .main-nav a, .request-btn, h2, p, .project-card, #theme-toggle-btn, .center-letter, .graphic-subtext,
+/* --- Refactored Base Styles & Transitions --- */
+body, .main-container, .logo, .main-nav a, .button-primary, h2, p, .project-card, #theme-toggle-btn, .center-letter, .graphic-subtext,
 .request-panel, .panel-content, .panel-content h3, .panel-content p, .panel-content a, .panel-content strong, .close-panel-btn,
 .preloader, .preloader-content, .preloader-text-left, .preloader-letters .letter, .preloader-letters .subtext, .preloader-line,
-.modal-content, .modal-close-btn, .form-group input, .form-group textarea, .audio-control-btn, .education-item {
+.modal-content, .modal-close-btn, .form-group input, .form-group textarea, .audio-control-btn, .education-item, .site-footer-info {
     transition: background-color var(--theme-transition-duration) ease,
     color var(--theme-transition-duration) ease,
     border-color var(--theme-transition-duration) ease,
     background var(--theme-transition-duration) ease,
-    box-shadow var(--theme-transition-duration) ease;
+    box-shadow var(--theme-transition-duration) ease,
+    fill var(--theme-transition-duration) ease; /* Added fill for SVG */
 }
-
 
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: var(--bg-color); /* Use variable */
-    color: var(--text-color); /* Use variable */
+    background-color: var(--bg-color);
+    color: var(--text-color);
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    overflow-x: hidden; /* Prevent horizontal scroll */
+    overflow-x: hidden;
 }
 
 a {
     text-decoration: none;
     color: inherit;
+    /* Base transition for links */
+    transition: color var(--theme-transition-duration) ease;
 }
+
+a:hover {
+    color: var(--primary-accent); /* General link hover */
+}
+
+body.dark-mode a:hover {
+    color: var(--primary-accent-darker);
+}
+
 
 ul {
     list-style: none;
@@ -102,44 +120,46 @@ button {
     cursor: pointer;
     border: none;
     background: none;
+    color: inherit; /* Inherit color for icon buttons */
 }
 
-/* --- Accessibility: Add distinct focus styles for keyboard users --- */
+/* --- Accessibility: Focus Styles --- */
+/* (Using :focus-visible for modern browsers) */
 a:focus-visible,
 button:focus-visible,
 input:focus-visible,
 textarea:focus-visible,
 select:focus-visible,
-[tabindex="0"]:focus-visible, /* Covers the project cards */
-.project-card:focus-visible { /* Keep explicit for clarity */
-    outline: 2px solid var(--primary-accent);
+[tabindex="0"]:focus-visible {
+    outline: 3px solid var(--primary-accent);
     outline-offset: 2px;
-    box-shadow: 0 0 0 4px var(--nav-link-hover-bg); /* Optional glow effect */
+    box-shadow: 0 0 0 4px var(--nav-link-hover-bg);
 }
-/* Ensure high-contrast focus on dark mode */
+
+/* High-contrast focus for dark mode */
 body.dark-mode a:focus-visible,
 body.dark-mode button:focus-visible,
 body.dark-mode input:focus-visible,
 body.dark-mode textarea:focus-visible,
 body.dark-mode select:focus-visible,
-body.dark-mode [tabindex="0"]:focus-visible,
-body.dark-mode .project-card:focus-visible {
+body.dark-mode [tabindex="0"]:focus-visible {
     outline-color: var(--primary-accent-darker);
-    box-shadow: 0 0 0 4px rgba(100, 100, 220, 0.3); /* Adjusted glow */
+    box-shadow: 0 0 0 4px rgba(100, 100, 220, 0.3);
 }
-/* Remove default outline when focus-visible is supported */
-a:focus, button:focus, input:focus, textarea:focus, select:focus, [tabindex="0"]:focus, .project-card:focus {
+
+/* Remove default outline when :focus-visible is supported and applied */
+a:focus, button:focus, input:focus, textarea:focus, select:focus, [tabindex="0"]:focus {
     outline: none;
 }
 
-/* --- Preloader Styles --- */
+/* --- Preloader --- */
 .preloader {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: var(--bg-color); /* Use variable */
+    background-color: var(--bg-color);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -164,7 +184,7 @@ a:focus, button:focus, input:focus, textarea:focus, select:focus, [tabindex="0"]
 
 .preloader-text-left {
     font-size: 1.2rem;
-    color: var(--preloader-text-color); /* Use variable */
+    color: var(--preloader-text-color);
     line-height: 1.6;
     flex-basis: 25%;
     text-align: left;
@@ -177,7 +197,7 @@ a:focus, button:focus, input:focus, textarea:focus, select:focus, [tabindex="0"]
     flex-grow: 1;
     font-size: 10rem;
     font-weight: 600;
-    color: var(--preloader-logo-color); /* Use variable */
+    color: var(--preloader-logo-color);
     position: relative;
 }
 
@@ -192,7 +212,7 @@ a:focus, button:focus, input:focus, textarea:focus, select:focus, [tabindex="0"]
 .preloader-letters .subtext {
     font-size: 0.8rem;
     font-weight: 400;
-    color: var(--preloader-text-color); /* Use variable */
+    color: var(--preloader-text-color);
     position: absolute;
     top: 10px;
     right: -50px;
@@ -218,13 +238,10 @@ a:focus, button:focus, input:focus, textarea:focus, select:focus, [tabindex="0"]
         transform: scale(0.9);
     }
 }
-
-/* Timing the animations (Ensure these IDs match HTML) */
 #letter-c1 { animation-name: fadeLetter; animation-delay: 0s; }
 #letter-b { animation-name: fadeLetter; animation-delay: 0.8s; }
 
-#letter-c1.visible .subtext,
-#letter-b.visible .subtext {
+#letter-c1.visible .subtext, #letter-b.visible .subtext {
     opacity: 1;
 }
 
@@ -234,10 +251,10 @@ a:focus, button:focus, input:focus, textarea:focus, select:focus, [tabindex="0"]
     left: 0;
     width: 100%;
     height: 2px;
-    background-color: var(--nav-link-hover-bg); /* Use variable */
+    background-color: var(--nav-link-hover-bg);
 }
 
-/* --- Page Wrapper & Container --- */
+/* --- Page Layout --- */
 .page-wrapper {
     position: relative;
     padding: 40px;
@@ -259,27 +276,35 @@ a:focus, button:focus, input:focus, textarea:focus, select:focus, [tabindex="0"]
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: radial-gradient(circle at center, rgba(180, 210, 250, 0.1) 1px, transparent 1px),
-    radial-gradient(circle at center, rgba(180, 210, 250, 0.1) 1px, transparent 1px);
+    background-image: radial-gradient(circle at center, rgba(180, 210, 250, 0.1) 1px, transparent 1px), radial-gradient(circle at center, rgba(180, 210, 250, 0.1) 1px, transparent 1px);
     background-size: 100px 100px, 200px 200px;
     background-position: 0 0, 50px 50px;
     opacity: 0.5;
     z-index: 0;
 }
 
+body.dark-mode .background-circles {
+    background-image: radial-gradient(circle at center, rgba(100, 100, 220, 0.08) 1px, transparent 1px), radial-gradient(circle at center, rgba(100, 100, 220, 0.08) 1px, transparent 1px);
+}
+
+/* *** CHANGE: Ensured flex column layout and increased min-height *** */
 .main-container {
-    background: var(--panel-bg); /* Use variable */
+    background: var(--panel-bg);
     border-radius: 35px;
     box-shadow: 0 20px 50px rgba(0, 50, 100, 0.1);
     padding: 30px 50px;
     width: 90%;
     max-width: 1400px;
-    min-height: 700px;
+    min-height: 750px; /* Increased min-height slightly */
     position: relative;
     z-index: 1;
     overflow: hidden;
-    display: flex;
-    flex-direction: column;
+    display: flex; /* Ensure flex layout */
+    flex-direction: column; /* Stack header, main, footer */
+}
+
+body.dark-mode .main-container {
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
 }
 
 /* --- Header & Navigation --- */
@@ -290,18 +315,28 @@ a:focus, button:focus, input:focus, textarea:focus, select:focus, [tabindex="0"]
     padding-bottom: 20px;
     margin-bottom: 30px;
     gap: 15px;
-    flex-wrap: wrap; /* Allow wrapping of controls */
+    flex-wrap: wrap;
+    flex-shrink: 0; /* Prevent header from shrinking */
 }
 
 .logo {
     font-weight: 700;
     font-size: 1.8rem;
     color: var(--header-logo-color);
+    flex-shrink: 0;
 }
 
+.main-nav {
+    flex-grow: 1;
+}
+
+/* Allow nav to take space */
 .main-nav ul {
     display: flex;
     gap: 25px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
 .main-nav a {
@@ -310,8 +345,8 @@ a:focus, button:focus, input:focus, textarea:focus, select:focus, [tabindex="0"]
     font-weight: 500;
     padding: 8px 15px;
     border-radius: 20px;
-    /* transition is handled globally */
     position: relative;
+    text-decoration: none; /* Ensure no underline */
 }
 
 .main-nav a::after {
@@ -326,99 +361,195 @@ a:focus, button:focus, input:focus, textarea:focus, select:focus, [tabindex="0"]
     transition: width 0.3s ease;
 }
 
-.main-nav a:hover,
-.main-nav a.active {
+.main-nav a:hover, .main-nav a.active {
     color: var(--nav-link-active-color);
     background-color: var(--nav-link-hover-bg);
 }
 
-.main-nav a.active::after {
-    width: 30%;
-}
-.main-nav a:hover::after {
+.main-nav a.active::after, .main-nav a:hover::after {
     width: 30%;
 }
 
-/* Group header controls together */
 .header-controls {
     display: flex;
     align-items: center;
-    gap: 10px; /* Space between buttons */
+    gap: 10px;
 }
 
+/* Group for buttons */
 
-.request-btn {
+/* --- Base Button Style --- */
+.button-primary {
+    display: inline-flex; /* Use flex for icon alignment */
+    align-items: center;
+    justify-content: center;
     background: linear-gradient(100deg, var(--primary-accent), var(--primary-accent-darker));
-    color: var(--button-text-color);
+    color: var(--button-text-color) !important; /* Override link color */
     padding: 12px 25px;
     border-radius: 25px;
     font-weight: 500;
     font-size: 0.95rem;
     box-shadow: 0 5px 15px rgba(0, 119, 255, 0.3);
-    /* transition handled globally */
-    transition: transform 0.2s ease, box-shadow 0.2s ease, background var(--theme-transition-duration) ease; /* Add background transition */
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    /* Transition applied globally, but specify properties here for clarity */
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background var(--theme-transition-duration) ease, color var(--theme-transition-duration) ease;
 }
 
-.request-btn:hover {
+.button-primary:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 20px rgba(0, 119, 255, 0.4);
+    color: var(--button-text-color); /* Ensure text color stays */
 }
 
-.request-btn .arrow {
+body.dark-mode .button-primary {
+    box-shadow: 0 5px 15px rgba(77, 148, 255, 0.25);
+}
+
+body.dark-mode .button-primary:hover {
+    box-shadow: 0 8px 20px rgba(77, 148, 255, 0.35);
+}
+
+.button-primary .arrow {
     margin-left: 8px;
+    display: inline-block; /* Needed for transform */
     transition: transform 0.2s ease;
 }
 
-.request-btn:hover .arrow {
+.button-primary:hover .arrow {
     transform: translateX(3px);
 }
 
-/* --- Content Area & Sections --- */
-.content-area {
-    flex-grow: 1;
-    position: relative;
+.resume-download-btn .arrow { /* Specific transform for download arrow */
+    transition: transform 0.2s ease;
 }
 
+.resume-download-btn:hover .arrow {
+    transform: translateY(2px);
+}
+
+/* Specific padding adjustments if needed */
+.request-btn {
+    padding: 12px 25px;
+}
+
+.resume-download-btn {
+    padding: 12px 25px;
+}
+
+.form-submit-btn {
+    padding: 10px 20px;
+    width: auto; /* Ensure it doesn't stretch full width */
+}
+
+.modal-link-btn {
+    padding: 8px 18px;
+    font-size: 0.9rem;
+}
+
+/* --- Content Area & Sections --- */
+/* *** CHANGE: Ensured flex-grow and relative positioning *** */
+.content-area {
+    flex-grow: 1; /* Allow content area to fill space in flex column */
+    position: relative; /* Needed for absolute positioning of sections */
+    /* min-height: 0; Prevents flex item from overflowing container */
+}
+
+/* *** CHANGE: Added overflow-y for potential scrolling *** */
 .content-section {
-    display: none; /* Hidden by default */
+    display: none; /* Hidden by default, shown by .active class */
     align-items: center;
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 100%; /* Fill the content-area */
     opacity: 0;
     transition: opacity 0.6s ease-in-out;
     gap: 20px;
-    padding: 20px 0;
+    padding: 20px 0; /* Padding inside the section */
+    overflow-y: auto; /* Allow vertical scroll IF content exceeds section height */
 }
 
 #home-section {
-    justify-content: space-between; /* Keep space-between for home */
+    justify-content: space-between;
+    overflow-y: hidden; /* Usually home section fits */
 }
 
 .content-section.active {
     display: flex;
     opacity: 1;
-    z-index: 2; /* Ensure active section is on top */
+    z-index: 2;
 }
 
 .section-left, .section-right {
     flex-basis: 25%;
     padding: 0 20px;
+    flex-shrink: 0; /* Prevent shrinking */
 }
+
 .section-center {
     flex-basis: 45%;
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
+    flex-shrink: 0;
 }
+
+/* Standard Layout for About, Projects, Skills, Edu */
+/* *** CHANGE: Added overflow-y for potential scrolling *** */
+.content-section-standard-layout {
+    flex-direction: column;
+    justify-content: flex-start; /* Align content to top */
+    align-items: center;
+    text-align: center;
+    /* Position is absolute from .content-section */
+    height: 100%; /* Fill the content-area */
+    padding: 40px 15px; /* Consistent padding */
+    overflow-y: auto; /* Allow vertical scroll IF content exceeds section height */
+}
+
+.content-section-standard-layout h2 {
+    color: var(--section-title-color);
+    margin-bottom: 20px;
+    font-size: 2rem;
+    flex-shrink: 0; /* Prevent title shrinking */
+}
+
+.content-section-standard-layout > p {
+    color: var(--section-subtitle-color);
+    margin-bottom: 30px;
+    max-width: 700px;
+    line-height: 1.6;
+    flex-shrink: 0;
+}
+
+.content-section-standard-layout > p a { /* Style links in intro paragraph */
+    color: var(--primary-accent);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+}
+
+.content-section-standard-layout > p a:hover {
+    color: var(--primary-accent-darker);
+}
+
+body.dark-mode .content-section-standard-layout > p a {
+    color: var(--primary-accent-darker);
+}
+
+body.dark-mode .content-section-standard-layout > p a:hover {
+    color: var(--button-text-color); /* Or another light color */
+}
+
 
 /* --- Home Section Specifics --- */
 #home-section .section-left .label {
     display: block;
-    color: var(--section-subtitle-color); /* Use variable */
+    color: var(--section-subtitle-color);
     margin-bottom: 10px;
     font-size: 0.9rem;
 }
@@ -427,43 +558,47 @@ a:focus, button:focus, input:focus, textarea:focus, select:focus, [tabindex="0"]
     font-size: 1.8rem;
     font-weight: 600;
     line-height: 1.4;
-    color: var(--section-title-color); /* Use variable */
+    color: var(--section-title-color);
 }
 
 #home-section .section-right h2 {
     font-size: 2.4rem;
     font-weight: 600;
     line-height: 1.3;
-    color: var(--section-title-color); /* Use variable */
+    color: var(--section-title-color);
     text-align: right;
 }
 
-/* --- Central Graphic Area (Canvas Container) --- */
+/* --- Central Graphic Area (Tesseract) --- */
 .graphic-area {
     position: relative;
     width: 100%;
-    height: 570px;
+    height: 100%; /* Let it fill the center section height */
+    min-height: 400px; /* Minimum height */
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
 }
 
-#canvas-container { /* Target the container specifically */
+#canvas-container {
     width: 100%;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: grab;
+}
+
+#canvas-container:active {
+    cursor: grabbing;
 }
 
 #tesseract-canvas {
-    display: block; /* Ensure canvas behaves predictably */
+    display: block;
     max-width: 100%;
     max-height: 100%;
-    /* Let Three.js handle the actual size */
 }
-
 
 .graphic-content { /* Overlay Text */
     position: absolute;
@@ -475,9 +610,9 @@ a:focus, button:focus, input:focus, textarea:focus, select:focus, [tabindex="0"]
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    color: var(--tesseract-text-color); /* Use variable */
-    pointer-events: none; /* Allow interaction with canvas below */
-    z-index: 1; /* Sit above canvas but below header/nav if needed */
+    color: var(--tesseract-text-color);
+    pointer-events: none; /* Allow canvas interaction */
+    z-index: 1;
 }
 
 .center-letter {
@@ -494,45 +629,25 @@ a:focus, button:focus, input:focus, textarea:focus, select:focus, [tabindex="0"]
     line-height: 1.5;
 }
 
-
-/* --- About Section Specifics --- */
-#about-section {
-    justify-content: center; /* Center the main content block */
-    flex-direction: column; /* Stack label and center vertically initially */
-    align-items: center; /* Center items horizontally */
-    text-align: center; /* Center text within the section */
-}
-
-.about-label-left {
-    /* Removed vertical writing mode styles */
-    color: var(--section-subtitle-color); /* Use variable */
+/* --- About Section Specifics (Now uses standard layout) --- */
+.about-label-left { /* Can be styled as a smaller title or removed if H2 is enough */
+    color: var(--section-subtitle-color);
     font-size: 0.9rem;
     text-transform: uppercase;
     letter-spacing: 1px;
-    text-align: center;
-    margin-bottom: 20px;
-    width: 100%;
+    margin-bottom: 5px; /* Space below label */
+    flex-shrink: 0;
 }
 
-.about-center {
-    display: flex; /* Use flex for alignment */
+.about-center { /* Container for details + resume */
+    display: flex;
     flex-direction: column;
     align-items: center;
-    position: relative;
     width: 100%;
-    max-width: 900px;
+    max-width: 900px; /* Limit width */
 }
 
-.about-title {
-    font-size: 2rem;
-    font-weight: 600;
-    line-height: 1.3;
-    color: var(--section-title-color);
-    z-index: 3;
-    text-align: center;
-    margin-bottom: 40px;
-}
-
+/* H2 styling handled by .content-section-standard-layout h2 */
 .about-details {
     display: flex;
     justify-content: center;
@@ -540,6 +655,7 @@ a:focus, button:focus, input:focus, textarea:focus, select:focus, [tabindex="0"]
     position: relative;
     width: 100%;
     flex-wrap: wrap;
+    margin-bottom: 40px; /* Space before resume btn */
 }
 
 .detail-item {
@@ -574,7 +690,7 @@ a:focus, button:focus, input:focus, textarea:focus, select:focus, [tabindex="0"]
 
 .detail-item .line {
     position: absolute;
-    bottom: -10px; /* Position below content */
+    bottom: -10px;
     left: 0;
     width: 50px;
     height: 1px;
@@ -583,56 +699,11 @@ a:focus, button:focus, input:focus, textarea:focus, select:focus, [tabindex="0"]
 
 .resume-download-container {
     text-align: center;
-    margin-top: 30px;
+    margin-top: 0;
+    flex-shrink: 0;
 }
 
-.resume-download-btn {
-    display: inline-block;
-    background: linear-gradient(100deg, var(--primary-accent), var(--primary-accent-darker));
-    color: var(--button-text-color);
-    padding: 12px 25px;
-    border-radius: 25px;
-    font-weight: 500;
-    font-size: 0.95rem;
-    box-shadow: 0 5px 15px rgba(0, 119, 255, 0.3);
-    transition: transform 0.2s ease, box-shadow 0.2s ease, background var(--theme-transition-duration) ease;
-    text-decoration: none;
-}
-
-.resume-download-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(0, 119, 255, 0.4);
-}
-
-.resume-download-btn .arrow {
-    margin-left: 8px;
-    display: inline-block;
-    transition: transform 0.2s ease;
-}
-
-.resume-download-btn:hover .arrow {
-    transform: translateY(2px);
-}
-
-
-/* --- Placeholder Sections (General Styling) --- */
-.placeholder-section {
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center; /* Center content like titles/paragraphs */
-    text-align: center;
-}
-.placeholder-section h2 {
-    color: var(--section-title-color);
-    margin-bottom: 20px;
-    font-size: 2rem;
-}
-
-.placeholder-section > p { /* Target direct paragraph children */
-    color: var(--section-subtitle-color);
-    margin-bottom: 30px; /* Increased space */
-    max-width: 700px; /* Limit width for readability */
-}
+/* Resume button styled by .button-primary */
 
 /* --- Projects Grid & Cards --- */
 .projects-grid {
@@ -641,7 +712,7 @@ a:focus, button:focus, input:focus, textarea:focus, select:focus, [tabindex="0"]
     gap: 30px;
     width: 100%;
     max-width: 1100px;
-    margin-top: 0; /* Reset margin top as placeholder p has margin bottom */
+    margin-top: 0;
     padding: 0 15px;
 }
 
@@ -654,9 +725,10 @@ a:focus, button:focus, input:focus, textarea:focus, select:focus, [tabindex="0"]
     text-decoration: none;
     color: inherit;
     text-align: left;
-    transition: transform 0.3s ease, box-shadow var(--theme-transition-duration) ease; /* Updated */
+    transition: transform 0.3s ease, box-shadow var(--theme-transition-duration) ease, background-color var(--theme-transition-duration) ease;
     position: relative;
     cursor: pointer;
+    overflow: hidden; /* Prevent arrow overflow */
 }
 
 .project-card:hover {
@@ -674,7 +746,7 @@ a:focus, button:focus, input:focus, textarea:focus, select:focus, [tabindex="0"]
     color: var(--text-color);
     font-size: 0.9rem;
     line-height: 1.6;
-    margin-bottom: 35px; /* Ensure space for arrow */
+    margin-bottom: 35px; /* Space for arrow */
 }
 
 .project-card .card-link-arrow {
@@ -687,12 +759,12 @@ a:focus, button:focus, input:focus, textarea:focus, select:focus, [tabindex="0"]
     transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-.project-card:hover .card-link-arrow {
+.project-card:hover .card-link-arrow, .project-card:focus-visible .card-link-arrow {
     opacity: 1;
     transform: translateX(-5px);
 }
 
-/* --- Skills Section Enhancements --- */
+/* --- Skills Section --- */
 .skills-categories {
     display: flex;
     flex-wrap: wrap;
@@ -700,7 +772,7 @@ a:focus, button:focus, input:focus, textarea:focus, select:focus, [tabindex="0"]
     gap: 30px;
     width: 100%;
     max-width: 1000px;
-    margin: 0 auto; /* Center and remove top margin */
+    margin: 0 auto;
     text-align: left;
 }
 
@@ -717,20 +789,22 @@ a:focus, button:focus, input:focus, textarea:focus, select:focus, [tabindex="0"]
     padding-bottom: 5px;
 }
 
-.skills-list { /* Target specifically */
+.skills-list {
     list-style: none;
-    padding: 0; /* Remove default padding */
-    margin: 0; /* Remove default margin */
+    padding: 0;
+    margin: 0;
 }
+
 .skills-list li {
     margin-bottom: 8px;
-    padding-left: 18px; /* Indent text */
+    padding-left: 18px;
     position: relative;
     line-height: 1.5;
-    font-size: 0.95rem; /* Consistent size */
-    color: var(--text-color); /* Use variable */
+    font-size: 0.95rem;
+    color: var(--text-color);
 }
-.skills-list li::before { /* Add bullet points */
+
+.skills-list li::before {
     content: '▹';
     position: absolute;
     left: 0;
@@ -740,10 +814,6 @@ a:focus, button:focus, input:focus, textarea:focus, select:focus, [tabindex="0"]
 }
 
 /* --- Education Section --- */
-#education-section {
-    /* Uses .placeholder-section styles */
-}
-
 .education-content {
     display: flex;
     flex-direction: column;
@@ -754,14 +824,15 @@ a:focus, button:focus, input:focus, textarea:focus, select:focus, [tabindex="0"]
 }
 
 .education-item {
-    background-color: rgba(255, 255, 255, 0.05); /* Subtle */
+    background-color: rgba(255, 255, 255, 0.05);
     padding: 20px;
     border-radius: 10px;
     border-left: 3px solid var(--primary-accent);
 }
 
 body.dark-mode .education-item {
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.15);
+    border-left-color: var(--primary-accent-darker);
 }
 
 .education-item h3 {
@@ -770,8 +841,7 @@ body.dark-mode .education-item {
     margin-bottom: 10px;
 }
 
-.education-item p,
-.education-item ul {
+.education-item p, .education-item ul {
     color: var(--text-color);
     font-size: 0.95rem;
     line-height: 1.6;
@@ -780,7 +850,7 @@ body.dark-mode .education-item {
 .education-item ul {
     list-style: none;
     padding-left: 0;
-    margin-top: 10px; /* Add space if list follows paragraph */
+    margin-top: 10px;
 }
 
 .education-item li {
@@ -795,7 +865,6 @@ body.dark-mode .education-item {
     left: 0;
     color: var(--primary-accent);
 }
-
 
 /* --- Project Modal Styles --- */
 .modal {
@@ -829,6 +898,10 @@ body.dark-mode .education-item {
     cursor: pointer;
 }
 
+body.dark-mode .modal-overlay {
+    background-color: rgba(0, 0, 0, 0.75);
+}
+
 .modal-content {
     position: relative;
     background: var(--panel-bg);
@@ -842,7 +915,7 @@ body.dark-mode .education-item {
     max-height: 85vh;
     overflow-y: auto;
     transform: scale(0.95);
-    transition: transform 0.3s ease, background var(--theme-transition-duration) ease, color var(--theme-transition-duration) ease; /* Added theme transitions */
+    transition: transform 0.3s ease, background var(--theme-transition-duration) ease, color var(--theme-transition-duration) ease;
 }
 
 .modal.open .modal-content {
@@ -874,17 +947,22 @@ body.dark-mode .education-item {
     font-size: 1.6rem;
     color: var(--section-title-color);
     margin-bottom: 20px;
-    padding-right: 30px; /* Space for close button */
+    padding-right: 30px;
 }
 
+/* Space for close btn */
+/* Modal Image Display - Handled by JS adding/removing .visible class */
 .modal-body #project-modal-image {
     max-width: 100%;
     height: auto;
-    margin-bottom: 20px; /* Increased space */
-    border-radius: 8px; /* Slightly rounded corners */
-    display: none; /* Controlled by JS */
+    margin-bottom: 20px;
+    border-radius: 8px;
+    display: none; /* Hidden by default */
 }
 
+.modal-body #project-modal-image.visible {
+    display: block; /* Shown when class is added */
+}
 
 .modal-body h4 {
     font-size: 1.1rem;
@@ -907,20 +985,7 @@ body.dark-mode .education-item {
     flex-wrap: wrap;
 }
 
-.modal-link-btn {
-    display: inline-block;
-    padding: 8px 18px;
-    border-radius: 20px;
-    background-color: var(--primary-accent);
-    color: var(--button-text-color);
-    text-decoration: none;
-    font-size: 0.9rem;
-    transition: background-color 0.3s ease;
-}
-
-.modal-link-btn:hover {
-    background-color: var(--primary-accent-darker);
-}
+/* Modal link buttons use .button-primary style */
 
 /* --- Contact Form Styles (within panel) --- */
 #contact-form {
@@ -946,24 +1011,21 @@ body.dark-mode .education-item {
     margin-bottom: 5px;
 }
 
-.form-group input[type="text"],
-.form-group input[type="email"],
-.form-group textarea {
+.form-group input[type="text"], .form-group input[type="email"], .form-group textarea {
     width: 100%;
     padding: 10px;
-    border: 1px solid var(--nav-link-color);
+    border: 1px solid var(--input-border-color);
     border-radius: 5px;
-    background-color: var(--bg-color); /* Match page background */
+    background-color: var(--input-bg-color);
     color: var(--text-color);
     font-size: 0.95rem;
-    transition: border-color 0.3s ease, background-color var(--theme-transition-duration) ease, color var(--theme-transition-duration) ease; /* Added theme transitions */
+    transition: border-color 0.3s ease, background-color var(--theme-transition-duration) ease, color var(--theme-transition-duration) ease, box-shadow 0.3s ease;
 }
 
-/* Focus handled by global :focus-visible */
-.form-group input:focus,
-.form-group textarea:focus {
-    border-color: var(--primary-accent);
-    box-shadow: 0 0 0 2px var(--nav-link-hover-bg);
+/* Focus state - using :focus-visible via global style */
+.form-group input:focus, .form-group textarea:focus {
+    border-color: var(--input-focus-border-color);
+    box-shadow: 0 0 0 3px var(--input-focus-shadow-color);
 }
 
 .form-group textarea {
@@ -971,23 +1033,7 @@ body.dark-mode .education-item {
     min-height: 80px;
 }
 
-.form-submit-btn {
-    background: linear-gradient(100deg, var(--primary-accent), var(--primary-accent-darker));
-    color: var(--button-text-color);
-    padding: 10px 20px;
-    border-radius: 20px;
-    font-weight: 500;
-    font-size: 0.95rem;
-    border: none;
-    cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, background var(--theme-transition-duration) ease; /* Add background transition */
-}
-
-.form-submit-btn:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 10px rgba(0, 119, 255, 0.3);
-}
-
+/* Submit button uses .button-primary style */
 .form-note {
     font-size: 0.8rem;
     color: var(--section-subtitle-color);
@@ -995,11 +1041,11 @@ body.dark-mode .education-item {
     font-style: italic;
 }
 
-/* --- Request Panel --- */
+/* --- Request Panel (Contact Flyout) --- */
 #request-panel {
     position: fixed;
     top: 0;
-    left: 0; /* Slide from left */
+    left: 0;
     width: 400px;
     max-width: 90%;
     height: 100%;
@@ -1007,14 +1053,18 @@ body.dark-mode .education-item {
     box-shadow: 5px 0 25px rgba(0, 0, 0, 0.1);
     z-index: 1002;
     overflow-y: auto;
-    transform: translateX(-100%); /* Start off-screen */
+    transform: translateX(-100%);
     visibility: hidden;
-    transition: transform 0.4s ease-in-out, visibility 0s 0.4s linear, background var(--theme-transition-duration) ease; /* Added theme transition */
+    transition: transform 0.4s ease-in-out, visibility 0s 0.4s linear, background var(--theme-transition-duration) ease;
     color: var(--text-color);
     display: flex;
     flex-direction: column;
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
+}
+
+body.dark-mode #request-panel {
+    box-shadow: 5px 0 25px rgba(0, 0, 0, 0.3);
 }
 
 #request-panel.open {
@@ -1036,6 +1086,10 @@ body.dark-mode .education-item {
     transition: opacity 0.4s ease, visibility 0s 0.4s linear;
 }
 
+body.dark-mode #panel-overlay {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
 #panel-overlay.active {
     opacity: 1;
     visibility: visible;
@@ -1054,7 +1108,7 @@ body.dark-mode .education-item {
     padding: 5px;
     line-height: 1;
     opacity: 0.7;
-    /* transition handled globally */
+    transition: opacity 0.2s ease, color var(--theme-transition-duration) ease;
 }
 
 #close-request-panel:hover {
@@ -1062,37 +1116,35 @@ body.dark-mode .education-item {
     opacity: 1;
 }
 
-/* Focus handled by global :focus-visible */
-
 .panel-content {
     padding: 60px 40px 40px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 15px; /* Reduced gap slightly */
     flex-grow: 1;
-    /* transition handled globally */
 }
 
 .panel-content h3 {
     font-size: 1.4rem;
     color: var(--section-title-color);
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 
 .panel-content .panel-intro {
     font-size: 0.95rem;
     color: var(--section-subtitle-color);
-    margin-bottom: 25px;
+    margin-bottom: 20px;
 }
 
 .panel-content .contact-item {
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
 .panel-content .contact-item strong {
     color: var(--section-title-color);
     display: block;
     margin-bottom: 3px;
+    font-weight: 500; /* Slightly less bold */
 }
 
 .panel-content .contact-item a {
@@ -1100,13 +1152,21 @@ body.dark-mode .education-item {
     text-decoration: none;
     word-break: break-all;
     display: inline-block;
+    transition: color 0.2s ease;
 }
 
 .panel-content .contact-item a:hover {
+    color: var(--primary-accent-darker);
     text-decoration: underline;
 }
 
-/* Focus handled by global :focus-visible */
+body.dark-mode .panel-content .contact-item a {
+    color: var(--primary-accent-darker);
+}
+
+body.dark-mode .panel-content .contact-item a:hover {
+    color: var(--button-text-color);
+}
 
 .panel-content .legal-text {
     font-size: 0.8rem;
@@ -1117,36 +1177,35 @@ body.dark-mode .education-item {
 }
 
 /* --- Theme Toggle Button Styles --- */
-#theme-toggle-btn {
+.theme-toggle-btn { /* Renamed from #theme-toggle-btn to class for consistency */
     display: inline-flex;
     align-items: center;
+    justify-content: center; /* Center icon */
     gap: 6px;
-    padding: 8px 12px;
-    border-radius: 20px;
+    padding: 8px; /* Adjusted padding for icon only */
+    border-radius: 50%; /* Make it circular */
     border: 1px solid var(--nav-link-color);
     color: var(--nav-link-color);
     background-color: transparent;
-    font-size: 0.9rem;
+    font-size: 1.1rem; /* Slightly larger icon */
     cursor: pointer;
-    /* transition handled globally */
-    /* margin-left: 10px; Moved to header-controls gap */
+    line-height: 1; /* Ensure icon is centered vertically */
+    width: 36px; /* Fixed width */
+    height: 36px; /* Fixed height */
 }
 
-#theme-toggle-btn:hover {
+.theme-toggle-btn:hover {
     background-color: var(--nav-link-hover-bg);
     border-color: var(--nav-link-active-color);
 }
 
-#theme-toggle-btn .theme-icon {
+.theme-toggle-btn .theme-icon {
     line-height: 1;
+    display: block;
 }
 
-#theme-toggle-btn .theme-beta {
-    font-size: 0.75em;
-    font-weight: 500;
-    line-height: 1;
-    opacity: 0.8;
-}
+/* Ensure icon is block */
+/* Removed .theme-beta */
 
 /* --- Audio Control Button Styles --- */
 .audio-control-btn {
@@ -1160,8 +1219,8 @@ body.dark-mode .education-item {
     background-color: transparent;
     cursor: pointer;
     line-height: 1;
-    /* transition handled globally */
-    /* margin-left: 10px; Moved to header-controls gap */
+    width: 36px;
+    height: 36px; /* Match theme toggle size */
 }
 
 .audio-control-btn:hover {
@@ -1173,8 +1232,10 @@ body.dark-mode .education-item {
     width: 1em;
     height: 1em;
     display: block;
+    fill: currentColor;
 }
 
+/* Ensure SVG inherits color */
 .audio-control-btn .hidden {
     display: none;
 }
@@ -1193,7 +1254,8 @@ body.dark-mode .education-item {
     z-index: 1010;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0s 0.3s linear, background-color var(--theme-transition-duration) ease, color var(--theme-transition-duration) ease; /* Added theme transitions */
+    transition: opacity 0.3s ease, visibility 0s 0.3s linear, background-color var(--theme-transition-duration) ease, color var(--theme-transition-duration) ease;
+    font-size: 0.9rem;
 }
 
 .audio-error.visible {
@@ -1202,8 +1264,39 @@ body.dark-mode .education-item {
     transition: opacity 0.3s ease, background-color var(--theme-transition-duration) ease, color var(--theme-transition-duration) ease;
 }
 
+/* --- Footer Styles --- */
+.site-footer-info {
+    padding: 20px 0 0; /* Add padding above */
+    margin-top: 30px; /* Add margin above */
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--footer-text-color);
+    border-top: 1px solid var(--nav-link-hover-bg); /* Separator line */
+    flex-shrink: 0; /* Prevent footer from shrinking */
+}
 
-/* --- REMOVED redundant .skills-list styling block --- */
+.site-footer-info p {
+    margin-bottom: 5px; /* Space between lines */
+}
+
+.site-footer-info a {
+    color: var(--footer-link-color);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+}
+
+.site-footer-info a:hover {
+    color: var(--primary-accent);
+}
+
+body.dark-mode .site-footer-info a {
+    color: var(--primary-accent-darker);
+}
+
+body.dark-mode .site-footer-info a:hover {
+    color: var(--button-text-color);
+}
 
 
 /* --- Responsive Adjustments --- */
@@ -1211,18 +1304,22 @@ body.dark-mode .education-item {
     .main-container {
         width: 95%;
         padding: 25px 35px;
+        min-height: 700px; /* Adjust min-height if needed */
     }
 
     #home-section .section-left p {
-        font-size: 1.6rem; /* Adjust font size */
-    }
-    #home-section .section-right h2 {
-        font-size: 1.8rem; /* Adjust font size */
+        font-size: 1.6rem;
     }
 
-    .about-details {
-        gap: 25px; /* Adjust gap */
+    #home-section .section-right h2 {
+        font-size: 2rem;
     }
+
+    /* Adjusted */
+    .about-details {
+        gap: 25px;
+    }
+
     .skills-categories {
         gap: 25px;
     }
@@ -1231,90 +1328,111 @@ body.dark-mode .education-item {
 @media (max-width: 992px) {
     .main-container {
         padding: 20px 25px;
-        min-height: auto;
+        min-height: auto; /* Allow height to adjust on smaller screens */
     }
+
+    /* Removed fixed min-height for mobile */
     .site-header {
-        flex-direction: row; /* Keep horizontal but allow wrap */
+        flex-direction: row;
         align-items: center;
         margin-bottom: 20px;
     }
 
+    /* Keep row but allow wrap */
     .logo {
-        margin-right: 20px; /* Ensure some space */
-        flex-shrink: 0; /* Prevent logo shrinking too much */
+        margin-right: auto;
     }
 
+    /* Push nav/controls right */
     .main-nav {
-        flex-grow: 1; /* Allow nav to take available space */
-        margin-bottom: 10px; /* Space below nav if it wraps */
+        order: 3;
+        width: 100%;
+        margin-top: 15px;
     }
+
+    /* Nav wraps below logo/controls */
     .main-nav ul {
         gap: 10px;
         flex-wrap: wrap;
-        justify-content: flex-start; /* Align nav items left */
+        justify-content: center;
     }
+
+    /* Center nav links when wrapped */
     .main-nav a {
         padding: 6px 10px;
         font-size: 0.9rem;
     }
 
     .header-controls {
-        width: 100%; /* Make controls take full width if header wraps */
-        justify-content: flex-start; /* Align controls left */
-        margin-top: 10px;
+        order: 2;
+        margin-left: 15px;
     }
 
-    .request-btn {
-        /* margin-left: 0; Inherited from header-controls */
+    /* Controls stay right of logo */
+    .content-area {
+        flex-grow: 1;
+        min-height: 0; /* Override flex defaults */
     }
 
-    #theme-toggle-btn, .audio-control-btn {
-        /* margin-left: 0; Inherited from header-controls */
-    }
-
+    /* Ensure it can shrink */
     .content-section {
         flex-direction: column;
-        position: relative; /* Allow static positioning in flow */
-        display: none;
-        height: auto;
+        position: relative; /* Change from absolute to relative for normal flow */
+        display: none; /* Still hide inactive */
+        height: auto; /* Height based on content */
         opacity: 0;
         padding: 30px 10px;
-        align-items: stretch; /* Stretch items to fill width */
+        align-items: center; /* Center items */
+        width: 100%;
+        overflow-y: visible; /* Allow content to determine height */
     }
+
+    /* #home-section needs specific handling if it should behave differently */
+    #home-section {
+        flex-direction: column; /* Stack home elements */
+        position: relative; /* Keep relative */
+        height: auto; /* Adjust height */
+        padding: 30px 10px;
+        align-items: center;
+    }
+
     .content-section.active {
         display: flex;
         opacity: 1;
     }
+
     .section-left, .section-center, .section-right {
-        flex-basis: auto; /* Reset basis */
-        width: 100%; /* Take full width */
+        flex-basis: auto;
+        width: 100%;
         padding: 0 10px;
         text-align: center;
-        margin-bottom: 20px; /* Add space between stacked sections */
+        margin-bottom: 30px;
     }
 
+    /* Consistent spacing */
     .section-right {
-        margin-bottom: 0; /* No space after last element */
+        margin-bottom: 0;
     }
 
-    #home-section .section-left p,
-    #home-section .section-right h2 {
+    #home-section .section-left p, #home-section .section-right h2 {
         text-align: center;
-        font-size: 1.4rem; /* Consistent size */
+        font-size: 1.5rem;
     }
 
+    /* Consistent */
     #home-section .section-left .label {
         text-align: center;
     }
 
     #home-section .section-right h2 {
-        text-align: center; /* Override right alignment */
+        text-align: center;
     }
 
     .graphic-area {
         height: 350px;
-        margin: 20px 0;
-        order: 0; /* Ensure graphic appears between left/right on mobile if needed */
+        margin: 10px 0 30px;
+        order: 0;
+        width: 90%; /* Limit width */
     }
 
     .center-letter {
@@ -1322,8 +1440,7 @@ body.dark-mode .education-item {
     }
 
     .about-label-left {
-        text-align: center;
-        margin: 0 0 20px 0;
+        margin: 0 0 15px 0;
     }
 
     .about-center {
@@ -1331,23 +1448,23 @@ body.dark-mode .education-item {
     }
 
     .about-details {
-        flex-direction: column; /* Stack detail items */
-        align-items: center; /* Center stacked items */
+        flex-direction: column;
+        align-items: center;
         gap: 25px;
     }
 
     .detail-item {
-        max-width: 90%; /* Allow items to be wider */
-        text-align: center; /* Center text within item */
+        max-width: 90%;
+        text-align: center;
     }
 
     .detail-item .line {
         left: 50%;
-        transform: translateX(-50%); /* Center the line */
+        transform: translateX(-50%);
     }
 
     .detail-item .number {
-        position: relative; /* Make number part of flow */
+        position: relative;
         display: block;
         margin-bottom: 5px;
         text-align: center;
@@ -1355,14 +1472,14 @@ body.dark-mode .education-item {
 
     .projects-grid {
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        padding: 0 5px; /* Reduce padding */
+        padding: 0 5px;
     }
 
-    #about-section, #projects-section, #skills-section, #education-section {
-        padding-bottom: 50px;
-        padding-top: 30px;
+    .content-section-standard-layout {
+        padding: 30px 10px 50px;
     }
 
+    /* Adjust padding */
     .skills-categories {
         flex-direction: column;
         align-items: center;
@@ -1371,24 +1488,31 @@ body.dark-mode .education-item {
     .skill-category {
         width: 90%;
         max-width: 400px;
-        text-align: center; /* Center category headings */
+        text-align: center;
     }
 
     .skills-list {
-        text-align: left; /* Keep list items left-aligned */
+        text-align: left;
+        display: inline-block;
     }
 
+    /* Keep list text left but center block */
     .education-content {
         max-width: 90%;
     }
 
     .education-item {
-        text-align: center; /* Center education item text */
+        text-align: center;
     }
 
     .education-item ul {
-        text-align: left; /* Keep list items left-aligned */
-        display: inline-block; /* Allow centering of the list block */
+        text-align: left;
+        display: inline-block;
+    }
+
+    .site-footer-info {
+        margin-top: 20px;
+        padding-top: 15px;
     }
 }
 
@@ -1397,65 +1521,96 @@ body.dark-mode .education-item {
         padding: 25px;
         max-height: 90vh;
     }
+
     #project-modal-title {
         font-size: 1.4rem;
     }
 
     .panel-content {
-        padding: 60px 30px 30px; /* Adjust padding */
+        padding: 60px 30px 30px;
     }
 }
 
 @media (max-width: 480px) {
+    body {
+        padding: 0;
+    }
+
+    /* Remove body padding if any */
+    .page-wrapper {
+        padding: 10px;
+    }
+
+    /* Less padding */
     .main-container {
         padding: 15px;
         border-radius: 20px;
+        width: 100%;
     }
+
     .logo {
         font-size: 1.5rem;
+        margin-right: 10px;
+    }
+
+    /* Reduce margin */
+    .main-nav {
+        margin-top: 10px;
     }
 
     .main-nav ul {
-        gap: 5px; /* Further reduce nav gap */
-        justify-content: center; /* Center nav items */
+        gap: 5px;
     }
+
     .main-nav a {
         font-size: 0.85rem;
         padding: 5px 8px;
     }
 
     .header-controls {
-        justify-content: center; /* Center buttons */
         gap: 8px;
+        margin-left: auto; /* Push controls right */
     }
-    .request-btn {
+
+    .button-primary {
         padding: 10px 18px;
         font-size: 0.9rem;
     }
-    #theme-toggle-btn {
-        padding: 6px 10px;
-        font-size: 0.85rem;
+
+    /* Adjust icon button size */
+    .theme-toggle-btn, .audio-control-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 1rem;
+        padding: 6px;
     }
+
     .graphic-area {
         height: 280px;
+        margin-bottom: 20px;
+        width: 100%;
     }
+
     .center-letter {
         font-size: 3rem;
     }
+
     .graphic-subtext {
         font-size: 0.8rem;
     }
+
     .preloader-letters {
         font-size: 6rem;
     }
+
     .preloader-text-left {
         font-size: 1rem;
-        flex-basis: auto; /* Allow text to wrap */
-        margin-bottom: 15px; /* Space if preloader content stacks */
+        flex-basis: auto;
+        margin-bottom: 15px;
     }
 
     .preloader-content {
-        flex-direction: column; /* Stack preloader content */
+        flex-direction: column;
         text-align: center;
     }
 
@@ -1464,26 +1619,33 @@ body.dark-mode .education-item {
         max-width: 100%;
         border-radius: 0;
     }
+
     .panel-content {
         padding: 50px 20px 20px;
     }
+
     .modal-content {
         width: 95%;
         padding: 20px 15px;
     }
+
     #project-modal-title {
         font-size: 1.2rem;
     }
+
     .modal-link-btn {
         padding: 6px 12px;
         font-size: 0.85rem;
     }
+
     .education-item {
         padding: 15px;
     }
+
     .education-item h3 {
         font-size: 1.1rem;
     }
+
     .education-item p, .education-item ul {
         font-size: 0.9rem;
     }

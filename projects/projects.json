@@ -1,0 +1,29 @@
+{
+  "project1": {
+    "title": "ATM Withdrawal Simulation",
+    "image": "assets/projects/atm_screenshot.png",
+    "description": "A command-line application built with C# that simulates the process of withdrawing cash from an ATM. The user inputs the desired amount, and the program calculates the optimal combination of banknotes (e.g., 1000s, 500s, 200s, 100s) to dispense. It includes basic input validation.",
+    "tech": "C#, .NET Console Application",
+    "challenges": "Handling edge cases like amounts not dispensable with available notes and ensuring correct calculation logic were key challenges. Improved understanding of basic algorithms and user input handling in C#.",
+    "liveLink": null,
+    "repoLink": "https://github.com/Vojtik1112/MyPage/tree/main/projects/project1"
+  },
+  "project2": {
+    "title": "Objednávka Trička (T-Shirt Order Form)",
+    "image": "assets/projects/tshirt_screenshot.png",
+    "description": "A simple web form developed using HTML, CSS, and JavaScript for ordering custom t-shirts. It allows users to enter their name, email, choose a size, color, and specify custom text for the shirt. Includes client-side JavaScript validation to ensure required fields are filled correctly.",
+    "tech": "HTML, CSS, JavaScript",
+    "challenges": "Implementing robust client-side validation using JavaScript regular expressions and ensuring cross-browser compatibility for the form elements. Practiced DOM manipulation and event handling.",
+    "liveLink": "projects/project2/index.html",
+    "repoLink": "https://github.com/Vojtik1112/MyPage/tree/main/projects/project2"
+  },
+  "project3": {
+    "title": "Interactive Keyboard Layout",
+    "image": "assets/projects/keyboard_screenshot.png",
+    "description": "A visual representation of a standard keyboard layout created purely with HTML and CSS. This project focused on structuring content semantically using HTML and applying CSS (Flexbox/Grid) for precise layout, styling, and visual appearance. Future enhancement could include adding JavaScript for key press visual feedback.",
+    "tech": "HTML, CSS",
+    "challenges": "Achieving accurate key positioning and responsive spacing using CSS layout techniques. Reinforced understanding of semantic HTML structure and advanced CSS selectors.",
+    "liveLink": "projects/project3/index.html",
+    "repoLink": "https://github.com/Vojtik1112/MyPage/tree/main/projects/project3"
+  }
+}
