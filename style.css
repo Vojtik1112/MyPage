@@ -37,7 +37,7 @@
 
 /* --- Dark Mode Variables --- */
 body.dark-mode {
-    --bg-color: #1a1a2e; /* Dark page background (very similar dark blue) */
+    --bg-color: #1a1a2e; /* Dark page background */
     --text-color: #f0f0f0; /* Light default text */
     --panel-bg: linear-gradient(135deg, #2c2c44 0%, #1f1f35 100%); /* Dark container background */
     --header-logo-color: #c0c0ff; /* Lighter logo color */
@@ -48,11 +48,9 @@ body.dark-mode {
     --primary-accent: #4d94ff; /* Brighter blue accent */
     --primary-accent-darker: #80b3ff; /* Even brighter blue for gradients */
     --button-text-color: #fff; /* Keep button text light for contrast */
-    /* MODIFIED: Made subtitles brighter */
-    --section-subtitle-color: #bdbddd; /* Lighter subtitles (was #a0a0cc) */
+    --section-subtitle-color: #bdbddd; /* Lighter subtitles */
     --tesseract-line-color: #cccccc; /* Lighter Tesseract lines */
-    /* MODIFIED: Made text over tesseract brighter (matching main text) */
-    --tesseract-text-color: #f0f0f0; /* Light text over tesseract (was #e0e0e0) */
+    --tesseract-text-color: #f0f0f0; /* Light text over tesseract */
     --card-bg: #2c2c44; /* Dark card background */
     --card-shadow: 0 8px 25px rgba(0, 0, 0, 0.2); /* Darker shadow */
     --card-hover-shadow: 0 12px 35px rgba(0, 0, 0, 0.3); /* Darker hover shadow */
@@ -61,21 +59,23 @@ body.dark-mode {
     --preloader-logo-color: #c0c0ff; /* Lighter preloader logo */
     --error-bg-color: #3e2723; /* Dark red background for errors */
     --error-text-color: #ef9a9a; /* Light red text for errors */
-
     /* --- Override other variables as needed --- */
 }
 
-/* --- Refactored Base Styles (Examples) --- */
+/* --- Refactored Base Styles --- */
 /* Add transitions for smooth theme changes */
-/* Added .panel-content elements to transition */
+/* Added .panel-content elements and preloader elements to transition */
 body, .main-container, .logo, .main-nav a, .request-btn, h2, p, .project-card, #theme-toggle-btn, .center-letter, .graphic-subtext,
-.request-panel, .panel-content, .panel-content h3, .panel-content p, .panel-content a, .panel-content strong, .close-panel-btn {
+.request-panel, .panel-content, .panel-content h3, .panel-content p, .panel-content a, .panel-content strong, .close-panel-btn,
+.preloader, .preloader-content, .preloader-text-left, .preloader-letters .letter, .preloader-letters .subtext, .preloader-line,
+.modal-content, .modal-close-btn, .form-group input, .form-group textarea, .audio-control-btn, .education-item {
     transition: background-color var(--theme-transition-duration) ease,
     color var(--theme-transition-duration) ease,
     border-color var(--theme-transition-duration) ease,
     background var(--theme-transition-duration) ease,
     box-shadow var(--theme-transition-duration) ease;
 }
+
 
 body {
     font-family: 'Poppins', sans-serif;
@@ -107,7 +107,11 @@ button {
 /* --- Accessibility: Add distinct focus styles for keyboard users --- */
 a:focus-visible,
 button:focus-visible,
-.project-card:focus-visible {
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[tabindex="0"]:focus-visible, /* Covers the project cards */
+.project-card:focus-visible { /* Keep explicit for clarity */
     outline: 2px solid var(--primary-accent);
     outline-offset: 2px;
     box-shadow: 0 0 0 4px var(--nav-link-hover-bg); /* Optional glow effect */
@@ -115,19 +119,17 @@ button:focus-visible,
 /* Ensure high-contrast focus on dark mode */
 body.dark-mode a:focus-visible,
 body.dark-mode button:focus-visible,
+body.dark-mode input:focus-visible,
+body.dark-mode textarea:focus-visible,
+body.dark-mode select:focus-visible,
+body.dark-mode [tabindex="0"]:focus-visible,
 body.dark-mode .project-card:focus-visible {
     outline-color: var(--primary-accent-darker);
     box-shadow: 0 0 0 4px rgba(100, 100, 220, 0.3); /* Adjusted glow */
 }
 /* Remove default outline when focus-visible is supported */
-a:focus, button:focus, .project-card:focus {
+a:focus, button:focus, input:focus, textarea:focus, select:focus, [tabindex="0"]:focus, .project-card:focus {
     outline: none;
-}
-
-/* --- Add transitions for theme-affected preloader elements --- */
-.preloader, .preloader-content, .preloader-text-left, .preloader-letters .letter, .preloader-letters .subtext, .preloader-line {
-    transition: background-color var(--theme-transition-duration) ease,
-    color var(--theme-transition-duration) ease;
 }
 
 /* --- Preloader Styles --- */
@@ -137,14 +139,13 @@ a:focus, button:focus, .project-card:focus {
     left: 0;
     width: 100%;
     height: 100%;
-    /* Use variable for background */
-    background-color: var(--bg-color);
+    background-color: var(--bg-color); /* Use variable */
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 1000;
     opacity: 1;
-    transition: opacity 0.8s ease-out, background-color var(--theme-transition-duration) ease; /* Add background transition */
+    transition: opacity 0.8s ease-out, background-color var(--theme-transition-duration) ease;
 }
 
 .preloader.hidden {
@@ -163,8 +164,7 @@ a:focus, button:focus, .project-card:focus {
 
 .preloader-text-left {
     font-size: 1.2rem;
-    /* Use variable for text color */
-    color: var(--preloader-text-color);
+    color: var(--preloader-text-color); /* Use variable */
     line-height: 1.6;
     flex-basis: 25%;
     text-align: left;
@@ -177,8 +177,7 @@ a:focus, button:focus, .project-card:focus {
     flex-grow: 1;
     font-size: 10rem;
     font-weight: 600;
-    /* Use variable for main letter color */
-    color: var(--preloader-logo-color);
+    color: var(--preloader-logo-color); /* Use variable */
     position: relative;
 }
 
@@ -193,27 +192,36 @@ a:focus, button:focus, .project-card:focus {
 .preloader-letters .subtext {
     font-size: 0.8rem;
     font-weight: 400;
-    /* Use variable for subtext color */
-    color: var(--preloader-text-color); /* Match side text color */
+    color: var(--preloader-text-color); /* Use variable */
     position: absolute;
     top: 10px;
     right: -50px;
     opacity: 0;
-    transition: opacity 0.5s 0.3s ease, color var(--theme-transition-duration) ease; /* Add color transition */
+    transition: opacity 0.5s 0.3s ease, color var(--theme-transition-duration) ease;
 }
 
 @keyframes fadeLetter {
-  0% { opacity: 0; transform: scale(0.9); }
-  25% { opacity: 1; transform: scale(1); }
-  75% { opacity: 1; transform: scale(1); }
-  100% { opacity: 0; transform: scale(0.9); }
+    0% {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    25% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    75% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0.9);
+    }
 }
 
 /* Timing the animations (Ensure these IDs match HTML) */
 #letter-c1 { animation-name: fadeLetter; animation-delay: 0s; }
 #letter-b { animation-name: fadeLetter; animation-delay: 0.8s; }
-/* Removed #letter-d and #letter-c2 animations */
-
 
 #letter-c1.visible .subtext,
 #letter-b.visible .subtext {
@@ -226,11 +234,8 @@ a:focus, button:focus, .project-card:focus {
     left: 0;
     width: 100%;
     height: 2px;
-    /* Use a subtle color, maybe related to text or borders */
-    background-color: var(--nav-link-hover-bg);
-    transition: background-color var(--theme-transition-duration) ease;
+    background-color: var(--nav-link-hover-bg); /* Use variable */
 }
-
 
 /* --- Page Wrapper & Container --- */
 .page-wrapper {
@@ -248,16 +253,14 @@ a:focus, button:focus, .project-card:focus {
     opacity: 1;
 }
 
-
 .background-circles {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-image:
-        radial-gradient(circle at center, rgba(180, 210, 250, 0.1) 1px, transparent 1px),
-        radial-gradient(circle at center, rgba(180, 210, 250, 0.1) 1px, transparent 1px);
+    background-image: radial-gradient(circle at center, rgba(180, 210, 250, 0.1) 1px, transparent 1px),
+    radial-gradient(circle at center, rgba(180, 210, 250, 0.1) 1px, transparent 1px);
     background-size: 100px 100px, 200px 200px;
     background-position: 0 0, 50px 50px;
     opacity: 0.5;
@@ -286,13 +289,14 @@ a:focus, button:focus, .project-card:focus {
     align-items: center;
     padding-bottom: 20px;
     margin-bottom: 30px;
-    gap: 15px; /* Adjust gap if needed */
+    gap: 15px;
+    flex-wrap: wrap; /* Allow wrapping of controls */
 }
 
 .logo {
     font-weight: 700;
     font-size: 1.8rem;
-    color: var(--header-logo-color); /* Use variable */
+    color: var(--header-logo-color);
 }
 
 .main-nav ul {
@@ -301,12 +305,12 @@ a:focus, button:focus, .project-card:focus {
 }
 
 .main-nav a {
-    color: var(--nav-link-color); /* Use variable */
+    color: var(--nav-link-color);
     font-size: 0.95rem;
     font-weight: 500;
     padding: 8px 15px;
     border-radius: 20px;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    /* transition is handled globally */
     position: relative;
 }
 
@@ -318,27 +322,32 @@ a:focus, button:focus, .project-card:focus {
     transform: translateX(-50%);
     width: 0;
     height: 2px;
-    background-color: var(--primary-accent); /* Use variable */
+    background-color: var(--primary-accent);
     transition: width 0.3s ease;
 }
 
-
 .main-nav a:hover,
 .main-nav a.active {
-    color: var(--nav-link-active-color); /* Use variable */
-    background-color: var(--nav-link-hover-bg); /* Use variable */
+    color: var(--nav-link-active-color);
+    background-color: var(--nav-link-hover-bg);
 }
 
 .main-nav a.active::after {
-   width: 30%;
+    width: 30%;
 }
 .main-nav a:hover::after {
-   width: 30%;
+    width: 30%;
+}
+
+/* Group header controls together */
+.header-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between buttons */
 }
 
 
 .request-btn {
-    /* Use variables for gradient and text */
     background: linear-gradient(100deg, var(--primary-accent), var(--primary-accent-darker));
     color: var(--button-text-color);
     padding: 12px 25px;
@@ -346,7 +355,8 @@ a:focus, button:focus, .project-card:focus {
     font-weight: 500;
     font-size: 0.95rem;
     box-shadow: 0 5px 15px rgba(0, 119, 255, 0.3);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    /* transition handled globally */
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background var(--theme-transition-duration) ease; /* Add background transition */
 }
 
 .request-btn:hover {
@@ -383,7 +393,6 @@ a:focus, button:focus, .project-card:focus {
     padding: 20px 0;
 }
 
-/* --- Home Section Specifics --- */
 #home-section {
     justify-content: space-between; /* Keep space-between for home */
 }
@@ -391,7 +400,7 @@ a:focus, button:focus, .project-card:focus {
 .content-section.active {
     display: flex;
     opacity: 1;
-    z-index: 2;
+    z-index: 2; /* Ensure active section is on top */
 }
 
 .section-left, .section-right {
@@ -403,69 +412,13 @@ a:focus, button:focus, .project-card:focus {
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative; /* For graphic/canvas overlay */
-}
-
-/* --- About Section Specifics --- */
-#about-section {
-    justify-content: center; /* Center the main content block */
-    flex-direction: column; /* Stack label and center vertically initially */
-    align-items: center; /* Center items horizontally */
-    text-align: center; /* Center text within the section */
-}
-
-.about-label-left {
-    writing-mode: horizontal-tb; /* Change back to horizontal */
-    text-orientation: mixed;
-    transform: none; /* Remove rotation */
-    color: #a0b0c8;
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    text-align: center;
-    margin-bottom: 20px; /* Add space below the label */
-    width: 100%; /* Take full width */
-}
-
-.about-center {
-    flex-direction: column;
-    align-items: center; /* Center items within this container */
     position: relative;
-    width: 100%; /* Ensure it can take width */
-    max-width: 900px; /* Limit max width for better readability */
-}
-
-.about-title {
-    font-size: 2rem;
-    font-weight: 600;
-    line-height: 1.3;
-    color: var(--section-title-color);
-    z-index: 3;
-    text-align: center;
-    margin-bottom: 40px; /* Increased space below title */
-}
-
-.about-details {
-    display: flex;
-    justify-content: center; /* Center the detail items */
-    gap: 30px;
-    position: relative;
-    width: 100%; /* Take full width */
-    flex-wrap: wrap; /* Allow wrapping on smaller screens if needed */
-}
-
-.detail-item {
-    flex: 1 1 250px; /* Allow grow/shrink, base width */
-    max-width: 300px; /* Limit max width of individual items */
-    text-align: left; /* Keep text left-aligned within item */
-    position: relative;
-    padding-top: 30px;
 }
 
 /* --- Home Section Specifics --- */
 #home-section .section-left .label {
     display: block;
-    color: #778ca8;
+    color: var(--section-subtitle-color); /* Use variable */
     margin-bottom: 10px;
     font-size: 0.9rem;
 }
@@ -474,26 +427,41 @@ a:focus, button:focus, .project-card:focus {
     font-size: 1.8rem;
     font-weight: 600;
     line-height: 1.4;
-    color: #1a2a4a;
+    color: var(--section-title-color); /* Use variable */
 }
 
 #home-section .section-right h2 {
     font-size: 2.4rem;
     font-weight: 600;
     line-height: 1.3;
-    color: var(--section-title-color);
+    color: var(--section-title-color); /* Use variable */
     text-align: right;
 }
 
-/* --- Central Graphic Area (Now Canvas Container) --- */
+/* --- Central Graphic Area (Canvas Container) --- */
 .graphic-area {
     position: relative;
     width: 100%;
-    height: 570px; /* Moved from inline style */
+    height: 570px;
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
+}
+
+#canvas-container { /* Target the container specifically */
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#tesseract-canvas {
+    display: block; /* Ensure canvas behaves predictably */
+    max-width: 100%;
+    max-height: 100%;
+    /* Let Three.js handle the actual size */
 }
 
 
@@ -508,88 +476,209 @@ a:focus, button:focus, .project-card:focus {
     align-items: center;
     justify-content: center;
     color: var(--tesseract-text-color); /* Use variable */
-    pointer-events: none; /* Prevent blocking canvas interaction */
+    pointer-events: none; /* Allow interaction with canvas below */
+    z-index: 1; /* Sit above canvas but below header/nav if needed */
 }
-
-/* Removed percentage container styles */
 
 .center-letter {
     font-size: 6rem;
     font-weight: 700;
-    color: var(--tesseract-text-color); /* Use variable */
+    color: var(--tesseract-text-color);
     line-height: 1;
     margin-bottom: 10px;
-    /* text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); /* Removed shadow */
 }
 
 .graphic-subtext {
     font-size: 0.85rem;
-    color: var(--tesseract-text-color); /* Use variable */
+    color: var(--tesseract-text-color);
     line-height: 1.5;
-    /* text-shadow: 0 1px 5px rgba(0, 0, 0, 0.2); /* Removed shadow */
 }
 
-/* --- Placeholder Sections (Projects, Skills) --- */
+
+/* --- About Section Specifics --- */
+#about-section {
+    justify-content: center; /* Center the main content block */
+    flex-direction: column; /* Stack label and center vertically initially */
+    align-items: center; /* Center items horizontally */
+    text-align: center; /* Center text within the section */
+}
+
+.about-label-left {
+    /* Removed vertical writing mode styles */
+    color: var(--section-subtitle-color); /* Use variable */
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: center;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.about-center {
+    display: flex; /* Use flex for alignment */
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+}
+
+.about-title {
+    font-size: 2rem;
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--section-title-color);
+    z-index: 3;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.about-details {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    position: relative;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.detail-item {
+    flex: 1 1 250px;
+    max-width: 300px;
+    text-align: left;
+    position: relative;
+    padding-top: 30px;
+}
+
+.detail-item .number {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--primary-accent);
+}
+
+.detail-item h3 {
+    font-size: 1.1rem;
+    color: var(--section-title-color);
+    margin-bottom: 8px;
+}
+
+.detail-item p {
+    font-size: 0.9rem;
+    color: var(--text-color);
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.detail-item .line {
+    position: absolute;
+    bottom: -10px; /* Position below content */
+    left: 0;
+    width: 50px;
+    height: 1px;
+    background-color: var(--nav-link-hover-bg);
+}
+
+.resume-download-container {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.resume-download-btn {
+    display: inline-block;
+    background: linear-gradient(100deg, var(--primary-accent), var(--primary-accent-darker));
+    color: var(--button-text-color);
+    padding: 12px 25px;
+    border-radius: 25px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    box-shadow: 0 5px 15px rgba(0, 119, 255, 0.3);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background var(--theme-transition-duration) ease;
+    text-decoration: none;
+}
+
+.resume-download-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 119, 255, 0.4);
+}
+
+.resume-download-btn .arrow {
+    margin-left: 8px;
+    display: inline-block;
+    transition: transform 0.2s ease;
+}
+
+.resume-download-btn:hover .arrow {
+    transform: translateY(2px);
+}
+
+
+/* --- Placeholder Sections (General Styling) --- */
 .placeholder-section {
     flex-direction: column;
-    justify-content: flex-start; /* Align content top */
+    justify-content: flex-start;
+    align-items: center; /* Center content like titles/paragraphs */
     text-align: center;
 }
 .placeholder-section h2 {
     color: var(--section-title-color);
     margin-bottom: 20px;
-    font-size: 2rem; /* Match about title size */
+    font-size: 2rem;
 }
-.placeholder-section p {
+
+.placeholder-section > p { /* Target direct paragraph children */
     color: var(--section-subtitle-color);
-    margin-bottom: 20px; /* Space before skills list OR project grid */
+    margin-bottom: 30px; /* Increased space */
+    max-width: 700px; /* Limit width for readability */
 }
 
 /* --- Projects Grid & Cards --- */
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive grid columns */
-    gap: 30px; /* Space between cards */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
     width: 100%;
-    max-width: 1100px; /* Limit grid width */
-    margin-top: 30px; /* Space below the intro paragraph */
-    padding: 0 15px; /* Padding on the sides of the grid */
+    max-width: 1100px;
+    margin-top: 0; /* Reset margin top as placeholder p has margin bottom */
+    padding: 0 15px;
 }
 
 .project-card {
-    display: block; /* Make the anchor tag behave like a block */
-    background-color: var(--card-bg); /* Use variable */
-    border-radius: 15px; /* Rounded corners */
+    display: block;
+    background-color: var(--card-bg);
+    border-radius: 15px;
     padding: 25px;
-    box-shadow: var(--card-shadow); /* Use variable */
+    box-shadow: var(--card-shadow);
     text-decoration: none;
-    color: inherit; /* Inherit text color */
-    text-align: left; /* Align text left within card */
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    position: relative; /* Needed for absolute positioning of arrow */
+    color: inherit;
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow var(--theme-transition-duration) ease; /* Updated */
+    position: relative;
     cursor: pointer;
 }
 
 .project-card:hover {
-    transform: translateY(-5px); /* Lift card on hover */
-    box-shadow: var(--card-hover-shadow); /* Use variable */
+    transform: translateY(-5px);
+    box-shadow: var(--card-hover-shadow);
 }
 
 .project-card h3 {
-    color: var(--section-title-color); /* Use variable */
+    color: var(--section-title-color);
     font-size: 1.15rem;
     margin-bottom: 10px;
 }
 
 .project-card p {
-    color: var(--text-color); /* Use variable */
+    color: var(--text-color);
     font-size: 0.9rem;
     line-height: 1.6;
-    margin-bottom: 15px; /* Space before potential arrow/footer */
+    margin-bottom: 35px; /* Ensure space for arrow */
 }
 
 .project-card .card-link-arrow {
-    color: var(--link-arrow-color); /* Use variable */
+    color: var(--link-arrow-color);
     position: absolute;
     bottom: 15px;
     right: 20px;
@@ -600,89 +689,79 @@ a:focus, button:focus, .project-card:focus {
 
 .project-card:hover .card-link-arrow {
     opacity: 1;
-    transform: translateX(-5px); /* Move arrow slightly left on hover */
+    transform: translateX(-5px);
 }
 
 /* --- Skills Section Enhancements --- */
 .skills-categories {
     display: flex;
-    flex-wrap: wrap; /* Allow categories to wrap on smaller screens */
-    justify-content: space-around; /* Distribute categories */
-    gap: 30px; /* Space between categories */
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 30px;
     width: 100%;
-    max-width: 1000px; /* Adjust max-width as needed */
-    margin: 30px auto 0; /* Center and add top margin */
-    text-align: left; /* Align text left within categories */
+    max-width: 1000px;
+    margin: 0 auto; /* Center and remove top margin */
+    text-align: left;
 }
 
 .skill-category {
-    flex: 1 1 250px; /* Allow categories to grow and shrink, base width 250px */
-    min-width: 200px; /* Minimum width before wrapping */
+    flex: 1 1 250px;
+    min-width: 200px;
 }
 
 .skill-category h3 {
     color: var(--primary-accent-darker);
     font-size: 1.1rem;
     margin-bottom: 15px;
-    border-bottom: 1px solid var(--nav-link-hover-bg); /* Subtle separator */
+    border-bottom: 1px solid var(--nav-link-hover-bg);
     padding-bottom: 5px;
 }
 
 .skills-list { /* Target specifically */
     list-style: none;
     padding: 0; /* Remove default padding */
-    font-size: 0.95rem; /* Adjust font size */
-    color: var(--text-color); /* Use variable */
-    margin: 0; /* Remove margin */
-    text-align: left; /* Align list items left */
+    margin: 0; /* Remove default margin */
 }
 .skills-list li {
-    margin-bottom: 8px; /* Adjust spacing */
+    margin-bottom: 8px;
     padding-left: 18px; /* Indent text */
     position: relative;
     line-height: 1.5;
+    font-size: 0.95rem; /* Consistent size */
+    color: var(--text-color); /* Use variable */
 }
 .skills-list li::before { /* Add bullet points */
-    content: '▹'; /* Use a different bullet */
+    content: '▹';
     position: absolute;
     left: 0;
-    color: var(--primary-accent); /* Blue bullet */
+    color: var(--primary-accent);
     font-weight: bold;
-    font-size: 1.1em; /* Slightly larger bullet */
+    font-size: 1.1em;
 }
 
 /* --- Education Section --- */
 #education-section {
-    flex-direction: column;
-    align-items: center; /* Center content horizontally */
-    justify-content: flex-start; /* Align content to the top */
-    text-align: center;
-}
-
-#education-section h2 {
-    color: var(--section-title-color);
-    margin-bottom: 30px; /* Space below main title */
-    font-size: 2rem;
+    /* Uses .placeholder-section styles */
 }
 
 .education-content {
     display: flex;
-    flex-direction: column; /* Stack items vertically */
-    gap: 30px; /* Space between education items */
+    flex-direction: column;
+    gap: 30px;
     width: 100%;
-    max-width: 800px; /* Limit content width */
-    text-align: left; /* Align text left within items */
+    max-width: 800px;
+    text-align: left;
 }
 
 .education-item {
-    background-color: rgba(255, 255, 255, 0.05); /* Very subtle background */
+    background-color: rgba(255, 255, 255, 0.05); /* Subtle */
     padding: 20px;
     border-radius: 10px;
-    border-left: 3px solid var(--primary-accent); /* Accent border */
+    border-left: 3px solid var(--primary-accent);
 }
 
 body.dark-mode .education-item {
-    background-color: rgba(0, 0, 0, 0.1); /* Subtle dark background */
+    background-color: rgba(0, 0, 0, 0.1);
 }
 
 .education-item h3 {
@@ -701,6 +780,7 @@ body.dark-mode .education-item {
 .education-item ul {
     list-style: none;
     padding-left: 0;
+    margin-top: 10px; /* Add space if list follows paragraph */
 }
 
 .education-item li {
@@ -716,41 +796,6 @@ body.dark-mode .education-item {
     color: var(--primary-accent);
 }
 
-/* --- Resume Download Button --- */
-.resume-download-container {
-    text-align: center; /* Center the button */
-    margin-top: 30px; /* Space above the button */
-}
-
-.resume-download-btn {
-    display: inline-block; /* Allow padding and margin */
-    /* Use variables similar to request-btn */
-    background: linear-gradient(100deg, var(--primary-accent), var(--primary-accent-darker));
-    color: var(--button-text-color);
-    padding: 12px 25px;
-    border-radius: 25px;
-    font-weight: 500;
-    font-size: 0.95rem;
-    box-shadow: 0 5px 15px rgba(0, 119, 255, 0.3);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    text-decoration: none;
-}
-
-.resume-download-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(0, 119, 255, 0.4);
-}
-
-.resume-download-btn .arrow {
-    margin-left: 8px;
-    display: inline-block; /* Ensure arrow is treated correctly */
-    transition: transform 0.2s ease;
-}
-
-.resume-download-btn:hover .arrow {
-    transform: translateY(2px); /* Slight downward movement */
-}
-
 
 /* --- Project Modal Styles --- */
 .modal {
@@ -759,7 +804,7 @@ body.dark-mode .education-item {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1050; /* Above panel overlay */
+    z-index: 1050;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -780,24 +825,24 @@ body.dark-mode .education-item {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.6); /* Darker overlay */
+    background-color: rgba(0, 0, 0, 0.6);
     cursor: pointer;
 }
 
 .modal-content {
     position: relative;
-    background: var(--panel-bg); /* Use panel background */
+    background: var(--panel-bg);
     color: var(--text-color);
     padding: 30px 40px;
     border-radius: 15px;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
     z-index: 1051;
     width: 90%;
-    max-width: 700px; /* Limit modal width */
-    max-height: 85vh; /* Limit modal height */
-    overflow-y: auto; /* Allow scrolling if content overflows */
+    max-width: 700px;
+    max-height: 85vh;
+    overflow-y: auto;
     transform: scale(0.95);
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, background var(--theme-transition-duration) ease, color var(--theme-transition-duration) ease; /* Added theme transitions */
 }
 
 .modal.open .modal-content {
@@ -817,7 +862,7 @@ body.dark-mode .education-item {
     padding: 0 5px;
     line-height: 1;
     opacity: 0.7;
-    transition: opacity 0.2s ease, color 0.2s ease;
+    transition: opacity 0.2s ease, color var(--theme-transition-duration) ease;
 }
 
 .modal-close-btn:hover {
@@ -831,6 +876,15 @@ body.dark-mode .education-item {
     margin-bottom: 20px;
     padding-right: 30px; /* Space for close button */
 }
+
+.modal-body #project-modal-image {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px; /* Increased space */
+    border-radius: 8px; /* Slightly rounded corners */
+    display: none; /* Controlled by JS */
+}
+
 
 .modal-body h4 {
     font-size: 1.1rem;
@@ -868,11 +922,10 @@ body.dark-mode .education-item {
     background-color: var(--primary-accent-darker);
 }
 
-
 /* --- Contact Form Styles (within panel) --- */
 #contact-form {
-    margin-top: 30px; /* Space above form */
-    border-top: 1px solid var(--nav-link-hover-bg); /* Separator */
+    margin-top: 30px;
+    border-top: 1px solid var(--nav-link-hover-bg);
     padding-top: 20px;
 }
 
@@ -898,28 +951,27 @@ body.dark-mode .education-item {
 .form-group textarea {
     width: 100%;
     padding: 10px;
-    border: 1px solid var(--nav-link-color); /* Use nav link color for border */
+    border: 1px solid var(--nav-link-color);
     border-radius: 5px;
     background-color: var(--bg-color); /* Match page background */
     color: var(--text-color);
     font-size: 0.95rem;
-    transition: border-color 0.3s ease;
+    transition: border-color 0.3s ease, background-color var(--theme-transition-duration) ease, color var(--theme-transition-duration) ease; /* Added theme transitions */
 }
 
+/* Focus handled by global :focus-visible */
 .form-group input:focus,
 .form-group textarea:focus {
-    outline: none;
     border-color: var(--primary-accent);
     box-shadow: 0 0 0 2px var(--nav-link-hover-bg);
 }
 
 .form-group textarea {
-    resize: vertical; /* Allow vertical resize */
+    resize: vertical;
     min-height: 80px;
 }
 
 .form-submit-btn {
-    /* Style similar to request-btn */
     background: linear-gradient(100deg, var(--primary-accent), var(--primary-accent-darker));
     color: var(--button-text-color);
     padding: 10px 20px;
@@ -928,7 +980,7 @@ body.dark-mode .education-item {
     font-size: 0.95rem;
     border: none;
     cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background var(--theme-transition-duration) ease; /* Add background transition */
 }
 
 .form-submit-btn:hover {
@@ -943,13 +995,11 @@ body.dark-mode .education-item {
     font-style: italic;
 }
 
-
 /* --- Request Panel --- */
-/* Styles for the left slide-in panel */
 #request-panel {
     position: fixed;
     top: 0;
-    left: 0; /* Correct position */
+    left: 0; /* Slide from left */
     width: 400px;
     max-width: 90%;
     height: 100%;
@@ -957,9 +1007,9 @@ body.dark-mode .education-item {
     box-shadow: 5px 0 25px rgba(0, 0, 0, 0.1);
     z-index: 1002;
     overflow-y: auto;
-    transform: translateX(-100%); /* Start off-screen left */
-    visibility: hidden; /* Initially hidden for accessibility */
-    transition: transform 0.4s ease-in-out, visibility 0s 0.4s linear; /* Delay visibility change */
+    transform: translateX(-100%); /* Start off-screen */
+    visibility: hidden;
+    transition: transform 0.4s ease-in-out, visibility 0s 0.4s linear, background var(--theme-transition-duration) ease; /* Added theme transition */
     color: var(--text-color);
     display: flex;
     flex-direction: column;
@@ -968,12 +1018,11 @@ body.dark-mode .education-item {
 }
 
 #request-panel.open {
-    transform: translateX(0); /* Slide into view */
-    visibility: visible; /* Make visible when open */
-    transition: transform 0.4s ease-in-out; /* Only transition transform */
+    transform: translateX(0);
+    visibility: visible;
+    transition: transform 0.4s ease-in-out, background var(--theme-transition-duration) ease;
 }
 
-/* Styles for the overlay */
 #panel-overlay {
     position: fixed;
     top: 0;
@@ -993,7 +1042,6 @@ body.dark-mode .education-item {
     transition: opacity 0.4s ease;
 }
 
-/* Styles for close button */
 #close-request-panel {
     position: absolute;
     top: 15px;
@@ -1006,6 +1054,7 @@ body.dark-mode .education-item {
     padding: 5px;
     line-height: 1;
     opacity: 0.7;
+    /* transition handled globally */
 }
 
 #close-request-panel:hover {
@@ -1013,106 +1062,90 @@ body.dark-mode .education-item {
     opacity: 1;
 }
 
-/* Add focus style for panel close button */
-#close-request-panel:focus-visible {
-    outline: 2px solid var(--primary-accent);
-    outline-offset: 1px;
-    opacity: 1;
-}
+/* Focus handled by global :focus-visible */
 
-/* Styles for panel content */
 .panel-content {
-    padding: 60px 40px 40px; /* Top padding accounts for close button */
+    padding: 60px 40px 40px;
     display: flex;
     flex-direction: column;
-    gap: 20px; /* Spacing between items */
-    flex-grow: 1; /* Allow content to fill panel */
+    gap: 20px;
+    flex-grow: 1;
+    /* transition handled globally */
 }
 
 .panel-content h3 {
-    font-size: 1.4rem; /* Slightly larger */
+    font-size: 1.4rem;
     color: var(--section-title-color);
-    margin-bottom: 10px; /* Space after heading */
+    margin-bottom: 10px;
 }
 
 .panel-content .panel-intro {
     font-size: 0.95rem;
     color: var(--section-subtitle-color);
-    margin-bottom: 25px; /* Space before contact items */
+    margin-bottom: 25px;
 }
 
 .panel-content .contact-item {
-    margin-bottom: 15px; /* Space between contact items */
+    margin-bottom: 15px;
 }
 
 .panel-content .contact-item strong {
     color: var(--section-title-color);
-    display: block; /* Ensure strong is on its own line */
-    margin-bottom: 3px; /* Small space before link */
+    display: block;
+    margin-bottom: 3px;
 }
 
 .panel-content .contact-item a {
     color: var(--primary-accent);
     text-decoration: none;
     word-break: break-all;
-    display: inline-block; /* Keep link inline */
+    display: inline-block;
 }
 
 .panel-content .contact-item a:hover {
     text-decoration: underline;
 }
 
-/* Add focus style for panel links */
-.panel-content .contact-item a:focus-visible {
-    outline: 2px solid var(--primary-accent);
-    outline-offset: 1px;
-    text-decoration: none; /* Remove underline on focus if desired */
-}
+/* Focus handled by global :focus-visible */
 
 .panel-content .legal-text {
     font-size: 0.8rem;
     color: var(--section-subtitle-color);
     line-height: 1.5;
-    margin-top: auto; /* Push to bottom */
-    padding-top: 20px; /* Add some space above */
+    margin-top: auto;
+    padding-top: 20px;
 }
-
 
 /* --- Theme Toggle Button Styles --- */
 #theme-toggle-btn {
-    display: inline-flex; /* Use flexbox to align items horizontally */
-    align-items: center; /* Vertically center icon and text */
-    gap: 6px; /* Add space between icon and text */
-    padding: 8px 12px; /* Adjust padding as needed */
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
     border-radius: 20px;
-    /* Use existing variables for consistency */
     border: 1px solid var(--nav-link-color);
     color: var(--nav-link-color);
-    background-color: transparent; /* Explicitly set background */
-    font-size: 0.9rem; /* Base font size */
+    background-color: transparent;
+    font-size: 0.9rem;
     cursor: pointer;
-    /* Inherit transitions defined elsewhere or add specific ones */
-    transition: background-color var(--theme-transition-duration) ease,
-    color var(--theme-transition-duration) ease,
-    border-color var(--theme-transition-duration) ease;
-    margin-left: 10px; /* Add some space from nav/other buttons */
+    /* transition handled globally */
+    /* margin-left: 10px; Moved to header-controls gap */
 }
 
 #theme-toggle-btn:hover {
     background-color: var(--nav-link-hover-bg);
-    border-color: var(--nav-link-active-color); /* Example hover effect */
+    border-color: var(--nav-link-active-color);
 }
 
 #theme-toggle-btn .theme-icon {
-    line-height: 1; /* Helps prevent extra space around the icon */
-    /* Icon size can be adjusted via font-size on the button or here */
+    line-height: 1;
 }
 
 #theme-toggle-btn .theme-beta {
-    font-size: 0.75em; /* Make "BETA" slightly smaller */
+    font-size: 0.75em;
     font-weight: 500;
-    line-height: 1; /* Consistent line height */
-    opacity: 0.8; /* Make it slightly less prominent */
+    line-height: 1;
+    opacity: 0.8;
 }
 
 /* --- Audio Control Button Styles --- */
@@ -1120,17 +1153,15 @@ body.dark-mode .education-item {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 8px; /* Adjust padding for icon-only */
-    border-radius: 50%; /* Make it circular */
+    padding: 8px;
+    border-radius: 50%;
     border: 1px solid var(--nav-link-color);
     color: var(--nav-link-color);
     background-color: transparent;
     cursor: pointer;
-    transition: background-color var(--theme-transition-duration) ease,
-                color var(--theme-transition-duration) ease,
-                border-color var(--theme-transition-duration) ease;
-    line-height: 1; /* Ensure icon is centered */
-    margin-left: 10px; /* Add some space */
+    line-height: 1;
+    /* transition handled globally */
+    /* margin-left: 10px; Moved to header-controls gap */
 }
 
 .audio-control-btn:hover {
@@ -1139,9 +1170,9 @@ body.dark-mode .education-item {
 }
 
 .audio-control-btn svg {
-    width: 1em; /* Match font size */
+    width: 1em;
     height: 1em;
-    display: block; /* Remove extra space */
+    display: block;
 }
 
 .audio-control-btn .hidden {
@@ -1159,40 +1190,20 @@ body.dark-mode .education-item {
     padding: 10px 20px;
     border-radius: 5px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-    z-index: 1010; /* Above most elements */
+    z-index: 1010;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0s 0.3s linear;
+    transition: opacity 0.3s ease, visibility 0s 0.3s linear, background-color var(--theme-transition-duration) ease, color var(--theme-transition-duration) ease; /* Added theme transitions */
 }
 
 .audio-error.visible {
     opacity: 1;
     visibility: visible;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.3s ease, background-color var(--theme-transition-duration) ease, color var(--theme-transition-duration) ease;
 }
 
-/* --- Skills Section Fix --- */
-.skills-list { /* Target specifically */
-    list-style: none;
-    padding: 20px 0; /* Add padding here */
-    font-size: 1.1rem; /* Use desired font size */
-    color: var(--text-color); /* Use variable */
-    margin: 0 auto; /* Center the list */
-    max-width: 400px; /* Limit width */
-    text-align: left; /* Align list items left */
-}
-.skills-list li {
-    margin-bottom: 10px;
-    padding-left: 20px;
-    position: relative;
-}
-.skills-list li::before { /* Add bullet points */
-    content: '•';
-    position: absolute;
-    left: 0;
-    color: var(--primary-accent); /* Blue bullet */
-    font-weight: bold;
-}
+
+/* --- REMOVED redundant .skills-list styling block --- */
 
 
 /* --- Responsive Adjustments --- */
@@ -1202,129 +1213,196 @@ body.dark-mode .education-item {
         padding: 25px 35px;
     }
 
-    #home-section .section-left p,
+    #home-section .section-left p {
+        font-size: 1.6rem; /* Adjust font size */
+    }
     #home-section .section-right h2 {
-        font-size: 1.5rem;
-        color: var(--section-title-color);
+        font-size: 1.8rem; /* Adjust font size */
     }
 
     .about-details {
-        gap: 30px; /* Adjust gap */
-    }
-    .detail-item {
-        max-width: 300px; /* Keep max-width */
-    }
-    .resume-download-container {
-        margin-top: 20px; /* Adjust spacing */
+        gap: 25px; /* Adjust gap */
     }
     .skills-categories {
-        gap: 20px;
+        gap: 25px;
     }
 }
 
 @media (max-width: 992px) {
     .main-container {
         padding: 20px 25px;
-        min-height: auto; /* Allow container to shrink */
+        min-height: auto;
     }
     .site-header {
-        flex-direction: column; /* Stack header items */
-        align-items: flex-start; /* Align left */
+        flex-direction: row; /* Keep horizontal but allow wrap */
+        align-items: center;
         margin-bottom: 20px;
     }
+
+    .logo {
+        margin-right: 20px; /* Ensure some space */
+        flex-shrink: 0; /* Prevent logo shrinking too much */
+    }
+
+    .main-nav {
+        flex-grow: 1; /* Allow nav to take available space */
+        margin-bottom: 10px; /* Space below nav if it wraps */
+    }
     .main-nav ul {
-        gap: 10px; /* Reduce nav gap */
-        flex-wrap: wrap; /* Allow nav items to wrap */
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: flex-start; /* Align nav items left */
     }
     .main-nav a {
         padding: 6px 10px;
         font-size: 0.9rem;
     }
+
+    .header-controls {
+        width: 100%; /* Make controls take full width if header wraps */
+        justify-content: flex-start; /* Align controls left */
+        margin-top: 10px;
+    }
+
     .request-btn {
-        align-self: flex-start; /* Align button left */
-        margin-top: 10px;
-        margin-left: 0; /* Reset margin */
+        /* margin-left: 0; Inherited from header-controls */
     }
-    #theme-toggle-btn {
-        align-self: flex-start; /* Align button left */
-        margin-top: 10px;
-        margin-left: 0; /* Reset margin */
-    }
-    .audio-control-btn {
-        align-self: flex-start;
-        margin-top: 10px;
-        margin-left: 0; /* Reset margin */
+
+    #theme-toggle-btn, .audio-control-btn {
+        /* margin-left: 0; Inherited from header-controls */
     }
 
     .content-section {
-        flex-direction: column; /* Stack sections vertically */
-        position: relative; /* Change from absolute */
-        display: none; /* Keep hidden until active */
-        height: auto; /* Allow height to adjust */
-        opacity: 0; /* Keep transition */
-        padding: 30px 10px; /* Consistent padding */
+        flex-direction: column;
+        position: relative; /* Allow static positioning in flow */
+        display: none;
+        height: auto;
+        opacity: 0;
+        padding: 30px 10px;
+        align-items: stretch; /* Stretch items to fill width */
     }
     .content-section.active {
-        display: flex; /* Show active section */
+        display: flex;
         opacity: 1;
     }
     .section-left, .section-center, .section-right {
-        flex-basis: 100%; /* Full width */
-        padding: 0 10px; /* Adjust padding */
-        text-align: center; /* Center text */
+        flex-basis: auto; /* Reset basis */
+        width: 100%; /* Take full width */
+        padding: 0 10px;
+        text-align: center;
+        margin-bottom: 20px; /* Add space between stacked sections */
     }
-     #home-section .section-left p,
-     #home-section .section-right h2 {
-        text-align: center; /* Center text */
-        font-size: 1.3rem;
-     }
-     #home-section .section-left .label {
-         text-align: center;
-     }
-     .graphic-area {
-         height: 350px; /* Reduce canvas height */
-         margin: 20px 0;
-     }
-     .center-letter {
-         font-size: 4rem;
-     }
-     .about-label-left {
-         text-align: center;
-         margin: 0 0 20px 0;
-     }
-     .about-center {
-         max-width: 90%; /* Adjust max-width for smaller screens */
-     }
-     .about-details {
-         gap: 25px; /* Adjust gap for smaller screens */
-     }
-     .projects-grid {
-         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-     }
-     #about-section, #projects-section, #skills-section, #education-section {
-         padding-bottom: 50px;
-         padding-top: 30px;
-     }
-     .skills-categories {
-         flex-direction: column; /* Stack categories vertically */
-         align-items: center; /* Center categories */
-     }
-     .skill-category {
-         width: 90%; /* Take more width when stacked */
-         max-width: 400px;
-     }
-     .education-content {
-         max-width: 90%;
-     }
+
+    .section-right {
+        margin-bottom: 0; /* No space after last element */
+    }
+
+    #home-section .section-left p,
+    #home-section .section-right h2 {
+        text-align: center;
+        font-size: 1.4rem; /* Consistent size */
+    }
+
+    #home-section .section-left .label {
+        text-align: center;
+    }
+
+    #home-section .section-right h2 {
+        text-align: center; /* Override right alignment */
+    }
+
+    .graphic-area {
+        height: 350px;
+        margin: 20px 0;
+        order: 0; /* Ensure graphic appears between left/right on mobile if needed */
+    }
+
+    .center-letter {
+        font-size: 4rem;
+    }
+
+    .about-label-left {
+        text-align: center;
+        margin: 0 0 20px 0;
+    }
+
+    .about-center {
+        max-width: 90%;
+    }
+
+    .about-details {
+        flex-direction: column; /* Stack detail items */
+        align-items: center; /* Center stacked items */
+        gap: 25px;
+    }
+
+    .detail-item {
+        max-width: 90%; /* Allow items to be wider */
+        text-align: center; /* Center text within item */
+    }
+
+    .detail-item .line {
+        left: 50%;
+        transform: translateX(-50%); /* Center the line */
+    }
+
+    .detail-item .number {
+        position: relative; /* Make number part of flow */
+        display: block;
+        margin-bottom: 5px;
+        text-align: center;
+    }
+
+    .projects-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        padding: 0 5px; /* Reduce padding */
+    }
+
+    #about-section, #projects-section, #skills-section, #education-section {
+        padding-bottom: 50px;
+        padding-top: 30px;
+    }
+
+    .skills-categories {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .skill-category {
+        width: 90%;
+        max-width: 400px;
+        text-align: center; /* Center category headings */
+    }
+
+    .skills-list {
+        text-align: left; /* Keep list items left-aligned */
+    }
+
+    .education-content {
+        max-width: 90%;
+    }
+
+    .education-item {
+        text-align: center; /* Center education item text */
+    }
+
+    .education-item ul {
+        text-align: left; /* Keep list items left-aligned */
+        display: inline-block; /* Allow centering of the list block */
+    }
 }
 
 @media (max-width: 768px) {
     .modal-content {
-        padding: 20px;
+        padding: 25px;
         max-height: 90vh;
     }
     #project-modal-title {
         font-size: 1.4rem;
+    }
+
+    .panel-content {
+        padding: 60px 30px 30px; /* Adjust padding */
     }
 }
 
@@ -1336,11 +1414,22 @@ body.dark-mode .education-item {
     .logo {
         font-size: 1.5rem;
     }
+
+    .main-nav ul {
+        gap: 5px; /* Further reduce nav gap */
+        justify-content: center; /* Center nav items */
+    }
     .main-nav a {
         font-size: 0.85rem;
+        padding: 5px 8px;
+    }
+
+    .header-controls {
+        justify-content: center; /* Center buttons */
+        gap: 8px;
     }
     .request-btn {
-        padding: 10px 20px;
+        padding: 10px 18px;
         font-size: 0.9rem;
     }
     #theme-toggle-btn {
@@ -1361,7 +1450,15 @@ body.dark-mode .education-item {
     }
     .preloader-text-left {
         font-size: 1rem;
+        flex-basis: auto; /* Allow text to wrap */
+        margin-bottom: 15px; /* Space if preloader content stacks */
     }
+
+    .preloader-content {
+        flex-direction: column; /* Stack preloader content */
+        text-align: center;
+    }
+
     #request-panel {
         width: 100%;
         max-width: 100%;
@@ -1372,7 +1469,7 @@ body.dark-mode .education-item {
     }
     .modal-content {
         width: 95%;
-        padding: 15px;
+        padding: 20px 15px;
     }
     #project-modal-title {
         font-size: 1.2rem;
