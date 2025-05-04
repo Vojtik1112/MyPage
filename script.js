@@ -1,7 +1,7 @@
 // script.js
-// (Handles preloader, navigation, slide-out panel, theme toggle, audio, modal, project data loading)
+// (Handles preloader, navigation, panel, theme, audio, modal, data loading, animations)
 
-document.addEventListener('DOMContentLoaded', async () => { // Make async for await
+document.addEventListener('DOMContentLoaded', async () => {
     // --- Element Selection ---
     const preloader = document.getElementById('preloader');
     const pageWrapper = document.getElementById('page-wrapper');
@@ -20,53 +20,49 @@ document.addEventListener('DOMContentLoaded', async () => { // Make async for aw
     const pauseIcon = document.getElementById('pause-icon');
     const audioErrorMessage = document.getElementById('audio-error-message');
     const projectModal = document.getElementById('project-modal');
-    // Project cards selected later in setupProjectCards
     const modalCloseBtns = document.querySelectorAll('[data-modal-close]');
 
     // --- Global State ---
-    let projectDetails = {}; // Will be loaded from JSON
+    let projectDetails = {};
     let elementToFocusOnPanelClose = null;
     let elementToFocusOnModalClose = null;
     const lightModeIcon = '☀️';
     const darkModeIcon = '🌙';
-    const lightTesseractColor = 0x000000; // Black
-    const darkTesseractColor = 0xcccccc;  // Light gray
+    // Updated colors to match new CSS variables
+    const lightTesseractColor = 0x34495e;
+    const darkTesseractColor = 0xbdc3c7;
 
     // --- Check for essential elements ---
-    // (Add more checks as needed)
     if (!pageWrapper || !requestPanel || !panelOverlay || !projectModal) {
-        console.error("One or more essential layout elements (pageWrapper, requestPanel, panelOverlay, projectModal) not found. Functionality may be limited.");
+        console.error("One or more essential layout elements missing.");
     }
     if (!themeToggleBtn || !themeIconSpan) {
         console.warn("Theme toggle button or icon span not found.");
     }
     if (!bgMusic || !audioToggleBtn || !playIcon || !pauseIcon) {
-        console.warn("Audio elements (music, toggle, icons) missing. Audio controls disabled.");
+        console.warn("Audio elements missing. Audio controls disabled.");
         if (audioToggleBtn) audioToggleBtn.style.display = 'none';
     }
 
     // --- Project Data Loading ---
     async function loadProjectData() {
         try {
-            // Adjust the path if your projects.json is located elsewhere
             const response = await fetch('assets/projects/projects.json');
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status} - Could not fetch project data.`);
             }
             projectDetails = await response.json();
             console.log('Project data loaded successfully.');
-            // Setup cards *after* data is loaded
             setupProjectCards();
         } catch (error) {
             console.error("Failed to load or parse project data:", error);
-            // Optionally display an error to the user or disable project section
         }
     }
 
     // --- Preloader Logic ---
     const letters = {
-        c1: document.getElementById('letter-c1'), // 'V'
-        b: document.getElementById('letter-b')    // 'N'
+        c1: document.getElementById('letter-c1'),
+        b: document.getElementById('letter-b')
     };
     function showLetter(letterElement) {
         if (letterElement) {
@@ -84,21 +80,18 @@ document.addEventListener('DOMContentLoaded', async () => { // Make async for aw
         setTimeout(() => {
             preloader.classList.add('hidden');
             if (pageWrapper) pageWrapper.classList.add('visible');
-            attemptAudioAutoplay(); // Attempt audio play after preloader fades
+            attemptAudioAutoplay();
 
-            // Clean up preloader
             setTimeout(() => {
-                preloader.remove(); // Use remove() modern method
-            }, 800); // Match CSS transition
+                preloader.remove();
+            }, 800);
         }, 1800);
     } else {
-        // No preloader: Show page and attempt autoplay
         if (pageWrapper) pageWrapper.classList.add('visible');
         attemptAudioAutoplay();
     }
 
     // --- Load Project Data ---
-    // Called after preloader logic starts, completes before card setup
     await loadProjectData();
 
     // --- Theme Toggle Logic ---
@@ -106,16 +99,12 @@ document.addEventListener('DOMContentLoaded', async () => { // Make async for aw
         const isDark = theme === 'dark';
         body.classList.toggle('dark-mode', isDark);
         if (themeIconSpan) themeIconSpan.textContent = isDark ? lightModeIcon : darkModeIcon;
-
         const tesseractColor = isDark ? darkTesseractColor : lightTesseractColor;
-        // Dispatch custom event for Tesseract color update
         const themeChangeEvent = new CustomEvent('themeChange', {
             detail: {theme: theme, color: tesseractColor}
         });
         window.dispatchEvent(themeChangeEvent);
-
         localStorage.setItem('theme', theme);
-        // console.log(`Theme applied: ${theme}`);
     }
 
     function toggleTheme() {
@@ -123,21 +112,18 @@ document.addEventListener('DOMContentLoaded', async () => { // Make async for aw
         applyTheme(newTheme);
     }
 
-    // Initial Theme Load
     const savedTheme = localStorage.getItem('theme');
     const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
     const initialTheme = savedTheme || (prefersDark ? 'dark' : 'light');
-    applyTheme(initialTheme); // Apply initial theme
+    applyTheme(initialTheme);
 
-    // Add listener to button
     if (themeToggleBtn) {
         themeToggleBtn.addEventListener('click', toggleTheme);
     }
 
-    // System preference listener (optional, only if no saved theme)
     try {
         window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
-            if (!localStorage.getItem('theme')) { // Only react if user hasn't manually set
+            if (!localStorage.getItem('theme')) {
                 applyTheme(event.matches ? 'dark' : 'light');
             }
         });
@@ -153,51 +139,58 @@ document.addEventListener('DOMContentLoaded', async () => { // Make async for aw
             const targetId = link.getAttribute('data-target');
             const targetSection = document.getElementById(targetId);
 
-            if (targetSection) {
+            if (targetSection && !targetSection.classList.contains('active')) { // Only switch if not already active
                 let isHomeSectionTargeted = targetId === 'home-section';
 
+                // Deactivate all first
                 contentSections.forEach(s => {
-                    const isActive = s.id === targetId;
-                    s.classList.toggle('active', isActive);
-                    // *** ACCESSIBILITY NOTE: The aria-hidden attribute is crucial! ***
-                    // It hides inactive sections from screen readers, preventing confusion.
-                    // Setting it to 'false' for the active section makes it visible to assistive tech.
-                    // DO NOT REMOVE this line or the logic.
-                    s.setAttribute('aria-hidden', String(!isActive));
+                    s.classList.remove('active');
+                    s.setAttribute('aria-hidden', 'true');
                 });
 
+                // Activate target section
+                targetSection.classList.add('active');
+                targetSection.setAttribute('aria-hidden', 'false');
+
+
+                // Update nav link states
                 navLinks.forEach(l => {
                     const isCurrent = l === link;
                     l.classList.toggle('active', isCurrent);
-                    l.setAttribute('aria-current', isCurrent ? 'page' : null);
+                    if (isCurrent) {
+                        l.setAttribute('aria-current', 'page');
+                    } else {
+                        l.removeAttribute('aria-current');
+                    }
                 });
 
-                // Dispatch custom event for section change (for Tesseract)
+                // Dispatch event for Tesseract
                 const sectionChangeEvent = new CustomEvent('sectionChange', {
                     detail: {isHomeActive: isHomeSectionTargeted}
                 });
                 window.dispatchEvent(sectionChangeEvent);
-                // console.log(`Navigated to: ${targetId}, Home Active: ${isHomeSectionTargeted}`);
 
-            } else {
+                // Trigger animations for newly visible section
+                triggerSectionAnimations(targetSection);
+
+            } else if (!targetSection) {
                 console.warn(`Navigation target section not found: #${targetId}`);
             }
         });
     });
 
-    // Set initial Tesseract state based on the default active section
+    // Initial setup for aria-hidden and Tesseract state
     const initialActiveSection = document.querySelector('.content-section.active');
+    contentSections.forEach(s => {
+        const isActive = s === initialActiveSection;
+        s.setAttribute('aria-hidden', String(!isActive));
+    });
     const initialHomeActive = initialActiveSection && initialActiveSection.id === 'home-section';
-    // *** ACCESSIBILITY: Ensure initial aria-hidden states are correct ***
-    // The HTML should set aria-hidden="true" for all non-active sections initially.
-    // This JS dispatch ensures the Tesseract animation state matches the initial view.
-    if (initialActiveSection) {
-        initialActiveSection.setAttribute('aria-hidden', 'false');
-    }
     const initialSectionChangeEvent = new CustomEvent('sectionChange', {
         detail: {isHomeActive: initialHomeActive}
     });
     window.dispatchEvent(initialSectionChangeEvent);
+
 
 
     // --- Request Panel Logic ---
@@ -210,8 +203,8 @@ document.addEventListener('DOMContentLoaded', async () => { // Make async for aw
         panelOverlay.classList.add('active');
         body.style.overflow = 'hidden';
 
-        const firstFocusable = requestPanel.querySelector('a[href], button:not([disabled]), textarea, input, select') || closeRequestPanelBtn;
-        if (firstFocusable) firstFocusable.focus();
+        const firstFocusable = requestPanel.querySelector('a[href]:not([disabled]), button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled])') || closeRequestPanelBtn;
+        if (firstFocusable) setTimeout(() => firstFocusable.focus(), 50); // Delay focus slightly for transition
         requestPanel.addEventListener('keydown', trapFocusInPanel);
     }
 
@@ -219,15 +212,18 @@ document.addEventListener('DOMContentLoaded', async () => { // Make async for aw
         if (!requestPanel || !panelOverlay) return;
         requestPanel.classList.remove('open');
         panelOverlay.classList.remove('active');
-        requestPanel.setAttribute('aria-hidden', 'true');
-        panelOverlay.setAttribute('aria-hidden', 'true');
+        // Wait for transition before setting aria-hidden
+        setTimeout(() => {
+            requestPanel.setAttribute('aria-hidden', 'true');
+            panelOverlay.setAttribute('aria-hidden', 'true');
+            if (elementToFocusOnPanelClose?.focus) elementToFocusOnPanelClose.focus();
+            elementToFocusOnPanelClose = null;
+        }, 400); // Match transition duration
         body.style.overflow = '';
         requestPanel.removeEventListener('keydown', trapFocusInPanel);
-        if (elementToFocusOnPanelClose?.focus) elementToFocusOnPanelClose.focus();
-        elementToFocusOnPanelClose = null;
     }
 
-    function trapFocusInPanel(e) { // Focus Trap
+    function trapFocusInPanel(e) {
         if (e.key !== 'Tab' || !requestPanel) return;
         const focusableElementsString = 'a[href]:not([disabled]), button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled])';
         const focusableElements = Array.from(requestPanel.querySelectorAll(focusableElementsString));
@@ -235,12 +231,12 @@ document.addEventListener('DOMContentLoaded', async () => { // Make async for aw
         const firstFocusable = focusableElements[0];
         const lastFocusable = focusableElements[focusableElements.length - 1];
 
-        if (e.shiftKey) { // Shift + Tab
+        if (e.shiftKey) {
             if (document.activeElement === firstFocusable) {
                 lastFocusable.focus();
                 e.preventDefault();
             }
-        } else { // Tab
+        } else {
             if (document.activeElement === lastFocusable) {
                 firstFocusable.focus();
                 e.preventDefault();
@@ -248,7 +244,6 @@ document.addEventListener('DOMContentLoaded', async () => { // Make async for aw
         }
     }
 
-    // Event listeners for panel
     if (openRequestPanelBtn) openRequestPanelBtn.addEventListener('click', openPanel);
     if (closeRequestPanelBtn) closeRequestPanelBtn.addEventListener('click', closePanel);
     if (panelOverlay) panelOverlay.addEventListener('click', closePanel);
@@ -277,20 +272,18 @@ document.addEventListener('DOMContentLoaded', async () => { // Make async for aw
     }
 
     function attemptAudioAutoplay() {
-        // Autoplay is unreliable, often blocked. Best effort.
         if (bgMusic && bgMusic.paused) {
-            setTimeout(() => { // Slight delay might help sometimes
+            setTimeout(() => {
                 bgMusic.play().then(() => {
                     updateAudioButton(true);
                     console.log("Audio autoplay successful.");
                 }).catch(err => {
-                    console.warn('Audio autoplay failed (likely browser policy):', err.name);
+                    console.warn('Audio autoplay failed:', err.name);
                     updateAudioButton(false);
-                    // Don't show error on initial failed autoplay
                 });
             }, 100);
         } else if (bgMusic && !bgMusic.paused) {
-            updateAudioButton(true); // Sync button if already playing
+            updateAudioButton(true);
         }
     }
 
@@ -304,9 +297,9 @@ document.addEventListener('DOMContentLoaded', async () => { // Make async for aw
             }).catch(err => {
                 console.error('Audio play failed on toggle:', err);
                 updateAudioButton(false);
-                let message = 'Unable to play audio. Please check browser settings.';
+                let message = 'Unable to play audio. Check browser settings.';
                 if (err.name === 'NotAllowedError') {
-                    message = 'Audio playback requires interaction (like clicking) first.';
+                    message = 'Audio playback requires user interaction first.';
                 }
                 showAudioError(message);
             });
@@ -316,30 +309,26 @@ document.addEventListener('DOMContentLoaded', async () => { // Make async for aw
         }
     }
 
-    // Add listeners only if all audio elements exist
     if (audioToggleBtn && bgMusic && playIcon && pauseIcon) {
         audioToggleBtn.addEventListener('click', toggleAudio);
         bgMusic.addEventListener('play', () => updateAudioButton(true));
         bgMusic.addEventListener('pause', () => updateAudioButton(false));
-        bgMusic.addEventListener('ended', () => updateAudioButton(false)); // Reset on end
-        updateAudioButton(!bgMusic.paused); // Initial state sync
+        bgMusic.addEventListener('ended', () => updateAudioButton(false));
+        updateAudioButton(!bgMusic.paused);
     }
 
 
     // --- Project Modal Logic ---
     function openProjectModal(projectId) {
         const details = projectDetails[projectId];
-        // Check if details exist for the given projectId
         if (!details) {
             console.error(`Project details not found for ID: ${projectId}. Check projects.json.`);
-            // Optionally show a user-friendly error message here
             return;
         }
         if (!projectModal) return;
 
-        elementToFocusOnModalClose = document.activeElement; // Store focus
+        elementToFocusOnModalClose = document.activeElement;
 
-        // Populate modal content
         const titleEl = projectModal.querySelector('#project-modal-title');
         const imgEl = projectModal.querySelector('#project-modal-image');
         const descEl = projectModal.querySelector('#project-modal-description');
@@ -349,58 +338,57 @@ document.addEventListener('DOMContentLoaded', async () => { // Make async for aw
         const repoLinkEl = projectModal.querySelector('#project-modal-repo-link');
 
         if (titleEl) titleEl.textContent = details.title;
-        if (descEl) descEl.innerHTML = details.description; // Allow basic HTML if needed
+        if (descEl) descEl.innerHTML = details.description;
         if (techEl) techEl.textContent = details.tech;
         if (chalEl) chalEl.textContent = details.challenges;
 
-        // Handle image display and alt text
         if (imgEl) {
             if (details.image) {
                 imgEl.src = details.image;
-                imgEl.alt = details.title ? `Screenshot of the ${details.title} project.` : 'Project screenshot.'; // Improved Alt Text
-                imgEl.classList.add('visible'); // Use CSS class to show
+                imgEl.alt = details.title ? `Screenshot of the ${details.title} project.` : 'Project screenshot.';
+                imgEl.classList.add('visible');
             } else {
-                imgEl.classList.remove('visible'); // Use CSS class to hide
-                imgEl.alt = ''; // Clear alt text
+                imgEl.classList.remove('visible');
+                imgEl.alt = '';
             }
         }
 
-        // Handle links visibility
         [liveLinkEl, repoLinkEl].forEach(linkEl => {
             if (linkEl) {
                 const linkType = linkEl.id.includes('live') ? 'liveLink' : 'repoLink';
                 if (details[linkType]) {
                     linkEl.href = details[linkType];
-                    linkEl.style.display = 'inline-block'; // Show link
+                    linkEl.style.display = 'inline-block';
                 } else {
-                    linkEl.style.display = 'none'; // Hide link
+                    linkEl.style.display = 'none';
                 }
             }
         });
 
-        // Open the modal
         projectModal.setAttribute('aria-hidden', 'false');
         projectModal.classList.add('open');
-        body.style.overflow = 'hidden'; // Prevent background scroll
+        body.style.overflow = 'hidden';
 
-        // Focus management
         const focusTarget = projectModal.querySelector('.modal-close-btn') || projectModal.querySelector('a[href], button');
-        if (focusTarget) focusTarget.focus();
+        if (focusTarget) setTimeout(() => focusTarget.focus(), 50); // Delay focus
         projectModal.addEventListener('keydown', trapFocusInModal);
     }
 
     function closeProjectModal() {
         if (!projectModal) return;
         projectModal.classList.remove('open');
-        projectModal.setAttribute('aria-hidden', 'true');
-        body.style.overflow = ''; // Restore scroll
-        projectModal.removeEventListener('keydown', trapFocusInModal);
 
-        if (elementToFocusOnModalClose?.focus) elementToFocusOnModalClose.focus();
-        elementToFocusOnModalClose = null;
+        setTimeout(() => {
+            projectModal.setAttribute('aria-hidden', 'true');
+            if (elementToFocusOnModalClose?.focus) elementToFocusOnModalClose.focus();
+            elementToFocusOnModalClose = null;
+        }, 300); // Match modal transition
+
+        body.style.overflow = '';
+        projectModal.removeEventListener('keydown', trapFocusInModal);
     }
 
-    function trapFocusInModal(e) { // Focus Trap
+    function trapFocusInModal(e) {
         if (e.key !== 'Tab' || !projectModal) return;
         const modalContent = projectModal.querySelector('.modal-content');
         if (!modalContent) return;
@@ -408,18 +396,18 @@ document.addEventListener('DOMContentLoaded', async () => { // Make async for aw
         const focusableElements = Array.from(modalContent.querySelectorAll(focusableElementsString));
         const closeBtn = projectModal.querySelector('.modal-close-btn');
         if (closeBtn && !focusableElements.includes(closeBtn)) {
-            focusableElements.unshift(closeBtn); // Ensure close button is trappable
+            focusableElements.unshift(closeBtn);
         }
         if (focusableElements.length === 0) return;
         const firstFocusable = focusableElements[0];
         const lastFocusable = focusableElements[focusableElements.length - 1];
 
-        if (e.shiftKey) { // Shift + Tab
+        if (e.shiftKey) {
             if (document.activeElement === firstFocusable) {
                 lastFocusable.focus();
                 e.preventDefault();
             }
-        } else { // Tab
+        } else {
             if (document.activeElement === lastFocusable) {
                 firstFocusable.focus();
                 e.preventDefault();
@@ -427,7 +415,6 @@ document.addEventListener('DOMContentLoaded', async () => { // Make async for aw
         }
     }
 
-    // Setup project card listeners (Function called after data loaded)
     function setupProjectCards() {
         const projectCards = document.querySelectorAll('.project-card[data-modal-target]');
         let cardCount = 0;
@@ -435,46 +422,77 @@ document.addEventListener('DOMContentLoaded', async () => { // Make async for aw
             const projectId = card.getAttribute('data-project-id');
             if (!projectId) {
                 console.warn("Project card missing data-project-id attribute:", card);
-                return; // Skip cards without an ID
+                return;
             }
-
-            // Ensure the project data for this card actually exists
             if (!projectDetails[projectId]) {
-                console.warn(`No project data found for ID: ${projectId}. Card interactions disabled for:`, card);
-                card.style.cursor = 'default'; // Indicate non-interactive
-                card.removeAttribute('tabindex'); // Remove from tab order
+                console.warn(`No project data found for ID: ${projectId}. Card interactions disabled.`);
+                card.style.cursor = 'default';
+                card.removeAttribute('tabindex');
                 card.removeAttribute('role');
-                return; // Skip adding listeners
+                return;
             }
 
             cardCount++;
-            card.addEventListener('click', () => {
-                openProjectModal(projectId);
-            });
-
-            // Keyboard accessibility (Enter/Space)
+            card.addEventListener('click', () => openProjectModal(projectId));
             card.addEventListener('keydown', (e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault(); // Prevent space bar scroll
+                    e.preventDefault();
                     openProjectModal(projectId);
                 }
             });
         });
-        console.log(`Setup listeners for ${cardCount} project cards with valid data.`);
+        console.log(`Setup listeners for ${cardCount} project cards.`);
     }
 
-
-    // Add listeners to modal close buttons/overlay
     modalCloseBtns.forEach(button => {
         button.addEventListener('click', closeProjectModal);
     });
 
-    // Close modal on Escape key
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && projectModal?.classList.contains('open')) {
             closeProjectModal();
         }
     });
-    // --- End Project Modal Logic ---
+
+
+    // --- Intersection Observer for Animations ---
+    const animatedElements = document.querySelectorAll('.animate-on-scroll');
+
+    const observer = new IntersectionObserver((entries, observerRef) => {
+        entries.forEach(entry => {
+            // Check if the element's section is currently active before animating
+            const parentSection = entry.target.closest('.content-section');
+            if (entry.isIntersecting && parentSection && parentSection.classList.contains('active')) {
+                entry.target.classList.add('is-visible');
+                observerRef.unobserve(entry.target); // Animate only once per page load/section view
+            }
+        });
+    }, {
+        threshold: 0.1 // Adjust threshold as needed (0.1 means 10% visible)
+    });
+
+    // Observe elements initially
+    animatedElements.forEach(el => observer.observe(el));
+
+    // Function to explicitly trigger observation check for elements in a section
+    // This helps ensure animations trigger correctly when navigating quickly
+    function triggerSectionAnimations(sectionElement) {
+        const elementsToAnimate = sectionElement.querySelectorAll('.animate-on-scroll');
+        elementsToAnimate.forEach(el => {
+            // Re-observe briefly to check intersection state IF not already visible
+            // This handles cases where an element might have scrolled into view
+            // while the section was inactive.
+            if (!el.classList.contains('is-visible')) {
+                observer.unobserve(el); // Stop previous observation first
+                observer.observe(el);   // Re-start observation
+            }
+        });
+    }
+
+    // Trigger animations for the initially active section
+    if (initialActiveSection) {
+        // Use setTimeout to ensure the initial layout is stable before checking
+        setTimeout(() => triggerSectionAnimations(initialActiveSection), 100);
+    }
 
 }); // End of DOMContentLoaded

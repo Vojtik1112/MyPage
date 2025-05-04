@@ -41,11 +41,10 @@ document.addEventListener('DOMContentLoaded', () => {
         scene = new THREE.Scene();
 
         // Camera
-        const fov = 70;
+        const fov = 70; // Slightly wider FOV might look good
         const aspect = container.clientWidth / container.clientHeight;
         camera = new THREE.PerspectiveCamera(fov, aspect, 0.1, 100);
-        // *** CHANGE: Moved camera closer to make tesseract appear larger ***
-        camera.position.z = 3.5; // Was 4.5
+        camera.position.z = 3.5; // Camera closer for bigger tesseract
 
         // Renderer
         renderer = new THREE.WebGLRenderer({canvas: canvas, antialias: true, alpha: true});
@@ -57,13 +56,16 @@ document.addEventListener('DOMContentLoaded', () => {
         const positions = new Float32Array(edges.length * 2 * 3);
         geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
 
-        // Determine initial color based on current theme
+        // Determine initial color based on current theme (matches JS theme logic)
         const initialIsDark = document.body.classList.contains('dark-mode');
-        const initialColor = initialIsDark ? 0xcccccc : 0x000000;
+        const lightTesseractColor = 0x34495e; // Match new text color
+        const darkTesseractColor = 0xbdc3c7;  // Match new dark mode line color
+        const initialColor = initialIsDark ? darkTesseractColor : lightTesseractColor;
+
 
         tesseractMaterial = new THREE.LineBasicMaterial({
             color: initialColor,
-            linewidth: 1
+            linewidth: 1 // Note: linewidth > 1 might not work on all systems/drivers
         });
         tesseractLines = new THREE.LineSegments(geometry, tesseractMaterial);
         scene.add(tesseractLines);
@@ -73,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
         container.addEventListener('pointerdown', onPointerDown, false);
         container.addEventListener('pointermove', onPointerMove, false);
         container.addEventListener('pointerup', onPointerUp, false);
-        container.addEventListener('pointerout', onPointerUp, false);
+        container.addEventListener('pointerout', onPointerUp, false); // Stop drag if pointer leaves
 
         // Listen for custom events from script.js
         window.addEventListener('themeChange', handleThemeChange);
@@ -118,13 +120,14 @@ document.addEventListener('DOMContentLoaded', () => {
         // Perspective projection
         const distance = 4; // Viewpoint distance (keep this consistent for projection math)
         const perspectiveDivisor = distance - w_final;
+        // Avoid division by zero/tiny numbers -> push point far away
         if (Math.abs(perspectiveDivisor) < 0.0001) {
             return new THREE.Vector3(x_final * 10000, y_final * 10000, z_final * 10000);
         }
-        const perspectiveFactor = 1 / perspectiveDivisor;
+        const perspectiveFactor = 1 / perspectiveDivisor; // Simpler projection factor
 
         return new THREE.Vector3(
-            x_final * perspectiveFactor * distance,
+            x_final * perspectiveFactor * distance, // Scale by distance
             y_final * perspectiveFactor * distance,
             z_final * perspectiveFactor * distance
         );
@@ -132,11 +135,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Animation Loop ---
     function animate() {
-        requestAnimationFrame(animate);
+        requestAnimationFrame(animate); // Always request next frame
 
+        // Only perform updates if the home section is active
         if (!tesseractIsActive) {
-            // Optional: Could reduce CPU usage further by stopping renders completely
-            // when inactive, but requestAnimationFrame keeps the loop ready.
             return; // Skip updates if not active
         }
 
@@ -169,16 +171,24 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Standard Event Handlers ---
     function onWindowResize() {
         if (!camera || !renderer || !container) return;
-        windowHalfX = container.clientWidth / 2;
-        windowHalfY = container.clientHeight / 2;
-        camera.aspect = container.clientWidth / container.clientHeight;
+        const width = container.clientWidth;
+        const height = container.clientHeight;
+
+        if (width === 0 || height === 0) return; // Avoid division by zero if container is hidden/resized to zero
+
+        windowHalfX = width / 2;
+        windowHalfY = height / 2;
+
+        camera.aspect = width / height;
         camera.updateProjectionMatrix();
-        renderer.setSize(container.clientWidth, container.clientHeight);
+        renderer.setSize(width, height);
     }
 
     function onPointerDown(event) {
-        if (!tesseractIsActive) return;
-        event.preventDefault();
+        if (!tesseractIsActive) return; // Only allow dragging if active
+        // Check if the event target is the canvas or its container
+        if (event.target !== canvas && event.target !== container) return;
+        event.preventDefault(); // Prevent text selection etc.
         isDragging = true;
         previousMousePosition = {x: event.clientX, y: event.clientY};
         container.style.cursor = 'grabbing';
@@ -190,6 +200,7 @@ document.addEventListener('DOMContentLoaded', () => {
             x: event.clientX - previousMousePosition.x,
             y: event.clientY - previousMousePosition.y
         };
+        // Adjust target rotation (adjust sensitivity as needed)
         targetRotationY += deltaMove.x * 0.006;
         targetRotationX += deltaMove.y * 0.006;
         previousMousePosition = {x: event.clientX, y: event.clientY};
@@ -203,6 +214,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- Run Initialization ---
-    init();
+    // Use requestAnimationFrame to wait for initial layout calculation
+    requestAnimationFrame(init);
+
 
 }); // End of DOMContentLoaded listener

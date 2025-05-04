@@ -20,6 +20,8 @@
   <link href="assets/favicon.png" rel="icon" type="image/png"/>
   <!-- Add Three.js library (Using CDN) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <!-- Optional: Add Font Awesome for icons if desired -->
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" /> -->
 </head>
 <body>
 <!-- Preloader -->
@@ -94,17 +96,17 @@
         </button>
 
         <button
-                class="audio-control-btn"
                 id="audio-toggle-btn"
+                class="audio-control-btn"
                 aria-label="Play background music"
         >
           <svg
                   class="bi bi-play-fill"
                   fill="currentColor"
                   height="16"
-                  viewBox="0 0 16 16"
                   width="16"
                   xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 16 16"
                   id="play-icon"
           >
             <path
@@ -112,12 +114,12 @@
             />
           </svg>
           <svg
-                  class="bi bi-pause-fill hidden"
-                  height="16"
-                  viewBox="0 0 16 16"
                   fill="currentColor"
+                  height="16"
                   width="16"
                   xmlns="http://www.w3.org/2000/svg"
+                  class="bi bi-pause-fill hidden"
+                  viewBox="0 0 16 16"
                   id="pause-icon"
           >
             <path
@@ -133,10 +135,10 @@
     </header>
 
     <main class="content-area">
-      <!-- Home Section (Initial View) -->
+      <!-- Home Section -->
       <!-- NOTE: aria-hidden is managed by JS for accessibility. It hides INACTIVE sections from screen readers. -->
       <section aria-hidden="false" class="content-section active" id="home-section">
-        <div class="section-left">
+        <div class="section-left animate-on-scroll">
           <span class="label">I am an</span>
           <p>
             IT Student exploring<br/>C++, C#, AI & UE.
@@ -151,7 +153,7 @@
             </p>
           </div>
         </div>
-        <div class="section-right">
+        <div class="section-right animate-on-scroll">
           <h2>
             Problem-solver,<br/> Lifelong Learner,<br/> Tech Enthusiast.
           </h2>
@@ -164,42 +166,39 @@
               class="content-section content-section-standard-layout"
               id="about-section" <!-- Initially hidden -->
       >
-      <h2>About Me</h2>
-      <p>
+      <h2 class="animate-on-scroll">About Me</h2>
+      <p class="animate-on-scroll" style="animation-delay: 0.1s;">
         Driven IT student at SPŠ Třebíč, passionate about software development and exploring new technologies through
         hands-on projects.
       </p>
       <div class="about-center">
-        <div class="about-details">
-          <div class="detail-item">
+        <div class="about-details animate-on-scroll" style="animation-delay: 0.2s;">
+          <div class="detail-item animate-on-scroll" style="animation-delay: 0.3s;">
             <span class="number">.01</span>
             <h3>Current Focus</h3>
-            <!-- *** SHORTENED TEXT *** -->
+            <!-- *** YOU MUST SHORTEN THIS TEXT TO FIT *** -->
             <p>
               Developing skills in C++, C#, web fundamentals. Exploring AI and Unreal Engine basics.
             </p>
-            <div class="line"></div>
           </div>
-          <div class="detail-item">
+          <div class="detail-item animate-on-scroll" style="animation-delay: 0.4s;">
             <span class="number">.02</span>
             <h3>Key Interests</h3>
-            <!-- *** SHORTENED TEXT *** -->
+            <!-- *** YOU MUST SHORTEN THIS TEXT TO FIT *** -->
             <p>
               Keen interest in C++, C#, AI concepts, and Unreal Engine development. Eager to learn more.
             </p>
-            <div class="line"></div>
           </div>
-          <div class="detail-item">
+          <div class="detail-item animate-on-scroll" style="animation-delay: 0.5s;">
             <span class="number">.03</span>
             <h3>Approach</h3>
-            <!-- *** SHORTENED TEXT *** -->
+            <!-- *** YOU MUST SHORTEN THIS TEXT TO FIT *** -->
             <p>
               Learning by doing: tackling school work and personal projects to build practical skills.
             </p>
-            <div class="line"></div>
           </div>
         </div>
-        <div class="resume-download-container">
+        <div class="resume-download-container animate-on-scroll" style="animation-delay: 0.6s;">
           <a
                   href="assets/resume.pdf"
                   download="Vojtech_Novak_Resume.pdf"
@@ -217,54 +216,41 @@
               aria-hidden="true"
               class="content-section content-section-standard-layout" <!-- Initially hidden -->
       >
-      <h2>My Projects</h2>
-      <!-- *** SHORTENED TEXT *** -->
-      <p>
+      <h2 class="animate-on-scroll">My Projects</h2>
+      <p class="animate-on-scroll" style="animation-delay: 0.1s;">
         Selected academic & personal projects. Click for details. See more on <a href="https://github.com/Vojtik1112"
                                                                                  rel="noopener noreferrer"
                                                                                  target="_blank">GitHub</a>.
       </p>
-      <div class="projects-grid">
-        <div
-                class="project-card"
-                data-modal-target="#project-modal"
-                data-project-id="project1"
-                aria-haspopup="dialog" role="button" tabindex="0"
-        >
+      <div class="projects-grid animate-on-scroll" style="animation-delay: 0.2s;">
+        <div aria-haspopup="dialog" class="project-card animate-on-scroll" data-modal-target="#project-modal"
+             data-project-id="project1" role="button" style="animation-delay: 0.3s;" tabindex="0">
           <h3>ATM Simulation</h3>
-          <!-- *** SHORTENED TEXT *** -->
+          <!-- *** YOU MUST SHORTEN THIS TEXT TO FIT *** -->
           <p>
             C# console app simulating ATM withdrawals and calculating banknotes. Basic logic/IO demo.
           </p>
           <span class="card-link-arrow">→</span>
         </div>
-        <div
-                class="project-card"
-                data-modal-target="#project-modal"
-                data-project-id="project2"
-                aria-haspopup="dialog" role="button" tabindex="0"
-        >
+        <div aria-haspopup="dialog" class="project-card animate-on-scroll" data-modal-target="#project-modal"
+             data-project-id="project2" role="button" style="animation-delay: 0.4s;" tabindex="0">
           <h3>T-Shirt Order Form</h3>
-          <!-- *** SHORTENED TEXT *** -->
+          <!-- *** YOU MUST SHORTEN THIS TEXT TO FIT *** -->
           <p>
             HTML/CSS/JS form for ordering t-shirts with client-side input validation.
           </p>
           <span class="card-link-arrow">→</span>
         </div>
-        <div
-                class="project-card"
-                data-modal-target="#project-modal"
-                data-project-id="project3"
-                aria-haspopup="dialog" role="button" tabindex="0"
-        >
+        <div aria-haspopup="dialog" class="project-card animate-on-scroll" data-modal-target="#project-modal"
+             data-project-id="project3" role="button" style="animation-delay: 0.5s;" tabindex="0">
           <h3>Keyboard Layout</h3>
-          <!-- *** SHORTENED TEXT *** -->
+          <!-- *** YOU MUST SHORTEN THIS TEXT TO FIT *** -->
           <p>
             Visual keyboard layout using HTML/CSS focusing on structure and styling.
           </p>
           <span class="card-link-arrow">→</span>
         </div>
-        <!-- Add more cards ONLY if they fit without causing scrolling -->
+        <!-- Add more cards ONLY if they fit -->
       </div>
       </section>
 
@@ -274,43 +260,51 @@
               aria-hidden="true"
               class="content-section content-section-standard-layout" <!-- Initially hidden -->
       >
-      <h2>Technical Skills</h2>
-      <p>Key technologies and concepts I'm working with:</p>
-      <div class="skills-categories">
-        <div class="skill-category">
+      <h2 class="animate-on-scroll">Technical Skills</h2>
+      <p class="animate-on-scroll" style="animation-delay: 0.1s;">Key technologies and concepts I'm working with:</p>
+      <div class="skills-categories animate-on-scroll" style="animation-delay: 0.2s;">
+        <div class="skill-category animate-on-scroll" style="animation-delay: 0.3s;">
           <h3>Programming</h3>
-          <!-- *** SHORTENED/CONSOLIDATED TEXT *** -->
-          <ul class="skills-list">
-            <li>C++ (OOP, Data Structures)</li>
-            <li>C# (.NET Fundamentals)</li>
-            <li>JavaScript (ES6+, DOM)</li>
-            <li>Python (Basics for AI/ML)</li>
+          <ul class="skills-list-tags">
+            <!-- *** KEEP THIS LIST CONCISE *** -->
+            <li class="skill-tag">C++</li>
+            <li class="skill-tag">C#</li>
+            <li class="skill-tag">JavaScript</li>
+            <li class="skill-tag">Python</li>
+            <li class="skill-tag">OOP</li>
+            <li class="skill-tag">Data Structures</li>
           </ul>
         </div>
-        <div class="skill-category">
+        <div class="skill-category animate-on-scroll" style="animation-delay: 0.4s;">
           <h3>Web Dev</h3>
-          <!-- *** SHORTENED TEXT *** -->
-          <ul class="skills-list">
-            <li>HTML5</li>
-            <li>CSS3 (Flexbox, Grid)</li>
-            <li>PHP (Basics)</li>
+          <ul class="skills-list-tags">
+            <!-- *** KEEP THIS LIST CONCISE *** -->
+            <li class="skill-tag">HTML5</li>
+            <li class="skill-tag">CSS3</li>
+            <li class="skill-tag">Flexbox</li>
+            <li class="skill-tag">Grid</li>
+            <li class="skill-tag">PHP (Basics)</li>
           </ul>
         </div>
-        <div class="skill-category">
+        <div class="skill-category animate-on-scroll" style="animation-delay: 0.5s;">
           <h3>Game Dev / AI</h3>
-          <!-- *** SHORTENED TEXT *** -->
-          <ul class="skills-list">
-            <li>Unreal Engine (Blueprints)</li>
-            <li>AI/ML Concepts</li>
+          <ul class="skills-list-tags">
+            <!-- *** KEEP THIS LIST CONCISE *** -->
+            <li class="skill-tag">Unreal Engine</li>
+            <li class="skill-tag">Blueprints</li>
+            <li class="skill-tag">AI Concepts</li>
+            <li class="skill-tag">ML Concepts</li>
           </ul>
         </div>
-        <div class="skill-category">
+        <div class="skill-category animate-on-scroll" style="animation-delay: 0.6s;">
           <h3>Tools & Other</h3>
-          <!-- *** SHORTENED TEXT *** -->
-          <ul class="skills-list">
-            <li>Git / GitHub</li>
-            <li>Visual Studio / VS Code</li>
-            <li>Agile Basics</li>
+          <ul class="skills-list-tags">
+            <!-- *** KEEP THIS LIST CONCISE *** -->
+            <li class="skill-tag">Git</li>
+            <li class="skill-tag">GitHub</li>
+            <li class="skill-tag">Visual Studio</li>
+            <li class="skill-tag">VS Code</li>
+            <li class="skill-tag">Agile Basics</li>
           </ul>
         </div>
       </div>
@@ -322,28 +316,28 @@
               aria-hidden="true"
               class="content-section content-section-standard-layout" <!-- Initially hidden -->
       >
-      <h2>Education & Experience</h2>
-      <div class="education-content">
-        <div class="education-item">
+      <h2 class="animate-on-scroll">Education & Experience</h2>
+      <div class="education-content animate-on-scroll" style="animation-delay: 0.1s;">
+        <div class="education-item animate-on-scroll" style="animation-delay: 0.2s;">
           <h3>Current Education</h3>
-          <!-- *** SHORTENED TEXT *** -->
+          <!-- *** YOU MUST SHORTEN THIS TEXT TO FIT *** -->
           <p>
             <strong>SPŠ Třebíč:</strong> Info. Technology<br/>(Expected Graduation: May 2027)
           </p>
         </div>
-        <div class="education-item">
+        <div class="education-item animate-on-scroll" style="animation-delay: 0.3s;">
           <h3>Relevant Coursework</h3>
-          <!-- *** SHORTENED TEXT / FEWER ITEMS *** -->
-          <ul class="skills-list"> <!-- Re-used class for style -->
+          <!-- *** YOU MUST SHORTEN THIS LIST TO FIT *** -->
+          <ul class="skills-list">
             <li>Programming (C++, C#)</li>
             <li>Computer Systems & Networks</li>
             <li>Database Systems (Concepts)</li>
             <li>Web Development Basics</li>
           </ul>
         </div>
-        <div class="education-item">
+        <div class="education-item animate-on-scroll" style="animation-delay: 0.4s;">
           <h3>Experience</h3>
-          <!-- *** SHORTENED TEXT *** -->
+          <!-- *** YOU MUST SHORTEN THIS TEXT TO FIT *** -->
           <p>
             Focusing on academic projects and self-learning. Eager to apply skills professionally.
           </p>
@@ -352,29 +346,17 @@
       </section>
     </main>
 
-    <!-- Project Detail Modal (Remains the same, allows scrolling internally) -->
-    <div
-            class="modal"
-            id="project-modal"
-            aria-hidden="true"
-            role="dialog"
-            aria-labelledby="project-modal-title"
-            aria-modal="true"
-    >
+    <!-- Project Detail Modal -->
+    <div aria-hidden="true" aria-labelledby="project-modal-title" aria-modal="true" class="modal" id="project-modal"
+         role="dialog">
       <div class="modal-overlay" data-modal-close></div>
       <div class="modal-content">
-        <button
-                class="modal-close-btn"
-                data-modal-close
-                aria-label="Close project details"
-        >
-          ×
-        </button>
+        <button aria-label="Close project details" class="modal-close-btn" data-modal-close>×</button>
         <h3 id="project-modal-title">Project Title</h3>
         <div class="modal-body">
           <img alt="" id="project-modal-image" src=""/>
           <h4>Description:</h4>
-          <p id="project-modal-description">Details...</p>
+          <p id="project-modal-description">...</p>
           <h4>Technologies Used:</h4>
           <p id="project-modal-tech"></p>
           <h4>Challenges & Learning:</h4>
@@ -389,7 +371,7 @@
       </div>
     </div>
 
-    <!-- Contact Panel (Remains the same, allows scrolling internally) -->
+    <!-- Contact Panel -->
     <aside aria-hidden="true" class="request-panel" id="request-panel">
       <button aria-label="Close contact panel" class="close-panel-btn" id="close-request-panel">×</button>
       <div class="panel-content">
