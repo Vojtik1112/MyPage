@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fd7f821a-f96c-4dc7-82a6-b5432aca8538" name="Changes" comment="Fix typos and improve comments across multiple files&#10;&#10;Resolved spelling and grammatical issues in comments and updated phrasing for clarity and consistency in `index.html`, `.idea/workspace.xml`, and `script.js`. These changes enhance code readability and maintainability without altering functionality.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+    <list default="true" id="fd7f821a-f96c-4dc7-82a6-b5432aca8538" name="Changes" comment="Add README badges and improve documentation&#10;&#10;Added a license badge, live demo link, and refined instructions in `README.md` for better usability and clarity. Adjusted formatting and structure to enhance readability and navigation.">
+      <change beforePath="$PROJECT_DIR$/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/script.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,28 +67,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "DefaultHtmlFileTemplate": "HTML File",
-    "JavaScript Debug.index.html.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "junie.onboarding.icon.badge.shown": "true",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "preferences.updates",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;JavaScript Debug.index.html.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.updates&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\vojte\WebstormProjects\MyPage\assets" />
@@ -112,7 +112,7 @@
       <workItem from="1746135214777" duration="11000" />
       <workItem from="1746135279886" duration="4071000" />
       <workItem from="1746299504714" duration="2837000" />
-      <workItem from="1746369324061" duration="550000" />
+      <workItem from="1746369324061" duration="1764000" />
     </task>
     <task id="LOCAL-00001" summary="Update styles and layout; add IDE workspace config&#10;&#10;Increased height of graphic area in HTML for better layout. Changed text colors to black and removed shadows in CSS for improved readability. Added `.idea/workspace.xml` for local IDE configuration.">
       <option name="closed" value="true" />
@@ -178,7 +178,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746301229233</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Add README badges and improve documentation&#10;&#10;Added a license badge, live demo link, and refined instructions in `README.md` for better usability and clarity. Adjusted formatting and structure to enhance readability and navigation.">
+      <option name="closed" value="true" />
+      <created>1746369930468</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1746369930468</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -210,7 +218,9 @@
     <MESSAGE value="Add theme toggle and implement dynamic theming variables&#10;&#10;Introduced a theme toggle button in `index.html` for switching between light and dark modes. Refactored `style.css` to leverage CSS variables, enabling smooth theme transitions. Updated project files to improve maintainability and enhance the user experience." />
     <MESSAGE value="Merge remote-tracking branch 'origin/main'" />
     <MESSAGE value="Fix typos and improve comments across multiple files&#10;&#10;Resolved spelling and grammatical issues in comments and updated phrasing for clarity and consistency in `index.html`, `.idea/workspace.xml`, and `script.js`. These changes enhance code readability and maintainability without altering functionality." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix typos and improve comments across multiple files&#10;&#10;Resolved spelling and grammatical issues in comments and updated phrasing for clarity and consistency in `index.html`, `.idea/workspace.xml`, and `script.js`. These changes enhance code readability and maintainability without altering functionality." />
+    <MESSAGE value="Fix typos and improve comments across multiple files&#10;&#10;Resolved spelling and grammatical issues in comments and updated phrasing for clarity and consistency in `index.html`, `.idea/workspace.xml`, and `script.js`. These changes enhance code readability and maintainability without altering functionality.&#10;&#10;Signed-off-by: Vojta Novak &lt;vojtechnovak84@gmail.com&gt;" />
+    <MESSAGE value="Add README badges and improve documentation&#10;&#10;Added a license badge, live demo link, and refined instructions in `README.md` for better usability and clarity. Adjusted formatting and structure to enhance readability and navigation." />
+    <option name="LAST_COMMIT_MESSAGE" value="Add README badges and improve documentation&#10;&#10;Added a license badge, live demo link, and refined instructions in `README.md` for better usability and clarity. Adjusted formatting and structure to enhance readability and navigation." />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
