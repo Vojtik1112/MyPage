@@ -1,7 +1,7 @@
 // script.js
-// (Handles preloader, navigation, slide-out panel, THEME TOGGLE, AUDIO, and MODAL)
+// (Handles preloader, navigation, slide-out panel, theme toggle, audio, modal, project data loading)
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => { // Make async for await
     // --- Element Selection ---
     const preloader = document.getElementById('preloader');
     const pageWrapper = document.getElementById('page-wrapper');
@@ -20,48 +20,48 @@ document.addEventListener('DOMContentLoaded', () => {
     const pauseIcon = document.getElementById('pause-icon');
     const audioErrorMessage = document.getElementById('audio-error-message');
     const projectModal = document.getElementById('project-modal');
-    const projectCards = document.querySelectorAll('.project-card[data-modal-target]');
+    // Project cards selected later in setupProjectCards
     const modalCloseBtns = document.querySelectorAll('[data-modal-close]');
 
+    // --- Global State ---
+    let projectDetails = {}; // Will be loaded from JSON
+    let elementToFocusOnPanelClose = null;
+    let elementToFocusOnModalClose = null;
+    const lightModeIcon = '☀️';
+    const darkModeIcon = '🌙';
+    const lightTesseractColor = 0x000000; // Black
+    const darkTesseractColor = 0xcccccc;  // Light gray
+
     // --- Check for essential elements ---
-    if (!pageWrapper) console.error("pageWrapper not found.");
-    if (!requestPanel) console.error("requestPanel not found.");
-    if (!panelOverlay) console.error("panelOverlay not found.");
-    if (!projectModal) console.error("project-modal not found.");
+    // (Add more checks as needed)
+    if (!pageWrapper || !requestPanel || !panelOverlay || !projectModal) {
+        console.error("One or more essential layout elements (pageWrapper, requestPanel, panelOverlay, projectModal) not found. Functionality may be limited.");
+    }
+    if (!themeToggleBtn || !themeIconSpan) {
+        console.warn("Theme toggle button or icon span not found.");
+    }
+    if (!bgMusic || !audioToggleBtn || !playIcon || !pauseIcon) {
+        console.warn("Audio elements (music, toggle, icons) missing. Audio controls disabled.");
+        if (audioToggleBtn) audioToggleBtn.style.display = 'none';
+    }
 
-    // --- Project Data (Ensure paths in assets/projects/ are correct) ---
-    const projectDetails = {
-        project1: {
-            title: "ATM Withdrawal Simulation",
-            image: "assets/projects/atm_screenshot.png", // Confirm path
-            description: "A command-line application built with C# that simulates the process of withdrawing cash from an ATM. The user inputs the desired amount, and the program calculates the optimal combination of banknotes (e.g., 1000s, 500s, 200s, 100s) to dispense. It includes basic input validation.",
-            tech: "C#, .NET Console Application",
-            challenges: "Handling edge cases like amounts not dispensable with available notes and ensuring correct calculation logic were key challenges. Improved understanding of basic algorithms and user input handling.",
-            liveLink: null,
-            repoLink: "https://github.com/Vojtik1112/MyPage/tree/main/projects/project1" // Confirm link
-        },
-        project2: {
-            title: "Objednávka Trička (T-Shirt Order Form)",
-            image: "assets/projects/tshirt_screenshot.png", // Confirm path
-            description: "A simple web form developed using HTML, CSS, and JavaScript for ordering custom t-shirts. It allows users to enter their name, email, choose a size, color, and specify custom text for the shirt. Includes client-side JavaScript validation to ensure required fields are filled correctly.",
-            tech: "HTML, CSS, JavaScript",
-            challenges: "Implementing robust client-side validation and ensuring cross-browser compatibility for the form elements. Practiced DOM manipulation and event handling in JavaScript.",
-            liveLink: "projects/project2/index.html", // Confirm path relative to main HTML
-            repoLink: "https://github.com/Vojtik1112/MyPage/tree/main/projects/project2" // Confirm link
-        },
-        project3: {
-            title: "Interactive Keyboard Layout",
-            image: "assets/projects/keyboard_screenshot.png", // Confirm path
-            description: "A visual representation of a standard keyboard layout created purely with HTML and CSS. This project focused on structuring content semantically using HTML and applying CSS for precise layout, styling, and visual appearance. Potential future enhancement includes adding JavaScript for key press feedback.",
-            tech: "HTML, CSS",
-            challenges: "Achieving accurate key positioning and spacing using CSS, particularly flexbox or grid layouts. Reinforced understanding of HTML structure and CSS selectors.",
-            liveLink: "projects/project3/index.html", // Confirm path relative to main HTML
-            repoLink: "https://github.com/Vojtik1112/MyPage/tree/main/projects/project3" // Confirm link
+    // --- Project Data Loading ---
+    async function loadProjectData() {
+        try {
+            // Adjust the path if your projects.json is located elsewhere
+            const response = await fetch('assets/projects/projects.json');
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status} - Could not fetch project data.`);
+            }
+            projectDetails = await response.json();
+            console.log('Project data loaded successfully.');
+            // Setup cards *after* data is loaded
+            setupProjectCards();
+        } catch (error) {
+            console.error("Failed to load or parse project data:", error);
+            // Optionally display an error to the user or disable project section
         }
-    };
-
-    let elementToFocusOnPanelClose = null; // For restoring focus after panel closes
-    let elementToFocusOnModalClose = null; // For restoring focus after modal closes
+    }
 
     // --- Preloader Logic ---
     const letters = {
@@ -76,34 +76,73 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (preloader) {
-        // Pause animations initially
         if (letters.c1) letters.c1.style.animationPlayState = 'paused';
         if (letters.b) letters.b.style.animationPlayState = 'paused';
-
-        // Sequence the letter animations
         setTimeout(() => showLetter(letters.c1), 100);
         setTimeout(() => showLetter(letters.b), 900);
 
-        // Hide preloader after animations and show page
         setTimeout(() => {
             preloader.classList.add('hidden');
             if (pageWrapper) pageWrapper.classList.add('visible');
+            attemptAudioAutoplay(); // Attempt audio play after preloader fades
 
-            // --- Attempt to autoplay audio ---
-            attemptAudioAutoplay();
-            // --- End Autoplay Attempt ---
-
-            // Clean up preloader from DOM after transition
+            // Clean up preloader
             setTimeout(() => {
-                if (preloader.parentNode) {
-                    preloader.parentNode.removeChild(preloader);
-                }
-            }, 800); // Match CSS opacity transition duration
-        }, 1800); // Total duration for animations to complete
+                preloader.remove(); // Use remove() modern method
+            }, 800); // Match CSS transition
+        }, 1800);
     } else {
-        // If no preloader, show page immediately and try autoplay
+        // No preloader: Show page and attempt autoplay
         if (pageWrapper) pageWrapper.classList.add('visible');
         attemptAudioAutoplay();
+    }
+
+    // --- Load Project Data ---
+    // Called after preloader logic starts, completes before card setup
+    await loadProjectData();
+
+    // --- Theme Toggle Logic ---
+    function applyTheme(theme) {
+        const isDark = theme === 'dark';
+        body.classList.toggle('dark-mode', isDark);
+        if (themeIconSpan) themeIconSpan.textContent = isDark ? lightModeIcon : darkModeIcon;
+
+        const tesseractColor = isDark ? darkTesseractColor : lightTesseractColor;
+        // Dispatch custom event for Tesseract color update
+        const themeChangeEvent = new CustomEvent('themeChange', {
+            detail: {theme: theme, color: tesseractColor}
+        });
+        window.dispatchEvent(themeChangeEvent);
+
+        localStorage.setItem('theme', theme);
+        // console.log(`Theme applied: ${theme}`);
+    }
+
+    function toggleTheme() {
+        const newTheme = body.classList.contains('dark-mode') ? 'light' : 'dark';
+        applyTheme(newTheme);
+    }
+
+    // Initial Theme Load
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const initialTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+    applyTheme(initialTheme); // Apply initial theme
+
+    // Add listener to button
+    if (themeToggleBtn) {
+        themeToggleBtn.addEventListener('click', toggleTheme);
+    }
+
+    // System preference listener (optional, only if no saved theme)
+    try {
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+            if (!localStorage.getItem('theme')) { // Only react if user hasn't manually set
+                applyTheme(event.matches ? 'dark' : 'light');
+            }
+        });
+    } catch (e) {
+        console.warn("Error setting up prefers-color-scheme listener:", e);
     }
 
 
@@ -115,36 +154,31 @@ document.addEventListener('DOMContentLoaded', () => {
             const targetSection = document.getElementById(targetId);
 
             if (targetSection) {
-                let isHomeSectionActive = false; // Track if home is becoming active
+                let isHomeSectionTargeted = targetId === 'home-section';
 
-                // Update Sections Visibility and ARIA states
                 contentSections.forEach(s => {
                     const isActive = s.id === targetId;
                     s.classList.toggle('active', isActive);
-                    s.setAttribute('aria-hidden', String(!isActive)); // Use "true" or "false" string
-                    if (isActive && s.id === 'home-section') {
-                        isHomeSectionActive = true; // Home section is now active
-                    }
+                    // *** ACCESSIBILITY NOTE: The aria-hidden attribute is crucial! ***
+                    // It hides inactive sections from screen readers, preventing confusion.
+                    // Setting it to 'false' for the active section makes it visible to assistive tech.
+                    // DO NOT REMOVE this line or the logic.
+                    s.setAttribute('aria-hidden', String(!isActive));
                 });
 
-                // *** Control Tesseract Animation ***
-                if (typeof window.setTesseractActive === 'function') {
-                    window.setTesseractActive(isHomeSectionActive);
-                } else {
-                    // console.warn("setTesseractActive function not found on window.");
-                }
-                // *** End Tesseract Control ***
-
-                // Update Nav Links Active State and ARIA current
                 navLinks.forEach(l => {
                     const isCurrent = l === link;
                     l.classList.toggle('active', isCurrent);
-                    if (isCurrent) {
-                        l.setAttribute('aria-current', 'page');
-                    } else {
-                        l.removeAttribute('aria-current');
-                    }
+                    l.setAttribute('aria-current', isCurrent ? 'page' : null);
                 });
+
+                // Dispatch custom event for section change (for Tesseract)
+                const sectionChangeEvent = new CustomEvent('sectionChange', {
+                    detail: {isHomeActive: isHomeSectionTargeted}
+                });
+                window.dispatchEvent(sectionChangeEvent);
+                // console.log(`Navigated to: ${targetId}, Home Active: ${isHomeSectionTargeted}`);
+
             } else {
                 console.warn(`Navigation target section not found: #${targetId}`);
             }
@@ -152,59 +186,52 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Set initial Tesseract state based on the default active section
-    if (typeof window.setTesseractActive === 'function') {
-        const initialActiveSection = document.querySelector('.content-section.active');
-        window.setTesseractActive(initialActiveSection && initialActiveSection.id === 'home-section');
+    const initialActiveSection = document.querySelector('.content-section.active');
+    const initialHomeActive = initialActiveSection && initialActiveSection.id === 'home-section';
+    // *** ACCESSIBILITY: Ensure initial aria-hidden states are correct ***
+    // The HTML should set aria-hidden="true" for all non-active sections initially.
+    // This JS dispatch ensures the Tesseract animation state matches the initial view.
+    if (initialActiveSection) {
+        initialActiveSection.setAttribute('aria-hidden', 'false');
     }
+    const initialSectionChangeEvent = new CustomEvent('sectionChange', {
+        detail: {isHomeActive: initialHomeActive}
+    });
+    window.dispatchEvent(initialSectionChangeEvent);
+
 
     // --- Request Panel Logic ---
     function openPanel() {
         if (!requestPanel || !panelOverlay) return;
-
-        elementToFocusOnPanelClose = document.activeElement; // Store focus
+        elementToFocusOnPanelClose = document.activeElement;
         requestPanel.setAttribute('aria-hidden', 'false');
         panelOverlay.setAttribute('aria-hidden', 'false');
         requestPanel.classList.add('open');
         panelOverlay.classList.add('active');
-        document.body.style.overflow = 'hidden'; // Prevent background scroll
+        body.style.overflow = 'hidden';
 
-        // Focus management: Focus first focusable element in panel
-        const firstFocusable = requestPanel.querySelector('a[href], button:not([disabled]), textarea, input, select');
-        if (firstFocusable) {
-            firstFocusable.focus();
-        } else if (closeRequestPanelBtn) {
-            closeRequestPanelBtn.focus(); // Fallback to close button
-        }
-
-        requestPanel.addEventListener('keydown', trapFocusInPanel); // Add focus trap
+        const firstFocusable = requestPanel.querySelector('a[href], button:not([disabled]), textarea, input, select') || closeRequestPanelBtn;
+        if (firstFocusable) firstFocusable.focus();
+        requestPanel.addEventListener('keydown', trapFocusInPanel);
     }
 
     function closePanel() {
         if (!requestPanel || !panelOverlay) return;
-
         requestPanel.classList.remove('open');
         panelOverlay.classList.remove('active');
         requestPanel.setAttribute('aria-hidden', 'true');
         panelOverlay.setAttribute('aria-hidden', 'true');
-        document.body.style.overflow = ''; // Restore scroll
-
-        requestPanel.removeEventListener('keydown', trapFocusInPanel); // Remove focus trap
-
-        // Restore focus
-        if (elementToFocusOnPanelClose && typeof elementToFocusOnPanelClose.focus === 'function') {
-            elementToFocusOnPanelClose.focus();
-        }
+        body.style.overflow = '';
+        requestPanel.removeEventListener('keydown', trapFocusInPanel);
+        if (elementToFocusOnPanelClose?.focus) elementToFocusOnPanelClose.focus();
         elementToFocusOnPanelClose = null;
     }
 
-    // Focus Trap function for Panel
-    function trapFocusInPanel(e) {
+    function trapFocusInPanel(e) { // Focus Trap
         if (e.key !== 'Tab' || !requestPanel) return;
-
-        const focusableElementsString = 'a[href], button:not([disabled]), textarea, input, select';
+        const focusableElementsString = 'a[href]:not([disabled]), button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled])';
         const focusableElements = Array.from(requestPanel.querySelectorAll(focusableElementsString));
         if (focusableElements.length === 0) return;
-
         const firstFocusable = focusableElements[0];
         const lastFocusable = focusableElements[focusableElements.length - 1];
 
@@ -226,65 +253,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (closeRequestPanelBtn) closeRequestPanelBtn.addEventListener('click', closePanel);
     if (panelOverlay) panelOverlay.addEventListener('click', closePanel);
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && requestPanel?.classList.contains('open')) {
-            closePanel();
-        }
+        if (e.key === 'Escape' && requestPanel?.classList.contains('open')) closePanel();
     });
-
-    // --- Theme Toggle Logic ---
-    const lightModeIcon = '☀️';
-    const darkModeIcon = '🌙';
-    const lightTesseractColor = 0x000000; // Black
-    const darkTesseractColor = 0xcccccc;  // Light gray
-
-    function applyTheme(theme) {
-        if (theme === 'dark') {
-            body.classList.add('dark-mode');
-            if (themeIconSpan) themeIconSpan.textContent = lightModeIcon;
-            // Check if function exists before calling
-            if (typeof window.updateTesseractColor === 'function') {
-                window.updateTesseractColor(darkTesseractColor);
-            }
-            localStorage.setItem('theme', 'dark');
-        } else {
-            body.classList.remove('dark-mode');
-            if (themeIconSpan) themeIconSpan.textContent = darkModeIcon;
-            // Check if function exists before calling
-            if (typeof window.updateTesseractColor === 'function') {
-                window.updateTesseractColor(lightTesseractColor);
-            }
-            localStorage.setItem('theme', 'light');
-        }
-    }
-
-    function toggleTheme() {
-        const newTheme = body.classList.contains('dark-mode') ? 'light' : 'dark';
-        applyTheme(newTheme);
-    }
-
-    // Initial Theme Load
-    const savedTheme = localStorage.getItem('theme');
-    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const initialTheme = savedTheme || (prefersDark ? 'dark' : 'light');
-    applyTheme(initialTheme);
-
-    // Add listener to button
-    if (themeToggleBtn) {
-        themeToggleBtn.addEventListener('click', toggleTheme);
-    } else {
-        console.warn("Theme toggle button not found.");
-    }
-
-    // Optional: Listen for system preference changes ONLY if no theme is saved
-    try {
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
-            if (!localStorage.getItem('theme')) { // Only update if user hasn't set a preference
-                applyTheme(event.matches ? 'dark' : 'light');
-            }
-        });
-    } catch (e) {
-        console.warn("Error setting up prefers-color-scheme listener:", e);
-    }
 
 
     // --- Audio Control Logic ---
@@ -292,7 +262,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (audioErrorMessage) {
             audioErrorMessage.textContent = message;
             audioErrorMessage.classList.add('visible');
-            // Hide after 5 seconds
             setTimeout(() => audioErrorMessage.classList.remove('visible'), 5000);
         } else {
             console.warn("Audio error message element not found.");
@@ -308,27 +277,26 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function attemptAudioAutoplay() {
+        // Autoplay is unreliable, often blocked. Best effort.
         if (bgMusic && bgMusic.paused) {
-            // Delay slightly to ensure user interaction context might be available
-            setTimeout(() => {
+            setTimeout(() => { // Slight delay might help sometimes
                 bgMusic.play().then(() => {
                     updateAudioButton(true);
                     console.log("Audio autoplay successful.");
                 }).catch(err => {
-                    console.warn('Audio autoplay failed:', err.name);
+                    console.warn('Audio autoplay failed (likely browser policy):', err.name);
                     updateAudioButton(false);
-                    // Don't show error on initial failed autoplay, only on user click fail
+                    // Don't show error on initial failed autoplay
                 });
             }, 100);
         } else if (bgMusic && !bgMusic.paused) {
-            updateAudioButton(true); // Ensure button is correct if already playing
+            updateAudioButton(true); // Sync button if already playing
         }
     }
 
-
     function toggleAudio() {
         if (!bgMusic) return;
-        if (audioErrorMessage) audioErrorMessage.classList.remove('visible'); // Hide previous errors
+        if (audioErrorMessage) audioErrorMessage.classList.remove('visible');
 
         if (bgMusic.paused) {
             bgMusic.play().then(() => {
@@ -336,9 +304,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }).catch(err => {
                 console.error('Audio play failed on toggle:', err);
                 updateAudioButton(false);
-                let message = 'Unable to play audio. Please check browser settings or try again.';
+                let message = 'Unable to play audio. Please check browser settings.';
                 if (err.name === 'NotAllowedError') {
-                    message = 'Audio playback requires user interaction first (e.g., click anywhere).';
+                    message = 'Audio playback requires interaction (like clicking) first.';
                 }
                 showAudioError(message);
             });
@@ -351,24 +319,23 @@ document.addEventListener('DOMContentLoaded', () => {
     // Add listeners only if all audio elements exist
     if (audioToggleBtn && bgMusic && playIcon && pauseIcon) {
         audioToggleBtn.addEventListener('click', toggleAudio);
-
-        // Sync button state with audio events
         bgMusic.addEventListener('play', () => updateAudioButton(true));
-        bgMusic.addEventListener('pause', () => updateAudioButton(false)); // Catches pauses including end
-        bgMusic.addEventListener('ended', () => updateAudioButton(false));
-
-        // Initial button state check (in case it's already playing somehow)
-        updateAudioButton(!bgMusic.paused);
-
-    } else {
-        console.warn("Audio control elements missing. Audio controls disabled.");
-        if (audioToggleBtn) audioToggleBtn.style.display = 'none'; // Hide button if incomplete
+        bgMusic.addEventListener('pause', () => updateAudioButton(false));
+        bgMusic.addEventListener('ended', () => updateAudioButton(false)); // Reset on end
+        updateAudioButton(!bgMusic.paused); // Initial state sync
     }
+
 
     // --- Project Modal Logic ---
     function openProjectModal(projectId) {
         const details = projectDetails[projectId];
-        if (!details || !projectModal) return;
+        // Check if details exist for the given projectId
+        if (!details) {
+            console.error(`Project details not found for ID: ${projectId}. Check projects.json.`);
+            // Optionally show a user-friendly error message here
+            return;
+        }
+        if (!projectModal) return;
 
         elementToFocusOnModalClose = document.activeElement; // Store focus
 
@@ -382,32 +349,31 @@ document.addEventListener('DOMContentLoaded', () => {
         const repoLinkEl = projectModal.querySelector('#project-modal-repo-link');
 
         if (titleEl) titleEl.textContent = details.title;
-        if (descEl) descEl.innerHTML = details.description; // Use innerHTML if description contains formatting
+        if (descEl) descEl.innerHTML = details.description; // Allow basic HTML if needed
         if (techEl) techEl.textContent = details.tech;
         if (chalEl) chalEl.textContent = details.challenges;
 
-        // Handle image
+        // Handle image display and alt text
         if (imgEl) {
             if (details.image) {
                 imgEl.src = details.image;
-                // *** Set descriptive alt text ***
-                imgEl.alt = `Screenshot of the ${details.title} project`;
-                imgEl.style.display = 'block';
+                imgEl.alt = details.title ? `Screenshot of the ${details.title} project.` : 'Project screenshot.'; // Improved Alt Text
+                imgEl.classList.add('visible'); // Use CSS class to show
             } else {
-                imgEl.style.display = 'none';
-                imgEl.alt = ''; // Clear alt text if no image
+                imgEl.classList.remove('visible'); // Use CSS class to hide
+                imgEl.alt = ''; // Clear alt text
             }
         }
 
-        // Handle links
+        // Handle links visibility
         [liveLinkEl, repoLinkEl].forEach(linkEl => {
             if (linkEl) {
                 const linkType = linkEl.id.includes('live') ? 'liveLink' : 'repoLink';
                 if (details[linkType]) {
                     linkEl.href = details[linkType];
-                    linkEl.style.display = 'inline-block';
+                    linkEl.style.display = 'inline-block'; // Show link
                 } else {
-                    linkEl.style.display = 'none';
+                    linkEl.style.display = 'none'; // Hide link
                 }
             }
         });
@@ -415,13 +381,11 @@ document.addEventListener('DOMContentLoaded', () => {
         // Open the modal
         projectModal.setAttribute('aria-hidden', 'false');
         projectModal.classList.add('open');
+        body.style.overflow = 'hidden'; // Prevent background scroll
 
-        // Focus management: Focus the close button first for accessibility
+        // Focus management
         const focusTarget = projectModal.querySelector('.modal-close-btn') || projectModal.querySelector('a[href], button');
-        if (focusTarget) {
-            focusTarget.focus();
-        }
-        // Add focus trap listener for modal
+        if (focusTarget) focusTarget.focus();
         projectModal.addEventListener('keydown', trapFocusInModal);
     }
 
@@ -429,33 +393,24 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!projectModal) return;
         projectModal.classList.remove('open');
         projectModal.setAttribute('aria-hidden', 'true');
-        projectModal.removeEventListener('keydown', trapFocusInModal); // Remove trap
+        body.style.overflow = ''; // Restore scroll
+        projectModal.removeEventListener('keydown', trapFocusInModal);
 
-        // Restore focus
-        if (elementToFocusOnModalClose && typeof elementToFocusOnModalClose.focus === 'function') {
-            elementToFocusOnModalClose.focus();
-        }
+        if (elementToFocusOnModalClose?.focus) elementToFocusOnModalClose.focus();
         elementToFocusOnModalClose = null;
     }
 
-    // Focus Trap function for Modal
-    function trapFocusInModal(e) {
+    function trapFocusInModal(e) { // Focus Trap
         if (e.key !== 'Tab' || !projectModal) return;
-
-        const focusableElementsString = 'a[href], button:not([disabled]), textarea, input, select';
-        // Find focusable elements *within the modal content*
         const modalContent = projectModal.querySelector('.modal-content');
         if (!modalContent) return;
-
+        const focusableElementsString = 'a[href]:not([disabled]), button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled])';
         const focusableElements = Array.from(modalContent.querySelectorAll(focusableElementsString));
-        if (focusableElements.length === 0) return;
-
-        // Ensure the close button is included if it's outside .modal-content but logically part of modal
         const closeBtn = projectModal.querySelector('.modal-close-btn');
         if (closeBtn && !focusableElements.includes(closeBtn)) {
-            focusableElements.unshift(closeBtn); // Add close button to the start
+            focusableElements.unshift(closeBtn); // Ensure close button is trappable
         }
-
+        if (focusableElements.length === 0) return;
         const firstFocusable = focusableElements[0];
         const lastFocusable = focusableElements[focusableElements.length - 1];
 
@@ -472,40 +427,42 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Setup project card listeners (Function called after data loaded)
+    function setupProjectCards() {
+        const projectCards = document.querySelectorAll('.project-card[data-modal-target]');
+        let cardCount = 0;
+        projectCards.forEach(card => {
+            const projectId = card.getAttribute('data-project-id');
+            if (!projectId) {
+                console.warn("Project card missing data-project-id attribute:", card);
+                return; // Skip cards without an ID
+            }
 
-    // Add listeners to project cards
-    projectCards.forEach(card => {
-        const projectId = card.getAttribute('data-project-id');
-        if (!projectId) {
-            console.warn("Project card missing data-project-id:", card);
-            return;
-        }
+            // Ensure the project data for this card actually exists
+            if (!projectDetails[projectId]) {
+                console.warn(`No project data found for ID: ${projectId}. Card interactions disabled for:`, card);
+                card.style.cursor = 'default'; // Indicate non-interactive
+                card.removeAttribute('tabindex'); // Remove from tab order
+                card.removeAttribute('role');
+                return; // Skip adding listeners
+            }
 
-        card.addEventListener('click', () => {
-            openProjectModal(projectId);
-        });
+            cardCount++;
+            card.addEventListener('click', () => {
+                openProjectModal(projectId);
+            });
 
-        // Keyboard accessibility
-        if (card.tagName !== 'A') { // Only add if not already a link
-            card.setAttribute('tabindex', '0'); // Make focusable
-            card.setAttribute('role', 'button'); // Define role
+            // Keyboard accessibility (Enter/Space)
             card.addEventListener('keydown', (e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault(); // Prevent space bar scroll
                     openProjectModal(projectId);
                 }
             });
-        } else {
-            // If it's a link, prevent default click if it's just opening modal
-            card.addEventListener('click', (e) => {
-                if (card.getAttribute('href') === '#') { // Or check data-modal-target presence
-                    e.preventDefault();
-                    openProjectModal(projectId);
-                }
-            });
-        }
+        });
+        console.log(`Setup listeners for ${cardCount} project cards with valid data.`);
+    }
 
-    });
 
     // Add listeners to modal close buttons/overlay
     modalCloseBtns.forEach(button => {
@@ -518,7 +475,6 @@ document.addEventListener('DOMContentLoaded', () => {
             closeProjectModal();
         }
     });
-
     // --- End Project Modal Logic ---
 
 }); // End of DOMContentLoaded

@@ -1,528 +1,441 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vojtěch Novák - IT Student Portfolio</title>
-    <link rel="stylesheet" href="style.css" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link href="assets/favicon.png" rel="icon" type="image/png" />
-    <!-- Add Three.js library (Using CDN) -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-
-    <!-- Inline style moved to the external stylesheet -->
-  </head>
-  <body>
-    <!-- Preloader -->
-    <div class="preloader" id="preloader">
-      <div class="preloader-content">
-        <div class="preloader-text-left">
-          Curious Learner,<br />
-          Tech Enthusiast,<br />
-          Future Innovator
-        </div>
-        <div class="preloader-letters">
-          <div class="letter" id="letter-c1">
-            V <span class="subtext">Vojtěch</span>
-          </div>
-          <div class="letter" id="letter-b">
-            N <span class="subtext">Novák</span>
-          </div>
-        </div>
-        <div class="preloader-line"></div>
+<head>
+  <meta charset="UTF-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta
+          name="description"
+          content="Portfolio of Vojtěch Novák, an IT student from SPŠ Třebíč focusing on C++, C#, AI, and Unreal Engine. Explore projects and skills."
+  />
+  <meta
+          name="keywords"
+          content="Vojtěch Novák, IT Student, Portfolio, C++, C#, AI, Artificial Intelligence, Unreal Engine, Web Development, SPŠ Třebíč, Třebíč"
+  />
+  <title>Vojtěch Novák - IT Student Portfolio</title>
+  <link href="style.css" rel="stylesheet"/>
+  <link
+          href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet"
+  />
+  <link href="assets/favicon.png" rel="icon" type="image/png"/>
+  <!-- Add Three.js library (Using CDN) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+<!-- Preloader -->
+<div class="preloader" id="preloader">
+  <div class="preloader-content">
+    <div class="preloader-text-left">
+      Curious Learner,<br/>
+      Tech Enthusiast,<br/>
+      Future Innovator
+    </div>
+    <div class="preloader-letters">
+      <div class="letter" id="letter-c1">
+        V <span class="subtext">Vojtěch</span>
+      </div>
+      <div class="letter" id="letter-b">
+        N <span class="subtext">Novák</span>
       </div>
     </div>
+    <div class="preloader-line"></div>
+  </div>
+</div>
 
-    <div class="page-wrapper" id="page-wrapper">
-      <div class="background-circles"></div>
-      <div class="main-container">
-        <!-- Header -->
-        <header class="site-header">
-          <div class="logo">Vojtěch Novák</div>
-          <nav class="main-nav">
-            <ul>
-              <li>
-                <a
-                  href="#home"
-                  class="nav-link active"
-                  data-target="home-section"
-                  aria-current="page"
-                  >Home</a
-                >
-              </li>
-              <li>
-                <a href="#about" class="nav-link" data-target="about-section"
-                  >About</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#projects"
-                  class="nav-link"
-                  data-target="projects-section"
-                  >Projects</a
-                >
-              </li>
-              <li>
-                <a href="#skills" class="nav-link" data-target="skills-section"
-                  >Skills</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#education"
-                  class="nav-link"
-                  data-target="education-section"
-                  >Education</a
-                >
-              </li>
-            </ul>
-          </nav>
-          <!-- Moved the theme toggle button here -->
-          <button aria-label="Toggle theme" id="theme-toggle-btn">
-            <!-- Default content for initial load/no JS -->
-            <span class="theme-icon">🌙</span>
-            <!-- Default to moon (light theme) -->
-            <span class="theme-beta">BETA</span>
-          </button>
-
-          <!-- Added Audio Controls -->
-          <button
-            id="audio-toggle-btn"
-            class="audio-control-btn"
-            aria-label="Play background music"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="currentColor"
-              class="bi bi-play-fill"
-              viewBox="0 0 16 16"
-              id="play-icon"
+<div class="page-wrapper" id="page-wrapper">
+  <div class="background-circles"></div>
+  <div class="main-container">
+    <!-- Header -->
+    <header class="site-header">
+      <div class="logo">Vojtěch Novák</div>
+      <nav class="main-nav">
+        <ul>
+          <li>
+            <a
+                    aria-current="page"
+                    class="nav-link active"
+                    data-target="home-section"
+                    href="#home"
+            >Home</a
             >
-              <path
-                d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393"
-              />
-            </svg>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="currentColor"
-              class="bi bi-pause-fill hidden"
-              viewBox="0 0 16 16"
-              id="pause-icon"
+          </li>
+          <li>
+            <a class="nav-link" data-target="about-section" href="#about"
+            >About</a
             >
-              <path
-                d="M5.5 3.5A1.5 1.5 0 0 1 7 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5m5 0A1.5 1.5 0 0 1 12 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5"
-              />
-            </svg>
-          </button>
+          </li>
+          <li>
+            <a
+                    href="#projects"
+                    class="nav-link"
+                    data-target="projects-section"
+            >Projects</a
+            >
+          </li>
+          <li>
+            <a class="nav-link" data-target="skills-section" href="#skills"
+            >Skills</a
+            >
+          </li>
+          <li>
+            <a
+                    href="#education"
+                    class="nav-link"
+                    data-target="education-section"
+            >Education</a
+            >
+          </li>
+        </ul>
+      </nav>
+      <!-- Grouped Header Controls -->
+      <div class="header-controls">
+        <button aria-label="Toggle theme" class="theme-toggle-btn" id="theme-toggle-btn">
+          <span class="theme-icon">🌙</span>
+        </button>
 
-          <button class="request-btn" id="open-request-panel">
-            Get in Touch <span class="arrow">→</span>
-          </button>
-        </header>
-
-        <main class="content-area">
-          <!-- Home Section (Initial View) -->
-          <section id="home-section" class="content-section active">
-            <div class="section-left">
-              <span class="label">I am an</span>
-              <p>
-                Information Technology<br />Student learning<br />C++, C#, AI &
-                UE.
-              </p>
-            </div>
-            <div class="section-center graphic-area" id="canvas-container">
-              <!-- Added ID -->
-              <!-- Canvas for Tesseract -->
-              <canvas id="tesseract-canvas"></canvas>
-
-              <!-- Content Over Canvas -->
-              <!-- Added inline style to prevent blocking canvas interaction -->
-              <div
-                class="graphic-content home-graphic-content"
-                style="pointer-events: none"
-              >
-                <div class="center-letter">VN</div>
-                <p class="graphic-subtext">
-                  Exploring the world of technology<br />and building practical
-                  skills<br />through hands-on projects.
-                </p>
-              </div>
-            </div>
-            <div class="section-right">
-              <h2>
-                Passionate about code,<br />problem-solving, and<br />emerging
-                tech like AI.
-              </h2>
-            </div>
-          </section>
-
-          <!-- About Section -->
-          <section
-            id="about-section"
-            class="content-section"
-            aria-hidden="true"
+        <button
+                class="audio-control-btn"
+                id="audio-toggle-btn"
+                aria-label="Play background music"
+        >
+          <svg
+                  class="bi bi-play-fill"
+                  fill="currentColor"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  width="16"
+                  xmlns="http://www.w3.org/2000/svg"
+                  id="play-icon"
           >
-            <div class="section-left about-label-left">About Me</div>
-            <div class="section-center about-center">
-              <h2 class="about-title">
-                My Learning Journey<br />in Information Technology
-              </h2>
-              <div class="about-details">
-                <div class="detail-item">
-                  <span class="number">.01</span>
-                  <h3>Current Focus</h3>
-                  <p>
-                    As an IT student, I'm actively developing my understanding
-                    and practical skills in programming and technology concepts.
-                  </p>
-                  <div class="line"></div>
-                </div>
-                <div class="detail-item">
-                  <span class="number">.02</span>
-                  <h3>Key Interests</h3>
-                  <p>
-                    I'm particularly interested in C++, C#, Artificial
-                    Intelligence, and game development with Unreal Engine.
-                    Always eager to learn more.
-                  </p>
-                  <div class="line"></div>
-                </div>
-                <div class="detail-item">
-                  <span class="number">.03</span>
-                  <h3>Approach</h3>
-                  <p>
-                    I approach learning through hands-on experience, tackling
-                    school projects to solidify my knowledge and build my
-                    portfolio.
-                  </p>
-                  <div class="line"></div>
-                </div>
-              </div>
-              <div class="resume-download-container">
-                <a
+            <path
+                    d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393"
+            />
+          </svg>
+          <svg
+                  class="bi bi-pause-fill hidden"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  fill="currentColor"
+                  width="16"
+                  xmlns="http://www.w3.org/2000/svg"
+                  id="pause-icon"
+          >
+            <path
+                    d="M5.5 3.5A1.5 1.5 0 0 1 7 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5m5 0A1.5 1.5 0 0 1 12 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5"
+            />
+          </svg>
+        </button>
+
+        <button class="request-btn button-primary" id="open-request-panel">
+          Get in Touch <span class="arrow">→</span>
+        </button>
+      </div>
+    </header>
+
+    <main class="content-area">
+      <!-- Home Section (Initial View) -->
+      <!-- NOTE: aria-hidden is managed by JS for accessibility. It hides INACTIVE sections from screen readers. -->
+      <section aria-hidden="false" class="content-section active" id="home-section">
+        <div class="section-left">
+          <span class="label">I am an</span>
+          <p>
+            IT Student exploring<br/>C++, C#, AI & UE.
+          </p>
+        </div>
+        <div class="section-center graphic-area" id="canvas-container">
+          <canvas id="tesseract-canvas"></canvas>
+          <div class="graphic-content home-graphic-content">
+            <div class="center-letter">VN</div>
+            <p class="graphic-subtext">
+              Passionate about code<br/>& emerging tech.
+            </p>
+          </div>
+        </div>
+        <div class="section-right">
+          <h2>
+            Problem-solver,<br/> Lifelong Learner,<br/> Tech Enthusiast.
+          </h2>
+        </div>
+      </section>
+
+      <!-- About Section -->
+      <section
+              aria-hidden="true"
+              class="content-section content-section-standard-layout"
+              id="about-section" <!-- Initially hidden -->
+      >
+      <h2>About Me</h2>
+      <p>
+        Driven IT student at SPŠ Třebíč, passionate about software development and exploring new technologies through
+        hands-on projects.
+      </p>
+      <div class="about-center">
+        <div class="about-details">
+          <div class="detail-item">
+            <span class="number">.01</span>
+            <h3>Current Focus</h3>
+            <!-- *** SHORTENED TEXT *** -->
+            <p>
+              Developing skills in C++, C#, web fundamentals. Exploring AI and Unreal Engine basics.
+            </p>
+            <div class="line"></div>
+          </div>
+          <div class="detail-item">
+            <span class="number">.02</span>
+            <h3>Key Interests</h3>
+            <!-- *** SHORTENED TEXT *** -->
+            <p>
+              Keen interest in C++, C#, AI concepts, and Unreal Engine development. Eager to learn more.
+            </p>
+            <div class="line"></div>
+          </div>
+          <div class="detail-item">
+            <span class="number">.03</span>
+            <h3>Approach</h3>
+            <!-- *** SHORTENED TEXT *** -->
+            <p>
+              Learning by doing: tackling school work and personal projects to build practical skills.
+            </p>
+            <div class="line"></div>
+          </div>
+        </div>
+        <div class="resume-download-container">
+          <a
                   href="assets/resume.pdf"
                   download="Vojtech_Novak_Resume.pdf"
-                  class="resume-download-btn"
-                >
-                  Download Resume (PDF) <span class="arrow">↓</span>
-                </a>
-              </div>
-            </div>
-            <div class="section-right"></div>
-          </section>
-
-          <!-- Projects Section -->
-          <section
-            id="projects-section"
-            class="content-section placeholder-section"
-            aria-hidden="true"
+                  class="resume-download-btn button-primary"
           >
-            <h2>My Projects</h2>
-            <p>
-              Click on a project to see more details. Check out my GitHub for
-              code examples!
-            </p>
+            Download Resume (PDF) <span class="arrow">↓</span>
+          </a>
+        </div>
+      </div>
+      </section>
 
-            <!-- Modified Project Cards Grid -->
-            <div class="projects-grid">
-              <div
+      <!-- Projects Section -->
+      <section
+              id="projects-section"
+              aria-hidden="true"
+              class="content-section content-section-standard-layout" <!-- Initially hidden -->
+      >
+      <h2>My Projects</h2>
+      <!-- *** SHORTENED TEXT *** -->
+      <p>
+        Selected academic & personal projects. Click for details. See more on <a href="https://github.com/Vojtik1112"
+                                                                                 rel="noopener noreferrer"
+                                                                                 target="_blank">GitHub</a>.
+      </p>
+      <div class="projects-grid">
+        <div
                 class="project-card"
                 data-modal-target="#project-modal"
                 data-project-id="project1"
-              >
-                <h3>ATM Withdrawal Simulation</h3>
-                <p>
-                  A simple C# console application simulating ATM withdrawals.
-                  Calculates banknote denominations based on user input.
-                  Demonstrates basic input/output and logic.
-                </p>
-                <span class="card-link-arrow">→</span>
-              </div>
-              <div
+                aria-haspopup="dialog" role="button" tabindex="0"
+        >
+          <h3>ATM Simulation</h3>
+          <!-- *** SHORTENED TEXT *** -->
+          <p>
+            C# console app simulating ATM withdrawals and calculating banknotes. Basic logic/IO demo.
+          </p>
+          <span class="card-link-arrow">→</span>
+        </div>
+        <div
                 class="project-card"
                 data-modal-target="#project-modal"
                 data-project-id="project2"
-              >
-                <h3>Objednávka Trička</h3>
-                <p>
-                  A web form (HTML/CSS/JS) for ordering custom t-shirts.
-                  Features client-side validation for user inputs like name,
-                  email, size, and custom text.
-                </p>
-                <span class="card-link-arrow">→</span>
-              </div>
-              <div
+                aria-haspopup="dialog" role="button" tabindex="0"
+        >
+          <h3>T-Shirt Order Form</h3>
+          <!-- *** SHORTENED TEXT *** -->
+          <p>
+            HTML/CSS/JS form for ordering t-shirts with client-side input validation.
+          </p>
+          <span class="card-link-arrow">→</span>
+        </div>
+        <div
                 class="project-card"
                 data-modal-target="#project-modal"
                 data-project-id="project3"
-              >
-                <h3>Interactive Keyboard</h3>
-                <p>
-                  An on-screen keyboard layout created with HTML and CSS.
-                  Highlights key structure and styling techniques. Basic
-                  interactivity could be added with JS.
-                </p>
-                <span class="card-link-arrow">→</span>
-              </div>
-            </div>
-          </section>
-
-          <!-- Skills Section -->
-          <section
-            id="skills-section"
-            class="content-section placeholder-section"
-            aria-hidden="true"
-          >
-            <h2>Technical Skills</h2>
-            <p>Technologies I'm currently learning and using:</p>
-            <div class="skills-categories">
-              <div class="skill-category">
-                <h3>Programming Languages</h3>
-                <ul class="skills-list">
-                  <li>C++ (University Coursework, Personal Projects)</li>
-                  <li>C# (University Coursework, Simple Applications)</li>
-                  <li>JavaScript (Web Development Basics, Learning)</li>
-                </ul>
-              </div>
-              <div class="skill-category">
-                <h3>Web Technologies</h3>
-                <ul class="skills-list">
-                  <li>HTML (Structuring Web Content)</li>
-                  <li>CSS (Styling Web Content, Basic Layouts)</li>
-                </ul>
-              </div>
-              <div class="skill-category">
-                <h3>Game Development</h3>
-                <ul class="skills-list">
-                  <li>Unreal Engine (Learning, Basic Blueprints & Concepts)</li>
-                </ul>
-              </div>
-              <div class="skill-category">
-                <h3>Concepts & Tools</h3>
-                <ul class="skills-list">
-                  <li>
-                    Artificial Intelligence (Foundational Concepts, Exploring)
-                  </li>
-                  <li>Git / GitHub (Version Control Basics)</li>
-                  <li>Visual Studio / VS Code</li>
-                </ul>
-              </div>
-            </div>
-          </section>
-
-          <!-- Education Section -->
-          <section
-            id="education-section"
-            class="content-section placeholder-section"
-            aria-hidden="true"
-          >
-            <h2>Education & Experience</h2>
-            <div class="education-content">
-              <div class="education-item">
-                <h3>Current Education</h3>
-                <p>
-                  <strong>School:</strong> Střední průmyslová škola Třebíč,
-                  Třebíč, Czech Republic<br />
-                  <strong>Program:</strong> Information Technology <br />
-                  <strong>Expected Graduation:</strong> May 2027
-                </p>
-              </div>
-              <div class="education-item">
-                <h3>Relevant Coursework</h3>
-                <ul>
-                  <li>Introduction to Programming (C++)</li>
-                  <li>Object-Oriented Programming (C#)</li>
-                  <li>Data Structures & Algorithms (Learning)</li>
-                  <li>Web Development Fundamentals (HTML, CSS, JS)</li>
-                  <li>Database Basics (Conceptual)</li>
-                </ul>
-              </div>
-              <div class="education-item">
-                <h3>Experience</h3>
-                <p>
-                  Currently focusing on academic projects and building
-                  foundational skills. Eager to apply my learning in practical
-                  settings.
-                </p>
-              </div>
-            </div>
-          </section>
-        </main>
-
-        <!-- Project Detail Modal -->
-        <div
-          class="modal"
-          id="project-modal"
-          aria-hidden="true"
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="project-modal-title"
+                aria-haspopup="dialog" role="button" tabindex="0"
         >
-          <div class="modal-overlay" data-modal-close></div>
-          <div class="modal-content">
-            <button
-              class="modal-close-btn"
-              data-modal-close
-              aria-label="Close project details"
-            >
-              &times;
-            </button>
-            <h3 id="project-modal-title">Project Title</h3>
-            <div class="modal-body">
-              <img
-                src=""
-                alt="Project Screenshot"
-                id="project-modal-image"
-                style="
-                  max-width: 100%;
-                  height: auto;
-                  margin-bottom: 15px;
-                  display: none;
-                "
-              />
-              <p id="project-modal-description">
-                A detailed project description goes here.
-              </p>
-              <h4>Technologies Used:</h4>
-              <p id="project-modal-tech"></p>
-              <h4>Challenges & Learning:</h4>
-              <p id="project-modal-challenges"></p>
-              <div class="modal-links">
-                <a
-                  href="#"
-                  id="project-modal-live-link"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="modal-link-btn"
-                  style="display: none"
-                  >Live Demo</a
-                >
-                <a
-                  href="#"
-                  id="project-modal-repo-link"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="modal-link-btn"
-                  style="display: none"
-                  >Code Repository</a
-                >
-              </div>
-            </div>
+          <h3>Keyboard Layout</h3>
+          <!-- *** SHORTENED TEXT *** -->
+          <p>
+            Visual keyboard layout using HTML/CSS focusing on structure and styling.
+          </p>
+          <span class="card-link-arrow">→</span>
+        </div>
+        <!-- Add more cards ONLY if they fit without causing scrolling -->
+      </div>
+      </section>
+
+      <!-- Skills Section -->
+      <section
+              id="skills-section"
+              aria-hidden="true"
+              class="content-section content-section-standard-layout" <!-- Initially hidden -->
+      >
+      <h2>Technical Skills</h2>
+      <p>Key technologies and concepts I'm working with:</p>
+      <div class="skills-categories">
+        <div class="skill-category">
+          <h3>Programming</h3>
+          <!-- *** SHORTENED/CONSOLIDATED TEXT *** -->
+          <ul class="skills-list">
+            <li>C++ (OOP, Data Structures)</li>
+            <li>C# (.NET Fundamentals)</li>
+            <li>JavaScript (ES6+, DOM)</li>
+            <li>Python (Basics for AI/ML)</li>
+          </ul>
+        </div>
+        <div class="skill-category">
+          <h3>Web Dev</h3>
+          <!-- *** SHORTENED TEXT *** -->
+          <ul class="skills-list">
+            <li>HTML5</li>
+            <li>CSS3 (Flexbox, Grid)</li>
+            <li>PHP (Basics)</li>
+          </ul>
+        </div>
+        <div class="skill-category">
+          <h3>Game Dev / AI</h3>
+          <!-- *** SHORTENED TEXT *** -->
+          <ul class="skills-list">
+            <li>Unreal Engine (Blueprints)</li>
+            <li>AI/ML Concepts</li>
+          </ul>
+        </div>
+        <div class="skill-category">
+          <h3>Tools & Other</h3>
+          <!-- *** SHORTENED TEXT *** -->
+          <ul class="skills-list">
+            <li>Git / GitHub</li>
+            <li>Visual Studio / VS Code</li>
+            <li>Agile Basics</li>
+          </ul>
+        </div>
+      </div>
+      </section>
+
+      <!-- Education Section -->
+      <section
+              id="education-section"
+              aria-hidden="true"
+              class="content-section content-section-standard-layout" <!-- Initially hidden -->
+      >
+      <h2>Education & Experience</h2>
+      <div class="education-content">
+        <div class="education-item">
+          <h3>Current Education</h3>
+          <!-- *** SHORTENED TEXT *** -->
+          <p>
+            <strong>SPŠ Třebíč:</strong> Info. Technology<br/>(Expected Graduation: May 2027)
+          </p>
+        </div>
+        <div class="education-item">
+          <h3>Relevant Coursework</h3>
+          <!-- *** SHORTENED TEXT / FEWER ITEMS *** -->
+          <ul class="skills-list"> <!-- Re-used class for style -->
+            <li>Programming (C++, C#)</li>
+            <li>Computer Systems & Networks</li>
+            <li>Database Systems (Concepts)</li>
+            <li>Web Development Basics</li>
+          </ul>
+        </div>
+        <div class="education-item">
+          <h3>Experience</h3>
+          <!-- *** SHORTENED TEXT *** -->
+          <p>
+            Focusing on academic projects and self-learning. Eager to apply skills professionally.
+          </p>
+        </div>
+      </div>
+      </section>
+    </main>
+
+    <!-- Project Detail Modal (Remains the same, allows scrolling internally) -->
+    <div
+            class="modal"
+            id="project-modal"
+            aria-hidden="true"
+            role="dialog"
+            aria-labelledby="project-modal-title"
+            aria-modal="true"
+    >
+      <div class="modal-overlay" data-modal-close></div>
+      <div class="modal-content">
+        <button
+                class="modal-close-btn"
+                data-modal-close
+                aria-label="Close project details"
+        >
+          ×
+        </button>
+        <h3 id="project-modal-title">Project Title</h3>
+        <div class="modal-body">
+          <img alt="" id="project-modal-image" src=""/>
+          <h4>Description:</h4>
+          <p id="project-modal-description">Details...</p>
+          <h4>Technologies Used:</h4>
+          <p id="project-modal-tech"></p>
+          <h4>Challenges & Learning:</h4>
+          <p id="project-modal-challenges"></p>
+          <div class="modal-links">
+            <a class="modal-link-btn button-primary" href="#" id="project-modal-live-link" rel="noopener noreferrer"
+               style="display: none" target="_blank">Live Demo</a>
+            <a class="modal-link-btn button-primary" href="#" id="project-modal-repo-link" rel="noopener noreferrer"
+               style="display: none" target="_blank">Code Repository</a>
           </div>
         </div>
-
-        <!-- Contact Panel -->
-        <aside class="request-panel" id="request-panel" aria-hidden="true">
-          <button
-            class="close-panel-btn"
-            id="close-request-panel"
-            aria-label="Close contact panel"
-          >
-            ×
-          </button>
-          <div class="panel-content">
-            <h3>Contact Me</h3>
-            <p class="panel-intro">
-              Feel free to reach out via email, connect online, or use the form
-              below.
-            </p>
-
-            <div class="contact-item">
-              <strong>Email:</strong><br />
-              <a
-                href="mailto:vojtechnovak84@gmail.com"
-                id="panel-first-focusable"
-                >vojtechnovak84@gmail.com</a
-              >
-            </div>
-            <div class="contact-item">
-              <strong>GitHub:</strong><br />
-              <a
-                href="https://github.com/Vojtik1112"
-                rel="noopener noreferrer"
-                target="_blank"
-                >github.com/Vojtik1112</a
-              >
-            </div>
-            <div class="contact-item">
-              <strong>Instagram:</strong><br />
-              <a
-                href="https://www.instagram.com/schizvojta/?next=%2F"
-                rel="noopener noreferrer"
-                target="_blank"
-                >@schizvojta</a
-              >
-            </div>
-
-            <form
-              id="contact-form"
-              action="https://formspree.io/f/YOUR_FORMSPREE_ID"
-              method="POST"
-            >
-              <h4>Send a Message:</h4>
-              <div class="form-group">
-                <label for="contact-name">Name:</label>
-                <input type="text" id="contact-name" name="name" required />
-              </div>
-              <div class="form-group">
-                <label for="contact-email">Email:</label>
-                <input
-                  type="email"
-                  id="contact-email"
-                  name="_replyto"
-                  required
-                />
-              </div>
-              <div class="form-group">
-                <label for="contact-message">Message:</label>
-                <textarea
-                  id="contact-message"
-                  name="message"
-                  rows="4"
-                  required
-                ></textarea>
-              </div>
-              <button type="submit" class="form-submit-btn">
-                Send Message
-              </button>
-              <p class="form-note">
-                Note: This form requires a service like Formspree to function.
-              </p>
-            </form>
-
-            <p class="legal-text">
-              Connecting with others passionate about technology.
-            </p>
-          </div>
-        </aside>
-        <div class="panel-overlay" id="panel-overlay" aria-hidden="true"></div>
-        <div
-          id="audio-error-message"
-          class="audio-error"
-          aria-live="polite"
-        ></div>
       </div>
     </div>
 
-    <!-- Main script.js (Handles preloader, nav, panel) -->
-    <script src="script.js"></script>
-    <!-- Tesseract animation script -->
-    <script src="tesseract.js"></script>
+    <!-- Contact Panel (Remains the same, allows scrolling internally) -->
+    <aside aria-hidden="true" class="request-panel" id="request-panel">
+      <button aria-label="Close contact panel" class="close-panel-btn" id="close-request-panel">×</button>
+      <div class="panel-content">
+        <h3>Contact Me</h3>
+        <p class="panel-intro">Interested in collaborating or have a question? Feel free to reach out.</p>
+        <div class="contact-item"><strong>Email:</strong><br/><a href="mailto:vojtechnovak84@gmail.com"
+                                                                 id="panel-first-focusable">vojtechnovak84@gmail.com</a>
+        </div>
+        <div class="contact-item"><strong>GitHub:</strong><br/><a href="https://github.com/Vojtik1112"
+                                                                  rel="noopener noreferrer" target="_blank">github.com/Vojtik1112</a>
+        </div>
+        <div class="contact-item"><strong>Instagram:</strong><br/><a
+                href="https://www.instagram.com/schizvojta/?next=%2F" rel="noopener noreferrer" target="_blank">@schizvojta</a>
+        </div>
+        <form action="https://formspree.io/f/YOUR_FORMSPREE_ID" id="contact-form" method="POST">
+          <h4>Send a Message:</h4>
+          <div class="form-group"><label for="contact-name">Name:</label><input id="contact-name" name="name"
+                                                                                required type="text"/></div>
+          <div class="form-group"><label for="contact-email">Email:</label><input id="contact-email" name="_replyto"
+                                                                                  required type="email"/></div>
+          <div class="form-group"><label for="contact-message">Message:</label><textarea id="contact-message"
+                                                                                         name="message" required
+                                                                                         rows="4"></textarea></div>
+          <button class="form-submit-btn button-primary" type="submit">Send Message</button>
+          <p class="form-note">Powered by Formspree.</p>
+        </form>
+        <p class="legal-text">Building connections through technology.</p>
+      </div>
+    </aside>
+    <div aria-hidden="true" class="panel-overlay" id="panel-overlay"></div>
 
-    <!-- Add this just before </body> -->
-    <audio
-      id="background-music"
-      loop
-      preload="auto"
-      src="assets/song.mp3"
-    ></audio>
-  </body>
+    <div aria-live="polite" class="audio-error" id="audio-error-message"></div>
+
+    <!-- Footer -->
+    <footer class="site-footer-info">
+      <p>© <span id="current-year">2025</span> Vojtěch Novák. All Rights Reserved.</p>
+      <p>Find me on <a href="https://github.com/Vojtik1112" rel="noopener noreferrer" target="_blank">GitHub</a></p>
+    </footer>
+
+  </div> <!-- End main-container -->
+</div> <!-- End page-wrapper -->
+
+<!-- Scripts -->
+<script src="script.js"></script>
+<script src="tesseract.js"></script>
+<audio id="background-music" loop preload="auto" src="assets/song.mp3"></audio>
+<script>document.getElementById('current-year').textContent = new Date().getFullYear();</script>
+</body>
 </html>

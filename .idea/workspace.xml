@@ -4,8 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fd7f821a-f96c-4dc7-82a6-b5432aca8538" name="Changes" comment="Add README badges and improve documentation&#10;&#10;Added a license badge, live demo link, and refined instructions in `README.md` for better usability and clarity. Adjusted formatting and structure to enhance readability and navigation.">
-      <change beforePath="$PROJECT_DIR$/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/script.js" afterDir="false" />
+    <list default="true" id="fd7f821a-f96c-4dc7-82a6-b5432aca8538" name="Changes" comment="Add meta tags for SEO and refine page content structure&#10;&#10;Introduced meta description and keywords for improved SEO visibility. Updated existing sections with better CSS handling, standardized layout, and content clarity. Simplified project card descriptions and enhanced button styling for consistency.">
       <change beforePath="$PROJECT_DIR$/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -19,6 +18,7 @@
         <option value="CSS File" />
         <option value="JavaScript File" />
         <option value="HTML File" />
+        <option value="tsconfig.json" />
       </list>
     </option>
   </component>
@@ -112,7 +112,7 @@
       <workItem from="1746135214777" duration="11000" />
       <workItem from="1746135279886" duration="4071000" />
       <workItem from="1746299504714" duration="2837000" />
-      <workItem from="1746369324061" duration="1764000" />
+      <workItem from="1746369324061" duration="3358000" />
     </task>
     <task id="LOCAL-00001" summary="Update styles and layout; add IDE workspace config&#10;&#10;Increased height of graphic area in HTML for better layout. Changed text colors to black and removed shadows in CSS for improved readability. Added `.idea/workspace.xml` for local IDE configuration.">
       <option name="closed" value="true" />
@@ -186,7 +186,31 @@
       <option name="project" value="LOCAL" />
       <updated>1746369930468</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Refactor and optimize CSS, improving maintainability&#10;&#10;Updated CSS to enhance readability, maintainability, and UX. Consolidated comments, improved use of variables, and streamlined styles for better theme transitions and accessibility. Enhanced section layouts and responsiveness.">
+      <option name="closed" value="true" />
+      <created>1746371117484</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1746371117484</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Remove unnecessary margin from header logo in CSS&#10;&#10;Eliminated the `margin-right: auto` rule from the header logo style to simplify layout management. This improves consistency and reduces redundant styling for better maintainability.">
+      <option name="closed" value="true" />
+      <created>1746371195498</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1746371195498</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Add meta tags for SEO and refine page content structure&#10;&#10;Introduced meta description and keywords for improved SEO visibility. Updated existing sections with better CSS handling, standardized layout, and content clarity. Simplified project card descriptions and enhanced button styling for consistency.">
+      <option name="closed" value="true" />
+      <created>1746372607840</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1746372607840</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -220,9 +244,16 @@
     <MESSAGE value="Fix typos and improve comments across multiple files&#10;&#10;Resolved spelling and grammatical issues in comments and updated phrasing for clarity and consistency in `index.html`, `.idea/workspace.xml`, and `script.js`. These changes enhance code readability and maintainability without altering functionality." />
     <MESSAGE value="Fix typos and improve comments across multiple files&#10;&#10;Resolved spelling and grammatical issues in comments and updated phrasing for clarity and consistency in `index.html`, `.idea/workspace.xml`, and `script.js`. These changes enhance code readability and maintainability without altering functionality.&#10;&#10;Signed-off-by: Vojta Novak &lt;vojtechnovak84@gmail.com&gt;" />
     <MESSAGE value="Add README badges and improve documentation&#10;&#10;Added a license badge, live demo link, and refined instructions in `README.md` for better usability and clarity. Adjusted formatting and structure to enhance readability and navigation." />
-    <option name="LAST_COMMIT_MESSAGE" value="Add README badges and improve documentation&#10;&#10;Added a license badge, live demo link, and refined instructions in `README.md` for better usability and clarity. Adjusted formatting and structure to enhance readability and navigation." />
+    <MESSAGE value="Merge remote-tracking branch 'origin/main'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml" />
+    <MESSAGE value="Refactor and optimize CSS, improving maintainability&#10;&#10;Updated CSS to enhance readability, maintainability, and UX. Consolidated comments, improved use of variables, and streamlined styles for better theme transitions and accessibility. Enhanced section layouts and responsiveness." />
+    <MESSAGE value="Refactor and optimize CSS, improving maintainability&#10;&#10;Updated CSS to enhance readability, maintainability, and UX. Consolidated comments, improved use of variables, and streamlined styles for better theme transitions and accessibility. Enhanced section layouts and responsiveness.&#10;&#10;Signed-off-by: Vojta Novak &lt;vojtechnovak84@gmail.com&gt;" />
+    <MESSAGE value="Remove unnecessary margin from header logo in CSS&#10;&#10;Eliminated the `margin-right: auto` rule from the header logo style to simplify layout management. This improves consistency and reduces redundant styling for better maintainability." />
+    <MESSAGE value="Merge remote-tracking branch 'origin/main'&#10;&#10;# Conflicts:&#10;#&#9;style.css" />
+    <MESSAGE value="Add meta tags for SEO and refine page content structure&#10;&#10;Introduced meta description and keywords for improved SEO visibility. Updated existing sections with better CSS handling, standardized layout, and content clarity. Simplified project card descriptions and enhanced button styling for consistency." />
+    <option name="LAST_COMMIT_MESSAGE" value="Add meta tags for SEO and refine page content structure&#10;&#10;Introduced meta description and keywords for improved SEO visibility. Updated existing sections with better CSS handling, standardized layout, and content clarity. Simplified project card descriptions and enhanced button styling for consistency." />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="GROUP_MULTIFILE_MERGE_BY_DIRECTORY" value="true" />
   </component>
 </project>
