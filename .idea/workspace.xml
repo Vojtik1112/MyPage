@@ -4,7 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fd7f821a-f96c-4dc7-82a6-b5432aca8538" name="Changes" comment="Add meta tags for SEO and refine page content structure&#10;&#10;Introduced meta description and keywords for improved SEO visibility. Updated existing sections with better CSS handling, standardized layout, and content clarity. Simplified project card descriptions and enhanced button styling for consistency.">
+    <list default="true" id="fd7f821a-f96c-4dc7-82a6-b5432aca8538" name="Changes" comment="Improve HTML structure &amp; 4D tesseract rendering optimizations&#10;&#10;Refactored HTML for better readability and consistency, including attribute spacing and animatable elements. Improved tesseract.js rendering by enhancing readability, optimizing projection logic, and adjusting colors for better theme integration.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -112,7 +113,7 @@
       <workItem from="1746135214777" duration="11000" />
       <workItem from="1746135279886" duration="4071000" />
       <workItem from="1746299504714" duration="2837000" />
-      <workItem from="1746369324061" duration="3358000" />
+      <workItem from="1746369324061" duration="5168000" />
     </task>
     <task id="LOCAL-00001" summary="Update styles and layout; add IDE workspace config&#10;&#10;Increased height of graphic area in HTML for better layout. Changed text colors to black and removed shadows in CSS for improved readability. Added `.idea/workspace.xml` for local IDE configuration.">
       <option name="closed" value="true" />
@@ -210,7 +211,23 @@
       <option name="project" value="LOCAL" />
       <updated>1746372607840</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Add meta tags for SEO and refine page content structure&#10;&#10;Introduced meta description and keywords for improved SEO visibility. Updated existing sections with better CSS handling, standardized layout, and content clarity. Simplified project card descriptions and enhanced button styling for consistency.&#10;&#10;Signed-off-by: Vojta Novak &lt;vojtechnovak84@gmail.com&gt;Update HTML structure and remove redundant styles.&#10;&#10;Improved readability and maintainability of the HTML by reformatting meta tags, restructuring elements, and cleaning up inline comments. Removed unused styles and adjusted some text for brevity and clarity. Updated additional files for consistency.">
+      <option name="closed" value="true" />
+      <created>1746372786302</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1746372786302</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Improve HTML structure &amp; 4D tesseract rendering optimizations&#10;&#10;Refactored HTML for better readability and consistency, including attribute spacing and animatable elements. Improved tesseract.js rendering by enhancing readability, optimizing projection logic, and adjusting colors for better theme integration.">
+      <option name="closed" value="true" />
+      <created>1746374026663</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1746374026663</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -250,7 +267,11 @@
     <MESSAGE value="Remove unnecessary margin from header logo in CSS&#10;&#10;Eliminated the `margin-right: auto` rule from the header logo style to simplify layout management. This improves consistency and reduces redundant styling for better maintainability." />
     <MESSAGE value="Merge remote-tracking branch 'origin/main'&#10;&#10;# Conflicts:&#10;#&#9;style.css" />
     <MESSAGE value="Add meta tags for SEO and refine page content structure&#10;&#10;Introduced meta description and keywords for improved SEO visibility. Updated existing sections with better CSS handling, standardized layout, and content clarity. Simplified project card descriptions and enhanced button styling for consistency." />
-    <option name="LAST_COMMIT_MESSAGE" value="Add meta tags for SEO and refine page content structure&#10;&#10;Introduced meta description and keywords for improved SEO visibility. Updated existing sections with better CSS handling, standardized layout, and content clarity. Simplified project card descriptions and enhanced button styling for consistency." />
+    <MESSAGE value="Add meta tags for SEO and refine page content structure&#10;&#10;Introduced meta description and keywords for improved SEO visibility. Updated existing sections with better CSS handling, standardized layout, and content clarity. Simplified project card descriptions and enhanced button styling for consistency.&#10;&#10;Signed-off-by: Vojta Novak &lt;vojtechnovak84@gmail.com&gt;" />
+    <MESSAGE value="Add meta tags for SEO and refine page content structure&#10;&#10;Introduced meta description and keywords for improved SEO visibility. Updated existing sections with better CSS handling, standardized layout, and content clarity. Simplified project card descriptions and enhanced button styling for consistency.&#10;&#10;Signed-off-by: Vojta Novak &lt;vojtechnovak84@gmail.com&gt;Update HTML structure and remove redundant styles.&#10;&#10;Improved readability and maintainability of the HTML by reformatting meta tags, restructuring elements, and cleaning up inline comments. Removed unused styles and adjusted some text for brevity and clarity. Updated additional files for consistency." />
+    <MESSAGE value="Merge remote-tracking branch 'origin/main'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;index.html&#10;#&#9;style.css" />
+    <MESSAGE value="Improve HTML structure &amp; 4D tesseract rendering optimizations&#10;&#10;Refactored HTML for better readability and consistency, including attribute spacing and animatable elements. Improved tesseract.js rendering by enhancing readability, optimizing projection logic, and adjusting colors for better theme integration." />
+    <option name="LAST_COMMIT_MESSAGE" value="Improve HTML structure &amp; 4D tesseract rendering optimizations&#10;&#10;Refactored HTML for better readability and consistency, including attribute spacing and animatable elements. Improved tesseract.js rendering by enhancing readability, optimizing projection logic, and adjusting colors for better theme integration." />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
