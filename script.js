@@ -26,11 +26,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     let projectDetails = {};
     let elementToFocusOnPanelClose = null;
     let elementToFocusOnModalClose = null;
-    const lightModeIcon = '☀️';
-    const darkModeIcon = '🌙';
-    // Updated colors to match new CSS variables
-    const lightTesseractColor = 0x34495e;
-    const darkTesseractColor = 0xbdc3c7;
+    const lightModeIcon = '☀️'; // Sun icon for light mode (meaning, click to go to dark)
+    const darkModeIcon = '🌙';  // Moon icon for dark mode (meaning, click to go to light)
+    
+    // Updated colors to match new style for Tesseract
+    const lightTesseractColor = 0x000000; // Black lines for light theme
+    const darkTesseractColor = 0xE0E0E0;  // Light grey lines for dark theme
 
     // --- Check for essential elements ---
     if (!pageWrapper || !requestPanel || !panelOverlay || !projectModal) {
@@ -98,7 +99,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     function applyTheme(theme) {
         const isDark = theme === 'dark';
         body.classList.toggle('dark-mode', isDark);
+        // The icon should represent the mode you *will switch to*
+        // So, if it's dark mode, show sun icon (to switch to light)
+        // If it's light mode, show moon icon (to switch to dark)
         if (themeIconSpan) themeIconSpan.textContent = isDark ? lightModeIcon : darkModeIcon;
+        
         const tesseractColor = isDark ? darkTesseractColor : lightTesseractColor;
         const themeChangeEvent = new CustomEvent('themeChange', {
             detail: {theme: theme, color: tesseractColor}
